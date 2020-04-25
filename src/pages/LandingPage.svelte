@@ -1,7 +1,10 @@
 <script>
     import {slide, fade} from 'svelte/transition';
+    import Icon from 'svelte-awesome';
+    import {arrowRight} from 'svelte-awesome/icons'
+    import {Link} from 'svelte-routing';
     import Button from "../Components/Button/Button.svelte";
-    import NewLogo from "../svg/NewLogo.svelte";
+    import AnimatedLogo from "../svg/AnimatedLogo.svelte";
     import Mount from "../Components/Abstract/Mount.svelte";
 
     export let name = "";
@@ -19,41 +22,49 @@
     <div class="container">
         <header>
             <span class="logo">
-                <NewLogo/>
+                <AnimatedLogo/>
             </span>
-            <h1 transition:fade={headerFade}>MedFoyer</h1>
+            <h1 class="uk-heading-large uk-margin-remove" transition:fade={headerFade}>MedFoyer</h1>
         </header>
-
         <main transition:slide={mainSlide}>
             {#if name}
-                <h2>Hello {name}!</h2>
+                <h2 class="uk-heading-medium">Hello {name}!</h2>
             {:else}
-                <h2>Hello!</h2>
+                <h2 class="uk-heading-medium">Hello!</h2>
             {/if}
-
             <div>
-                <Button>Tap here to get started</Button>
+                <Button>
+                    <Link to="/map">
+                    <span class="uk-text-large">
+                        Tap to get started <span class="uk-icon" uk-icon="icon: sign-in; ratio: 2"/>
+                    </span>
+                    </Link>
+                </Button>
             </div>
         </main>
     </div>
 </Mount>
 <style lang="scss">
-    div.container{
-        width:100vw;
-        height:100vh;
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
-        align-items:center;
-        text-align:center;
-        font-size:2rem;
-        > *{
-            margin:3rem auto;
+    div.container {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-size: 2rem;
+
+        > * {
+            display: block;
+            margin: 0 auto;
         }
-        header{
-            height:8em;
-            span.logo{
-                height:4em;
+
+        header {
+
+            span.logo {
+                height: 8em;
+                display: block;
             }
         }
     }

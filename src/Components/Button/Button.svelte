@@ -2,20 +2,23 @@
 
 </script>
 
-<button on:click>
+<button on:click class="uk-button uk-button-default uk-box-shadow-hover-large">
     <slot/>
 </button>
 
 <style lang="scss">
-    button{
+    button {
+        background-color: transparent;
+        border: 1px solid;
+        color: #396481;
         padding:1em;
-        background-color:transparent;
-        border:1px solid;
-        color:#396481;
-        font-size:1.5rem;
-        transition: box-shadow 1s;
-    &:hover{
-         box-shadow:0.2em 0.2em 20px 5px rgba(0,0,0,0.5); // Dark Blue
-     }
+        line-height:1em;
+        font-size:inherit;
+
+        &:focus {
+            outline-offset: 20px;
+            outline-color: #5FA8D8;
+            outline-width: thick;
+        }
     }
 </style>

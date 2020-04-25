@@ -6,7 +6,20 @@ h1,h2,h3,h4,h5,h6{
     font-weight: 400;
     color: #396481;
 }
-
+a{
+    text-decoration:none;
+    color:inherit;
+}
+a:hover{
+    text-decoration:none;
+    color:inherit;
+}
 :root{
     font-size:16px;
+}
+
+@media screen and (max-width: 500px){
+    :root{
+        font-size:14px;
+    }
 }
