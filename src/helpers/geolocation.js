@@ -12,6 +12,8 @@ export function getErrorCode(error) {
 }
 
 export function getLatLong(callback){
-
     navigator.geolocation.getCurrentPosition(callback, function(e){callback(getErrorCode(e))});
+}
+export function subscribe(callback){
+    navigator.geolocation.watchPosition(callback, function(e){callback(getErrorCode(e))});
 }

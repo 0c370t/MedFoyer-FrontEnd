@@ -1,31 +1,91 @@
 <script>
     import mapboxgl from 'mapbox-gl/dist/mapbox-gl'
+    import Uikit from 'uikit';
+    import {subscribe} from '../helpers/geolocation';
+    import pulsingDot from '../helpers/mapping/pulsingDot';
 
     import Button from '../Components/Button/Button.svelte';
     import GpsPermissionModal from "../Components/GpsPermissionModal.svelte";
     import Logo from "../svg/Logo.svelte";
 
-    let clinicPosition = [-94.5512, 39.1495]; // TODO: Collect from API
+    let clinicPosition = [-94.655160, 39.282440]; // TODO: Collect from API
+    let userPosition = [0, 0];
     let description = "North Kansas City Hospital";
+    const supportsGps = Boolean(navigator.geolocation);
+    let needsConfirmation;
+    let mapIsRendered = false;
+    let map = null;
+
+    let clinicMarker = new mapboxgl.Marker()
+            .setLngLat(clinicPosition)
+            .setDraggable(false);
+
+    const updateUserPosition = (pos) => {
+        if (typeof (result) === "string") {
+            Uikit.notification({
+                message: result,
+                status: "danger",
+                group: "gps-alerts",
+            });
+        } else {
+            userPosition = [pos.coords.longitude, pos.coords.latitude];
+        }
+    };
+    $: {
+        if(map){
+            let source = map.getSource("points");
+            if(source){
+                source.setData({
+                    "type": "Point",
+                    "coordinates": userPosition
+                });
+            }
+        }
+    }
+    if (supportsGps) {
+        subscribe(updateUserPosition)
+    }
+
+
     const renderMap = () => {
         mapboxgl.accessToken = 'pk.eyJ1IjoiYmRvbmFsZG1mIiwiYSI6ImNrOWY0eGtqeTA5MTEzZnA5ZWdudHd0ZTUifQ.RhjKb2SBHSf5KTQnVbdTUA';
-        let map = new mapboxgl.Map({
+        map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/light-v10',
             center: clinicPosition, // Long Lat because reasons?
             zoom: 13,
             interactive: false
         });
-        let marker = new mapboxgl.Marker()
-                .setLngLat(clinicPosition)
-                .setDraggable(false)
-                .addTo(map);
-        mapIsRendered = true;
-    };
+        map.on("load", function () {
+            map.addImage('pulsing-dot', pulsingDot(map), {pixelRatio: 2});
+            map.addSource('points', {
+                'type': 'geojson',
+                'data': {
+                    'type': 'FeatureCollection',
+                    'features': [
+                        {
+                            'type': 'Feature',
+                            'geometry': {
+                                'type': 'Point',
+                                'coordinates': userPosition
+                            }
+                        }
+                    ]
+                }
+            });
+            map.addLayer({
+                'id': 'points',
+                'type': 'symbol',
+                'source': 'points',
+                'layout': {
+                    'icon-image': 'pulsing-dot'
+                }
+            });
+            clinicMarker.addTo(map);
+            mapIsRendered = true;
+        });
+    }
 
-    const supportsGps = Boolean(navigator.geolocation);
-    let needsConfirmation;
-    let mapIsRendered = false;
 </script>
 
 <svelte:head>
@@ -61,12 +121,12 @@
         header {
             display: flex;
             justify-content: center;
-            align-items:center;
+            align-items: center;
             font-size: 1.3em;
             top: 2em;
-            background-color: rgba(255,255,255,0.5);
-            height:6em;
-            z-index:1;
+            background-color: rgba(255, 255, 255, 0.5);
+            height: 6em;
+            z-index: 1;
 
         }
 
