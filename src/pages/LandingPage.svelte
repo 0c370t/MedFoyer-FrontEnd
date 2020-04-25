@@ -1,31 +1,60 @@
 <script>
-    import Button from "../Button/Button.svelte";
+    import {slide, fade} from 'svelte/transition';
+    import Button from "../Components/Button/Button.svelte";
+    import NewLogo from "../svg/NewLogo.svelte";
+    import Mount from "../Components/Abstract/Mount.svelte";
+
     export let name = "";
+    const headerFade = {
+        duration: 500,
+        delay: 1500,
+    };
+    const mainSlide = {
+        duration: 500,
+        delay: 2000
+    };
 </script>
 
-<main>
-    {#if name}
-        <h2>Hello {name}!</h2>
-    {:else}
-        <h2>Hello!</h2>
-    {/if}
+<Mount>
+    <div class="container">
+        <header>
+            <span class="logo">
+                <NewLogo/>
+            </span>
+            <h1 transition:fade={headerFade}>MedFoyer</h1>
+        </header>
 
-    <div>
-        <Button>Tap here to get started</Button>
+        <main transition:slide={mainSlide}>
+            {#if name}
+                <h2>Hello {name}!</h2>
+            {:else}
+                <h2>Hello!</h2>
+            {/if}
+
+            <div>
+                <Button>Tap here to get started</Button>
+            </div>
+        </main>
     </div>
-</main>
-
+</Mount>
 <style lang="scss">
-    main{
+    div.container{
+        width:100vw;
+        height:100vh;
         display:flex;
+        flex-direction:column;
         justify-content:center;
         align-items:center;
-        flex-direction:column;
-        height:calc(60vh - 5rem);
-        width:100vw;
-        h2{
-            font-size:4rem;
-            margin-bottom:1rem;
+        text-align:center;
+        font-size:2rem;
+        > *{
+            margin:3rem auto;
+        }
+        header{
+            height:8em;
+            span.logo{
+                height:4em;
+            }
         }
     }
 </style>

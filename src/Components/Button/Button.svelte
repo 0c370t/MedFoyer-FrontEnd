@@ -2,7 +2,7 @@
 
 </script>
 
-<button>
+<button on:click>
     <slot/>
 </button>
 
