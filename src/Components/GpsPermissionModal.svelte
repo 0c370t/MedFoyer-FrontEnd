@@ -47,7 +47,7 @@
 </script>
 {#if supportsGps}
     <Modal open={promptForPermission} id="locationModal" showClose={false}>
-        <h3 slot="header">We need permission</h3>
+        <h3 slot="header">We need your permission</h3>
         <p>
             MedFoyer uses GPS to ensure you are at your destination before checking in, we need permission from your
             device to do so.
@@ -61,7 +61,7 @@
         <h3 slot="header">GPS Unavailable</h3>
         <p>
             MedFoyer uses GPS to ensure you are at your destination before checking in, but it looks like your device
-            does not support GPS.
+            does not currently support GPS.
         </p>
         <span class="modalButton" slot="footer">
             <Button on:click={refresh}>Reload <span class="uk-icon" uk-icon="icon: reload; ratio:2"/></Button>
