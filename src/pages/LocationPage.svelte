@@ -1,5 +1,5 @@
 <script>
-    import mapboxgl from 'mapbox-gl/dist/mapbox-gl'
+    import mapboxgl from 'mapbox-gl/dist/mapbox-gl';
     import Uikit from 'uikit';
     import {subscribe} from '../helpers/geolocation';
     import pulsingDot from '../helpers/mapping/pulsingDot';
