@@ -3,10 +3,9 @@
     import {getCookies, setCookie} from '../helpers/cookies';
     import Uikit from 'uikit';
 
+    import Icon from '../Components/Icon/Icon.svelte';
     import Modal from "../Components/Modal/Modal.svelte";
     import Button from '../Components/Button/Button.svelte';
-    import Icon from 'svelte-awesome';
-    import {check} from 'svelte-awesome/icons';
     import {getLatLong} from "../helpers/geolocation";
 
     export let supportsGps = false;
@@ -53,7 +52,7 @@
             device to do so.
         </p>
         <span class="modalButton" slot="footer">
-            <Button on:click={getGpsPermission}>Okay <span><Icon data={check}/></span></Button>
+            <Button on:click={getGpsPermission}>Okay <span><Icon options="{{icon:"check"}}"/></span></Button>
         </span>
     </Modal>
 {:else}

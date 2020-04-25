@@ -1,11 +1,11 @@
 <script>
     import {slide, fade} from 'svelte/transition';
-    import Icon from 'svelte-awesome';
-    import {arrowRight} from 'svelte-awesome/icons'
     import {Link} from 'svelte-routing';
     import Button from "../Components/Button/Button.svelte";
     import AnimatedLogo from "../svg/AnimatedLogo.svelte";
     import Mount from "../Components/Abstract/Mount.svelte";
+    import Icon from "../Components/Icon/Icon.svelte";
+    import {appt} from '../helpers/stores';
 
     export let name = "";
     const headerFade = {
@@ -16,6 +16,7 @@
         duration: 500,
         delay: 2000
     };
+    let appointmentExists = Object.keys($appt).length > 0;
 </script>
 
 <Mount>
@@ -26,6 +27,7 @@
             </span>
             <h1 class="uk-heading-large uk-margin-remove" transition:fade={headerFade}>MedFoyer</h1>
         </header>
+        {#if appointmentExists}
         <main transition:slide={mainSlide}>
             {#if name}
                 <h2 class="uk-heading-medium">Hello {name}!</h2>
@@ -36,12 +38,13 @@
                 <Button>
                     <Link to="/map">
                     <span class="uk-text-large">
-                        Tap to get started <span class="uk-icon" uk-icon="icon: sign-in; ratio: 2"/>
+                        Tap to get started <Icon options="{{icon:'sign-in',ratio:2}}"/>
                     </span>
                     </Link>
                 </Button>
             </div>
         </main>
+            {/if}
     </div>
 </Mount>
 <style lang="scss">

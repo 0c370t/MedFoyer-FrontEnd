@@ -1,3 +1,5 @@
+import getDistance from 'geolib/es/getDistance';
+
 export function getErrorCode(error) {
     switch(error.code) {
         case error.PERMISSION_DENIED:
@@ -16,4 +18,16 @@ export function getLatLong(callback){
 }
 export function subscribe(callback){
     navigator.geolocation.watchPosition(callback, function(e){callback(getErrorCode(e))});
+}
+export function withinDistance(patientLocation, drLocation, threshold){
+    console.log("Yep");
+    patientLocation = {
+        "latitude": patientLocation[1],
+        "longitude": patientLocation[0],
+    };
+    drLocation = {
+        "latitude": drLocation[1],
+        "longitude": drLocation[0],
+    };
+    return getDistance(patientLocation, drLocation) < threshold;
 }

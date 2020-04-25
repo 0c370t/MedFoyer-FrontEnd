@@ -1,22 +1,27 @@
 <script>
     import mapboxgl from 'mapbox-gl/dist/mapbox-gl';
     import Uikit from 'uikit';
-    import {subscribe} from '../helpers/geolocation';
+    import {subscribe, withinDistance} from '../helpers/geolocation';
     import pulsingDot from '../helpers/mapping/pulsingDot';
 
     import Button from '../Components/Button/Button.svelte';
     import GpsPermissionModal from "../Components/GpsPermissionModal.svelte";
     import Logo from "../svg/Logo.svelte";
+    import {appt} from '../helpers/stores';
 
-    let clinicPosition = [-94.655160, 39.282440]; // TODO: Collect from API
+    if(Object.keys($appt).length === 0){
+        window.location.href = "/";
+    }
+    let clinicPosition = [parseFloat($appt.long), parseFloat($appt.lat)]; // TODO: Collect from API
     let userPosition = [0, 0];
     let description = "North Kansas City Hospital";
     const supportsGps = Boolean(navigator.geolocation);
     let needsConfirmation;
     let mapIsRendered = false;
     let map = null;
+    let withinBounds = false;
 
-    let clinicMarker = new mapboxgl.Marker()
+    let clinicMarker = new mapboxgl.Marker({color: "#396481"})
             .setLngLat(clinicPosition)
             .setDraggable(false);
 
@@ -29,6 +34,7 @@
             });
         } else {
             userPosition = [pos.coords.longitude, pos.coords.latitude];
+            withinBounds = withinDistance(userPosition, clinicPosition, 1000);
         }
     };
     $: {
@@ -107,7 +113,12 @@
 
     </main>
     <footer class="uk-position-bottom-center">
-        <Button>Verify Location</Button>
+        <p class="uk-text-small uk-margin-remove uk-width-1-1 uk-text-center uk-text-danger">
+{#if !withinBounds}
+    You are too far away, please check in when you have arrived.
+    {/if}
+        </p>
+        <Button disabled="{!withinBounds}">Verify Location</Button>
     </footer>
 </div>
 <style lang="scss">
@@ -140,6 +151,8 @@
             display: flex;
             justify-content: center;
             font-size: 1.3em;
+            flex-direction:column;
+            width:80%;
         }
     }
 
