@@ -5,19 +5,19 @@
     import GpsPermissionModal from "../Components/GpsPermissionModal.svelte";
     import Logo from "../svg/Logo.svelte";
 
-    let position = [-94.5512, 39.1495];
+    let clinicPosition = [-94.5512, 39.1495]; // TODO: Collect from API
     let description = "North Kansas City Hospital";
     const renderMap = () => {
         mapboxgl.accessToken = 'pk.eyJ1IjoiYmRvbmFsZG1mIiwiYSI6ImNrOWY0eGtqeTA5MTEzZnA5ZWdudHd0ZTUifQ.RhjKb2SBHSf5KTQnVbdTUA';
         let map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/light-v10',
-            center: position, // Long Lat because reasons?
+            center: clinicPosition, // Long Lat because reasons?
             zoom: 13,
             interactive: false
         });
         let marker = new mapboxgl.Marker()
-                .setLngLat(position)
+                .setLngLat(clinicPosition)
                 .setDraggable(false)
                 .addTo(map);
         mapIsRendered = true;
