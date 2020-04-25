@@ -1,0 +1,12 @@
+*{
+    font-family: 'Montserrat', sans-serif;
+    font-weight:300;
+}
+h1,h2,h3,h4,h5,h6{
+    font-weight: 400;
+    color: #396481;
+}
+
+:root{
+    font-size:16px;
+}

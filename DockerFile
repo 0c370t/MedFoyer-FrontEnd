@@ -1,0 +1,6 @@
+FROM nginx:stable
+COPY . /app
+WORKDIR /app
+RUN apt update && apt -y install curl gnupg && curl -sL https://deb.nodesource.com/setup_12.x | bash && apt -y install nodejs && npm i && npm run build
+COPY ./public /usr/share/nginx/html
+RUN cp -r ./public/* /usr/share/nginx/html/
