@@ -39,7 +39,7 @@
             <Button on:click={renderMap}>Render Map</Button>
         {:else}
             <Logo/>
-            <h1 class="uk-margin-remove uk-heading-large">MedFoyer</h1>
+            <h1 class="uk-margin-remove uk-heading-medium">MedFoyer</h1>
         {/if}
 
     </header>
