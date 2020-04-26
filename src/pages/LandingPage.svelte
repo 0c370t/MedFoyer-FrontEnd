@@ -1,31 +1,73 @@
 <script>
-    import Button from "../Button/Button.svelte";
-    export let name = "";
+    import {slide, fade} from 'svelte/transition';
+    import {Link} from 'svelte-routing';
+    import Button from "../Components/Button/Button.svelte";
+    import AnimatedLogo from "../svg/AnimatedLogo.svelte";
+    import Mount from "../Components/Abstract/Mount.svelte";
+    import Icon from "../Components/Icon/Icon.svelte";
+    import {appt} from '../helpers/stores';
+
+    const headerFade = {
+        duration: 500,
+        delay: 1500,
+    };
+    const mainSlide = {
+        duration: 500,
+        delay: 2000,
+    };
+    let appointmentExists = Object.keys($appt).length > 0;
 </script>
 
-<main>
-    {#if name}
-        <h2>Hello {name}!</h2>
-    {:else}
-        <h2>Hello!</h2>
-    {/if}
-
-    <div>
-        <Button>Tap here to get started</Button>
+<Mount>
+    <div class="container">
+        <header>
+            <span class="logo">
+                <AnimatedLogo/>
+            </span>
+            <h1 class="uk-heading-large uk-margin-remove" transition:fade={headerFade}>MedFoyer</h1>
+        </header>
+        {#if appointmentExists}
+        <main transition:slide={mainSlide}>
+            {#if $appt.name}
+                <h2 class="uk-heading-medium">Hello {$appt.name}!</h2>
+            {:else}
+                <h2 class="uk-heading-medium">Hello!</h2>
+            {/if}
+            <div>
+                <Button>
+                    <Link to="/map">
+                    <span class="uk-text-large">
+                        Tap to get started <Icon options="{{icon:'sign-in',ratio:2}}"/>
+                    </span>
+                    </Link>
+                </Button>
+            </div>
+        </main>
+            {/if}
     </div>
-</main>
-
+</Mount>
 <style lang="scss">
-    main{
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        flex-direction:column;
-        height:calc(60vh - 5rem);
-        width:100vw;
-        h2{
-            font-size:4rem;
-            margin-bottom:1rem;
+    div.container {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-size: 2rem;
+
+        > * {
+            display: block;
+            margin: 0 auto;
+        }
+
+        header {
+
+            span.logo {
+                height: 8em;
+                display: block;
+            }
         }
     }
 </style>

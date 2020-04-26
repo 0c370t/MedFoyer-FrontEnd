@@ -1,38 +1,63 @@
 <script>
     import {draw, fade} from 'svelte/transition';
-    import {path} from './logo';
+    import {paths} from './newlogo.paths';
     import Mount from "../Components/Abstract/Mount.svelte";
 
-    const drawSettings = {
-        delay: 300,
+    const outerShapeDraw = {
+        delay: 0,
         duration: 1500
     };
-    const fillSettings = {
-        delay: 1000,
-        duration: 200
+    const innerShapeDraw = {
+        delay: 200,
+        duration: 1500
+    };
+    const innerShapeFill = {
+        delay: 1300,
+        duration: 500
+    };
+    const crossDraw = {
+        delay: 500,
+        duration: 1200
     };
 </script>
+
 <Mount>
-    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-         viewBox="-5 -5 105 105" xml:space="preserve">
-    <path class="stroke" d="{path}" transition:draw={drawSettings}></path>
-        <path class="fill" d="{path}" transition:fade={fillSettings}></path>
-</svg>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 250 400" xml:space="preserve">
+        <path transition:draw={outerShapeDraw} class="outer-shape stroke" d="{paths.outerShape}"></path>
+        <path transition:draw={innerShapeDraw} class="inner-shape stroke" d="{paths.innerShape}"></path>
+        <path transition:fade={innerShapeFill} class="inner-shape fill" d="{paths.innerShape}"></path>
+        <path transition:draw={crossDraw} class="cross stroke" d="{paths.cross}"></path>
+    </svg>
 </Mount>
 
 <style>
     svg {
-        height: 5em;
-        width:5em;
+        height: 100%;
+        width:auto;
     }
 
-    path.stroke {
-        stroke: blue;
+    path {
         fill: none;
     }
 
-    path.fill {
-        stroke: none;
-        fill: blue;
+    path.outer-shape.stroke {
+        stroke: #396481;
+        stroke-width: 5;
+        stroke-miterlimit: 10;
+        transition: 5s;
+    }
+
+    path.inner-shape.stroke {
+        stroke: #5FA8D8;
+    }
+
+    path.inner-shape.fill {
+        fill: #5FA8D8;
+    }
+
+    path.cross.stroke {
+        stroke: #5FA8D8;
+        stroke-width: 4;
+        stroke-miterlimit: 10;
     }
 </style>

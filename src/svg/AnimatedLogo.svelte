@@ -32,7 +32,8 @@
 
 <style>
     svg {
-        height: 5em;
+        height: 100%;
+        width:auto;
     }
 
     path {
