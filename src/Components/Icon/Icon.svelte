@@ -5,7 +5,6 @@
     let target;
 
     onMount(()=>{
-        console.log(options);
         Uikit.icon(target, options);
     })
 

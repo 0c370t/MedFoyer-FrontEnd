@@ -3,13 +3,12 @@
     export let open = false;
     export let id = "my-modal";
 
-
     import {onMount} from 'svelte';
     import Uikit from 'uikit';
 
     let modalElement;
     onMount(()=>{
-        Uikit.modal(modalElement, { bgClose: false, escClose: false, modal: false, keyboard:false});
+        Uikit.modal(modalElement, { bgClose: showClose, escClose: showClose, modal: showClose, keyboard:showClose});
     });
 
     $: {
@@ -21,7 +20,7 @@
     }
 </script>
 
-<div {id} class="uk-flex-top" class:uk-open={open} bind:this={modalElement}>
+<div {id} class="uk-flex-top" class:uk-open={open} bind:this={modalElement} on:hidden={() => open = false}>
     <div class="uk-modal-dialog uk-margin-auto-vertical">
         {#if showClose}
             <button class="uk-modal-close-default" type="button" uk-close></button>

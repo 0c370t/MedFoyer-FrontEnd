@@ -1,8 +1,9 @@
 <script>
     export let disabled = false;
+    export let fill = false;
 </script>
 
-<button on:click {disabled} class="uk-button uk-button-default uk-box-shadow-hover-large">
+<button on:click type="button" class:fill {disabled} class="uk-button uk-button-default uk-box-shadow-hover-large">
     <slot/>
 </button>
 
@@ -21,6 +22,9 @@
             outline-offset: 20px;
             outline-color: #5FA8D8;
             outline-width: thick;
+        }
+        &.fill{
+            width:100%;
         }
     }
 </style>

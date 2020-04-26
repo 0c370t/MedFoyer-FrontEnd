@@ -3,20 +3,22 @@
     import Uikit from 'uikit';
     import {subscribe, withinDistance} from '../helpers/geolocation';
     import pulsingDot from '../helpers/mapping/pulsingDot';
-
+    import {onMount} from 'svelte';
     import Button from '../Components/Button/Button.svelte';
     import GpsPermissionModal from "../Components/GpsPermissionModal.svelte";
     import Logo from "../svg/Logo.svelte";
     import {appt} from '../helpers/stores';
+    import {navigate} from "svelte-routing";
+    import {postCheckIn} from "../API/appointments.API";
 
-    if(Object.keys($appt).length === 0){
+    if (Object.keys($appt).length === 0) {
         window.location.href = "/";
     }
+
     let clinicPosition = [parseFloat($appt.long), parseFloat($appt.lat)]; // TODO: Collect from API
     let userPosition = [0, 0];
     const supportsGps = Boolean(navigator.geolocation);
     let needsConfirmation;
-    let mapIsRendered = false;
     let map = null;
     let withinBounds = false;
 
@@ -35,7 +37,7 @@
             userPosition = [pos.coords.longitude, pos.coords.latitude];
             withinBounds = withinDistance(userPosition, clinicPosition, 1000);
             let source = map.getSource("points");
-            if(source){
+            if (source) {
                 source.setData({
                     "type": "Point",
                     "coordinates": userPosition
@@ -46,9 +48,7 @@
     if (supportsGps) {
         subscribe(updateUserPosition)
     }
-
-
-    const renderMap = () => {
+    onMount(()=>{
         mapboxgl.accessToken = 'pk.eyJ1IjoiYmRvbmFsZG1mIiwiYSI6ImNrOWY0eGtqeTA5MTEzZnA5ZWdudHd0ZTUifQ.RhjKb2SBHSf5KTQnVbdTUA';
         map = new mapboxgl.Map({
             container: 'map',
@@ -83,8 +83,16 @@
                 }
             });
             clinicMarker.addTo(map);
-            mapIsRendered = true;
         });
+    });
+
+    const verifyLocation = () => {
+        postCheckIn($appt.id, userPosition[1], userPosition[0]).then(response => {
+            appt.set(response);
+            navigate("/screening");
+        }).catch(error => {
+            console.log(error);
+        })
     }
 
 </script>
@@ -96,24 +104,19 @@
 
 <div class="container">
     <header class="uk-position-top-center">
-        {#if !mapIsRendered}
-            <Button on:click={renderMap}>Render Map</Button>
-        {:else}
             <Logo/>
             <h1 class="uk-margin-remove uk-heading-medium">MedFoyer</h1>
-        {/if}
-
     </header>
     <main id="map">
 
     </main>
     <footer class="uk-position-bottom-center">
         <p class="uk-text-small uk-margin-remove uk-width-1-1 uk-text-center uk-text-danger">
-{#if !withinBounds}
-    You are too far away, please check in when you have arrived.
-    {/if}
+            {#if !withinBounds}
+                You are too far away, please check in when you have arrived.
+            {/if}
         </p>
-        <Button disabled="{!withinBounds}">Verify Location</Button>
+        <Button disabled="{!withinBounds}" on:click={verifyLocation}>Verify Location</Button>
     </footer>
 </div>
 <style lang="scss">
@@ -133,7 +136,6 @@
             background-color: rgba(255, 255, 255, 0.5);
             height: 6em;
             z-index: 1;
-
         }
 
         main#map {
@@ -146,8 +148,8 @@
             display: flex;
             justify-content: center;
             font-size: 1.3em;
-            flex-direction:column;
-            width:80%;
+            flex-direction: column;
+            width: 80%;
         }
     }
 

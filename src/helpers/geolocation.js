@@ -20,7 +20,6 @@ export function subscribe(callback){
     navigator.geolocation.watchPosition(callback, function(e){callback(getErrorCode(e))});
 }
 export function withinDistance(patientLocation, drLocation, threshold){
-    console.log("Yep");
     patientLocation = {
         "latitude": patientLocation[1],
         "longitude": patientLocation[0],
