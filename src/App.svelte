@@ -5,13 +5,14 @@
     import DataCollectionPage from './pages/DataCollectionPage.svelte';
     import FormPage from './pages/FormPage.svelte';
     import Waitlist from './pages/Waitlist.svelte';
+    import Redirect from './pages/Redirect.svelte';
     import Clinic from './pages/ClinicPages/Clinic.svelte';
     export let url = "";
 </script>
 
 <Router url="{url}">
     <Route path="/appt/:id" component="{DataCollectionPage}"/>
-    <Route path="/" component="{LandingPage}" />
+    <Route path="/" component="{Redirect}" />
     <Route path="/:name" component="{LandingPage}"/>
     <Route path="/map" component="{LocationPage}"/>
     <Route path="/screening" component="{FormPage}"/>
