@@ -1,11 +1,9 @@
 <script>
     export let appt;
     export let active = false;
-    console.log(appt.appointment_time);
     appt.appointment_time = new Date(appt.appointment_time * 1000);
 
     const formatDate = (date) => {
-        console.log(date);
         let ampm = "pm";
         if(date.getHours() < 12){
             ampm = "am";

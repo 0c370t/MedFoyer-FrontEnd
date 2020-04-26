@@ -25,9 +25,8 @@
             let obj = forms[formIndex];
             if(currentFormElement.reportValidity()){
                 finalFormObject = [...finalFormObject, ...obj.questions];
-                console.log({form: JSON.stringify(finalFormObject)});
-                //postScreeningResult($appt.id, {form: JSON.stringify(finalFormObject)});
-                postScreeningResult("guid", {form: JSON.stringify(finalFormObject)}).then((newAppt)=>{
+
+                postScreeningResult($appt.id, {form: JSON.stringify(finalFormObject)}).then((newAppt)=>{
                     appt.set(newAppt);
                     navigate("/waitlist");
                 });
