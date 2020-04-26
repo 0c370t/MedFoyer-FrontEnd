@@ -7,14 +7,13 @@
     import Icon from "../Components/Icon/Icon.svelte";
     import {appt} from '../helpers/stores';
 
-    export let name = "";
     const headerFade = {
         duration: 500,
         delay: 1500,
     };
     const mainSlide = {
         duration: 500,
-        delay: 2000
+        delay: 2000,
     };
     let appointmentExists = Object.keys($appt).length > 0;
 </script>
@@ -29,8 +28,8 @@
         </header>
         {#if appointmentExists}
         <main transition:slide={mainSlide}>
-            {#if name}
-                <h2 class="uk-heading-medium">Hello {name}!</h2>
+            {#if $appt.name}
+                <h2 class="uk-heading-medium">Hello {$appt.name}!</h2>
             {:else}
                 <h2 class="uk-heading-medium">Hello!</h2>
             {/if}

@@ -14,7 +14,6 @@
     }
     let clinicPosition = [parseFloat($appt.long), parseFloat($appt.lat)]; // TODO: Collect from API
     let userPosition = [0, 0];
-    let description = "North Kansas City Hospital";
     const supportsGps = Boolean(navigator.geolocation);
     let needsConfirmation;
     let mapIsRendered = false;
@@ -35,10 +34,6 @@
         } else {
             userPosition = [pos.coords.longitude, pos.coords.latitude];
             withinBounds = withinDistance(userPosition, clinicPosition, 1000);
-        }
-    };
-    $: {
-        if(map){
             let source = map.getSource("points");
             if(source){
                 source.setData({
@@ -47,7 +42,7 @@
                 });
             }
         }
-    }
+    };
     if (supportsGps) {
         subscribe(updateUserPosition)
     }
