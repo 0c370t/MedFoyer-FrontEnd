@@ -180,10 +180,10 @@
                     Pandemic. Please consider taking 2 minutes to fill one out: </p>
                 <div class="">
                     <a href="https://forms.gle/iBwTMaRtYneYNFz59" target="_blank"
-                       class="uk-button uk-button-primary uk-border-pill uk-margin-medium-right"
+                       class="uk-button uk-button-primary uk-border-pill uk-margin-medium-right uk-margin-medium-bottom"
                        data-uk-icon="arrow-right">I am a patient</a>
                     <a href="https://forms.gle/tuiqkX75ykiT3rXj7" target="_blank"
-                       class="uk-button uk-button-primary uk-border-pill" data-uk-icon="arrow-right">I am a
+                       class="uk-button uk-button-primary uk-border-pill uk-margin-medium-bottom" data-uk-icon="arrow-right">I am a
                                                                                                      practictioner</a>
                 </div>
             </div>
