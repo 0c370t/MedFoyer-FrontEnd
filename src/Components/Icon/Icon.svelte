@@ -8,7 +8,6 @@
 
     onMount(()=>{
         if(!target) console.log("Too soon bro!");
-        console.log(target);
         let newOptions = options;
 
         let x = Uikit.icon(target, newOptions);
