@@ -79,7 +79,7 @@
                         <h2 class="uk-margin-small-top">For health care providers.</h2>
                         <p class="subtitle-text">
                             The unexpected outbreak of the COVID-19 pandemic has taken the world by surprise and left
-                            businesses including healthcare clinics and surgery centers scrambling to find new solutions
+                            businesses, including healthcare clinics and surgery centers, scrambling to find new solutions
                             in light of the crisis. </p>
                         <div class="uk-grid uk-child-width-1-2@s" data-uk-grid>
                             <div>
@@ -176,15 +176,15 @@
             <div>
                 <h2 class="uk-margin-small-top uk-h1">Help us build something incredible.</h2>
                 <p class="subtitle-text">
-                    We are currently conducting surveys to make sure we can provide the most help during the COVID-19
+                    We are currently conducting surveys so we can provide the most help during the COVID-19
                     Pandemic. Please consider taking 2 minutes to fill one out: </p>
                 <div class="">
                     <a href="https://forms.gle/iBwTMaRtYneYNFz59" target="_blank"
-                       class="uk-button uk-button-primary uk-border-pill uk-margin-medium-right uk-margin-medium-bottom"
+                       class="uk-button uk-button-primary uk-border-pill uk-margin-medium-right uk-margin-small-bottom"
                        data-uk-icon="arrow-right">I am a patient</a>
                     <a href="https://forms.gle/tuiqkX75ykiT3rXj7" target="_blank"
-                       class="uk-button uk-button-primary uk-border-pill uk-margin-medium-bottom" data-uk-icon="arrow-right">I am a
-                                                                                                     practictioner</a>
+                       class="uk-button uk-button-primary uk-border-pill uk-margin-small-bottom" data-uk-icon="arrow-right">I am a
+                                                                                                     practitioner</a>
                 </div>
             </div>
             <div data-uk-scrollspy="cls: uk-animation-fade">
