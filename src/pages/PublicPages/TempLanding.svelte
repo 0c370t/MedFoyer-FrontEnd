@@ -15,7 +15,7 @@
             <nav class="uk-navbar uk-navbar-container uk-navbar-transparent" data-uk-navbar>
                 <div class="uk-navbar-left">
                     <div class="uk-navbar-item uk-padding-remove-horizontal">
-                        <h2 class="uk-margin-remove" style="height:2em"><a class="uk-logo" title="Logo" href="#"
+                        <h2 class="uk-margin-remove" style="height:2em"><a class="uk-logo" title="Logo"
                                                                            data-uk-scroll="duration:500">
                             <Logo/>
                             MedFoyer</a></h2>
@@ -61,9 +61,9 @@
         <div class="uk-section uk-section-small uk-padding-remove-top">
             <ul class="uk-subnav uk-subnav-pill uk-flex uk-flex-center"
                 data-uk-switcher="connect: .uk-switcher; animation: uk-animation-fade">
-                <li><a class="uk-border-pill" href="#">Discover</a></li>
-                <li><a class="uk-border-pill" href="#">Benefits</a></li>
-                <li><a class="uk-border-pill" href="#">Features</a></li>
+                <li><a class="uk-border-pill">Discover</a></li>
+                <li><a class="uk-border-pill">Benefits</a></li>
+                <li><a class="uk-border-pill">Features</a></li>
             </ul>
         </div>
 

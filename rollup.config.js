@@ -3,6 +3,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import serve from 'rollup-plugin-serve';
 import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
+import babel from '@rollup/plugin-babel';
 import { terser } from 'rollup-plugin-terser';
 import autoPreprocess from 'svelte-preprocess';
 import scss from 'rollup-plugin-scss';
@@ -41,6 +42,7 @@ export default {
 		}),
 		commonjs(),
 
+
 		// In dev mode, call `npm run start` once
 		// the bundle has been generated
 		!production && serve(
@@ -59,6 +61,30 @@ export default {
 
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify
+		babel({
+			extensions: [ '.js', '.mjs', '.html', '.svelte' ],
+			exclude: [ 'node_modules/@babel/**', 'node_modules/core-js/**' ],
+			babelHelpers: "runtime",
+			presets: [
+				[
+					'@babel/preset-env',
+					{
+						targets: '> 0.25%, not dead',
+						useBuiltIns: 'usage',
+						corejs: 3
+					}
+				]
+			],
+			plugins: [
+				'@babel/plugin-syntax-dynamic-import',
+				[
+					'@babel/plugin-transform-runtime',
+					{
+						useESModules: true
+					}
+				]
+			]
+		}),
 		production && terser()
 	],
 	watch: {
