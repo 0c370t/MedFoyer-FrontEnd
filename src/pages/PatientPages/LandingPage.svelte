@@ -1,11 +1,11 @@
 <script>
     import {slide, fade} from 'svelte/transition';
     import {Link} from 'svelte-routing';
-    import Button from "../Components/Button/Button.svelte";
-    import AnimatedLogo from "../svg/AnimatedLogo.svelte";
-    import Mount from "../Components/Abstract/Mount.svelte";
-    import Icon from "../Components/Icon/Icon.svelte";
-    import {appt} from '../helpers/stores';
+    import Button from "../../Components/Button/Button.svelte";
+    import AnimatedLogo from "../../svg/AnimatedLogo.svelte";
+    import Mount from "../../Components/Abstract/Mount.svelte";
+    import Icon from "../../Components/Icon/Icon.svelte";
+    import {appt} from '../../helpers/stores';
 
     const headerFade = {
         duration: 500,

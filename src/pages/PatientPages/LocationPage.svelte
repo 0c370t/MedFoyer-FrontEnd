@@ -1,15 +1,15 @@
 <script>
     import mapboxgl from 'mapbox-gl/dist/mapbox-gl';
     import Uikit from 'uikit';
-    import {subscribe, withinDistance} from '../helpers/geolocation';
-    import pulsingDot from '../helpers/mapping/pulsingDot';
+    import {subscribe, withinDistance} from '../../helpers/geolocation';
+    import pulsingDot from '../../helpers/mapping/pulsingDot';
     import {onMount} from 'svelte';
-    import Button from '../Components/Button/Button.svelte';
-    import GpsPermissionModal from "../Components/GpsPermissionModal.svelte";
-    import Logo from "../svg/Logo.svelte";
-    import {appt} from '../helpers/stores';
+    import Button from '../../Components/Button/Button.svelte';
+    import GpsPermissionModal from "../../Components/GpsPermissionModal.svelte";
+    import Logo from "../../svg/Logo.svelte";
+    import {appt} from '../../helpers/stores';
     import {navigate} from "svelte-routing";
-    import {postCheckIn} from "../API/appointments.API";
+    import {postCheckIn} from "../../API/appointments.API";
 
     if (Object.keys($appt).length === 0) {
         window.location.href = "/";
