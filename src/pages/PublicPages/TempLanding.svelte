@@ -147,15 +147,15 @@
                         </p>
                         <div class="uk-grid uk-child-width-1-2@s" data-uk-grid>
                             <div>
-                                <h4>Great stuff</h4>
-                                <p>Ut enim ad minim veniam, quis nostrud magna aliqua exercitation. <a href="">Learn
-                                                                                                               more.</a>
+                                <h4>User Interface</h4>
+                                <p>
+                                    MedFoyer provides an optimized app interface for both patients and clinic staff.
                                 </p>
                             </div>
                             <div>
-                                <h4>Data analysis</h4>
-                                <p>Ut enim ad minim veniam, quis nostrud magna aliqua exercitation. <a href="">Learn
-                                                                                                               more.</a>
+                                <h4>Patient Notifications</h4>
+                                <p>
+                                    Patients can receive notifications from clinic staff to increase communication efficiency.
                                 </p>
                             </div>
                         </div>
