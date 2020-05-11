@@ -1,11 +1,11 @@
 <script>
 
-    import {severe_symptoms, other_symptoms} from '../helpers/questions';
-    import {appt} from '../helpers/stores';
+    import {severe_symptoms, other_symptoms} from '../../helpers/questions';
+    import {appt} from '../../helpers/stores';
 
-    import Logo from "../svg/Logo.svelte";
-    import Form from "../Components/Forms/Form.svelte";
-    import {postScreeningResult} from "../API/appointments.API";
+    import Logo from "../../svg/Logo.svelte";
+    import Form from "../../Components/Forms/Form.svelte";
+    import {postScreeningResult} from "../../API/appointments.API";
     import {navigate} from "svelte-routing";
     let formIndex = 0;
     let finalFormObject = [];

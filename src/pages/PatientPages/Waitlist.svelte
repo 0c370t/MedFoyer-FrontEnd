@@ -1,5 +1,5 @@
 <script>
-    import Logo from "../svg/Logo.svelte";
+    import Logo from "../../svg/Logo.svelte";
 
 </script>
 <div class="container uk-container uk-container-small">
