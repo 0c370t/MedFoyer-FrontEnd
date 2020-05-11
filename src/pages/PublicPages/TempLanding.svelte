@@ -40,8 +40,8 @@
             <div class="uk-width-1-2@s"
                  data-uk-scrollspy="cls: uk-animation-slide-right-medium; target: > *; delay: 150">
                 <h1 class="uk-margin-remove-top">The waiting room of the future.</h1>
-                <p class="subtitle-text">MedFoyer uses your patients' cell phones to enable them to check
-                                         in from their vehicles, minimizing unnecessary contact with your
+                <p class="subtitle-text">MedFoyer uses your patients' smartphones, enabling them to check
+                                         in from their vehicles - minimizing unnecessary contact with your
                                          staff.</p>
                 <a href="#content" data-uk-scroll="duration:500" title="Learn More"
                    class="uk-button uk-button-primary uk-border-pill" data-uk-scrollspy-class="uk-animation-fade">LEARN
@@ -88,7 +88,7 @@
                             </div>
                             <div>
                                 <h4>Facilitate Social Distancing</h4>
-                                <p>MedFoyer uses a patient's smartphone to let them check in from their vehicle.</p>
+                                <p>MedFoyer uses a patient's smartphone to let them check-in from their vehicle.</p>
                             </div>
                         </div>
                         <div class="uk-flex uk-flex-around uk-margin-medium-top">
@@ -117,9 +117,9 @@
                                     matters most. </p>
                             </div>
                             <div>
-                                <h4>Increase patient safety</h4>
+                                <h4>Increase safety</h4>
                                 <p>
-                                    By automating COVID-19 pre-screenings, MedFoyer helps keep at-risk patients socially distanced.
+                                    By automating COVID-19 pre-screenings, MedFoyer helps keep both patients and staff safe by reducing close interactions.
                                 </p>
                             </div>
                         </div>
@@ -142,8 +142,8 @@
                         <h6 class="uk-text-primary">EXCEED COMMUNICATION EXPECTATIONS</h6>
                         <h2 class="uk-margin-small-top">Utilize a rich feature set.</h2>
                         <p class="subtitle-text">
-                            MedFoyer handles appointment reminders, COVID-19 screenings, to facilitate safe check-ins for your patients.
-                            An easy-to-use, to the point interface for clinic staff let MedFoyer fit into your workflow, rather than obstructing it.
+                            MedFoyer handles appointment reminders, COVID-19 screenings, and facilitates safe check-ins for your patients.
+                            An easy-to-use and straightforward interface lets MedFoyer fit seamlessly into your staff’s workflow, rather than obstructing it.
                         </p>
                         <div class="uk-grid uk-child-width-1-2@s" data-uk-grid>
                             <div>
