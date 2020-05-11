@@ -27,6 +27,11 @@ export default {
 			css: css => {
 				css.write('public/build/bundle.css');
 			},
+			onwarn: (warning, handler) => {
+				// UIKit3 uses <a> for several things that do not use href attributes. We want to hide these warnings.
+				if(warning.code === 'a11y-missing-attribute') return;
+				handler(warning);
+			},
 			hydratable: true,
 			preprocess: autoPreprocess(),
 		}),
@@ -61,7 +66,7 @@ export default {
 
 		// If we're building for production (npm run build
 		// instead of npm run dev), minify
-		babel({
+		production && babel({
 			extensions: [ '.js', '.mjs', '.html', '.svelte' ],
 			exclude: [ 'node_modules/@babel/**', 'node_modules/core-js/**' ],
 			babelHelpers: "runtime",
