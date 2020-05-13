@@ -37,12 +37,10 @@
         <!-- TOP CONTAINER -->
         <div class="uk-container uk-flex-auto top-container uk-position-relative uk-margin-medium-top"
              data-uk-parallax="y: 0,50; easing:0; opacity:0.2">
-            <div class="uk-width-1-2@s"
+            <div class="uk-width-2-3@s"
                  data-uk-scrollspy="cls: uk-animation-slide-right-medium; target: > *; delay: 150">
-                <h1 class="uk-margin-remove-top">The waiting room of the future.</h1>
-                <p class="subtitle-text">MedFoyer uses your patients' smartphones, enabling them to check
-                                         in from their vehicles - minimizing unnecessary contact with your
-                                         staff.</p>
+                <h1 class="uk-margin-remove-top">The waiting room of the future.™</h1>
+                <p class="subtitle-text">MedFoyer empowers patients to check-in to their appointments from the safety of their vehicles, minimizing contact with your staff and other patients.</p>
                 <a href="#content" data-uk-scroll="duration:500" title="Learn More"
                    class="uk-button uk-button-primary uk-border-pill" data-uk-scrollspy-class="uk-animation-fade">LEARN
                                                                                                                   MORE </a>
@@ -84,7 +82,7 @@
                         <div class="uk-grid uk-child-width-1-2@s" data-uk-grid>
                             <div>
                                 <h4>HIPAA Compliant Platform</h4>
-                                <p>MedFoyer is fully HIPAA Compliant, and data security is our top priority.</p>
+                                <p>MedFoyer is fully HIPAA compliant, and data security is our top priority.</p>
                             </div>
                             <div>
                                 <h4>Facilitate Social Distancing</h4>
@@ -177,7 +175,7 @@
                 <h2 class="uk-margin-small-top uk-h1">Help us build something incredible.</h2>
                 <p class="subtitle-text">
                     We are currently conducting surveys so we can provide the most help during the COVID-19
-                    Pandemic. Please consider taking 2 minutes to fill one out: </p>
+                    Pandemic. Please consider taking two minutes to fill one out: </p>
                 <div class="">
                     <a href="https://forms.gle/iBwTMaRtYneYNFz59" target="_blank"
                        class="uk-button uk-button-primary uk-border-pill uk-margin-medium-right uk-margin-small-bottom"
