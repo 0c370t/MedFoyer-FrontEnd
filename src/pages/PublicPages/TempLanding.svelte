@@ -39,10 +39,8 @@
              data-uk-parallax="y: 0,50; easing:0; opacity:0.2">
             <div class="uk-width-2-3@s"
                  data-uk-scrollspy="cls: uk-animation-slide-right-medium; target: > *; delay: 150">
-                <h1 class="uk-margin-remove-top">The waiting room of the future™.</h1>
-                <p class="subtitle-text">MedFoyer uses your patients' smartphones, enabling them to check
-                                         in from their vehicles - minimizing unnecessary contact with your
-                                         staff.</p>
+                <h1 class="uk-margin-remove-top">The waiting room of the future.™</h1>
+                <p class="subtitle-text">MedFoyer empowers patients to check-in to their appointments from the safety of their vehicles, minimizing contact with your staff and other patients.</p>
                 <a href="#content" data-uk-scroll="duration:500" title="Learn More"
                    class="uk-button uk-button-primary uk-border-pill" data-uk-scrollspy-class="uk-animation-fade">LEARN
                                                                                                                   MORE </a>
