@@ -17,13 +17,13 @@
     "core-js": "^3.6.5",
     "node-sass": "^4.14.1",
     "rollup": "^1.20.0",
-    "rollup-plugin-livereload": "^1.0.0",
-    "rollup-plugin-scss": "^2.4.0",
+    "rollup-plugin-livereload": "^1.3.0",
+    "rollup-plugin-scss": "^2.5.0",
     "rollup-plugin-serve": "^1.0.1",
     "rollup-plugin-svelte": "^5.0.3",
     "rollup-plugin-terser": "^5.1.2",
     "sass": "^1.26.5",
-    "svelte": "^3.0.0",
+    "svelte": "^3.22.2",
     "svelte-preprocess": "^3.7.4"
   },
   "dependencies": {
@@ -31,6 +31,6 @@
     "mapbox-gl": "^1.10.0",
     "sirv-cli": "^0.4.4",
     "svelte-routing": "^1.4.2",
-    "uikit": "^3.4.2"
+    "uikit": "^3.4.6"
   }
 }
