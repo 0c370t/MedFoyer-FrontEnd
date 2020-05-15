@@ -202,6 +202,18 @@
                 <p>
                     For questions, comments, or inquiries regarding the waiting room of the future, please reach out to us at <a href="mailto:sales@medfoyer.com" title="">sales@medfoyer.com</a>.
                 </p>
+                
+                <!-- Social Media Icons -->
+                <div>
+                    <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/MedFoyer/" 
+                        class="uk-icon-button uk-margin-small-right" uk-icon="facebook"/>
+                    <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/medfoyerapp/" 
+                        class="uk-icon-button  uk-margin-small-right" uk-icon="instagram"/>
+                    <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/medfoyerapp" 
+                        class="uk-icon-button  uk-margin-small-right" uk-icon="twitter"/>
+                    <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/company/medfoyer/" 
+                        class="uk-icon-button  uk-margin-small-right" uk-icon="linkedin"/>
+                </div>
             </div>
             <!--
             <div class="uk-width-1-6@m">
