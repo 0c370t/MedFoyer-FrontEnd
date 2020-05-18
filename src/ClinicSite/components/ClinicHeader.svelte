@@ -1,9 +1,9 @@
 <script>
     import Logo from "../../svg/Logo.svelte";
-    import Icon from "../Icon/Icon.svelte";
-    import Button from "../Button/Button.svelte";
-    import Modal from "../Modal/Modal.svelte";
-    import Form from "../Forms/Form.svelte";
+    import Icon from "../../Components/Icon/Icon.svelte";
+    import Button from "../../Components/Button/Button.svelte";
+    import Modal from "../../Components/Modal/Modal.svelte";
+    import Form from "../../Components/Forms/Form.svelte";
     import {postAppointment} from "../../API/appointments.API";
 
     export let updateAppointments;

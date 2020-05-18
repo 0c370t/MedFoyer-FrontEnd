@@ -3,17 +3,16 @@
 
     export let form;
     export let onSubmit;
-
     export let formElement;
-
     export let buttonText = "Submit";
+
 </script>
 <form bind:this={formElement} class="uk-container uk-container-small uk-container-expand">
     {#each form as question}
         <div class="field {question.type}">
             {#if question.type === "boolean"}
                 <label for="{question.name}">{question.label} </label>
-                <input name="{question.name}" type="checkbox" class="uk-checkbox" bind:checked={question.value}
+                <input name="{question.name}" type="checkbox" class="uk-checkbox input boolean" bind:checked={question.value}
                        required={question.required}/>
             {/if}
 
@@ -23,7 +22,7 @@
                     {#each question.options as option}
                         <span class="radioOption">
                                 <label>{option.label}</label>
-                                <input name="{question.name}" type="radio" class="uk-radio" bind:group={question.value}
+                                <input name="{question.name}" type="radio" class="uk-radio input radio" bind:group={question.value}
                                        value="{option.value}" required={question.required}/>
                             </span>
                     {/each}
@@ -50,6 +49,11 @@
             {#if question.type === "time"}
                 <label for="{question.name}">{question.label} </label>
                 <input type="time" class="uk-input field {question.type}" bind:value={question.value}
+                       name="{question.name}" required="{question.required}"/>
+            {/if}
+            {#if question.type === "email"}
+                <label for="{question.name}">{question.label} </label>
+                <input type="email" class="uk-input field {question.type}" bind:value={question.value}
                        name="{question.name}" required="{question.required}"/>
             {/if}
         </div>
@@ -102,7 +106,7 @@
             display: inline-block;
         }
 
-        input.text, input.number, input.datetime, input.time {
+        input:not(.radio):not(.boolean) {
             flex: 1;
         }
     }

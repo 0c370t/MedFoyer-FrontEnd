@@ -1,8 +1,8 @@
 <script>
-    import ClinicHeader from '../../Components/Clinic/ClinicHeader.svelte'
+    import ClinicHeader from '../components/ClinicHeader.svelte'
     import {getAppointments} from "../../API/appointments.API";
-    import AppointmentItem from "../../Components/Clinic/AppointmentItem.svelte";
-    import AppointmentOverview from "../../Components/Clinic/AppointmentOverview.svelte";
+    import AppointmentItem from "../components/AppointmentItem.svelte";
+    import AppointmentOverview from "../components/AppointmentOverview.svelte";
     import {onMount} from 'svelte';
     let appointments;
     let selectedAppointment = false;

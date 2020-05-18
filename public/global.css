@@ -23,3 +23,10 @@ a:hover{
         font-size:14px;
     }
 }
+
+
+/* UIKit Overrides */
+.uk-card-badge {
+    top:15px !important;
+    right:15px !important;
+}

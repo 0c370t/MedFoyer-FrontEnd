@@ -1,6 +1,7 @@
 <script>
     import Logo from "../../svg/Logo.svelte";
     import Icon from "../../Components/Icon/Icon.svelte";
+    import PatientForm from "../../Components/Forms/GoogleSurvey/PatientForm.svelte";
 
     const currentYear = new Date().getFullYear();
 </script>

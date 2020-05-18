@@ -1,6 +1,6 @@
 <script>
 
-    import {severe_symptoms, other_symptoms} from '../../helpers/questions';
+    import {severe_symptoms, other_symptoms} from '../../helpers/forms/default-covid-screen';
     import {appt} from '../../helpers/stores';
 
     import Logo from "../../svg/Logo.svelte";
