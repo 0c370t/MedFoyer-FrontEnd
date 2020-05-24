@@ -10,9 +10,8 @@ import scss from 'rollup-plugin-scss';
 
 const production = !process.env.ROLLUP_WATCH;
 
-export default (isPrimary, legacyMode = false) => {
+export default (isPrimary, out_dir, legacyMode = false) => {
     // LegacyMode flag is responsible for enabling or disabling babel
-
     return {
         plugins: [
             svelte({
@@ -21,7 +20,7 @@ export default (isPrimary, legacyMode = false) => {
                 // we'll extract any component CSS out into
                 // a separate file - better for performance
                 css: css => {
-                    css.write('public/build/bundle.css');
+                    css.write(out_dir + '/bundle.css');
                 },
                 onwarn: (warning, handler) => {
                     // UIKit3 uses <a> for several things that do not use href attributes. We want to hide these warnings.

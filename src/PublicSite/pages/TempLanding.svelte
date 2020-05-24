@@ -1,8 +1,6 @@
 <script>
     import Logo from "../../svg/Logo.svelte";
     import Icon from "../../Components/Icon/Icon.svelte";
-    import PatientForm from "../../Components/Forms/GoogleSurvey/PatientForm.svelte";
-
     const currentYear = new Date().getFullYear();
 </script>
 
@@ -183,7 +181,7 @@
                        data-uk-icon="arrow-right">I am a patient</a>
                     <a href="https://forms.gle/tuiqkX75ykiT3rXj7" target="_blank"
                        class="uk-button uk-button-primary uk-border-pill uk-margin-small-bottom" data-uk-icon="arrow-right">I am a
-                                                                                                     practitioner</a>
+                                                                                                                            practitioner</a>
                 </div>
             </div>
             <div data-uk-scrollspy="cls: uk-animation-fade">
@@ -201,17 +199,17 @@
                 <p>
                     For questions, comments, or inquiries regarding the waiting room of the future, please reach out to us at <a href="mailto:sales@medfoyer.com" title="">sales@medfoyer.com</a>.
                 </p>
-                
+
                 <!-- Social Media Icons -->
                 <div>
-                    <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/MedFoyer/" 
-                        class="uk-icon-button uk-margin-small-right" uk-icon="facebook"/>
-                    <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/medfoyerapp/" 
-                        class="uk-icon-button  uk-margin-small-right" uk-icon="instagram"/>
-                    <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/medfoyerapp" 
-                        class="uk-icon-button  uk-margin-small-right" uk-icon="twitter"/>
-                    <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/company/medfoyer/" 
-                        class="uk-icon-button  uk-margin-small-right" uk-icon="linkedin"/>
+                    <a target="_blank" rel="noopener noreferrer" href="https://www.facebook.com/MedFoyer/"
+                       class="uk-icon-button uk-margin-small-right" uk-icon="facebook"/>
+                    <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/medfoyerapp/"
+                       class="uk-icon-button  uk-margin-small-right" uk-icon="instagram"/>
+                    <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/medfoyerapp"
+                       class="uk-icon-button  uk-margin-small-right" uk-icon="twitter"/>
+                    <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/company/medfoyer/"
+                       class="uk-icon-button  uk-margin-small-right" uk-icon="linkedin"/>
                 </div>
             </div>
             <!--
@@ -241,11 +239,9 @@
         left: 0;
         right: 0;
     }
-
     .uk-sticky-placeholder {
         height: 0 !important;
     }
-
     .top-wrap::before, .overlay-wrap::before {
         position: absolute;
         top: 0;
@@ -256,35 +252,28 @@
         z-index: 1;
         background-color: rgba(0, 0, 0, 0.5);
     }
-
     .top-wrap-height {
         height: 80vh;
         min-height: 460px;
         transition: height 0.25s;
     }
-
     .uk-subnav-pill > * > :first-child {
         padding: 0.5rem 1rem;
     }
-
     .uk-subnav-pill > *:not(.uk-active) > :first-child {
         background-color: rgba(0, 0, 0, 0.04);
     }
-
     .top-container {
         z-index: 2;
     }
-
     .uk-logo img {
         height: 38px;
     }
-
     .subtitle-text {
         font-size: 1.2em;
         opacity: 0.7;
         font-weight: 300;
     }
-
     .logos-grid img {
         display: block;
         width: 60px;
@@ -292,7 +281,6 @@
         filter: grayscale(100%);
         transition: filter 0.25s;
     }
-
     .logos-grid img:hover {
         display: block;
         width: 60px;

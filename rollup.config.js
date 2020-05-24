@@ -11,7 +11,7 @@ if (production){
                 name:"publicApplication",
                 file: 'public/build/bundle.js'
             }
-        }, defaultConfig(true,true)
+        }, defaultConfig(true,'public/build', true)
     );
 
     let patientApp = Object.assign({}, {
@@ -22,7 +22,7 @@ if (production){
                 name:"patientApplication",
                 file: 'public/patient/build/bundle.js'
             }
-        }, defaultConfig(false)
+        }, defaultConfig(false, 'public/patient/build')
     );
 
     let clinicApp = Object.assign({}, {
@@ -33,7 +33,7 @@ if (production){
                 name:"clinicApplication",
                 file: 'public/clinic/build/bundle.js'
             }
-        }, defaultConfig(false)
+        }, defaultConfig(false, 'public/clinic/build')
     );
     output = [publicApp, patientApp, clinicApp];
 }
@@ -46,7 +46,7 @@ else {
                 name:"localApplication",
                 file: 'public/build/bundle.js'
             }
-        }, defaultConfig(true,false)
+        }, defaultConfig(true, 'public/build', false)
     );
 }
 
