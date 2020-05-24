@@ -71,7 +71,7 @@ export default {
 		// instead of npm run dev), minify
 		production && babel({
 			extensions: [ '.js', '.mjs', '.html', '.svelte' ],
-			exclude: [ 'node_modules/@babel/**', 'node_modules/core-js/**' ],
+			exclude: [ 'node_modules/@babel/**', 'node_modules/core-js/**', 'node_modules/**' ],
 			babelHelpers: "runtime",
 			presets: [
 				[
