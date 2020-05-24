@@ -56,7 +56,8 @@ export async function postCheckIn(id, lat, long){
         },
         body: JSON.stringify({
             current_lat: lat,
-            current_long: long
+            current_long: long,
+            checkin_time: new Date().getTime()
         })
     });
     return response.json();

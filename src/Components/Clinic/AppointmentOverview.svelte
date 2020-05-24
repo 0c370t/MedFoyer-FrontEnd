@@ -9,8 +9,6 @@
     export let appointment;
     export let updateAppointments;
 
-    console.log(appointment);
-
     const deleteAppointmentHandler = () => {
         UIkit.modal.confirm('Are you sure you want to delete this appointment?', {status: "danger"}).then(() => {
             deleteAppointment(appointment.id).then(updateAppointments);
@@ -62,11 +60,20 @@
             <!-- Map -->
             <div>
                 {#if appointment.patient_location}
-                    <div class="uk-card uk-card-body uk-box-shadow-small uk-background-default">
+                    <div class="uk-card uk-card-body uk-box-shadow-small uk-background-default uk-margin-small-bottom">
+                        <h3>Check-in Information:</h3>
+                        <hr/>
+                        <dl class="uk-description-list uk-description-list-divider">
+                            <dt>Check-in Time:</dt>
+                            <dd>{formatTime(new Date(appointment.checkin_time))}</dd>
+                        </dl>
+                    </div>
+                    <div class="uk-card uk-card-body uk-box-shadow-small uk-background-default uk-margin-small-bottom">
                         <h3>Check-in Location:</h3>
                         <hr/>
                         <ClinicStaticMap clinicPosition="{[appointment.long, appointment.lat]}" userPosition="{[appointment.patient_location[1], appointment.patient_location[0]]}"/>
                     </div>
+
                 {:else}
                     <p class="uk-light">
                         {appointment.name} has not checked in yet.
