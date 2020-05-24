@@ -9,7 +9,10 @@ import autoPreprocess from 'svelte-preprocess';
 import scss from 'rollup-plugin-scss';
 
 const production = !process.env.ROLLUP_WATCH;
-
+const devmode = process.env.DEVMODE;
+if(devmode){
+	console.log("YOYOYOYOYO");
+}
 export default {
 	input: 'src/main.js',
 	output: {
@@ -90,7 +93,7 @@ export default {
 				]
 			]
 		}),
-		production && terser()
+		production && devmode && terser()
 	],
 	watch: {
 		clearScreen: false
