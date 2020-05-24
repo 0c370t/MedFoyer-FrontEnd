@@ -41,7 +41,7 @@
     }
 
     path.outer-shape.stroke {
-        stroke: #396481;
+        stroke: #396481; /* Consider making white */
         stroke-width: 5;
         stroke-miterlimit: 10;
         transition: 5s;
