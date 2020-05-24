@@ -2,7 +2,7 @@ import {getHost} from "./helpers";
 
 export async function postAppointment(body){
     let url = getHost() + "appointment/";
-    let response = await fetch(url, {
+    return await fetch(url, {
         method: 'post',
         headers:{
             "Accept":"application/json",
@@ -17,6 +17,14 @@ export async function getAppointment(id){
     let url = getHost() + `appointment/${id}`;
     let response = await fetch(url);
     return response.json();
+}
+
+export async function deleteAppointment(id){
+    let url = getHost() + `appointment/${id}`;
+    return await fetch(url, {
+        method:"delete"
+    });
+
 }
 
 export async function getAppointments(){

@@ -4,6 +4,10 @@ export function getCookies(){
     keyValuePairs.forEach((pair)=>output[pair[0]] = pair[1]);
     return output;
 }
+export function getCookie(key){
+    return getCookies()[key];
+}
+
 export function setCookie(key, value){
     document.cookie = `${key}=${value}`;
 }

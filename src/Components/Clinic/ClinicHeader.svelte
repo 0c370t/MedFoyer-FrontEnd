@@ -5,54 +5,25 @@
     import Modal from "../Modal/Modal.svelte";
     import Form from "../Forms/Form.svelte";
     import {postAppointment} from "../../API/appointments.API";
+    import {new_appointment} from "../../helpers/questions";
 
     export let updateAppointments;
 
-    // TODO: Add Appointment Modal
     let showAppointmentModal = false;
     let formElement;
-    let apptForm = [
-        {
-            "label":"Patient Name",
-            "type":"text",
-            "name":"name",
-            "required": true
-        },
-        {
-            "label":"Appointment Time",
-            "type":"time",
-            "name":"appointment_time",
-            "required": true
-        },
-        {
-            "label":"Clinic Address",
-            "type":"text",
-            "name":"display_address",
-            "required": true
-        },
-        {
-            "label":"Latitude",
-            "type":"number",
-            "name":"lat",
-            "required": true
-        },
-        {
-            "label":"Longitude",
-            "type":"number",
-            "name":"long",
-            "required": true
-        }
-    ];
+    let apptForm = new_appointment;
     const submit = () => {
         let date = new Date();
-        date.setHours(apptForm[1].value.split(":")[0]);
-        date.setMinutes(apptForm[1].value.split(":")[1]);
-        apptForm[1].value = date.getTime();
+        date.setHours(apptForm[2].value.split(":")[0]);
+        date.setMinutes(apptForm[2].value.split(":")[1]);
+        apptForm[2].value = date.getTime();
         postAppointment({form: JSON.stringify(apptForm)}).then(response => {
             showAppointmentModal = false;
             updateAppointments();
+            apptForm = new_appointment;
         })
     }
+
 
 </script>
 
