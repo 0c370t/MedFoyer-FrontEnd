@@ -14,7 +14,7 @@
 <Router url="{url}">
     <Route path="/appt/:id" component="{DataCollectionPage}"/>
     <Route path="/" component="{TempLanding}" />
-    <Route path="/:name" component="{LandingPage}"/>
+    <Route path="/appt" component="{LandingPage}"/>
     <Route path="/map" component="{LocationPage}"/>
     <Route path="/screening" component="{FormPage}"/>
     <Route path="/clinic" component="{Clinic}"/>

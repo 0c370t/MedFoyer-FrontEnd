@@ -35,6 +35,7 @@
             });
         } else {
             userPosition = [pos.coords.longitude, pos.coords.latitude];
+            console.log(userPosition);
             withinBounds = withinDistance(userPosition, clinicPosition, 1000);
             let source = map.getSource("points");
             if (source) {

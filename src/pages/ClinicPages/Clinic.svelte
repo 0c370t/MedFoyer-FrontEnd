@@ -8,12 +8,23 @@
     let selectedAppointment = false;
 
     const updateAppointments = () => {
-        getAppointments().then(result => appointments = result);
+        getAppointments().then(result => {
+            appointments = result;
+            appointments.forEach(a => {
+                // Ensure dates are dates
+                if(!(a.appointment_time instanceof Date)){
+                    console.log(a.appointment_time);
+                    a.appointment_time = new Date(a.appointment_time);
+                }
+            });
+            selectedAppointment = false;
+        });
     };
 
     const selectAppointment = (appt) => {
         selectedAppointment = appt;
     };
+
     onMount(updateAppointments)
 
 </script>
@@ -30,7 +41,7 @@
 
     </aside>
     {#if selectedAppointment}
-        <AppointmentOverview appointment="{selectedAppointment}"/>
+        <AppointmentOverview appointment="{selectedAppointment}" {updateAppointments}/>
     {:else}
         <main></main>
     {/if}

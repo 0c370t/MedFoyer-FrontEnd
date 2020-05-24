@@ -178,3 +178,42 @@ export const other_symptoms = [
         "required":true
     }
 ];
+
+export const new_appointment = [
+    {
+        "label":"Patient Name",
+        "type":"text",
+        "name":"name",
+        "required": true
+    },
+    {
+        "label":"Patient Date of Birth",
+        "type":"date",
+        "name":"dob",
+        "required":true
+    },
+    {
+        "label":"Appointment Time",
+        "type":"time",
+        "name":"appointment_time",
+        "required": true
+    },
+    {
+        "label":"Clinic Address",
+        "type":"text",
+        "name":"display_address",
+        "required": true
+    },
+    {
+        "label":"Latitude",
+        "type":"number",
+        "name":"lat",
+        "required": true
+    },
+    {
+        "label":"Longitude",
+        "type":"number",
+        "name":"long",
+        "required": true
+    }
+];

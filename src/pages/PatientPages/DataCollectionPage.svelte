@@ -6,6 +6,6 @@
 
     getAppointment(id).then(appointmentData => {
         appt.set(appointmentData);
-        navigate("/");
+        navigate("/appt");
     });
 </script>

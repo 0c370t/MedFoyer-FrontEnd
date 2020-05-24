@@ -1,48 +1,48 @@
 <script>
+    import {formatTime} from "../../helpers/datetime";
+
     export let appt;
     export let active = false;
-    appt.appointment_time = new Date(appt.appointment_time * 1000);
 
-    const formatDate = (date) => {
-        let ampm = "pm";
-        if(date.getHours() < 12){
-            ampm = "am";
-        }
-        let minutes = '';
-        if(date.getMinutes() < 10){
-            minutes = `0${date.getMinutes()}`;
-        } else {
-            minutes = `${date.getMinutes()}`;
-        }
+    const at_risk = appt.covid_flag && appt.covid_flag !== "NORMAL";
 
-
-
-        return `${date.getHours() % 12}:${minutes} ${ampm}`;
-    }
 </script>
 
-<div class="uk-box-shadow-hover-medium" on:click class:active>
+<div class="uk-box-shadow-hover-medium uk-position-relative" on:click class:active class:at_risk>
     <h4 class="uk-margin-remove">
         {appt.name}
     </h4>
     <p class="uk-margin-remove">
-        {formatDate(appt.appointment_time)}
+        {formatTime(appt.appointment_time)}
     </p>
     <p class="uk-margin-remove">
         {appt.status}
     </p>
-    <hr/>
+    {#if at_risk}
+        <span class="uk-badge">AT RISK</span>
+    {/if}
 </div>
 
-<style>
+<style lang="scss">
     div {
         height: 8em;
         padding:1em;
         background-color:rgba(255,255,255,0.7);
         cursor:pointer;
+        &.active{
+            background-color:rgba(255,255,255,0.5);
+        }
+        &.at_risk{
+            border-right:#fd3636 10px solid;
+        }
+
     }
-    .active{
-        background-color:rgba(255,255,255,0.5);
+    span.uk-badge{
+        top:1em;
+        right:1em;
+        position:absolute;
+        background-color: #fd3636;
+        padding:.5em;
     }
     p{
         height:1em;

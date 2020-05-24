@@ -8,13 +8,13 @@
 
     export let buttonText = "Submit";
 </script>
-<form bind:this={formElement} class="uk-container uk-container-small uk-container-expand">
+<form bind:this={formElement} class="uk-container uk-width-1-1">
     {#each form as question}
         <div class="field {question.type}">
             {#if question.type === "boolean"}
                 <label for="{question.name}">{question.label} </label>
-                <input name="{question.name}" type="checkbox" class="uk-checkbox" bind:checked={question.value}
-                       required={question.required}/>
+                <input name="{question.name}" type="checkbox" class="uk-checkbox input {question.type}"
+                       bind:checked={question.value} required={question.required}/>
             {/if}
 
             {#if question.type === "radio"}
@@ -23,14 +23,18 @@
                     {#each question.options as option}
                         <span class="radioOption">
                                 <label>{option.label}</label>
-                                <input name="{question.name}" type="radio" class="uk-radio" bind:group={question.value}
-                                       value="{option.value}" required={question.required}/>
+                                <input name="{question.name}" type="radio" class="uk-radio input {question.type}"
+                                       bind:group={question.value} value="{option.value}" required={question.required}/>
                             </span>
                     {/each}
                 </div>
             {/if}
+
             {#if question.type === "label"}
-                <label class="labelfield"><strong>{question.label}</strong></label>
+                <label class="labelfield">
+                    <strong>{question.label}</strong>
+                    <hr/>
+                </label>
             {/if}
             {#if question.type === "text"}
                 <label for="{question.name}">{question.label} </label>
@@ -45,6 +49,11 @@
             {#if question.type === "datetime"}
                 <label for="{question.name}">{question.label} </label>
                 <input type="datetime-local" class="uk-input field {question.type}" bind:value={question.value}
+                       name="{question.name}" required="{question.required}"/>
+            {/if}
+            {#if question.type === "date"}
+                <label for="{question.name}">{question.label}</label>
+                <input type="date" class="uk-input field {question.type}" bind:value={question.value}
                        name="{question.name}" required="{question.required}"/>
             {/if}
             {#if question.type === "time"}
@@ -102,7 +111,15 @@
             display: inline-block;
         }
 
-        input.text, input.number, input.datetime, input.time {
+        input.radio {
+            background-size: 150%;
+        }
+
+        input.boolean {
+            background-size: 80%;
+        }
+
+        input:not(.radio):not(.boolean) {
             flex: 1;
         }
     }
