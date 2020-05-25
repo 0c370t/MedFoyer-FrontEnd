@@ -14,6 +14,9 @@
     </h4>
     <p class="uk-margin-remove">
         {formatTime(appt.appointment_time)}
+        {#if appt.checkin_time}
+            | Checked In: {formatTime(new Date(appt.checkin_time))}
+        {/if}
     </p>
     <p class="uk-margin-remove">
         {appt.status}

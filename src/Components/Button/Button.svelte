@@ -1,9 +1,10 @@
 <script>
     export let disabled = false;
     export let fill = false;
+    export let _class = "";
 </script>
 
-<button on:click type="button" class:fill {disabled} class="uk-button uk-button-default uk-box-shadow-hover-large">
+<button on:click type="button" class:fill {disabled} class={"uk-button uk-button-default uk-box-shadow-hover-large " + _class}>
     <slot/>
 </button>
 
@@ -15,6 +16,10 @@
         padding:1em;
         line-height:1em;
         font-size:inherit;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
         &:disabled:hover{
             box-shadow:none;
         }

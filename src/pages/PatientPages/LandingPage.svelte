@@ -24,26 +24,25 @@
             <span class="logo">
                 <AnimatedLogo/>
             </span>
-            <h1 class="uk-heading-large uk-margin-remove" transition:fade={headerFade}>MedFoyer</h1>
+            <h1 class="uk-heading-large uk-margin-remove" in:fade={headerFade}>MedFoyer</h1>
         </header>
         {#if appointmentExists}
-        <main transition:slide={mainSlide}>
-            {#if $appt.name}
-                <h2 class="uk-heading-medium">Hello {$appt.name}!</h2>
-            {:else}
-                <h2 class="uk-heading-medium">Hello!</h2>
-            {/if}
-            <div>
-                <Button>
-                    <Link to="/map">
+            <main in:slide={mainSlide} class="uk-margin-medium">
+                <h2 class="uk-heading-medium uk-margin-remove">Welcome</h2>
+                <hr class="uk-divider-icon uk-margin-small"/>
+                <div>
+
+                    <Link to="/auth">
+                        <Button>
                     <span class="uk-text-large">
                         Tap to get started <Icon options="{{icon:'sign-in',ratio:2}}"/>
-                    </span>
+                            </span>
+                        </Button>
                     </Link>
-                </Button>
-            </div>
-        </main>
-            {/if}
+
+                </div>
+            </main>
+        {/if}
     </div>
 </Mount>
 <style lang="scss">

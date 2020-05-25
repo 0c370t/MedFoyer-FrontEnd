@@ -7,26 +7,28 @@
     import Form from "../../Components/Forms/Form.svelte";
     import {postScreeningResult} from "../../API/appointments.API";
     import {navigate} from "svelte-routing";
+    import MobileHeader from "../../Components/Layout/MobileHeader.svelte";
+
     let formIndex = 0;
     let finalFormObject = [];
     let currentFormElement;
     let forms = [{
         questions: severe_symptoms,
-        handler: function() {
+        handler: function () {
             let obj = forms[formIndex];
-            if(currentFormElement.reportValidity()){
+            if (currentFormElement.reportValidity()) {
                 finalFormObject = [...finalFormObject, ...obj.questions];
                 formIndex = 1;
             }
         }
     }, {
         questions: other_symptoms,
-        handler: function() {
+        handler: function () {
             let obj = forms[formIndex];
-            if(currentFormElement.reportValidity()){
+            if (currentFormElement.reportValidity()) {
                 finalFormObject = [...finalFormObject, ...obj.questions];
 
-                postScreeningResult($appt.id, {form: JSON.stringify(finalFormObject)}).then((newAppt)=>{
+                postScreeningResult($appt.id, {form: JSON.stringify(finalFormObject)}).then((newAppt) => {
                     appt.set(newAppt);
                     navigate("/waitlist");
                 });
@@ -35,11 +37,8 @@
         }
     }];
 </script>
+<MobileHeader/>
 <div class="container uk-container uk-container-small">
-    <header>
-        <Logo/>
-        <h1 class="uk-margin-remove uk-heading-medium">MedFoyer</h1>
-    </header>
     {#if formIndex < forms.length}
         <Form form="{forms[formIndex].questions}" onSubmit="{forms[formIndex].handler}" bind:formElement={currentFormElement} buttonText="Continue"/>
     {/if}
