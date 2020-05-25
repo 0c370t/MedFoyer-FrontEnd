@@ -13,15 +13,18 @@
     let formElement;
     let apptForm = new_appointment;
     const submit = () => {
-        let date = new Date();
-        date.setHours(apptForm[2].value.split(":")[0]);
-        date.setMinutes(apptForm[2].value.split(":")[1]);
-        apptForm[2].value = date.getTime();
-        postAppointment({form: JSON.stringify(apptForm)}).then(response => {
-            showAppointmentModal = false;
-            updateAppointments();
-            apptForm = new_appointment;
-        })
+        if(formElement.reportValidity()){
+            debugger;
+            let date = new Date();
+            date.setHours(apptForm[3].value.split(":")[0]);
+            date.setMinutes(apptForm[3].value.split(":")[1]);
+            apptForm[3].value = date.getTime();
+            postAppointment({form: JSON.stringify(apptForm)}).then(response => {
+                showAppointmentModal = false;
+                updateAppointments();
+                apptForm = new_appointment;
+            })
+        }
     }
 
 

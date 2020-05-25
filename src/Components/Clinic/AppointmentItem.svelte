@@ -25,15 +25,18 @@
 
 <style lang="scss">
     div {
-        height: 8em;
+        height: 6em;
         padding:1em;
         background-color:rgba(255,255,255,0.7);
         cursor:pointer;
-        &.active{
-            background-color:rgba(255,255,255,0.5);
-        }
         &.at_risk{
             border-right:#fd3636 10px solid;
+        }
+        &:nth-child(odd){
+            background-color:rgba(255,255,255,0.5);
+        }
+        &.active{
+            background-color: hsl(204, 61%, 80%);
         }
 
     }

@@ -14,6 +14,9 @@
             deleteAppointment(appointment.id).then(updateAppointments);
         }).catch(e => undefined)
     }
+    const summonPatientPhoneNumber = () => {
+        UIkit.modal.alert(`The patient's contact phone number is ${appointment.phone_num}`);
+    }
 </script>
 
 <main class="uk-width-1-1">
@@ -24,7 +27,7 @@
                title="This functionality is for internal testing only!">
                 <Button>Patient Link <Icon options={{icon:"link"}}/></Button>
             </a>
-            <Button>Contact Patient <Icon options={{icon:"phone"}}/></Button>
+            <Button on:click={summonPatientPhoneNumber}>Contact Patient <Icon options={{icon:"phone"}}/></Button>
         </div>
         <div class="uk-flex uk-flex-right uk-flex-top">
             <Button on:click={deleteAppointmentHandler}>Cancel Appointment
@@ -59,25 +62,27 @@
         <div class="uk-width-2-5 uk-section uk-section-primary uk-padding-small uk-flex uk-flex-column uk-preserve-color">
             <!-- Map -->
             <div>
-                {#if appointment.patient_location}
+
                     <div class="uk-card uk-card-body uk-box-shadow-small uk-background-default uk-margin-small-bottom">
                         <h3>Check-in Information:</h3>
                         <hr/>
                         <dl class="uk-description-list uk-description-list-divider">
+                            <dt>Patient Phone Number:</dt>
+                            <dd>{appointment.phone_num ? appointment.phone_num : "Not available"}</dd>
                             <dt>Check-in Time:</dt>
-                            <dd>{formatTime(new Date(appointment.checkin_time))}</dd>
+                            {#if appointment.checkin_time}
+                                <dd>{formatTime(new Date(appointment.checkin_time))}</dd>
+                            {:else}
+                                <dd>{appointment.name} has not checked in yet.</dd>
+                            {/if}
                         </dl>
                     </div>
+                {#if appointment.patient_location}
                     <div class="uk-card uk-card-body uk-box-shadow-small uk-background-default uk-margin-small-bottom">
                         <h3>Check-in Location:</h3>
                         <hr/>
                         <ClinicStaticMap clinicPosition="{[appointment.long, appointment.lat]}" userPosition="{[appointment.patient_location[1], appointment.patient_location[0]]}"/>
                     </div>
-
-                {:else}
-                    <p class="uk-light">
-                        {appointment.name} has not checked in yet.
-                    </p>
                 {/if}
 
             </div>

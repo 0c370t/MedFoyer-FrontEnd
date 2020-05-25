@@ -43,7 +43,7 @@
             {/if}
             {#if question.type === "number"}
                 <label for="{question.name}">{question.label} </label>
-                <input type="number" class="uk-input field {question.type}" bind:value={question.value}
+                <input type="number" class="uk-input field {question.type}" bind:value={question.value} step="any"
                        name="{question.name}" required="{question.required}"/>
             {/if}
             {#if question.type === "datetime"}
@@ -59,6 +59,11 @@
             {#if question.type === "time"}
                 <label for="{question.name}">{question.label} </label>
                 <input type="time" class="uk-input field {question.type}" bind:value={question.value}
+                       name="{question.name}" required="{question.required}"/>
+            {/if}
+            {#if question.type === "phone"}
+                <label for="{question.name}">{question.label} </label>
+                <input type="tel" pattern={`[0-9]{3}-?[0-9]{3}-?[0-9]{4}`} placeholder="000-000-0000" class="uk-input field {question.type}" bind:value={question.value}
                        name="{question.name}" required="{question.required}"/>
             {/if}
         </div>
