@@ -14,17 +14,17 @@
             deleteAppointment(appointment.id).then(updateAppointments);
         }).catch(e => undefined)
     }
-
 </script>
 
 <main class="uk-width-1-1">
     <header class="uk-flex uk-flex-between uk-child-width-1-3 uk-container uk-container-expand">
         <div class="uk-flex uk-flex-left uk-flex-wrap">
             <h2 class="uk-width-1-1">{appointment.name} @ {formatTime(appointment.appointment_time)}</h2>
-            <a href="{window.location.protocol}//{window.location.host}/appt/{appointment.id}" target="_blank"
+            <a href="{window.location.protocol}//{window.location.host}/appt/{appointment.id}" target="_blank" class="uk-margin-small-right"
                title="This functionality is for internal testing only!">
-                <Button>Patient Link</Button>
+                <Button>Patient Link <Icon options={{icon:"link"}}/></Button>
             </a>
+            <Button>Contact Patient <Icon options={{icon:"phone"}}/></Button>
         </div>
         <div class="uk-flex uk-flex-right uk-flex-top">
             <Button on:click={deleteAppointmentHandler}>Cancel Appointment
