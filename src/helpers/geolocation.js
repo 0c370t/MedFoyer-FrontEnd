@@ -3,7 +3,7 @@ import getDistance from 'geolib/es/getDistance';
 export function getErrorCode(error) {
     switch(error.code) {
         case error.PERMISSION_DENIED:
-            return "MedFoyer cannot function if you block GPS.";
+            return "Please allow MedFoyer access to your GPS.";
         case error.POSITION_UNAVAILABLE:
             return "We are unable to determine your location.";
         case error.TIMEOUT:

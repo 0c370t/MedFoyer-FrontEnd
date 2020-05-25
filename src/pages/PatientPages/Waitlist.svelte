@@ -1,17 +1,15 @@
 <script>
     import Logo from "../../svg/Logo.svelte";
+    import MobileHeader from "../../Components/Layout/MobileHeader.svelte";
 
 </script>
-<div class="container uk-container uk-container-small">
-    <header>
-        <Logo/>
-        <h1 class="uk-margin-remove uk-heading-medium">MedFoyer</h1>
-    </header>
+<MobileHeader/>
+<div class="container uk-container uk-container-small uk-text-center uk-margin-medium-top">
     <main>
         <h3 class="uk-heading-divider uk-heading-small">Thank you for checking in!</h3>
         <p class="uk-text-large uk-text-center">
             You are
-            <span class="uk-heading-small uk-display-block uk-margin-small">
+            <span class="uk-heading-small uk-display-block uk-margin-remove">
                 5th
             </span>
             in line
