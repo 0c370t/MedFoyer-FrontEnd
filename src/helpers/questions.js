@@ -193,6 +193,12 @@ export const new_appointment = [
         "required":true
     },
     {
+        "label":"Patient Phone Number",
+        "type":"phone",
+        "name":"phone_num",
+        "required":true
+    },
+    {
         "label":"Appointment Time",
         "type":"time",
         "name":"appointment_time",
