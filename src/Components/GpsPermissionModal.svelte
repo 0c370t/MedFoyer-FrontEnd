@@ -20,7 +20,7 @@
 
     let errorContent = "";
     let notification = null;
-
+    let loading = false;
     const checkForErrors = (result) => {
         if(notification && notification.hasOwnProperty("close")){
             notification.close()
@@ -39,11 +39,12 @@
             });
             setCookie("locationPermissionGiven", true);
             promptForPermission = false;
-
         }
+        loading = false;
     };
 
     const getGpsPermission = () => {
+        loading = true;
         getLatLong(checkForErrors);
     };
 
@@ -56,7 +57,10 @@
             MedFoyer uses GPS to ensure you are at your doctor's office before checking in, when tapping okay, you will
             be prompted to give MedFoyer permission. </p>
         <span class="modalButton" slot="footer">
-            <Button on:click={getGpsPermission}>Okay <span><Icon options="{{icon:"check"}}"/></span></Button>
+            <Button _class="uk-position-relative" on:click={getGpsPermission} {loading}>
+                <span>Okay</span>
+                <span><Icon options={{icon:"check"}}/></span>
+            </Button>
         </span>
     </Modal>
 {:else}

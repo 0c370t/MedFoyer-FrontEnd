@@ -13,7 +13,7 @@
         UIkit.modal.confirm('Are you sure you want to delete this appointment?', {status: "danger"}).then(() => {
             deleteAppointment(appointment.id).then(updateAppointments);
         }).catch(e => undefined)
-    }
+    };
     const summonPatientPhoneNumber = () => {
         UIkit.modal.alert(`The patient's contact phone number is ${appointment.phone_num}`);
     }
@@ -47,6 +47,8 @@
                                 <dd>Yes</dd>
                             {:else if q.value === false}
                                 <dd>No</dd>
+                            {:else if q.options}
+                                <dd>{q.options.filter(q1 => q1.value === q.value)[0].label}</dd>
                             {:else}
                                 <dd>{q.value}</dd>
                             {/if}
