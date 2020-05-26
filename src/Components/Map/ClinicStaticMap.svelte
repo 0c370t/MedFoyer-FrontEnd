@@ -45,7 +45,7 @@
             });
 
             let clinicMarker = new mapboxgl.Marker({color: "#396481"})
-                    .setLngLat(["-94.65516","39.282445"])
+                    .setLngLat(clinicPosition)
                     .addTo(map);
             // clinicMarker.addTo(map);
         });

@@ -2,9 +2,14 @@
     export let disabled = false;
     export let fill = false;
     export let _class = "";
+    export let loading = false;
+    if(loading){
+        disabled = loading;
+    }
 </script>
 
-<button on:click type="button" class:fill {disabled} class={"uk-button uk-button-default uk-box-shadow-hover-large " + _class}>
+<button on:click type="button" class:fill disabled={loading || disabled} class={"uk-button uk-button-default uk-box-shadow-hover-large " + _class}>
+    <div uk-spinner class:uk-hidden={!loading} class="uk-overlay uk-position-center"/>
     <slot/>
 </button>
 
