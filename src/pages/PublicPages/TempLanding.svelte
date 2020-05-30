@@ -207,8 +207,8 @@
                         class="uk-icon-button uk-margin-small-right" uk-icon="facebook"/>
                     <a target="_blank" rel="noopener noreferrer" href="https://www.instagram.com/medfoyerapp/" 
                         class="uk-icon-button  uk-margin-small-right" uk-icon="instagram"/>
-                    <!-- Twitter is not yet active<a target="_blank" rel="noopener noreferrer" href="https://twitter.com/medfoyerapp"
-                        class="uk-icon-button  uk-margin-small-right" uk-icon="twitter"/>-->
+                    <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/medfoyerapp"
+                        class="uk-icon-button  uk-margin-small-right" uk-icon="twitter"/>
                     <a target="_blank" rel="noopener noreferrer" href="https://www.linkedin.com/company/medfoyer/" 
                         class="uk-icon-button  uk-margin-small-right" uk-icon="linkedin"/>
                 </div>
