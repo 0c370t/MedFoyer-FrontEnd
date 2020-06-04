@@ -7,6 +7,7 @@
     export let formElement;
 
     export let buttonText = "Submit";
+    export let loading = false;
 </script>
 <form bind:this={formElement} class="uk-container uk-width-1-1">
     {#each form as question}
@@ -29,11 +30,24 @@
                     {/each}
                 </div>
             {/if}
+            {#if question.type === "dropdown"}
+                <label>{question.label}</label>
+                <select class="uk-select input {question.type}">
+                    {#each question.options as option}
+                        <option value="{option.value}">{option.label}</option>
+                    {/each}
+                </select>
+            {/if}
 
             {#if question.type === "label"}
                 <label class="labelfield">
                     <strong>{question.label}</strong>
                     <hr/>
+                </label>
+            {/if}
+            {#if question.type === "validation-message"}
+                <label class="labelfield uk-label-danger">
+                    <strong>{question.label}</strong>
                 </label>
             {/if}
             {#if question.type === "text"}
@@ -66,10 +80,11 @@
                 <input type="tel" pattern={`[0-9]{3}-?[0-9]{3}-?[0-9]{4}`} placeholder="000-000-0000" class="uk-input field {question.type}" bind:value={question.value}
                        name="{question.name}" required="{question.required}"/>
             {/if}
+
         </div>
     {/each}
     <div class="buttonContainer">
-        <Button fill={true} on:click={onSubmit}>{buttonText}</Button>
+        <Button fill={true} {loading} on:click={onSubmit}>{buttonText}</Button>
     </div>
 </form>
 <style lang="scss">
@@ -124,7 +139,7 @@
             background-size: 80%;
         }
 
-        input:not(.radio):not(.boolean) {
+        input:not(.radio):not(.boolean), select {
             flex: 1;
         }
     }

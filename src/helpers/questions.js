@@ -1,3 +1,5 @@
+import state_options from "./mapping/state_options";
+
 export const severe_symptoms = [
     {
         "label":"I am the:",
@@ -205,21 +207,28 @@ export const new_appointment = [
         "required": true
     },
     {
-        "label":"Clinic Address",
+        "label":"Street Address",
         "type":"text",
-        "name":"display_address",
+        "name":"address_1",
         "required": true
     },
     {
-        "label":"Latitude",
-        "type":"number",
-        "name":"lat",
+        "label":"City",
+        "type":"text",
+        "name":"city",
         "required": true
     },
     {
-        "label":"Longitude",
+        "label":"State",
+        "type":"dropdown",
+        "name":"state",
+        "required":true,
+        "options":state_options
+    },
+    {
+        "label":"Zip Code",
         "type":"number",
-        "name":"long",
-        "required": true
+        "name":"zip",
+        "required":true
     }
 ];
