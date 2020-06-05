@@ -4,22 +4,27 @@
 
 </script>
 <MobileHeader/>
-<div class="container uk-container uk-container-small uk-text-center uk-margin-medium-top">
-    <main>
-        <h3 class="uk-heading-divider uk-heading-small">Thank you for checking in!</h3>
-        <p class="uk-text-large uk-text-center">
+    <main class="container uk-container uk-container-small uk-text-center uk-margin-small-top">
+        <h3 class="uk-heading-medium">Thank you for checking in!</h3>
+        <p class="uk-text-large uk-text-center uk-margin-remove">
             You are
             <span class="uk-heading-small uk-display-block uk-margin-remove">
                 5th
             </span>
             in line
         </p>
+        <hr class="uk-divider-icon uk-width-medium uk-align-center uk-margin-small"/>
+        <p class="uk-text-center uk-margin-small uk-text-large">
+            Approximate wait time: <span class="uk-text-emphasis">20 minutes</span>
+        </p>
+        <p class="uk-text-center uk-margin-small">
+            We'll text you when your doctor is ready. Please wait in your car or your favorite nearby cafe. See you soon.
+        </p>
 
     </main>
-</div>
 <style lang="scss">
 
-    div.container {
+    .container {
         display: flex;
         flex-direction: column;
         justify-content: center;

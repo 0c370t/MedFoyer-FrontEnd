@@ -36,7 +36,7 @@
         } else {
             userPosition = [pos.coords.longitude, pos.coords.latitude];
             console.log(userPosition);
-            withinBounds = withinDistance(userPosition, clinicPosition, 1000);
+            withinBounds = withinDistance(userPosition, clinicPosition, 1609.34);
             let source = map.getSource("points");
             if (source) {
                 source.setData({
