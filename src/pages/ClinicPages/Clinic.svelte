@@ -1,36 +1,66 @@
 <script>
     import ClinicHeader from '../../Components/Clinic/ClinicHeader.svelte'
     import {getAppointments} from "../../API/appointments.API";
-    import AppointmentItem from "../../Components/Clinic/AppointmentItem.svelte";
     import AppointmentOverview from "../../Components/Clinic/AppointmentOverview.svelte";
     import {onMount} from 'svelte';
-    let appointments;
+    import {appt} from '../../helpers/stores';
+
+    import ClinicAside from "../../Components/Clinic/ClinicAside.svelte";
+    import {getFilterFunction} from "../../helpers/appointments";
+    import {getCurrentDateForInput} from "../../helpers/datetime";
+
+    let appointments = [];
     let selectedAppointment = false;
+    let filterValues = {
+        'from-time': '08:00',
+        'to-time': '17:00',
+        'date': getCurrentDateForInput()
+    };
 
     const updateAppointments = () => {
-        getAppointments().then(result => appointments = result);
+        getAppointments().then(result => {
+            appointments = result;
+            appointments.forEach(a => {
+                // Ensure dates are dates
+                if (!(a.appointment_time instanceof Date)) {
+                    a.appointment_time = new Date(a.appointment_time);
+                }
+            });
+
+            if (!selectedAppointment || !appointments.filter(a => a.id === selectedAppointment.id)) {
+                selectedAppointment = false;
+            } else {
+                selectedAppointment = appointments.filter(a => a.id === selectedAppointment.id)[0];
+            }
+            applyFilters();
+
+        });
     };
 
-    const selectAppointment = (appt) => {
-        selectedAppointment = appt;
+    const updateFilters = (e) => {
+        filterValues = e.detail;
+        updateAppointments();
     };
     onMount(updateAppointments)
+
+    const applyFilters = () => {
+        appointments = appointments.filter(getFilterFunction(filterValues));
+    };
+
+    onMount(updateAppointments);
+    onMount(() => appt.set({}))
+
 
 </script>
 
 <div>
     <ClinicHeader {updateAppointments}/>
+    <ClinicAside {appointments} bind:selectedAppointment {updateAppointments} {filterValues} on:filter={updateFilters}/>
 
-    <aside>
-        {#if appointments}
-            {#each appointments as appointment}
-                <AppointmentItem appt="{appointment}" active="{appointment === selectedAppointment}" on:click={()=>selectAppointment(appointment)}/>
-            {/each}
-        {/if}
-
-    </aside>
     {#if selectedAppointment}
-        <AppointmentOverview appointment="{selectedAppointment}"/>
+        <main>
+            <AppointmentOverview appointment="{selectedAppointment}" {updateAppointments}/>
+        </main>
     {:else}
         <main></main>
     {/if}
@@ -42,13 +72,11 @@
         grid-template-columns: 25% 75%;
         grid-template-rows: 5em 1fr;
         grid-template-areas: "header header" "aside main";
-    }
-
-    aside {
-        background-color: rgba(0, 0, 0, 0.2);
+        position: relative;
     }
 
     main {
         grid-area: main;
+        overflow-y: scroll;
     }
 </style>

@@ -55,7 +55,7 @@
         </div>
     {/each}
     <div class="buttonContainer">
-        <Button fill={true} on:click={onSubmit}>{buttonText}</Button>
+        <Button fullwidth={true} {loading} on:click={onSubmit}>{buttonText}</Button>
     </div>
 </form>
 <style lang="scss">

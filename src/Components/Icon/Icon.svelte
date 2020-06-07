@@ -1,5 +1,6 @@
 <script>
     export let options = {};
+    export let icon = false;
     import Uikit from 'uikit';
     import UikitIcons from 'uikit/dist/js/uikit-icons.min';
     UikitIcons(Uikit);
@@ -9,6 +10,9 @@
     onMount(()=>{
         if(!target) console.log("Too soon bro!");
         let newOptions = options;
+        if(icon)
+            options['icon'] = icon;
+
 
         let x = Uikit.icon(target, newOptions);
     })
