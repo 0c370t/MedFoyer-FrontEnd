@@ -7,11 +7,12 @@
     onMount(async () => {
         let result = await getPicture("Mountain", 50);
         let baseUrl = result.photos[Math.floor(Math.random() * 50)].src["original"];
-        imageSrc = `${baseUrl}?auto=compress&cs=tinysrgb&fit=crop&h=${window.innerHeight}&w=${window.innerWidth}`;
+        imageSrc = `${baseUrl}?auto=compress&cs=tinysrgb&fit=crop&h=${height}&w=${width}`;
     });
 
     let imageSrc;
-
+    let height;
+    let width;
 
 </script>
 
@@ -19,7 +20,9 @@
      style={`
         background-image: url(${imageSrc});
         background-position: center;
-        background-repeat: no-repeat;`}>
+        background-repeat: no-repeat;`}
+        bind:clientHeight={height}
+        bind:clientWidth={width}>
     <div class="uk-position-cover uk-overlay-primary"></div>
     <main class="uk-width-medium uk-padding-small uk-position-z-index uk-scrollspy-inview uk-animation-fade uk-overlay-default uk-border-rounded">
         <header class="uk-flex uk-flex-column uk-flex-middle uk-flex-center uk-margin-medium-bottom">
