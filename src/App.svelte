@@ -8,7 +8,7 @@
     import TempLanding from './pages/PublicPages/TempLanding.svelte';
     import Clinic from './pages/ClinicPages/Clinic.svelte';
     import AuthenticationPage from './pages/PatientPages/AuthenticationPage.svelte';
-
+    import Login from './pages/ClinicPages/Login.svelte';
     export let url = "";
 </script>
 
@@ -21,5 +21,6 @@
     <Route path="/screening" component="{FormPage}"/>
     <Route path="/clinic" component="{Clinic}"/>
     <Route path="/waitlist" component="{Waitlist}"/>
+    <Route path="/login" component="{Login}"/>
 </Router>
 

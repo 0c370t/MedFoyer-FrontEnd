@@ -1,5 +1,8 @@
 <script>
     export let options = {};
+    export let icon = false;
+    export let _class = '';
+
     import Uikit from 'uikit';
     import UikitIcons from 'uikit/dist/js/uikit-icons.min';
     UikitIcons(Uikit);
@@ -16,4 +19,4 @@
 </script>
 
 
-<span bind:this={target}/>
+<span class={_class} bind:this={target}/>
