@@ -1,5 +1,3 @@
-import {loginSplashes} from "../helpers/stores";
-
 const api_key = "563492ad6f917000010000019c24b0af382f4d809230f39605775f6f";
 
 export async function getPicture(query, pageSize){
