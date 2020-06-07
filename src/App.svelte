@@ -12,7 +12,7 @@
     export let url = "";
 </script>
 
-<Router url="{url}">
+<Router {url}>
     <Route path="/appt/:id" component="{DataCollectionPage}"/>
     <Route path="/" component="{TempLanding}" />
     <Route path="/appt" component="{LandingPage}"/>

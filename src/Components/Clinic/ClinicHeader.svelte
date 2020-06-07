@@ -35,7 +35,6 @@
                 showAppointmentModal = false;
                 updateAppointments();
                 apptForm = new_appointment;
-
             } catch (e) {
                 apptForm.push({
                     "label": e.message,

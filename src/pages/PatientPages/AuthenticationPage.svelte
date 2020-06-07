@@ -28,7 +28,7 @@
         MedFoyer uses your birthday to make sure nobody else checks in for you, please enter it below. </p>
     <label class="uk-text-danger">{validationText}</label>
     <input type="date" class="uk-input" bind:value name="" required="true" title="Your birthday"/>
-    <Button fill="true" _class="uk-margin-medium-top" on:click={onSubmit}>
+    <Button fullwidth="true" _class="uk-margin-medium-top" on:click={onSubmit}>
         <span class="uk-margin-small-right">Submit</span>
         <Icon options={{icon:"check"}}/>
     </Button>

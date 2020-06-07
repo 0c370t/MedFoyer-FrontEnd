@@ -1,14 +1,21 @@
 <script>
     import ClinicHeader from '../../Components/Clinic/ClinicHeader.svelte'
     import {getAppointments} from "../../API/appointments.API";
-    import AppointmentItem from "../../Components/Clinic/AppointmentItem.svelte";
     import AppointmentOverview from "../../Components/Clinic/AppointmentOverview.svelte";
     import {onMount} from 'svelte';
-    import {sortByAppointmentTime, sortByCheckInTime} from '../../helpers/appointments';
-    import Icon from "../../Components/Icon/Icon.svelte";
+    import {appt} from '../../helpers/stores';
+
+    import ClinicAside from "../../Components/Clinic/ClinicAside.svelte";
+    import {getFilterFunction} from "../../helpers/appointments";
+    import {getCurrentDateForInput} from "../../helpers/datetime";
 
     let appointments = [];
     let selectedAppointment = false;
+    let filterValues = {
+        'from-time': '08:00',
+        'to-time': '17:00',
+        'date': getCurrentDateForInput()
+    };
 
     const updateAppointments = () => {
         getAppointments().then(result => {
@@ -16,63 +23,43 @@
             appointments.forEach(a => {
                 // Ensure dates are dates
                 if (!(a.appointment_time instanceof Date)) {
-                    console.log(a.appointment_time);
                     a.appointment_time = new Date(a.appointment_time);
                 }
             });
-            selectedAppointment = false;
+
+            if (!selectedAppointment || !appointments.filter(a => a.id === selectedAppointment.id)) {
+                selectedAppointment = false;
+            } else {
+                selectedAppointment = appointments.filter(a => a.id === selectedAppointment.id)[0];
+            }
+            applyFilters();
+
         });
     };
 
-    const selectAppointment = (appt) => {
-        selectedAppointment = appt;
+    const updateFilters = (e) => {
+        filterValues = e.detail;
+        updateAppointments();
+    };
+
+    const applyFilters = () => {
+        appointments = appointments.filter(getFilterFunction(filterValues));
     };
 
     onMount(updateAppointments);
-    let checkedInAppointments = [];
-    let notCheckedInAppointments = [];
-    $: checkedInAppointments = appointments.filter(a => a.patient_location);
-    $: notCheckedInAppointments = appointments.filter(a => !a.patient_location);
+    onMount(() => appt.set({}))
+
 
 </script>
 
 <div class="layout">
     <ClinicHeader {updateAppointments}/>
+    <ClinicAside {appointments} bind:selectedAppointment {updateAppointments} {filterValues} on:filter={updateFilters}/>
 
-    <aside class="uk-background-default">
-        <div class="uk-flex uk-flex-middle">
-            <h2 class="uk-margin-remove">Appointment Overview</h2>
-        </div>
-        {#if appointments}
-        <div id="checked-in">
-            <div class="uk-background-default uk-width-1-1 uk-margin-remove uk-padding-small uk-padding-remove-right uk-flex uk-flex-between uk-flex-middle" id="checked-in-header">
-                <h3 class="uk-margin-remove">Checked In</h3>
-                <span class="uk-button uk-button-default" on:click={updateAppointments}><Icon options={{icon: "refresh"}}/></span>
-            </div>
-            <div class="appointment-container uk-background-primary">
-                {#each checkedInAppointments.sort(sortByCheckInTime) as appointment}
-                    <AppointmentItem appt="{appointment}" active="{appointment === selectedAppointment}" on:click={()=>selectAppointment(appointment)}/>
-                {/each}
-            </div>
-        </div>
-
-        <div id="not-checked-in">
-            <div class="uk-background-default uk-width-1-1 uk-margin-remove uk-padding-small uk-padding-remove-right" id="not-checked-in-header">
-                <h3 class="uk-margin-remove">Not Checked In</h3>
-            </div>
-            <div class="appointment-container uk-background-primary">
-                {#each notCheckedInAppointments.sort(sortByAppointmentTime) as appointment}
-                    <AppointmentItem appt="{appointment}" active="{appointment === selectedAppointment}" on:click={()=>selectAppointment(appointment)}/>
-                {/each}
-            </div>
-        </div>
-        {/if}
-
-    </aside>
     {#if selectedAppointment}
-    <main>
-        <AppointmentOverview appointment="{selectedAppointment}" {updateAppointments}/>
-    </main>
+        <main>
+            <AppointmentOverview appointment="{selectedAppointment}" {updateAppointments}/>
+        </main>
     {:else}
         <main class="uk-text-center uk-padding">
             <h3>Please select an appointment</h3>
@@ -86,34 +73,11 @@
         grid-template-columns: 25% 75%;
         grid-template-rows: 5em 1fr;
         grid-template-areas: "header header" "aside main";
-        position:relative;
-    }
-
-    aside {
-        position:relative;
-        height:100%;
-        #checked-in{
-
-            height:50%;
-            #checked-in-header{
-                height:4em;
-            }
-        }
-        #not-checked-in{
-            #not-checked-in-header{
-                height:4em;
-            }
-
-            height:50%;
-        }
-        .appointment-container{
-            overflow-y:scroll;
-            height:calc(100% - 4em);
-        }
+        position: relative;
     }
 
     main {
         grid-area: main;
-        overflow-y:scroll;
+        overflow-y: scroll;
     }
 </style>
