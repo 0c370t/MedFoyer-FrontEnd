@@ -5,7 +5,7 @@
     import Modal from "../Modal/Modal.svelte";
     import Form from "../Forms/Form.svelte";
     import {postAppointment} from "../../API/appointments.API";
-    import {new_appointment} from "../../helpers/questions";
+    import {new_appointment} from "../../helpers/forms/create_appointment";
     import {lookupAddress} from "../../API/mapbox.API";
 
     export let updateAppointments;

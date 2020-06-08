@@ -1,6 +1,7 @@
 <script>
     import Logo from "../../svg/Logo.svelte";
     import Icon from "../../Components/Icon/Icon.svelte";
+    import PatientForm from "../../Components/Forms/GoogleSurvey/PatientForm.svelte";
 
     const currentYear = new Date().getFullYear();
 </script>
@@ -187,7 +188,7 @@
             </div>
             <div data-uk-scrollspy="cls: uk-animation-fade">
                 <img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw=="
-                     data-src="/assets/img/undraw_my_app_grf2.svg" data-uk-img alt="Image">
+                     data-src="/assets/img/undraw_my_app_grf2.svg" data-uk-img alt="My Application">
             </div>
         </div>
     </div>

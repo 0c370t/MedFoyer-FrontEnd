@@ -1,98 +1,59 @@
-import svelte from 'rollup-plugin-svelte';
-import resolve from '@rollup/plugin-node-resolve';
-import serve from 'rollup-plugin-serve';
-import commonjs from '@rollup/plugin-commonjs';
-import livereload from 'rollup-plugin-livereload';
-import babel from '@rollup/plugin-babel';
-import { terser } from 'rollup-plugin-terser';
-import autoPreprocess from 'svelte-preprocess';
-import scss from 'rollup-plugin-scss';
+import defaultConfig from './conf/default_rollup_config';
 
-const production = !process.env.ROLLUP_WATCH;
+let output = [];
 
-export default {
-	input: 'src/main.js',
-	output: {
-		sourcemap: true,
-		format: 'iife',
-		name: 'app',
-		file: 'public/build/bundle.js'
-	},
-	plugins: [
-		svelte({
-			// enable run-time checks when not in production
-			dev: !production,
-			// we'll extract any component CSS out into
-			// a separate file - better for performance
-			css: css => {
-				css.write('public/build/bundle.css');
-			},
-			onwarn: (warning, handler) => {
-				// UIKit3 uses <a> for several things that do not use href attributes. We want to hide these warnings.
-				if(warning.code === 'a11y-missing-attribute') return;
-				handler(warning);
-			},
-			hydratable: true,
-			preprocess: autoPreprocess(),
-		}),
-		scss(),
-		// If you have external dependencies installed from
-		// npm, you'll most likely need these plugins. In
-		// some cases you'll need additional configuration -
-		// consult the documentation for details:
-		// https://github.com/rollup/plugins/tree/master/packages/commonjs
-		resolve({
-			browser: true,
-			dedupe: ['svelte']
-		}),
-		commonjs(),
+if(process.env.DEVMODE){
+    let localApp = Object.assign({}, {
+        input: 'src/main.js',
+        output: {
+            sourcemap: true,
+            format: 'iife',
+            name: 'medfoyer',
+            file: 'public/build/bundle.js'
+        }
+    }, defaultConfig({
+        verbose: true,
+        contentBase: 'public',
+        historyApiFallback: true,
+        port: 5000,
+        host: '0.0.0.0'
+    }));
+    output = [localApp];
+} else {
+    let publicApp = Object.assign({}, {
+            input: 'src/PublicPages/main.js',
+            output: {
+                sourcemap: true,
+                format: 'iife',
+                name: 'medfoyer_landing_application',
+                file: 'public/build/bundle.js'
+            }
+        }, defaultConfig(false,true
+        )
+    );
 
+    let patientApp = Object.assign({}, {
+            input: 'src/PatientSite/main.js',
+            output: {
+                sourcemap: true,
+                format: 'iife',
+                name: 'medfoyer_patient_application',
+                file: 'public/patient/build/bundle.js'
+            }
+        }, defaultConfig(false)
+    );
 
-		// In dev mode, call `npm run start` once
-		// the bundle has been generated
-		!production && serve(
-			{
-				verbose:true,
-				contentBase: 'public',
-				historyApiFallback: true,
-				port:5000,
-				host:'0.0.0.0'
-			}
-		),
+    let clinicApp = Object.assign({}, {
+            input: 'src/ClinicSite/main.js',
+            output: {
+                sourcemap: true,
+                format: 'iife',
+                name: 'medfoyer_clinic_application',
+                file: 'public/clinic/build/bundle.js'
+            }
+        }, defaultConfig(false)
+    );
+    output = [publicApp, patientApp, clinicApp];
+}
 
-		// Watch the `public` directory and refresh the
-		// browser on changes when not in production
-		!production && livereload('public'),
-
-		// If we're building for production (npm run build
-		// instead of npm run dev), minify
-		production && babel({
-			extensions: [ '.js', '.mjs', '.html', '.svelte' ],
-			exclude: [ 'node_modules/@babel/**', 'node_modules/core-js/**', 'node_modules/**' ],
-			babelHelpers: "runtime",
-			presets: [
-				[
-					'@babel/preset-env',
-					{
-						targets: '> 0.25%, not dead',
-						useBuiltIns: 'usage',
-						corejs: 3
-					}
-				]
-			],
-			plugins: [
-				'@babel/plugin-syntax-dynamic-import',
-				[
-					'@babel/plugin-transform-runtime',
-					{
-						useESModules: true
-					}
-				]
-			]
-		}),
-		production && terser()
-	],
-	watch: {
-		clearScreen: false
-	}
-};
+export default output;

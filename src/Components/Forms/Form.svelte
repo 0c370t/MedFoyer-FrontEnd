@@ -3,9 +3,7 @@
 
     export let form;
     export let onSubmit;
-
     export let formElement;
-
     export let buttonText = "Submit";
     export let loading = false;
 </script>
@@ -24,8 +22,8 @@
                     {#each question.options as option}
                         <span class="radioOption">
                                 <label>{option.label}</label>
-                                <input name="{question.name}" type="radio" class="uk-radio input {question.type}"
                                        bind:group={question.value} value="{option.value}" required={question.required}/>
+                                <input name="{question.name}" type="radio" class="uk-radio input {question.type}"/>
                             </span>
                     {/each}
                 </div>
@@ -81,6 +79,11 @@
                        name="{question.name}" required="{question.required}"/>
             {/if}
 
+            {#if question.type === "email"}
+                <label for="{question.name}">{question.label} </label>
+                <input type="email" class="uk-input field {question.type}" bind:value={question.value}
+                       name="{question.name}" required="{question.required}"/>
+            {/if}
         </div>
     {/each}
     <div class="buttonContainer">
