@@ -64,11 +64,16 @@ export const getCurrentDateForInput = () => {
 
 export const formatForDisplay = (dateString) => {
     if(!dateString) return '';
-    let dateobj = new Date();
-    let [year, month, date] = dateString.split('-');
-    dateobj.setFullYear(year);
-    dateobj.setMonth(month-1);
-    dateobj.setDate(date);
+    let dateobj;
+    if(dateString instanceof Date){
+        dateobj = dateString;
+    } else {
+        dateobj = new Date();
+        let [year, month, date] = dateString.split('-');
+        dateobj.setFullYear(year);
+        dateobj.setMonth(month-1);
+        dateobj.setDate(date);
+    }
     let output = daysOfWeek[dateobj.getDay()] + ", ";
     output += months[dateobj.getMonth()] + " ";
     output += dateobj.getDate();
