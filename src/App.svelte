@@ -3,8 +3,12 @@
     import ClinicApp from "./ClinicSite/ClinicApp.svelte";
     import PatientApp from "./PatientSite/PatientApp.svelte";
     import PublicApp from "./PublicSite/PublicApp.svelte";
+    import {createClient} from "./API/init";
+    import {setClient} from "svelte-apollo";
 
-    export let url = "";
+    const client = createClient();
+    setClient(client);
+
 </script>
 
 <Router>

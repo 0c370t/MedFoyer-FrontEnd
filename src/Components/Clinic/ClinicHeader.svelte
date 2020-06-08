@@ -7,6 +7,7 @@
     import {postAppointment} from "../../API/appointments.API";
     import {new_appointment} from "../../helpers/forms/create_appointment";
     import {lookupAddress} from "../../API/mapbox.API";
+    import Drop from "../Drop/Drop.svelte";
 
     export let updateAppointments;
 
@@ -65,10 +66,34 @@
             MedFoyer </h1>
     </div>
     <div class="right">
-        <Button on:click={() => showAppointmentModal = true}>
-            <Icon options={{icon:'plus'}}/>
-            Add a new appointment
-        </Button>
+        <Drop mode="hover" pos="bottom-right">
+            <span slot="button">
+                    <Icon icon="plus"/>
+                    Menu
+            </span>
+            <ul class="uk-dropdown-nav uk-padding-small">
+                <li class="uk-nav-header">Management</li>
+                <li>
+                    <button class="uk-button uk-button-text">
+                        <Icon icon="user"/>
+                        <span>Add a Patient</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="uk-button uk-button-text" on:click={() => showAppointmentModal = true}>
+                        <Icon icon="calendar"/>
+                        <span>Add an Appointment</span>
+                    </button>
+                </li>
+                <li class="uk-nav-divider"></li>
+                <li>
+                    <button class="uk-button uk-button-text">
+                        <Icon icon="sign-out"/>
+                        <span>Sign-Out</span>
+                    </button>
+                </li>
+            </ul>
+        </Drop>
     </div>
 </header>
 

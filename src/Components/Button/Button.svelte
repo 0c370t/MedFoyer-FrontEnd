@@ -3,13 +3,18 @@
     export let fullwidth = false;
     export let _class = "";
     export let loading = false;
+    export let color = "default";
+    const allowed_colors = [
+        "default","primary","secondary","danger","text","link"
+    ];
+    if(!allowed_colors.includes(color)) color = "default";
     if (loading) {
         disabled = loading;
     }
 </script>
 
 <button on:click type="button" class:fullwidth disabled={loading || disabled}
-        class={"uk-button uk-button-default uk-box-shadow-hover-large " + _class}>
+        class={`uk-button uk-button-${color} uk-box-shadow-hover-large ${_class}`}>
     <span uk-spinner class:uk-hidden={!loading} class="uk-overlay uk-position-center"></span>
     <slot/>
 </button>

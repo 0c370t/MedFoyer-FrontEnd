@@ -9,6 +9,12 @@
     import {getFilterFunction} from "../../helpers/appointments";
     import {getCurrentDateForInput} from "../../helpers/datetime";
 
+    import {getClient, query} from 'svelte-apollo';
+    import {GET_APPOINTMENT_OVERVIEW} from "../../API/queries/appointments.GQL";
+
+    const client = getClient();
+
+    let graph_appointments = query(client, {query: GET_APPOINTMENT_OVERVIEW});
     let appointments = [];
     let selectedAppointment = false;
     let filterValues = {
@@ -47,11 +53,14 @@
     };
 
     onMount(updateAppointments);
-    onMount(() => appt.set({}))
+    onMount(() => appt.set({}));
+    onMount(async () => {
+        let x = await $graph_appointments;
+        console.log(x);
+    })
 
 
 </script>
-
 <div class="layout">
     <ClinicHeader {updateAppointments}/>
     <ClinicAside {appointments} bind:selectedAppointment {updateAppointments} {filterValues} on:filter={updateFilters}/>
