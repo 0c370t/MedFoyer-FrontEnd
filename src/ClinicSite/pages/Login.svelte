@@ -4,6 +4,7 @@
     import {getPicture} from '../../API/pexels.API';
     import {onMount} from "svelte";
     import {navigate} from "svelte-routing";
+    import {Auth} from 'aws-amplify';
 
     onMount(async () => {
         let result = await getPicture("Mountain", 50);
@@ -11,10 +12,16 @@
     });
 
     const doLogin = () => {
+        try{
+            // Auth.signIn(username, password)
+        } catch(err){
+            // Do things
+        }
         navigate("/clinic")
     };
 
-
+    let username;
+    let password;
     let selectedImage;
 
     let imageSrc;
@@ -23,6 +30,9 @@
     let photographer = "";
     $: if(selectedImage) imageSrc = `${selectedImage.src["original"]}?auto=compress&cs=tinysrgb&fit=crop&h=${height}&w=${width}`;
     $: if(selectedImage) photographer = selectedImage.photographer;
+
+
+
 </script>
 
 <div class="uk-cover-container uk-background-default uk-flex uk-flex-center uk-flex-middle uk-height-viewport uk-overflow-hidden uk-light"
@@ -44,13 +54,13 @@
                 <div class="uk-margin-small">
                     <div class="uk-inline uk-width-1-1">
                         <Icon _class="uk-form-icon uk-form-icon-flip" icon="user"/>
-                        <input class="uk-input uk-border-pill" required placeholder="Username" type="text">
+                        <input class="uk-input uk-border-pill" required placeholder="Username" type="text" bind:value={username}>
                     </div>
                 </div>
                 <div class="uk-margin-small">
                     <div class="uk-inline uk-width-1-1">
                         <Icon _class="uk-form-icon uk-form-icon-flip" icon="lock"/>
-                        <input class="uk-input uk-border-pill" required placeholder="Password" type="password">
+                        <input class="uk-input uk-border-pill" required placeholder="Password" type="password" bind:value={password}>
                     </div>
                 </div>
                 <div class="uk-margin-small">

@@ -7,6 +7,7 @@ import babel from '@rollup/plugin-babel';
 import {terser} from 'rollup-plugin-terser';
 import autoPreprocess from 'svelte-preprocess';
 import scss from 'rollup-plugin-scss';
+import json from '@rollup/plugin-json';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -41,8 +42,10 @@ export default (serveOptions, legacyMode = false) => {
             // https://github.com/rollup/plugins/tree/master/packages/commonjs
             resolve({
                 browser: true,
+                preferBuiltins: false,
                 dedupe: ['svelte']
             }),
+            json(),
             commonjs(),
 
 
