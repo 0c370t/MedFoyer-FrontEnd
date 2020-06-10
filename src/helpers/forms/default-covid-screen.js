@@ -1,5 +1,5 @@
-import state_options from "./mapping/state_options";
-import {getCurrentDateForInput} from "./datetime";
+import state_options from "../mapping/state_options";
+import {getCurrentDateForInput} from "../datetime";
 
 export const severe_symptoms = [
     {
