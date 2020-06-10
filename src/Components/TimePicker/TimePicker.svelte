@@ -20,6 +20,8 @@
     const refreshMinute = () => minute = minutes[Math.floor(value.getMinutes() / step)];
     const refreshPm = () => pm = value.getHours() >= 12;
     const setHour = () => {
+        // We need to handle the 12pm/12am separately because 12 > 11 but 12pm < 11pm
+        // Time is amazing.
         if(hour === 12){
             pm ? value.setHours(12)
                : value.setHours(0);
