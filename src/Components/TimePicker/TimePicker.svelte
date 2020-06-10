@@ -11,17 +11,22 @@
     $: if (value) {
         refreshHour();
         refreshMinute();
-        refreshpm();
+        refreshPm();
     }
     let hour;
     let minute;
     let pm;
-    const refreshHour = () => hour = hours[(value.getHours() % 12) - 1];
+    const refreshHour = () => hour = hours[((value.getHours() % 12) + 11) % 12]
     const refreshMinute = () => minute = minutes[Math.floor(value.getMinutes() / step)];
-    const refreshpm = () => pm = value.getHours() > 12;
+    const refreshPm = () => pm = value.getHours() >= 12;
     const setHour = () => {
-        pm ? value.setHours(hour + 12)
-            :value.setHours(hour);
+        if(hour === 12){
+            pm ? value.setHours(12)
+               : value.setHours(0);
+        } else {
+            pm ? value.setHours(hour + 12)
+               : value.setHours(hour);
+        }
         value = value;
     };
     const setMinute = () => {value.setMinutes(minute); value=value}
