@@ -7,7 +7,7 @@ export const awsconfig = {
         userPoolId: process.env.AMP_USER_POOL,
 
         // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
-        userPoolWebClientId: '2ltoku7mtgrcr7av6b4f78iue3',
+        userPoolWebClientId: process.env.AMP_USER_POOL_CLIENT,
 
         // OPTIONAL - Enforce user authentication prior to accessing AWS resources or not
         mandatorySignIn: true,

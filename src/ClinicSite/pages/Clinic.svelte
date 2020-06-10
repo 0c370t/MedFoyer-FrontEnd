@@ -7,10 +7,12 @@
 
     import ClinicAside from "../../Components/Clinic/ClinicAside.svelte";
     import {getFilterFunction} from "../../helpers/appointments";
-    import {getCurrentDateForInput} from "../../helpers/datetime";
+    import {getCurrentDateForInput, toAWSDate} from "../../helpers/datetime";
 
-    import {getClient, query} from 'svelte-apollo';
+    import {getClient, mutate, query} from 'svelte-apollo';
     import {GET_APPOINTMENT_OVERVIEW} from "../../API/queries/appointments.GQL";
+    import {CREATE_PATIENT} from '../../API/queries/patients.GQL';
+    import Button from "../../Components/Button/Button.svelte";
 
     const client = getClient();
 
@@ -29,7 +31,7 @@
     };
 
     const updateAppointments = () => {
-        getAppointments().then(result => {
+        /*getAppointments().then(result => {
             appointments = result;
             appointments.forEach(a => {
                 // Ensure dates are dates
@@ -44,8 +46,7 @@
                 selectedAppointment = appointments.filter(a => a.id === selectedAppointment.id)[0];
             }
             applyFilters();
-
-        });
+        });*/
     };
     setContext("updateAppointments", updateAppointments);
 
@@ -62,10 +63,7 @@
     onMount(() => appt.set({}));
     onMount(async () => {
         let x = await $graph_appointments;
-        console.log(x);
-    })
-
-
+    });
 </script>
 <div class="layout">
     <ClinicHeader {updateAppointments}/>

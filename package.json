@@ -21,6 +21,7 @@
     "@storybook/svelte": "^5.3.19",
     "apollo-boost": "^0.4.9",
     "aws-amplify": "^3.0.16",
+    "aws-appsync": "^3.0.3",
     "babel-loader": "^8.1.0",
     "core-js": "^3.6.5",
     "graphql": "^14.6.0",
@@ -37,7 +38,8 @@
     "svelte-routing": "^1.4.2",
     "webpack": "latest",
     "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.0",
+    "aws-appsync-auth-link": "latest"
   },
   "dependencies": {
     "geolib": "^3.2.1",

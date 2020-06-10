@@ -58,7 +58,7 @@ module.exports = (input, output) => {
             new MiniCssExtractPlugin({
                 filename: 'build/[name].css'
             }),
-            new EnvironmentPlugin(["AMP_DOMAIN", "AMP_USER_POOL"])
+            new EnvironmentPlugin(["AMP_DOMAIN", "AMP_USER_POOL", "AMP_USER_POOL_CLIENT"])
         ],
         devtool: prod ? false : 'source-map',
         devServer: {

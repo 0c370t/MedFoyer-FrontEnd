@@ -86,3 +86,10 @@ export const formatForDisplay = (dateString, includeTime = false) => {
     }
     return output;
 };
+
+
+export const toAWSDate = (date) => {
+    if(!date instanceof Date) return "";
+    let output = `${date.getFullYear()}-${padMinutes(date.getMonth())}-${date.getDate()}`;
+    return output;
+}
