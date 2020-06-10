@@ -1,5 +1,5 @@
 <script>
-    import {formatTime} from "../../helpers/datetime";
+    import {formatForDisplay, formatTime} from "../../helpers/datetime";
     import Button from "../Button/Button.svelte";
     import Icon from "../Icon/Icon.svelte";
     import UIkit from "uikit";
@@ -64,11 +64,13 @@
         <div class="uk-width-2-5 uk-section uk-section-primary uk-padding-small uk-flex uk-flex-column uk-preserve-color">
             <!-- Map -->
             <div>
-
                     <div class="uk-card uk-card-body uk-box-shadow-small uk-background-default uk-margin-small-bottom">
-                        <h3>Check-in Information:</h3>
+                        <h3>Appointment Information:</h3>
                         <hr/>
                         <dl class="uk-description-list uk-description-list-divider">
+                            <dt>Appointment Time:</dt>
+                            <dd>{formatForDisplay(appointment.appointment_time)} at {formatTime(appointment.appointment_time)}</dd>
+
                             <dt>Patient Phone Number:</dt>
                             <dd>{appointment.phone_num ? appointment.phone_num : "Not available"}</dd>
                             <dt>Check-in Time:</dt>

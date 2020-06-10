@@ -7,6 +7,16 @@
     export let formElement;
     export let buttonText = "Submit";
     export let loading = false;
+
+    const phoneClean = (value) => {
+        let phone = value.replace(/\D/g, '');
+        const match = phone.match(/(\d{1,3})(\d{0,3})(\d{0,4})$/);
+        if (match) {
+            phone = `(${match[1]})${match[2] ? '-' : ''}${match[2]}${match[3] ? '-' : ''}${match[3]}`;
+        }
+        return phone
+    }
+
 </script>
 <form bind:this={formElement} class="uk-container uk-width-1-1">
     {#each form as question}
@@ -76,9 +86,12 @@
             {/if}
             {#if question.type === "phone"}
                 <label for="{question.name}">{question.label} </label>
-                <input type="tel" pattern={`[0-9]{3}-?[0-9]{3}-?[0-9]{4}`} placeholder="000-000-0000" class="uk-input field {question.type}" bind:value={question.value}
-                       name="{question.name}" required="{question.required}"/>
+                <input type="tel" pattern={`\(?[0-9]{3}\)?-?[0-9]{3}-?[0-9]{4}`} placeholder="000-000-0000"
+                       class="uk-input field {question.type}" bind:value={question.value}
+                       on:change={() => question.value = phoneClean(question.value)} name="{question.name}"
+                       required="{question.required}"/>
             {/if}
+
             {#if question.type === "email"}
                 <label for="{question.name}">{question.label} </label>
                 <input type="email" class="uk-input field {question.type}" bind:value={question.value}
