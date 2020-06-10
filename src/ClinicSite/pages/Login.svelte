@@ -26,7 +26,7 @@
                         return;
                 }
             }
-            navigate("/clinic");
+            window.location.href = "/clinic";
 
         } catch (err) {
             console.log(err);
@@ -43,7 +43,6 @@
 
 
 </script>
-
 
 <SplashLayout {loading}>
     <h3 class="uk-text-center">Log In</h3>

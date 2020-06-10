@@ -14,7 +14,7 @@ export const awsconfig = {
 
         cookieStorage: {
             domain: process.env.AMP_DOMAIN,
-            secure: true,
+            secure: !process.env.AMP_DOMAIN.includes("192.168"),
             path: '/'
         },
 

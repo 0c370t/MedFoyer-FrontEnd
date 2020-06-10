@@ -1,14 +1,13 @@
 <script>
     import Logo from "../../svg/Logo.svelte";
-    import Icon from "../Icon/Icon.svelte";
     import {Auth} from 'aws-amplify';
-    import Button from "../Button/Button.svelte";
-    import Modal from "../Modal/Modal.svelte";
-    import Form from "../Forms/Form.svelte";
-    import {postAppointment} from "../../API/appointments.API";
-    import {lookupAddress} from "../../API/mapbox.API";
-    import Drop from "../Drop/Drop.svelte";
     import ClinicMasterMenu from "./ClinicMasterMenu.svelte";
+    import {onMount} from "svelte";
+
+    onMount(async()=>{
+        user = await Auth.currentUserInfo();
+    });
+    let user = {};
 
     export let updateAppointments;
 </script>
@@ -21,7 +20,10 @@
         <h1 class="uk-margin-remove">
             MedFoyer </h1>
     </div>
-    <div class="right">
+    <div class="right uk-flex">
+        <p class="uk-button uk-button-default uk-disabled uk-margin-small-right">
+            Welcome, {user.username || ""}
+        </p>
         <ClinicMasterMenu/>
     </div>
 </header>
