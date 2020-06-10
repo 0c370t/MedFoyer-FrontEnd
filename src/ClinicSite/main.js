@@ -1,6 +1,6 @@
 import App from './ClinicApp.svelte';
 import Amplify, { Auth } from 'aws-amplify';
-import awsconfig from '../../conf/amplify.config';
+import {awsconfig} from '../../conf/amplify.config';
 Amplify.configure(awsconfig);
 
 

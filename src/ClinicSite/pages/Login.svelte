@@ -13,13 +13,14 @@
 
     const doLogin = () => {
         try{
-            // Auth.signIn(username, password)
+             Auth.signIn(username, password)
         } catch(err){
             // Do things
         }
-        navigate("/clinic")
     };
 
+    let userValid = true;
+    let passwordValid = true;
     let username;
     let password;
     let selectedImage;
@@ -52,15 +53,16 @@
         <form class="toggle-class" action="#">
             <fieldset class="uk-fieldset">
                 <div class="uk-margin-small">
+
                     <div class="uk-inline uk-width-1-1">
                         <Icon _class="uk-form-icon uk-form-icon-flip" icon="user"/>
-                        <input class="uk-input uk-border-pill" required placeholder="Username" type="text" bind:value={username}>
+                        <input class="uk-input uk-border-pill" class:uk-form-danger={userValid} required placeholder="Username" type="text" bind:value={username}>
                     </div>
                 </div>
                 <div class="uk-margin-small">
                     <div class="uk-inline uk-width-1-1">
                         <Icon _class="uk-form-icon uk-form-icon-flip" icon="lock"/>
-                        <input class="uk-input uk-border-pill" required placeholder="Password" type="password" bind:value={password}>
+                        <input class="uk-input uk-border-pill" required placeholder="Password" class:uk-form-danger={passwordValid} type="password" bind:value={password}>
                     </div>
                 </div>
                 <div class="uk-margin-small">

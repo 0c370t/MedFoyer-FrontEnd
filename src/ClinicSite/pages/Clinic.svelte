@@ -17,10 +17,15 @@
     let graph_appointments = query(client, {query: GET_APPOINTMENT_OVERVIEW});
     let appointments = [];
     let selectedAppointment = false;
+    let defaultFrom = new Date();
+    defaultFrom.setHours(8);
+    defaultFrom.setMinutes(0);
+    let defaultTo = new Date();
+    defaultTo.setHours(17);
+    defaultTo.setMinutes(0);
     let filterValues = {
-        'from-time': '08:00',
-        'to-time': '17:00',
-        'date': getCurrentDateForInput()
+        from: defaultFrom,
+        to: defaultTo,
     };
 
     const updateAppointments = () => {

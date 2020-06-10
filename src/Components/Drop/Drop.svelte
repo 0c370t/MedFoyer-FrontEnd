@@ -11,6 +11,21 @@
     export let duration = 200;
     export let boundary = "body";
     export let boundaryAlign = true;
+    export let padsize = "normal";
+
+    const padsizings = ["normal", "small", "large", "remove"];
+    if (!padsizings.includes(padsize)) {
+        padsize = "";
+    } else {
+        if (padsize === "normal") {
+            padsize = "";
+        } else {
+            padsize = "-" + padsize;
+        }
+    }
+
+    export let block = false;
+
 
     const id = Math.floor(Math.random() * 10000);
 
@@ -28,13 +43,14 @@
 
 
 <div class="uk-inline">
-    <button class={`uk-button uk-button-default mf-drop-${id}`}>
-        <slot name="button">Drop</slot>
-    </button>
+    <slot name="full-button">
+        <button class={`uk-button uk-button-default mf-drop-${id}`} class:uk-display-block={block}>
+            <slot name="button">Drop</slot>
+        </button>
+    </slot>
 
-    <div bind:this={wrapperElement} class="uk-card uk-card-default uk-padding"
-        on:toggle on:beforeshow on:show on:shown on:beforehide on:hide on:hidden on:stack
-    >
+    <div bind:this={wrapperElement} class={`uk-card uk-card-default uk-padding${padsize}`} on:toggle on:beforeshow
+         on:show on:shown on:beforehide on:hide on:hidden on:stack>
         <slot/>
     </div>
 </div>

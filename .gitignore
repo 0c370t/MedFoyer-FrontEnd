@@ -8,3 +8,7 @@ node_modules/
 .idea/
 
 .vscode/
+
+public/_clinic/build/
+
+public/_patient/build/

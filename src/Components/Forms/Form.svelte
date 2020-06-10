@@ -28,6 +28,7 @@
                     {/each}
                 </div>
             {/if}
+
             {#if question.type === "dropdown"}
                 <label>{question.label}</label>
                 <select class="uk-select input {question.type}">
@@ -36,7 +37,6 @@
                     {/each}
                 </select>
             {/if}
-
             {#if question.type === "label"}
                 <label class="labelfield">
                     <strong>{question.label}</strong>
@@ -78,7 +78,6 @@
                 <input type="tel" pattern={`[0-9]{3}-?[0-9]{3}-?[0-9]{4}`} placeholder="000-000-0000" class="uk-input field {question.type}" bind:value={question.value}
                        name="{question.name}" required="{question.required}"/>
             {/if}
-
             {#if question.type === "email"}
                 <label for="{question.name}">{question.label} </label>
                 <input type="email" class="uk-input field {question.type}" bind:value={question.value}
