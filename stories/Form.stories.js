@@ -1,5 +1,5 @@
 import Form from '../src/Components/Forms/Form.svelte'
-import {severe_symptoms} from '../src/helpers/questions';
+import {severe_symptoms} from '../src/helpers/forms/default-covid-screen';
 
 
 export default {

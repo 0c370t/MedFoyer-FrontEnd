@@ -1,0 +1,27 @@
+$default-color: #FFF;
+$default-color-dark: darken($default-color, 10%);
+$default-color-darker: darken($default-color, 20%);
+$primary-color: #3E5867;
+$primary-color-dark: darken($primary-color, 10%);
+$primary-color-darker: darken($primary-color, 20%);
+$secondary-color: #396481;
+$secondary-color-dark: darken($secondary-color, 10%);
+$secondary-color-darker: darken($secondary-color, 20%);
+
+$text-dark: #396481;
+$text-light: #EEE;
+$base-heading-color: $text-dark;
+/* Globals */
+/* Text Color */
+$global-color: $text-dark;
+$global-inverse-color: $text-light;
+/* Backgrounds */
+$global-background: $default-color;
+$global-primary-background: $primary-color;
+$global-secondary-background: $secondary-color;
+/* Navbar */
+$navbar-background: $primary-color-darker;
+$navbar-item-color: $text-light;
+$navbar-nav-item-hover-color: $secondary-color;
+
+$base-body-font-family: 'Montserrat', sans-serif;

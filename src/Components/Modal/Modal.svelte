@@ -20,7 +20,7 @@
     }
 </script>
 
-<div {id} class="uk-flex-top" class:uk-open={open} bind:this={modalElement} on:hidden={() => open = false} on:shown={() => open = true}>
+<div {id} class="uk-flex-top container" class:uk-open={open} bind:this={modalElement} on:hidden={() => open = false} on:shown={() => open = true}>
     <div class="uk-modal-dialog uk-margin-auto-vertical">
         {#if showClose}
             <button class="uk-modal-close-default" type="button" uk-close></button>
@@ -38,4 +38,8 @@
 </div>
 
 <style lang="scss">
+    .container{
+        /* The modal will be on top. Always. Forever. */
+        z-index:499999 !important;
+    }
 </style>

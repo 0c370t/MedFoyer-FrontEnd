@@ -22,6 +22,14 @@ export const months = [
     "December"
 ];
 
+export const padMinutes = (minutes) => {
+    if(minutes < 10){
+        return `0${minutes}`;
+    } else {
+        return `${minutes}`;
+    }
+}
+
 export const formatTime = (date) => {
     try{
         if(!(date instanceof Date) || !date){
@@ -32,12 +40,8 @@ export const formatTime = (date) => {
         if(date.getHours() < 12){
             ampm = "am";
         }
-        let minutes = '';
-        if(date.getMinutes() < 10){
-            minutes = `0${date.getMinutes()}`;
-        } else {
-            minutes = `${date.getMinutes()}`;
-        }
+        let minutes = padMinutes(date.getMinutes());
+
         return `${date.getHours() % 12}:${minutes} ${ampm}`;
     } catch{
         console.log(date);
@@ -62,15 +66,23 @@ export const getCurrentDateForInput = () => {
     return output;
 };
 
-export const formatForDisplay = (dateString) => {
+export const formatForDisplay = (dateString, includeTime = false) => {
     if(!dateString) return '';
-    let dateobj = new Date();
-    let [year, month, date] = dateString.split('-');
-    dateobj.setFullYear(year);
-    dateobj.setMonth(month-1);
-    dateobj.setDate(date);
+    let dateobj;
+    if(dateString instanceof Date) {
+        dateobj = dateString;
+    } else {
+        dateobj = new Date();
+        let [year, month, date] = dateString.split('-');
+        dateobj.setFullYear(year);
+        dateobj.setMonth(month-1);
+        dateobj.setDate(date);
+    }
     let output = daysOfWeek[dateobj.getDay()] + ", ";
     output += months[dateobj.getMonth()] + " ";
     output += dateobj.getDate();
+    if(includeTime) {
+        output += ` @ ${dateobj.getHours()}:${padMinutes(dateobj.getMinutes())} ${dateobj.getHours() > 12 ? "pm" : "am"}`
+    }
     return output;
 };
