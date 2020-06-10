@@ -39,6 +39,10 @@
         UIKit.drop(wrapperElement, options)
     }
 
+    export const hide = (delay) => UIKit.drop(wrapperElement).hide(delay);
+    export const show = () => UIKit.drop(wrapperElement).show();
+
+
 </script>
 
 

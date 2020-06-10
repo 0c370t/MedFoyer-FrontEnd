@@ -1,3 +1,5 @@
+const EnvironmentPlugin = require("webpack").EnvironmentPlugin;
+
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 const preprocess = require('svelte-preprocess');
@@ -55,7 +57,8 @@ module.exports = (input, output) => {
         plugins: [
             new MiniCssExtractPlugin({
                 filename: 'build/[name].css'
-            })
+            }),
+            new EnvironmentPlugin(["AMP_DOMAIN", "AMP_USER_POOL"])
         ],
         devtool: prod ? false : 'source-map',
         devServer: {

@@ -1,61 +1,17 @@
 <script>
     import Logo from "../../svg/Logo.svelte";
     import Icon from "../Icon/Icon.svelte";
+    import {Auth} from 'aws-amplify';
     import Button from "../Button/Button.svelte";
     import Modal from "../Modal/Modal.svelte";
     import Form from "../Forms/Form.svelte";
     import {postAppointment} from "../../API/appointments.API";
-    import {new_appointment} from "../../helpers/forms/create_appointment";
     import {lookupAddress} from "../../API/mapbox.API";
     import Drop from "../Drop/Drop.svelte";
+    import ClinicMasterMenu from "./ClinicMasterMenu.svelte";
 
     export let updateAppointments;
-
-    let formLoading = false;
-    let showAppointmentModal = false;
-    let formElement;
-    let apptForm = new_appointment;
-
-    const submit = async () => {
-        formLoading = true;
-        if (apptForm[apptForm.length - 1].type === "validation-message") apptForm.pop();
-
-        if (formElement.reportValidity()) {
-            let clonedForm = apptForm.flatMap(x => Object.assign({}, x));
-            let date = new Date();
-
-            date.setHours(clonedForm[3].value.split(":")[0]);
-            date.setMinutes(clonedForm[3].value.split(":")[1]);
-            clonedForm[3].value = date.getTime();
-            let longLat;
-            try {
-                longLat = await lookupAddress(clonedForm[4].value, clonedForm[5].value, clonedForm[6].value, clonedForm[7].value);
-                clonedForm.push({"name": "long", "value": longLat[0]});
-                clonedForm.push({"name": "lat", "value": longLat[1]});
-                await postAppointment({form: JSON.stringify(clonedForm)});
-                showAppointmentModal = false;
-                updateAppointments();
-                apptForm = new_appointment;
-            } catch (e) {
-                apptForm.push({
-                    "label": e.message,
-                    "type": "validation-message"
-                });
-                apptForm = [...apptForm];
-            }
-
-        }
-        formLoading = false;
-    }
-
-
 </script>
-
-<Modal bind:open={showAppointmentModal} id="apptCreateModal">
-    <h3 slot="header">Add Appointment</h3>
-    <Form form="{apptForm}" onSubmit="{submit}" loading="{formLoading}" bind:formElement
-          buttonText="Create Appointment"/>
-</Modal>
 
 <header>
     <div class="left">
@@ -66,34 +22,7 @@
             MedFoyer </h1>
     </div>
     <div class="right">
-        <Drop mode="hover" pos="bottom-right">
-            <span slot="button">
-                    <Icon icon="plus"/>
-                    Menu
-            </span>
-            <ul class="uk-dropdown-nav uk-padding-small">
-                <li class="uk-nav-header">Management</li>
-                <li>
-                    <button class="uk-button uk-button-text">
-                        <Icon icon="user"/>
-                        <span>Add a Patient</span>
-                    </button>
-                </li>
-                <li>
-                    <button class="uk-button uk-button-text" on:click={() => showAppointmentModal = true}>
-                        <Icon icon="calendar"/>
-                        <span>Add an Appointment</span>
-                    </button>
-                </li>
-                <li class="uk-nav-divider"></li>
-                <li>
-                    <button class="uk-button uk-button-text">
-                        <Icon icon="sign-out"/>
-                        <span>Sign-Out</span>
-                    </button>
-                </li>
-            </ul>
-        </Drop>
+        <ClinicMasterMenu/>
     </div>
 </header>
 

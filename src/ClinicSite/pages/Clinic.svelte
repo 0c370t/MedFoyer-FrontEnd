@@ -2,7 +2,7 @@
     import ClinicHeader from '../../Components/Clinic/ClinicHeader.svelte'
     import {getAppointments} from "../../API/appointments.API";
     import AppointmentOverview from "../../Components/Clinic/AppointmentOverview.svelte";
-    import {onMount} from 'svelte';
+    import {onMount, setContext} from 'svelte';
     import {appt} from '../../helpers/stores';
 
     import ClinicAside from "../../Components/Clinic/ClinicAside.svelte";
@@ -47,6 +47,7 @@
 
         });
     };
+    setContext("updateAppointments", updateAppointments);
 
     const updateFilters = (e) => {
         filterValues = e.detail;

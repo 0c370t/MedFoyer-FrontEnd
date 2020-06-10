@@ -20,10 +20,11 @@
 </button>
 
 <style lang="scss">
+    @import '../../scss/variables';
     button {
         background-color: white;
         border: 1px solid;
-        color: #396481;
+        color: $primary-color;
         padding: 1em;
         line-height: 1em;
         font-size: inherit;
@@ -37,7 +38,7 @@
 
         &:focus {
             outline-offset: 20px;
-            outline-color: #5FA8D8;
+            outline-color: $secondary-color;
             outline-width: thick;
         }
 
