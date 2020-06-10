@@ -9,9 +9,12 @@
     import AuthenticationPage from './pages/AuthenticationPage.svelte';
     import FormPage from './pages/FormPage.svelte';
     import Waitlist from './pages/Waitlist.svelte';
+
+
 </script>
 
 <Router {url}>
+    <Route path="/patient/*" component="{LandingPage}"/>
     <Route path="/patient/appt/:id" component="{DataCollectionPage}"/>
     <Route path="/patient/appt" component="{LandingPage}"/>
     <Route path="/patient/auth" component="{AuthenticationPage}"/>
