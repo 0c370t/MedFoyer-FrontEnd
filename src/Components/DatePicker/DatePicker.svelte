@@ -5,11 +5,12 @@
     export let value = new Date();
     export let _class = "";
     export let fullwidth = true;
+    export let flex = false;
     $: if(value) console.log(value);
     let formattedSelected = '';
 </script>
 
-<DatePicker bind:formattedSelected style="width:100%;" bind:selected={value}
+<DatePicker bind:formattedSelected style={`${fullwidth ? "width:100%;" : ""} ${flex ? "flex:1;" : ""}`} bind:selected={value}
             dayHighlightedBackgroundColor="#3E5867"
             dayHighlightedTextColor="#FFF"
             highlightColor="#3E5867"

@@ -33,11 +33,15 @@
         <legend class="uk-legend">Filters</legend>
         <div class="uk-fieldset">
             <label for="from-time" class="uk-form-label uk-display-block">From:</label>
-            <TimePicker bind:value={internalValues['from']}/>
-            <DatePicker bind:value={internalValues['from']} required={true}/>
+            <div class="uk-flex">
+                <DatePicker bind:value={internalValues['from']} required={true}/>
+                <TimePicker bind:value={internalValues['from']}/>
+            </div>
             <label for="to-time" class="uk-form-label uk-display-block">To:</label>
-            <TimePicker bind:value={internalValues['to']}/>
-            <DatePicker bind:value={internalValues['to']} required={true}/>
+            <div class="uk-flex">
+                <DatePicker bind:value={internalValues['to']} required={true}/>
+                <TimePicker bind:value={internalValues['to']}/>
+            </div>
 
         </div>
         <button type="button" class="uk-margin-small uk-button-primary uk-button" on:click={validation}>Apply</button>

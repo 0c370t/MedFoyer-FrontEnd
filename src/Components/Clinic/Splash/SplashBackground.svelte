@@ -20,13 +20,14 @@
 
 
 <div class="uk-cover-container uk-background-default uk-flex uk-flex-center uk-flex-middle uk-height-viewport uk-overflow-hidden uk-light"
-     style={`
-        background-image: url(${imageSrc});
-        background-position: center;
-        background-repeat: no-repeat;`}
      bind:clientHeight={height}
      bind:clientWidth={width}>
-    <div class="uk-position-cover uk-overlay-primary"></div>
+    <div class="uk-position-cover uk-overlay-primary uk-position-z-index"></div>
+    <div class="uk-position-cover uk-animation-fade" style={`
+        background-image: url(${imageSrc});
+        background-position: center;
+        background-repeat: no-repeat;
+        z-index:0`}></div>
     <slot>
 
     </slot>

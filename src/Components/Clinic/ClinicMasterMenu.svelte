@@ -7,7 +7,7 @@
     import Spinner from "../Spinner/Spinner.svelte";
     import CreatePatientModel from "./Modals/CreatePatientModel.svelte";
 
-    let showAppointmentModal = false;
+    let showAppointmentModal = true;
     let showPatientModal = false;
 
     let loading = false;
@@ -36,21 +36,21 @@
             Menu
     </span>
     <ul class="uk-dropdown-nav uk-padding-small">
-        <li class="uk-nav-header">Management</li>
-        <li>
+        <li class="uk-nav-header uk-margin-small">Management</li>
+        <li class="uk-margin-small">
             <button class="uk-button uk-button-text" on:click={() => {showPatientModal = true; hide()}}>
                 <Icon icon="user"/>
-                <span>Add a Patient</span>
+                <span>Create a Patient</span>
             </button>
         </li>
-        <li>
+        <li class="uk-margin-small">
             <button class="uk-button uk-button-text" on:click={() => {showAppointmentModal = true; hide()}}>
                 <Icon icon="calendar"/>
-                <span>Add an Appointment</span>
+                <span>Create an Appointment</span>
             </button>
         </li>
-        <li class="uk-nav-divider"></li>
-        <li>
+        <li class="uk-nav-divider uk-margin-small"></li>
+        <li class="uk-margin-small">
             <button class="uk-button uk-button-text" on:click={signOut}>
                 <Icon icon="sign-out"/>
                 <span>Sign-Out</span>

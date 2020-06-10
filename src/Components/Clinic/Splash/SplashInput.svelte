@@ -42,7 +42,7 @@
 
 <div class="uk-margin-small">
     <div class="uk-inline uk-width-1-1" class:shake={!input.valid}>
-        <Callout position="left" visible={Boolean(input.message)}>
+        <Callout position="left" visible={Boolean(input.message)} dark={false}>
             {input.message}
         </Callout>
         <Icon _class="uk-form-icon uk-form-icon-flip" {icon}/>

@@ -1,6 +1,8 @@
 <script>
     import Button from '../Button/Button.svelte';
     import DatePicker from "../DatePicker/DatePicker.svelte";
+    import Callout from "../Callout/Callout.svelte";
+    import PatientPicker from "./Controls/PatientPicker.svelte";
 
     export let form;
     export let onSubmit;
@@ -20,7 +22,7 @@
 </script>
 <form bind:this={formElement} class="uk-container uk-width-1-1">
     {#each form as question}
-        <div class="field {question.type}">
+        <div class="field {question.type} uk-position-relative">
             {#if question.type === "boolean"}
                 <label for="{question.name}">{question.label} </label>
                 <input name="{question.name}" type="checkbox" class="uk-checkbox input {question.type}"
@@ -86,16 +88,24 @@
             {/if}
             {#if question.type === "phone"}
                 <label for="{question.name}">{question.label} </label>
-                <input type="tel" pattern={`\(?[0-9]{3}\)?-?[0-9]{3}-?[0-9]{4}`} placeholder="000-000-0000"
+                <input type="tel" pattern={`\\(?[0-9]{3}\\)?-?[0-9]{3}-?[0-9]{4}`} placeholder="(000)-000-0000"
                        class="uk-input field {question.type}" bind:value={question.value}
                        on:change={() => question.value = phoneClean(question.value)} name="{question.name}"
                        required="{question.required}"/>
             {/if}
-
             {#if question.type === "email"}
                 <label for="{question.name}">{question.label} </label>
                 <input type="email" class="uk-input field {question.type}" bind:value={question.value}
                        name="{question.name}" required="{question.required}"/>
+            {/if}
+            {#if question.type === "patient"}
+                <PatientPicker bind:question/>
+
+            {/if}
+
+
+            {#if question.message}
+                <Callout position="right"}>{question.message}</Callout>
             {/if}
         </div>
     {/each}
@@ -104,68 +114,5 @@
     </div>
 </form>
 <style lang="scss">
-
-    form {
-        margin-top: 2em;
-        font-size: 1.2em;
-    }
-
-    div.field {
-        margin-bottom: 1em;
-        display: flex;
-        justify-content: space-between;
-
-        &.radio {
-            flex-direction: column;
-        }
-
-        > label {
-            flex: 1;
-            font-size: 1.1em;
-        }
-
-        .radioContainer {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-
-            .radioOption {
-                display: flex;
-                justify-content: center;
-
-                input {
-                    margin-left: 1em;
-                }
-            }
-        }
-
-        input.radio, input.boolean {
-            width: 2em;
-            height: 2em;
-            margin-bottom: 1em;
-            display: inline-block;
-        }
-
-        input.radio {
-            background-size: 150%;
-        }
-
-        input.boolean {
-            background-size: 80%;
-        }
-
-        input:not(.radio):not(.boolean), select {
-            flex: 1;
-        }
-    }
-
-    div.buttonContainer {
-        flex: 1;
-        width: 80%;
-        display: flex;
-        justify-content: center;
-        margin: 0 auto 2em;
-    }
-
+    @import 'forms';
 </style>

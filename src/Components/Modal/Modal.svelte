@@ -20,7 +20,7 @@
     }
 </script>
 
-<div {id} class="uk-flex-top container" class:uk-open={open} bind:this={modalElement} on:hidden={() => open = false} on:shown={() => open = true}>
+<div {id} class="uk-flex-top container" class:uk-open={open} bind:this={modalElement} on:hidden={() => open = false} on:shown={() => open = true} on:beforeshow on:show on:shown on:beforehide on:hide on:hidden>
     <div class="uk-modal-dialog uk-margin-auto-vertical">
         {#if showClose}
             <button class="uk-modal-close-default" type="button" uk-close></button>

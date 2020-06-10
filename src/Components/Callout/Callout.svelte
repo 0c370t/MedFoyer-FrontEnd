@@ -3,13 +3,14 @@
 
     export let visible = true;
     export let position = "right";
+    export let dark = true;
     const positions = ["top", "right", "bottom", "left"];
     if (!positions.includes(position)) position = "right";
 
 </script>
 
 {#if visible}
-    <div class={`uk-border-rounded ${position} uk-position-z-index`} in:slide={{delay: 600}} out:slide>
+    <div class={`uk-border-rounded ${position} uk-position-z-index`} in:slide={{delay: 600}} out:slide class:dark>
         <p>
             <slot>
                 This is a callout!
@@ -29,6 +30,14 @@
         height: 2em;
         line-height: 2em;
         white-space: nowrap;
+        &.dark{
+            background-color:$primary-color;
+            color:white;
+        }
+        &.top.dark::before{ border-top: .5em $primary-color solid; }
+        &.bottom.dark::before{ border-bottom: .5em $primary-color solid; }
+        &.right.dark::before{ border-right: .5em $primary-color solid; }
+        &.left.dark::before{ border-left: .5em $primary-color solid; }
 
         &::before {
             display: block;
