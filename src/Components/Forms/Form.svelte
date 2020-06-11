@@ -3,13 +3,14 @@
     import DatePicker from "../DatePicker/DatePicker.svelte";
     import Callout from "../Callout/Callout.svelte";
     import PatientPicker from "./Controls/PatientPicker.svelte";
+    import TimePicker from "../TimePicker/TimePicker.svelte";
 
     export let form;
     export let onSubmit;
     export let formElement;
     export let buttonText = "Submit";
     export let loading = false;
-
+    export let validationMessage = "";
     const phoneClean = (value) => {
         let phone = value.replace(/\D/g, '');
         const match = phone.match(/(\d{1,3})(\d{0,3})(\d{0,4})$/);
@@ -56,11 +57,6 @@
                     <hr/>
                 </label>
             {/if}
-            {#if question.type === "validation-message"}
-                <label class="labelfield uk-label-danger">
-                    <strong>{question.label}</strong>
-                </label>
-            {/if}
             {#if question.type === "text"}
                 <label for="{question.name}">{question.label} </label>
                 <input type="text" class="uk-input field {question.type}" bind:value={question.value}
@@ -73,13 +69,21 @@
             {/if}
             {#if question.type === "datetime"}
                 <label for="{question.name}">{question.label} </label>
-                <input type="datetime-local" class="uk-input field {question.type}" bind:value={question.value}
-                       name="{question.name}" required="{question.required}"/>
+                <div class="{question.type} uk-flex uk-flex-column uk-flex-1">
+                    <TimePicker fullwidth={true} bind:value={question.value}/>
+                    <DatePicker fullwidth={true} flex="{true}" bind:value={question.value}/>
+                </div>
             {/if}
             {#if question.type === "date"}
                 <label for="{question.name}">{question.label}</label>
                 <input type="date" class="uk-input field {question.type}" bind:value={question.value}
                        name="{question.name}" required="{question.required}"/>
+            {/if}
+            {#if question.type ==="datepicker"}
+                <label for="{question.name}">{question.label} </label>
+                <div class="{question.type} uk-flex uk-flex-column">
+                    <DatePicker fullwidth={false} flex="{true}" bind:value={question.value}/>
+                </div>
             {/if}
             {#if question.type === "time"}
                 <label for="{question.name}">{question.label} </label>
@@ -100,16 +104,18 @@
             {/if}
             {#if question.type === "patient"}
                 <PatientPicker bind:question/>
-
             {/if}
 
 
             {#if question.message}
-                <Callout position="right"}>{question.message}</Callout>
+                <Callout position="right" }>{question.message}</Callout>
             {/if}
         </div>
     {/each}
     <div class="buttonContainer">
+        <label class="labelfield uk-label-danger">
+            <strong>{validationMessage}</strong>
+        </label>
         <Button fullwidth={true} {loading} on:click={onSubmit}>{buttonText}</Button>
     </div>
 </form>

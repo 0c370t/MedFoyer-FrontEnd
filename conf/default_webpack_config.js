@@ -33,6 +33,7 @@ module.exports = (input, output) => {
                             emitCss: true,
                             hotReload: true,
                             hydratable: true,
+                            dev: !prod,
                             preprocess: preprocess(),
                         }
                     }

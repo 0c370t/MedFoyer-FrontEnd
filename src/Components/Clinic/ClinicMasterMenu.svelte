@@ -6,14 +6,15 @@
     import {navigate} from "svelte-routing";
     import Spinner from "../Spinner/Spinner.svelte";
     import CreatePatientModel from "./Modals/CreatePatientModel.svelte";
+    import {onMount} from "svelte";
 
-    let showAppointmentModal = true;
+    let showAppointmentModal = false;
     let showPatientModal = false;
-
     let loading = false;
-
     let hide = () => {};
-
+    let user = {
+        admin: false
+    };
     const signOut = async () => {
         loading = true;
         try {
@@ -25,6 +26,15 @@
 
         loading = false;
     }
+
+    onMount(async()=>{
+        let tempuser = await Auth.currentAuthenticatedUser();
+        let groups = tempuser.signInUserSession.accessToken.payload["cognito:groups"];
+        if(groups.includes("medfoyer-admins")){
+            user.admin = true;
+        }
+    })
+
 </script>
 <Spinner show={loading}/>
 <CreatePatientModel bind:shown={showPatientModal}/>
@@ -50,10 +60,28 @@
             </button>
         </li>
         <li class="uk-nav-divider uk-margin-small"></li>
+        {#if user.admin}
+            <li class="uk-nav-header uk-margin-small">Administration</li>
+            <li class="uk-margin-small">
+                <button class="uk-button uk-button-text" on:click={() => {hide()}}>
+                    <Icon icon="settings"/>
+                    <span>Modify Clinic Details</span>
+                </button>
+            </li>
+            <li class="uk-nav-divider uk-margin-small"></li>
+        {/if}
+
         <li class="uk-margin-small">
             <button class="uk-button uk-button-text" on:click={signOut}>
                 <Icon icon="sign-out"/>
                 <span>Sign-Out</span>
+            </button>
+        </li>
+        <li class="uk-nav-divider uk-margin-small"></li>
+        <li class="uk-margin-small">
+            <button class="uk-button uk-button-text">
+                <Icon icon="lifesaver"/>
+                <span>Support</span>
             </button>
         </li>
     </ul>

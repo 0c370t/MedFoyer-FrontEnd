@@ -26,3 +26,29 @@ export const WithUnevenInput = () => ({
         value: unevenStep
     }
 })
+
+let WithStart_Prop = new Date();
+WithStart_Prop.setHours(8, 0);
+export const WithStart = () => ({
+    Component: TimePicker,
+    props: {
+        start: WithStart_Prop
+    }
+});
+
+let WithEnd_Prop = new Date();
+WithEnd_Prop.setHours(17, 0);
+export const WithEnd = () => ({
+    Component: TimePicker,
+    props: {
+        end: WithEnd_Prop
+    }
+});
+
+export const WithStartAndEnd = () => ({
+    Component: TimePicker,
+    props: {
+        start: WithStart_Prop,
+        end: WithEnd_Prop
+    }
+})

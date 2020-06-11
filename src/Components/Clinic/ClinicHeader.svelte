@@ -12,13 +12,11 @@
     export let updateAppointments;
 </script>
 
-<header>
+<header class="uk-padding-small">
     <div class="left">
-        <div class="logo">
-            <Logo/>
-        </div>
-        <h1 class="uk-margin-remove">
-            MedFoyer </h1>
+        <div class="logo uk-margin-small-right"><Logo/></div>
+        <h1 class="uk-margin-remove"> MedFoyer </h1>
+
     </div>
     <div class="right uk-flex">
         <p class="uk-button uk-button-default uk-disabled uk-margin-small-right">
@@ -35,7 +33,7 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 1em 3em;
+
         border-bottom: 1px solid gray;
 
         div.left {

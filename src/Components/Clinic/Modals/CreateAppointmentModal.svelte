@@ -1,16 +1,18 @@
 <script>
+    import {lookupAddress} from "../../../API/mapbox.API";
+
     export let shown = false;
     import {new_appointment} from "../../../helpers/forms/create_appointment";
     import {getContext} from "svelte";
     import Modal from "../../Modal/Modal.svelte";
     import Form from "../../Forms/Form.svelte";
+    import {postAppointment} from "../../../API/appointments.API";
 
     const updateAppointments = getContext("updateAppointments");
 
     const submit = async () => {
         formLoading = true;
-        if (apptForm[apptForm.length - 1].type === "validation-message") apptForm.pop();
-
+        console.log(apptForm);
         if (formElement.reportValidity()) {
             let clonedForm = apptForm.flatMap(x => Object.assign({}, x));
             let date = new Date();
@@ -24,30 +26,29 @@
                 clonedForm.push({"name": "long", "value": longLat[0]});
                 clonedForm.push({"name": "lat", "value": longLat[1]});
                 await postAppointment({form: JSON.stringify(clonedForm)});
-                showAppointmentModal = false;
+                shown = false;
                 updateAppointments();
                 apptForm = new_appointment;
             } catch (e) {
-                apptForm.push({
-                    "label": e.message,
-                    "type": "validation-message"
-                });
-                apptForm = [...apptForm];
+                validationMessage = e.message;
             }
 
         }
         formLoading = false;
-    }
+    };
 
     let formElement;
     let apptForm = new_appointment;
     let formLoading = false;
+    let validationMessage = "";
 
 </script>
 
 
 <Modal bind:open={shown} id="apptCreateModal">
     <h3 slot="header">Add Appointment</h3>
+    {#if shown}
     <Form form="{apptForm}" onSubmit="{submit}" loading="{formLoading}" bind:formElement
-          buttonText="Create Appointment"/>
+          buttonText="Create Appointment" {validationMessage}/>
+    {/if}
 </Modal>

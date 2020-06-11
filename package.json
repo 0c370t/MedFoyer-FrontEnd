@@ -22,6 +22,7 @@
     "apollo-boost": "^0.4.9",
     "aws-amplify": "^3.0.16",
     "aws-appsync": "^3.0.3",
+    "aws-appsync-auth-link": "latest",
     "babel-loader": "^8.1.0",
     "core-js": "^3.6.5",
     "graphql": "^14.6.0",
@@ -31,15 +32,14 @@
     "sass-loader": "^8.0.2",
     "svelte": "^3.23.0",
     "svelte-apollo": "^0.3.0",
-    "svelte-calendar": "^1.5.0",
+    "svelte-calendar": "github:0c370t/svelte-calendar#7e82a7cb9917ebc39b61620e214c8b66cc8b035f",
     "svelte-loader": "^2.13.6",
     "svelte-preprocess": "^3.7.4",
     "svelte-preprocess-sass": "^0.2.0",
     "svelte-routing": "^1.4.2",
     "webpack": "latest",
     "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.11.0",
-    "aws-appsync-auth-link": "latest"
+    "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
     "geolib": "^3.2.1",

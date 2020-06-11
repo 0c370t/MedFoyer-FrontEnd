@@ -9,7 +9,7 @@ export const new_appointment = [
     },
     {
         "label":"Appointment Time",
-        "type":"time",
+        "type":"datetime",
         "name":"appointment_time",
         "required": true
     },

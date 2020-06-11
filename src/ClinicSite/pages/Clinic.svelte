@@ -1,6 +1,5 @@
 <script>
     import ClinicHeader from '../../Components/Clinic/ClinicHeader.svelte'
-    import {getAppointments} from "../../API/appointments.API";
     import AppointmentOverview from "../../Components/Clinic/AppointmentOverview.svelte";
     import {onMount, setContext} from 'svelte';
     import {appt} from '../../helpers/stores';
@@ -9,10 +8,8 @@
     import {getFilterFunction} from "../../helpers/appointments";
     import {getCurrentDateForInput, toAWSDate} from "../../helpers/datetime";
 
-    import {getClient, mutate, query} from 'svelte-apollo';
+    import {getClient, query} from 'svelte-apollo';
     import {GET_APPOINTMENT_OVERVIEW} from "../../API/queries/appointments.GQL";
-    import {CREATE_PATIENT} from '../../API/queries/patients.GQL';
-    import Button from "../../Components/Button/Button.svelte";
 
     const client = getClient();
 
@@ -29,6 +26,7 @@
         from: defaultFrom,
         to: defaultTo,
     };
+    $: if(filterValues) console.log(filterValues);
 
     const updateAppointments = () => {
         /*getAppointments().then(result => {

@@ -70,7 +70,7 @@ export const formatForDisplay = (dateString, includeTime = false) => {
     if(!dateString) return '';
     let dateobj;
     if(dateString instanceof Date) {
-        dateobj = dateString;
+        dateobj = new Date(dateString.getTime());
     } else {
         dateobj = new Date();
         let [year, month, date] = dateString.split('-');
@@ -82,7 +82,7 @@ export const formatForDisplay = (dateString, includeTime = false) => {
     output += months[dateobj.getMonth()] + " ";
     output += dateobj.getDate();
     if(includeTime) {
-        output += ` @ ${dateobj.getHours()}:${padMinutes(dateobj.getMinutes())} ${dateobj.getHours() > 12 ? "pm" : "am"}`
+        output += ` @ ${dateobj.getHours() % 12}:${padMinutes(dateobj.getMinutes())} ${dateobj.getHours() > 12 ? "pm" : "am"}`
     }
     return output;
 };

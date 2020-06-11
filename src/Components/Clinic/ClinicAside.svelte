@@ -18,15 +18,13 @@
     $: checkedInAppointments = appointments.filter(a => a.patient_location).sort(sortByCheckInTime);
     $: notCheckedInAppointments = appointments.filter(a => !a.patient_location).sort(sortByAppointmentTime);
 
-
-
 </script>
 
 <aside class="uk-background-default">
-    <div class="uk-flex uk-flex-middle uk-flex-column uk-text-center">
+    <header class="uk-padding-small uk-padding-remove-vertical">
         <h2 class="uk-margin-remove uk-width-1-1">Appointment Overview</h2>
         <span class="uk-text-meta">{formatForDisplay(filterValues.from, true)} - {formatForDisplay(filterValues.to, true)}</span>
-    </div>
+    </header>
 
 
     <AppointmentList title="Checked In" appointments={checkedInAppointments} {selectedAppointment} {selectAppointment}>
@@ -51,5 +49,8 @@
         display: flex;
         flex-direction: column;
 
+        header{
+
+        }
     }
 </style>
