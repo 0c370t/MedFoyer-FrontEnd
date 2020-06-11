@@ -1,5 +1,5 @@
 <script>
-    import {formatTime} from "../../helpers/datetime";
+    import {formatTime} from "../../../../helpers/datetime";
 
     export let appt;
     export let active = false;

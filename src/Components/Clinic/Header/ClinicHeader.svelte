@@ -1,10 +1,10 @@
 <script>
-    import Logo from "../../svg/Logo.svelte";
+    import Logo from "../../../svg/Logo.svelte";
     import {Auth} from 'aws-amplify';
     import ClinicMasterMenu from "./ClinicMasterMenu.svelte";
     import {onMount} from "svelte";
 
-    onMount(async()=>{
+    onMount(async () => {
         user = await Auth.currentUserInfo();
     });
     let user = {};
@@ -12,11 +12,12 @@
     export let updateAppointments;
 </script>
 
-<header class="uk-padding-small">
+<header class="uk-padding-small" id="master-header">
     <div class="left">
-        <div class="logo uk-margin-small-right"><Logo/></div>
+        <div class="logo uk-margin-small-right">
+            <Logo/>
+        </div>
         <h1 class="uk-margin-remove"> MedFoyer </h1>
-
     </div>
     <div class="right uk-flex">
         <p class="uk-button uk-button-default uk-disabled uk-margin-small-right">

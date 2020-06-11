@@ -1,15 +1,15 @@
 <script>
-    import ClinicHeader from '../../Components/Clinic/ClinicHeader.svelte'
-    import AppointmentOverview from "../../Components/Clinic/AppointmentOverview.svelte";
+    import ClinicHeader from '../../Components/Clinic/Header/ClinicHeader.svelte'
+    import AppointmentOverview from "../../Components/Clinic/Asymmetric/Appointment/AppointmentOverview.svelte";
     import {onMount, setContext} from 'svelte';
     import {appt} from '../../helpers/stores';
 
-    import ClinicAside from "../../Components/Clinic/ClinicAside.svelte";
+    import AppointmentAside from "../../Components/Clinic/Asymmetric/Appointment/AppointmentAside.svelte";
     import {getFilterFunction} from "../../helpers/appointments";
-    import {getCurrentDateForInput, toAWSDate} from "../../helpers/datetime";
 
     import {getClient, query} from 'svelte-apollo';
     import {GET_APPOINTMENT_OVERVIEW} from "../../API/queries/appointments.GQL";
+    import AsymmetricLayout from "../../Components/Clinic/Asymmetric/AsymmetricLayout.svelte";
 
     const client = getClient();
 
@@ -26,7 +26,7 @@
         from: defaultFrom,
         to: defaultTo,
     };
-    $: if(filterValues) console.log(filterValues);
+    $: if (filterValues) console.log(filterValues);
 
     const updateAppointments = () => {
         /*getAppointments().then(result => {
@@ -63,32 +63,9 @@
         let x = await $graph_appointments;
     });
 </script>
-<div class="layout">
+
+<AsymmetricLayout>
     <ClinicHeader {updateAppointments}/>
-    <ClinicAside {appointments} bind:selectedAppointment {updateAppointments} {filterValues} on:filter={updateFilters}/>
-
-    {#if selectedAppointment}
-        <main>
-            <AppointmentOverview appointment="{selectedAppointment}" {updateAppointments}/>
-        </main>
-    {:else}
-        <main class="uk-text-center uk-padding">
-            <h3>Please select an appointment</h3>
-        </main>
-    {/if}
-</div>
-<style lang="scss">
-    div.layout {
-        height: 100vh;
-        display: grid;
-        grid-template-columns: 25% 75%;
-        grid-template-rows: 5em 1fr;
-        grid-template-areas: "header header" "aside main";
-        position: relative;
-    }
-
-    main {
-        grid-area: main;
-        overflow-y: scroll;
-    }
-</style>
+    <AppointmentAside {appointments} bind:selectedAppointment {updateAppointments} {filterValues} on:filter={updateFilters}/>
+    <AppointmentOverview appointment="{selectedAppointment}" {updateAppointments}/>
+</AsymmetricLayout>

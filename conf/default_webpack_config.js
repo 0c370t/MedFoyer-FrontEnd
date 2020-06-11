@@ -6,7 +6,51 @@ const preprocess = require('svelte-preprocess');
 const mode = process.env.NODE_ENV || 'development';
 const prod = mode === 'production';
 
-module.exports = (input, output) => {
+const getLoaders = (legacy_support = false) => legacy_support
+    ? [
+        {
+            loader: 'babel-loader',
+            options: {
+                presets: [
+                    ['@babel/preset-env', {
+                        targets: "> 0.25%, not dead",
+                        modules: "commonjs",
+                        debug: true,
+                        useBuiltIns: "usage",
+                        corejs: "3.6.4",
+                        include: ["@babel/plugin-transform-regenerator"]
+                    }]
+                ],
+
+            }
+        },
+        {
+            loader: 'svelte-loader',
+            options: {
+                emitCss: true,
+                hotReload: true,
+                legacy: legacy_support,
+                hydratable: true,
+                dev: !prod,
+                preprocess: preprocess(),
+            }
+        },
+
+        ]
+    : {
+        loader: 'svelte-loader',
+        options: {
+            emitCss: true,
+            hotReload: true,
+            hydratable: true,
+            dev: !prod,
+            preprocess: preprocess(),
+        }
+    }
+;
+
+
+module.exports = (input, output, legacy_support = false) => {
     return {
         entry: {
             bundle: [input]
@@ -27,16 +71,7 @@ module.exports = (input, output) => {
             rules: [
                 {
                     test: /\.svelte$/,
-                    use: {
-                        loader: 'svelte-loader',
-                        options: {
-                            emitCss: true,
-                            hotReload: true,
-                            hydratable: true,
-                            dev: !prod,
-                            preprocess: preprocess(),
-                        }
-                    }
+                    use: getLoaders(legacy_support)
                 },
                 {
                     test: /\.css$/,

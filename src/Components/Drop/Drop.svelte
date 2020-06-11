@@ -12,7 +12,7 @@
     export let boundary = "body";
     export let boundaryAlign = true;
     export let padsize = "normal";
-
+    export let _class = "";
     const padsizings = ["normal", "small", "large", "remove"];
     if (!padsizings.includes(padsize)) {
         padsize = "";
@@ -53,7 +53,7 @@
         </button>
     </slot>
 
-    <div bind:this={wrapperElement} class={`uk-card uk-card-default uk-padding${padsize}`} on:toggle on:beforeshow
+    <div bind:this={wrapperElement} class={`uk-card uk-card-default uk-padding${padsize} ${_class}`} on:toggle on:beforeshow
          on:show on:shown on:beforehide on:hide on:hidden on:stack>
         <slot/>
     </div>

@@ -1,11 +1,11 @@
 <script>
-    import Drop from "../Drop/Drop.svelte";
-    import Icon from "../Icon/Icon.svelte";
-    import CreateAppointmentModal from "./Modals/CreateAppointmentModal.svelte";
+    import Drop from "../../Drop/Drop.svelte";
+    import Icon from "../../Icon/Icon.svelte";
+    import CreateAppointmentModal from "../Modals/CreateAppointmentModal.svelte";
     import {Auth} from 'aws-amplify';
     import {navigate} from "svelte-routing";
-    import Spinner from "../Spinner/Spinner.svelte";
-    import CreatePatientModel from "./Modals/CreatePatientModel.svelte";
+    import Spinner from "../../Spinner/Spinner.svelte";
+    import CreatePatientModel from "../Modals/CreatePatientModel.svelte";
     import {onMount} from "svelte";
 
     let showAppointmentModal = false;
@@ -40,10 +40,10 @@
 <CreatePatientModel bind:shown={showPatientModal}/>
 <CreateAppointmentModal bind:shown={showAppointmentModal}/>
 
-<Drop mode="hover" pos="bottom-right" boundary="" bind:hide>
-    <span slot="button">
-            <Icon icon="plus"/>
-            Menu
+<Drop mode="hover" pos="bottom-right" boundary="#master-header" animation="uk-animation-slide-top-small" bind:hide _class="uk-background-secondary uk-light">
+    <span slot="button" class="uk-flex uk-flex-middle uk-flex-around">
+        <span class="uk-margin-small-right">Menu</span>
+        <Icon icon="chevron-down"/>
     </span>
     <ul class="uk-dropdown-nav uk-padding-small">
         <li class="uk-nav-header uk-margin-small">Management</li>
@@ -88,5 +88,7 @@
 </Drop>
 
 <style>
-
+    .uk-nav-header{
+        color: currentColor;
+    }
 </style>

@@ -1,10 +1,11 @@
 <script>
-    import {formatForDisplay, formatTime} from "../../helpers/datetime";
-    import Button from "../Button/Button.svelte";
-    import Icon from "../Icon/Icon.svelte";
+    import {formatForDisplay, formatTime} from "../../../../helpers/datetime";
+    import Button from "../../../Button/Button.svelte";
+    import Icon from "../../../Icon/Icon.svelte";
     import UIkit from "uikit";
-    import {deleteAppointment} from "../../API/appointments.API";
-    import ClinicStaticMap from "../Map/ClinicStaticMap.svelte";
+    import {deleteAppointment} from "../../../../API/appointments.API";
+    import ClinicStaticMap from "../../../Map/ClinicStaticMap.svelte";
+    import AsymmetricMain from "../AsymmetricMain.svelte";
 
     export let appointment;
     export let updateAppointments;
@@ -18,16 +19,19 @@
         UIkit.modal.alert(`The patient's contact phone number is ${appointment.phone_num}`);
     }
 </script>
-
-<main class="uk-width-1-1">
+<AsymmetricMain emptyMessage="Please select an appointment" hasContent={appointment}>
     <header class="uk-flex uk-flex-between uk-child-width-1-3 uk-container uk-container-expand">
         <div class="uk-flex uk-flex-left uk-flex-wrap">
             <h2 class="uk-width-1-1">{appointment.name} @ {formatTime(appointment.appointment_time)}</h2>
-            <a href="{window.location.protocol}//{window.location.host}/appt/{appointment.id}" target="_blank" class="uk-margin-small-right"
-               title="This functionality is for internal testing only!">
-                <Button>Patient Link <Icon options={{icon:"link"}}/></Button>
+            <a href="{window.location.protocol}//{window.location.host}/appt/{appointment.id}" target="_blank"
+               class="uk-margin-small-right" title="This functionality is for internal testing only!">
+                <Button>Patient Link
+                    <Icon options={{icon:"link"}}/>
+                </Button>
             </a>
-            <Button on:click={summonPatientPhoneNumber}>Contact Patient <Icon options={{icon:"phone"}}/></Button>
+            <Button on:click={summonPatientPhoneNumber}>Contact Patient
+                <Icon options={{icon:"phone"}}/>
+            </Button>
         </div>
         <div class="uk-flex uk-flex-right uk-flex-top">
             <Button on:click={deleteAppointmentHandler}>Cancel Appointment
@@ -64,37 +68,37 @@
         <div class="uk-width-2-5 uk-section uk-section-primary uk-padding-small uk-flex uk-flex-column uk-preserve-color">
             <!-- Map -->
             <div>
-                    <div class="uk-card uk-card-body uk-box-shadow-small uk-background-default uk-margin-small-bottom">
-                        <h3>Appointment Information:</h3>
-                        <hr/>
-                        <dl class="uk-description-list uk-description-list-divider">
-                            <dt>Appointment Time:</dt>
-                            <dd>{formatForDisplay(appointment.appointment_time)} at {formatTime(appointment.appointment_time)}</dd>
+                <div class="uk-card uk-card-body uk-box-shadow-small uk-background-default uk-margin-small-bottom">
+                    <h3>Appointment Information:</h3>
+                    <hr/>
+                    <dl class="uk-description-list uk-description-list-divider">
+                        <dt>Appointment Time:</dt>
+                        <dd>{formatForDisplay(appointment.appointment_time)}
+                            at {formatTime(appointment.appointment_time)}</dd>
 
-                            <dt>Patient Phone Number:</dt>
-                            <dd>{appointment.phone_num ? appointment.phone_num : "Not available"}</dd>
-                            <dt>Check-in Time:</dt>
-                            {#if appointment.checkin_time}
-                                <dd>{formatTime(new Date(appointment.checkin_time))}</dd>
-                            {:else}
-                                <dd>{appointment.name} has not checked in yet.</dd>
-                            {/if}
-                        </dl>
-                    </div>
+                        <dt>Patient Phone Number:</dt>
+                        <dd>{appointment.phone_num ? appointment.phone_num : "Not available"}</dd>
+                        <dt>Check-in Time:</dt>
+                        {#if appointment.checkin_time}
+                            <dd>{formatTime(new Date(appointment.checkin_time))}</dd>
+                        {:else}
+                            <dd>{appointment.name} has not checked in yet.</dd>
+                        {/if}
+                    </dl>
+                </div>
                 {#if appointment.patient_location}
                     <div class="uk-card uk-card-body uk-box-shadow-small uk-background-default uk-margin-small-bottom">
                         <h3>Check-in Location:</h3>
                         <hr/>
-                        <ClinicStaticMap clinicPosition="{[appointment.long, appointment.lat]}" userPosition="{[appointment.patient_location[1], appointment.patient_location[0]]}"/>
+                        <ClinicStaticMap clinicPosition="{[appointment.long, appointment.lat]}"
+                                         userPosition="{[appointment.patient_location[1], appointment.patient_location[0]]}"/>
                     </div>
                 {/if}
 
             </div>
         </div>
     </div>
-
-</main>
-
+</AsymmetricMain>
 <style lang="scss">
     main {
         grid-area: main;
