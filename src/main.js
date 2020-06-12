@@ -2,10 +2,10 @@ import "core-js/stable";
 import "regenerator-runtime/runtime";
 
 import App from './App.svelte';
-import Amplify, {Auth} from 'aws-amplify';
+import Auth from '@aws-amplify/auth';
 import {awsconfig} from '../conf/amplify.config';
 
-Amplify.configure(awsconfig);
+Auth.configure(awsconfig.Auth);
 
 const app = new App({
 	target: document.body,

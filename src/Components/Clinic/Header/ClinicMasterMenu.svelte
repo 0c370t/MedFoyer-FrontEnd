@@ -2,7 +2,7 @@
     import Drop from "../../Drop/Drop.svelte";
     import Icon from "../../Icon/Icon.svelte";
     import CreateAppointmentModal from "../Modals/CreateAppointmentModal.svelte";
-    import {Auth} from 'aws-amplify';
+    import Auth from '@aws-amplify/auth';
     import {navigate} from "svelte-routing";
     import Spinner from "../../Spinner/Spinner.svelte";
     import CreatePatientModel from "../Modals/CreatePatientModel.svelte";

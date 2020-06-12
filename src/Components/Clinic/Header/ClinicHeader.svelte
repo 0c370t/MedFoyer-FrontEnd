@@ -1,6 +1,6 @@
 <script>
     import Logo from "../../../svg/Logo.svelte";
-    import {Auth} from 'aws-amplify';
+    import Auth from '@aws-amplify/auth';
     import ClinicMasterMenu from "./ClinicMasterMenu.svelte";
     import {onMount} from "svelte";
 

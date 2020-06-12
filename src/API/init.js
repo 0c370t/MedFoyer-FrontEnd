@@ -1,6 +1,5 @@
-import ApolloClient from 'apollo-boost';
 import AWSAppSyncClient from 'aws-appsync';
-import {Auth} from 'aws-amplify';
+import Auth from '@aws-amplify/auth';
 import {AUTH_TYPE} from 'aws-appsync-auth-link';
 
 let client = null;

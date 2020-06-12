@@ -2,7 +2,7 @@
     import SplashLayout from "../../Components/Clinic/Splash/SplashLayout.svelte";
     import SplashInput, {inputTemplate, validateMany} from "../../Components/Clinic/Splash/SplashInput.svelte";
     import SplashButton from "../../Components/Clinic/Splash/SplashButton.svelte";
-    import {Auth} from 'aws-amplify';
+    import Auth from '@aws-amplify/auth';
     import {user} from '../../helpers/stores';
     import {navigate} from "svelte-routing";
     import {onMount} from "svelte";

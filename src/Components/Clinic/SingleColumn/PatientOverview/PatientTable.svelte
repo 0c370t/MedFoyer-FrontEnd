@@ -48,7 +48,7 @@
                 No Doctors!
             </td>
             <td class="uk-flex uk-flex-around">
-                <Button>
+                <Button disabled="{true}">
                     <Icon icon="pencil"/>
                 </Button>
                 <Button>

@@ -1,6 +1,6 @@
 <script>
     import {navigate} from "svelte-routing";
-    import {Auth} from 'aws-amplify';
+    import Auth from '@aws-amplify/auth';
     import {user} from '../../helpers/stores';
     import SplashLayout from "../../Components/Clinic/Splash/SplashLayout.svelte";
     import SplashInput, {inputTemplate, validateMany} from "../../Components/Clinic/Splash/SplashInput.svelte";
