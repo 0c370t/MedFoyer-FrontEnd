@@ -12,7 +12,6 @@
 
     const submit = async () => {
         formLoading = true;
-        console.log(apptForm);
         if (formElement.reportValidity()) {
             let clonedForm = apptForm.flatMap(x => Object.assign({}, x));
             let date = new Date();

@@ -22,4 +22,4 @@
 </script>
 
 
-<span class={_class} bind:this={target}/>
+<span class={_class} bind:this={target} on:click/>

@@ -32,7 +32,7 @@ const getLoaders = (legacy_support = false) => legacy_support
                 legacy: legacy_support,
                 hydratable: true,
                 dev: !prod,
-                preprocess: preprocess(),
+                preprocess: [preprocess()],
             }
         },
 
@@ -44,7 +44,7 @@ const getLoaders = (legacy_support = false) => legacy_support
             hotReload: true,
             hydratable: true,
             dev: !prod,
-            preprocess: preprocess(),
+            preprocess: [preprocess()],
         }
     }
 ;

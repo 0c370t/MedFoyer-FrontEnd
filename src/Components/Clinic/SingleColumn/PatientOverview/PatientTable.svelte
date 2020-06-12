@@ -1,71 +1,57 @@
 <script>
     import {getClient, query} from "svelte-apollo";
-    import Spinner from "../../../Spinner/Spinner.svelte";
     import {GET_ALL_PATIENTS} from "../../../../API/queries/patients.GQL";
     import Button from "../../../Button/Button.svelte";
     import Icon from "../../../Icon/Icon.svelte";
+    import {phoneClean} from "../../../../helpers/phone_numbers";
+    import DataTable, {buildAttribute} from "../../../DataTable/DataTable.svelte";
+    import ConfirmationModal from "../../../Modal/ConfirmationModal.svelte";
+    import Uikit from 'uikit';
+    import {createEventDispatcher} from "svelte";
 
     const client = getClient();
-
-    let patients = query(client, {query: GET_ALL_PATIENTS})
-
-    const orderBy = (attribute) => {
-        console.log("Attempting to sort by " + attribute);
-        debugger;
-        if(!$patients.data) return;
-        if(!Object.keys($patients.data.listPatients[0]).includes(attribute)) return;
-        $patients.data.listPatients = $patients.data.listPatients.sort(attribute);
+    const attributes = [
+        buildAttribute("given_name", "First Name", true, true, true),
+        buildAttribute("last_name", "Last Name", true, true, true),
+        buildAttribute("birth_date", "Date of Birth", true, true, true),
+        buildAttribute("phone_number", "Phone Number", true, true, true, phoneClean),
+    ];
+    let patients__ = query(client, {query: GET_ALL_PATIENTS});
+    let patients;
+    const dispatch = createEventDispatcher();
+    $patients__.then(i => {
+        patients = i.data.listPatients;
+        return i;
+    });
+    const confirmDelete = (patient_id) => {
+        // Can safely assume patient_id exists because this is a callback on a patient.
+        // Yes I'll take "words I'll probably eat in a month for 200" please
+        let patient = patients.filter(p => p.patient_id === patient_id)[0];
+        Uikit.modal.confirm(`Are you sure you want to delete ${patient.given_name} ${patient.last_name}?`).then(
+                ()=>{
+                    console.log("He's dead, Jim.");
+                    // TODO: DELETE PATIENT!
+                },
+                ()=>{}
+        )
+    }
+    const createAppointment = (patient_id) => {
+        dispatch('create-appointment', {
+            patient_id
+        })
     }
 </script>
 
-<table class="uk-table uk-position-relative uk-table-striped">
-    <tr class="uk-child-width-1-6">
-        <th on:click={()=>orderBy("given_name")}>First Name</th>
-        <th>Last name</th>
-        <th>Date of Birth</th>
-        <th>Phone Number</th>
-        <th>Doctors</th>
-        <th></th>
-    </tr>
-    {#await $patients}
-        <Spinner show={true}/>
-    {:then result}
-        {#each result.data.listPatients as patient (patient.patient_id)}
-        <tr>
-            <td>
-                {patient.given_name}
-            </td>
-            <td>
-                {patient.last_name}
-            </td>
-            <td>
-                {patient.birth_date}
-            </td>
-            <td>
-                {patient.phone_number}
-            </td>
-            <td>
-                No Doctors!
-            </td>
-            <td class="uk-flex uk-flex-around">
-                <Button disabled="{true}">
-                    <Icon icon="pencil"/>
-                </Button>
-                <Button>
-                    <Icon icon="trash"/>
-                </Button>
-            </td>
-        </tr>
-        {/each}
-
-    {:catch err}
-        <tr>
-            <td colspan="6"><h3>An error has occurred.</h3></td>
-        </tr>
-    {/await}
-
-</table>
-
-<style>
-
-</style>
+<DataTable data_promise={$patients__} {attributes} data_attribute="listPatients" data_key="patient_id">
+    <div slot="buttons" let:prop={id} class="uk-flex uk-flex-around">
+        <Button disabled="{true}">
+            <Icon icon="pencil"/>
+        </Button>
+        <Button on:click={()=>createAppointment(id)}>
+            <Icon icon="calendar"/>
+        </Button>
+        <Button on:click={()=>confirmDelete(id)}>
+            <Icon icon="trash"/>
+        </Button>
+    </div>
+</DataTable>

@@ -33,7 +33,6 @@ export const padMinutes = (minutes) => {
 export const formatTime = (date) => {
     try{
         if(!(date instanceof Date) || !date){
-            console.log(date);
             return "Invalid Date";
         }
         let ampm = "pm";
@@ -44,7 +43,7 @@ export const formatTime = (date) => {
 
         return `${date.getHours() % 12}:${minutes} ${ampm}`;
     } catch{
-        console.log(date);
+
     }
 };
 

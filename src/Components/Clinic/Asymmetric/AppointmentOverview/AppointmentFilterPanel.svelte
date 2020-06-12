@@ -42,7 +42,7 @@
             <TimePicker bind:value={internalValues.to} fullwidth={true}/>
         </div>
     </div>
-    <div class="uk-inline">
+    <div class="uk-inline uk-margin-small-top">
         <button type="button" class="uk-margin-small uk-button-primary uk-button" on:click={validation}>Apply</button>
         <Callout position="bottom" visible={message}>
             {message}

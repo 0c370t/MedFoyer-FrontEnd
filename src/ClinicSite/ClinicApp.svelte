@@ -8,6 +8,7 @@
     import CompleteProfile from './pages/CompleteProfile.svelte'
     import {CheckSession} from "../helpers/auth/ClinicAuthentication";
     import Redirect from "../Components/Routing/Redirect.svelte";
+    import ClinicWrapper from "./pages/ClinicWrapper.svelte";
 
     export let url = "";
 
@@ -20,8 +21,8 @@
 </script>
 
 <Router {url}>
-    <Route path="/clinic" component="{AppointmentOverview}"/>
-    <Route path="/clinic/patients" component="{PatientOverview}"/>
+    <Route path="/clinic"><ClinicWrapper component="{AppointmentOverview}"/></Route>
+    <Route path="/clinic/patients"><ClinicWrapper component="{PatientOverview}"/></Route>
     <Route path="/clinic/login" component="{Login}"/>
     <Route path="/clinic/login/complete_profile" component="{CompleteProfile}"/>
     <Route path="/clinic/*">

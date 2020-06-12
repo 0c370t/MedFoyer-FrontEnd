@@ -4,21 +4,14 @@
     import Callout from "../Callout/Callout.svelte";
     import PatientPicker from "./Controls/PatientPicker.svelte";
     import TimePicker from "../TimePicker/TimePicker.svelte";
-
+    import {phoneClean} from "../../helpers/phone_numbers";
     export let form;
     export let onSubmit;
     export let formElement;
     export let buttonText = "Submit";
     export let loading = false;
     export let validationMessage = "";
-    const phoneClean = (value) => {
-        let phone = value.replace(/\D/g, '');
-        const match = phone.match(/(\d{1,3})(\d{0,3})(\d{0,4})$/);
-        if (match) {
-            phone = `(${match[1]})${match[2] ? '-' : ''}${match[2]}${match[3] ? '-' : ''}${match[3]}`;
-        }
-        return phone
-    }
+
 
 </script>
 <form bind:this={formElement} class="uk-container uk-width-1-1">
