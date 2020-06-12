@@ -15,7 +15,7 @@ const getLoaders = (legacy_support = false) => legacy_support
                     ['@babel/preset-env', {
                         targets: "> 0.25%, not dead",
                         modules: "commonjs",
-                        debug: true,
+                        debug: !prod,
                         useBuiltIns: "usage",
                         corejs: "3.6.4",
                         include: ["@babel/plugin-transform-regenerator"]
@@ -36,7 +36,7 @@ const getLoaders = (legacy_support = false) => legacy_support
             }
         },
 
-        ]
+    ]
     : {
         loader: 'svelte-loader',
         options: {
@@ -94,7 +94,7 @@ module.exports = (input, output, legacy_support = false) => {
             new MiniCssExtractPlugin({
                 filename: 'build/[name].css'
             }),
-            new EnvironmentPlugin(["AMP_DOMAIN", "AMP_USER_POOL", "AMP_USER_POOL_CLIENT"])
+            new EnvironmentPlugin(["AMP_DOMAIN", "AMP_USER_POOL", "AMP_USER_POOL_CLIENT"]),
         ],
         devtool: prod ? false : 'source-map',
         devServer: {
