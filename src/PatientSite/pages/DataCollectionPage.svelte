@@ -1,11 +1,14 @@
 <script>
     import {getAppointment} from '../../API/appointments.API';
+
     export let id;
     import {navigate} from "svelte-routing";
-    import {appt} from '../../helpers/stores';
+    import {patient_meta} from '../../helpers/stores';
 
-    getAppointment(id).then(appointmentData => {
-        appt.set(appointmentData);
-        navigate("/appt");
+    patient_meta.set({
+        appointment: {
+            id: id
+        }
     });
+    navigate("/appt");
 </script>

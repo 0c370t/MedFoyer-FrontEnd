@@ -40,6 +40,7 @@
                 setFieldMessage(form, "phone_num", "Invalid Phone Number");
                 form = form;
             } else {
+                // TODO: Make this less likely to scare users
                 validationMessage = err.message;
             }
         }

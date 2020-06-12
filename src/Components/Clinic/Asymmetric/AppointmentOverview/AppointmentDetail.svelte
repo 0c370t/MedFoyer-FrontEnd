@@ -22,8 +22,8 @@
 <AsymmetricMain emptyMessage="Please select an appointment" hasContent={appointment}>
     <header class="uk-flex uk-flex-between uk-child-width-1-3 uk-container uk-container-expand">
         <div class="uk-flex uk-flex-left uk-flex-wrap">
-            <h2 class="uk-width-1-1">{appointment.name} @ {formatTime(appointment.appointment_time)}</h2>
-            <a href="{window.location.protocol}//{window.location.host}/appt/{appointment.id}" target="_blank"
+            <h2 class="uk-width-1-1">{appointment.patient ? appointment.patient.given_name : "Unnamed"} @ {formatTime(appointment.appointment_time)}</h2>
+            <a href="{window.location.protocol}//{window.location.host}/appt/{appointment.appointment_id}" target="_blank"
                class="uk-margin-small-right" title="This functionality is for internal testing only!">
                 <Button>Patient Link
                     <Icon options={{icon:"link"}}/>
@@ -62,7 +62,7 @@
                 </dl>
             {:else}
                 <p>
-                    {appointment.name} has not completed their COVID-19 screening yet. </p>
+                    {appointment.patient ? appointment.patient.given_name + " " + appointment.patient.last_name : "Unnamed"} has not completed their COVID-19 screening yet. </p>
             {/if}
         </div>
         <div class="uk-width-2-5 uk-section uk-section-primary uk-padding-small uk-flex uk-flex-column uk-preserve-color">
@@ -82,7 +82,7 @@
                         {#if appointment.checkin_time}
                             <dd>{formatTime(new Date(appointment.checkin_time))}</dd>
                         {:else}
-                            <dd>{appointment.name} has not checked in yet.</dd>
+                            <dd>{appointment.patient ? appointment.patient.given_name + " " + appointment.patient.last_name : "Unnamed"} has not checked in yet.</dd>
                         {/if}
                     </dl>
                 </div>

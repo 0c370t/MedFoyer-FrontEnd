@@ -5,12 +5,16 @@
     export let active = false;
 
     const at_risk = appt.covid_flag && appt.covid_flag !== "NORMAL";
-
+    console.log(appt);
 </script>
 
 <div class="uk-box-shadow-hover-medium uk-position-relative" on:click class:active class:at_risk>
     <h4 class="uk-margin-remove">
-        {appt.name}
+        {#if appt.patient}
+            {appt.patient.given_name} {appt.patient.last_name}
+            {:else}
+                Unnamed
+        {/if}
     </h4>
     <p class="uk-margin-remove">
         {formatTime(appt.appointment_time)}

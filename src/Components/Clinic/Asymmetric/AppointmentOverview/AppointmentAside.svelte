@@ -7,8 +7,10 @@
     import {formatForDisplay} from "../../../../helpers/datetime";
     import {sortByAppointmentTime, sortByCheckInTime} from "../../../../helpers/appointments";
     import AsymmetricAside from "../AsymmetricAside.svelte";
+    import Spinner from "../../../Spinner/Spinner.svelte";
 
     export let appointments = [];
+    export let loading = false;
     export let selectedAppointment = false;
     export let updateAppointments = () => {
     };
@@ -29,7 +31,7 @@
         <h2 class="uk-margin-remove uk-width-1-1" slot="header">Appointment Overview</h2>
         <span class="uk-text-meta" slot="header">{formatForDisplay(filterValues.from, true)} - {formatForDisplay(filterValues.to, true)}</span>
 
-    <AppointmentList title="Checked In" appointments={checkedInAppointments} {selectedAppointment} {selectAppointment}>
+    <AppointmentList title="Checked In" appointments={checkedInAppointments} {selectedAppointment} {selectAppointment} {loading}>
         <div slot="header">
             <button class="uk-button uk-button-default" on:click={updateAppointments}>
                 <Icon options={{icon: "refresh"}}/>
@@ -38,7 +40,11 @@
         </div>
     </AppointmentList>
 
-    <AppointmentList title="Not Checked In" appointments={notCheckedInAppointments} {selectedAppointment} {selectAppointment}/>
+    <AppointmentList title="Not Checked In" appointments={notCheckedInAppointments} {selectedAppointment} {selectAppointment} {loading}>
+        <div slot="header">
+
+        </div>
+    </AppointmentList>
 
 
 </AsymmetricAside>

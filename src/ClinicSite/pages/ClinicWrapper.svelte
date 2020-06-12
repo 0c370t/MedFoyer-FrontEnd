@@ -4,6 +4,7 @@
     import {appointmentModalData, user} from "../../helpers/clinic_stores";
     import {navigate} from "svelte-routing";
     import {onMount} from "svelte";
+    import {setFieldValue} from "../../helpers/forms/form-utils";
 
     export let component;
     export let admin_only = false;
@@ -14,8 +15,9 @@
     const openApptModal = (e) => {
         if(e.detail){
             console.log(e.detail);
-            $appointmentModalData[2].value = e.detail.patient_id
+            setFieldValue($appointmentModalData, "patient_id", e.detail.patient_id);
         }
+        console.log("BEANS");
         showAppointmentModal = true;
     };
     const openPatientModal = (e) => {

@@ -2,7 +2,13 @@ export const new_appointment = [
     {
         "label":"Patient",
         "type":"patient",
-        "name":"patient",
+        "name":"patient_id",
+        "required":true
+    },
+    {
+        "label":"Location",
+        "type":"location",
+        "name":"appointment_location",
         "required":true
     },
     {

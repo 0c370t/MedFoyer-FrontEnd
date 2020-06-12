@@ -5,6 +5,7 @@
     import PatientPicker from "./Controls/PatientPicker.svelte";
     import TimePicker from "../TimePicker/TimePicker.svelte";
     import {phoneClean} from "../../helpers/phone_numbers";
+    import LocationPicker from "./Controls/LocationPicker.svelte";
 
     export let form;
     export let onSubmit;
@@ -86,6 +87,8 @@
                        name="{question.name}" required="{question.required}"/>
             {:else if question.type === "patient"}
                 <PatientPicker bind:question/>
+            {:else if question.type === "location"}
+                <LocationPicker bind:question/>
             {/if}
             {#if question.message}
                 <Callout position="right" }>{question.message}</Callout>

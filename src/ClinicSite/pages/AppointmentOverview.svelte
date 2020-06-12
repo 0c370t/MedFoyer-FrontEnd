@@ -1,6 +1,6 @@
 <script>
     import ClinicHeader from '../../Components/Clinic/Header/ClinicHeader.svelte'
-    import AppointmentOverview from "../../Components/Clinic/Asymmetric/AppointmentOverview/AppointmentOverview.svelte";
+    import AppointmentOverview from "../../Components/Clinic/Asymmetric/AppointmentOverview/AppointmentDetail.svelte";
     import {onMount, setContext} from 'svelte';
     import {appt} from '../../helpers/stores';
 
@@ -13,7 +13,6 @@
 
     const client = getClient();
 
-    let graph_appointments = query(client, {query: GET_APPOINTMENT_OVERVIEW});
     let appointments = [];
     let selectedAppointment = false;
     let defaultFrom = new Date();
@@ -26,25 +25,27 @@
         from: defaultFrom,
         to: defaultTo,
     };
-    $: if (filterValues) console.log(filterValues);
-
-    const updateAppointments = () => {
-        /*getAppointments().then(result => {
-            appointments = result;
-            appointments.forEach(a => {
-                // Ensure dates are dates
-                if (!(a.appointment_time instanceof Date)) {
-                    a.appointment_time = new Date(a.appointment_time);
-                }
-            });
-
-            if (!selectedAppointment || !appointments.filter(a => a.id === selectedAppointment.id)) {
-                selectedAppointment = false;
-            } else {
-                selectedAppointment = appointments.filter(a => a.id === selectedAppointment.id)[0];
+    let result__ = query(client, {query: GET_APPOINTMENT_OVERVIEW});
+    $result__.then(r => {
+        loading = false;
+        appointments = r.data.listAppointments;
+        return r;
+    });
+    const updateAppointments = async () => {
+        loading = true;
+        await result__.refetch();
+        appointments.forEach(a => {
+            // Ensure dates are dates
+            if (!(a.appointment_time instanceof Date)) {
+                a.appointment_time = new Date(a.appointment_time);
             }
-            applyFilters();
-        });*/
+        });
+        if (!selectedAppointment || !appointments.filter(a => a.id === selectedAppointment.id)) {
+            selectedAppointment = false;
+        } else {
+            selectedAppointment = appointments.filter(a => a.id === selectedAppointment.id)[0];
+        }
+        applyFilters();
     };
     setContext("updateAppointments", updateAppointments);
 
@@ -55,17 +56,16 @@
 
     const applyFilters = () => {
         appointments = appointments.filter(getFilterFunction(filterValues));
+        loading = false;
     };
 
     onMount(updateAppointments);
     onMount(() => appt.set({}));
-    onMount(async () => {
-        let x = await $graph_appointments;
-    });
+    let loading = true;
 </script>
 
 <AsymmetricLayout>
     <ClinicHeader on:updateappts={updateAppointments} on:create-appointment on:create-patient/>
-    <AppointmentAside {appointments} bind:selectedAppointment {updateAppointments} {filterValues} on:filter={updateFilters}/>
+    <AppointmentAside {appointments} bind:selectedAppointment {updateAppointments} {filterValues} on:filter={updateFilters} {loading}/>
     <AppointmentOverview appointment="{selectedAppointment}" {updateAppointments}/>
 </AsymmetricLayout>
