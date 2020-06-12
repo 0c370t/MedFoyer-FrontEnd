@@ -16,7 +16,7 @@
         grid-template-columns: 1fr 60% 1fr;
         grid-template-areas:
                 "header header header"
-                ".      body   .";
+                ".      center .";
         position:relative;
         background-color: $primary-color;
     }

@@ -8,23 +8,22 @@
 
     export let form;
     export let onSubmit;
-    export let formElement;
+    export let formElement = null;
     export let buttonText = "Submit";
     export let loading = false;
     export let validationMessage = "";
-
+    export let _class = "";
+    export let fullwidth = true;
 
 </script>
-<form bind:this={formElement} class="uk-container uk-width-1-1">
-    {#each form as question}
+<form bind:this={formElement} class={"uk-container uk-width-1-1 " + _class}>
+    {#each form as question (question.name)}
         <div class="field {question.type} uk-position-relative">
             {#if question.type === "boolean"}
                 <label for="{question.name}">{question.label} </label>
                 <input name="{question.name}" type="checkbox" class="uk-checkbox input {question.type}"
                        bind:checked={question.value} required={question.required}/>
-            {/if}
-
-            {#if question.type === "radio"}
+            {:else if question.type === "radio"}
                 <label>{question.label}</label>
                 <div class="radioContainer">
                     {#each question.options as option}
@@ -97,7 +96,7 @@
         <label class="labelfield uk-label-danger">
             <strong>{validationMessage}</strong>
         </label>
-        <Button fullwidth={true} {loading} on:click={onSubmit}>{buttonText}</Button>
+        <Button {fullwidth} {loading} on:click={onSubmit}>{buttonText}</Button>
     </div>
 </form>
 <style lang="scss">

@@ -55,7 +55,7 @@
     <div class="uk-flex uk-flex-center uk-text-center">
         <span class="uk-flex uk-flex-column uk-flex-1 uk-flex-middle">
                 <label class="uk-form-label">Hour</label>
-                <select class="uk-select uk-form-width-xsmall uk-form-blank" bind:value={hour} on:change={setHour}>
+                <select class="uk-select uk-form-width-xsmall uk-form-blank" bind:value={hour} on:blur={setHour}>
                     {#each hours as hour}
                         <option value="{hour}">{hour}</option>
                     {/each}
@@ -64,7 +64,7 @@
         <span class="uk-flex uk-flex-column uk-flex-1 uk-flex-middle">
             <label class="uk-form-label">Minute</label>
             <select class="uk-select uk-form-width-xsmall uk-form-blank uk-flex-1" bind:value={minute}
-                    on:change={setMinute}>
+                    on:blur={setMinute}>
                 {#each minutes as minute}
                     <option value="{minute}">{minute}</option>
                 {/each}

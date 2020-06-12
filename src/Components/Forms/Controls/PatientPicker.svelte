@@ -23,7 +23,6 @@
         {#each result.data.listPatients as patient}
             <option value="{patient.patient_id}">{patient.last_name}, {patient.given_name}</option>
         {/each}
-    {:catch error}
     {/await}
 </select>
 

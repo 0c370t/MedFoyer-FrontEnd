@@ -1,5 +1,3 @@
-import state_options from "../mapping/state_options";
-
 export const new_appointment = [
     {
         "label":"Patient",
@@ -14,30 +12,5 @@ export const new_appointment = [
         "required": true,
         "start": new Date(),
         "value": new Date(),
-    },
-    {
-        "label":"Street Address",
-        "type":"text",
-        "name":"address_1",
-        "required": true
-    },
-    {
-        "label":"City",
-        "type":"text",
-        "name":"city",
-        "required": true
-    },
-    {
-        "label":"State",
-        "type":"dropdown",
-        "name":"state",
-        "required":true,
-        "options":state_options
-    },
-    {
-        "label":"Zip Code",
-        "type":"number",
-        "name":"zip",
-        "required":true
     }
 ];

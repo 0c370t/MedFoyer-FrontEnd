@@ -32,14 +32,14 @@
         <label for="from-time" class="uk-form-label uk-display-block">From:</label>
         <div class="uk-flex uk-flex-column">
             <DatePicker bind:value={internalValues['from']} required={true} fullwidth={true}
-                        end={internalValues.to}/>
-            <TimePicker bind:value={internalValues['from']} fullwidth={true}/>
+                        end={internalValues.to} _class="uk-margin-small"/>
+            <TimePicker bind:value={internalValues['from']} fullwidth={true} step="5" _class="uk-margin-small"/>
         </div>
         <label for="to-time" class="uk-form-label uk-display-block">To:</label>
         <div class="uk-flex uk-flex-column">
             <DatePicker bind:value={internalValues.to} required={true} fullwidth={true}
-                        start={internalValues['from']}/>
-            <TimePicker bind:value={internalValues.to} fullwidth={true}/>
+                        start={internalValues['from']} _class="uk-margin-small"/>
+            <TimePicker bind:value={internalValues.to} fullwidth={true} step="5" _class="uk-margin-small"/>
         </div>
     </div>
     <div class="uk-inline uk-margin-small-top">

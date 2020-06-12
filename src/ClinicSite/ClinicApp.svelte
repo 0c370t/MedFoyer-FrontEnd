@@ -9,7 +9,7 @@
     import {CheckSession} from "../helpers/auth/ClinicAuthentication";
     import Redirect from "../Components/Routing/Redirect.svelte";
     import ClinicWrapper from "./pages/ClinicWrapper.svelte";
-
+    import AdminOverview from "./pages/AdminOverview.svelte";
     export let url = "";
 
     const client = createClient();
@@ -23,6 +23,7 @@
 <Router {url}>
     <Route path="/clinic"><ClinicWrapper component="{AppointmentOverview}"/></Route>
     <Route path="/clinic/patients"><ClinicWrapper component="{PatientOverview}"/></Route>
+    <Route path="/clinic/admin"><ClinicWrapper admin_only="{true}" component="{AdminOverview}"/></Route>
     <Route path="/clinic/login" component="{Login}"/>
     <Route path="/clinic/login/complete_profile" component="{CompleteProfile}"/>
     <Route path="/clinic/*">

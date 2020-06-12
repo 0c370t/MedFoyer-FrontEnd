@@ -65,7 +65,7 @@
 </script>
 
 <AsymmetricLayout>
-    <ClinicHeader on:updateappts={updateAppointments}/>
+    <ClinicHeader on:updateappts={updateAppointments} on:create-appointment on:create-patient/>
     <AppointmentAside {appointments} bind:selectedAppointment {updateAppointments} {filterValues} on:filter={updateFilters}/>
     <AppointmentOverview appointment="{selectedAppointment}" {updateAppointments}/>
 </AsymmetricLayout>

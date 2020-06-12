@@ -1,8 +1,9 @@
 <script>
     import PatientTable from './PatientTable.svelte';
+    import CenterColumn from "../CenterColumn.svelte";
 </script>
 
-<main class="container uk-section">
+<CenterColumn>
     <header class="uk-container uk-container-medium">
         <h2>Patient Overview</h2>
     </header>
@@ -11,11 +12,4 @@
         <hr/>
         <PatientTable on:create-appointment/>
     </section>
-</main>
-
-<style>
-    .container {
-        background-color: white;
-        grid-area: body;
-    }
-</style>
+</CenterColumn>

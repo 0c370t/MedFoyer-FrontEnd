@@ -1,13 +1,8 @@
 <script>
     import Logo from "../../../svg/Logo.svelte";
-    import Auth from '@aws-amplify/auth';
+    import {user} from "../../../helpers/clinic_stores";
     import ClinicMasterMenu from "./ClinicMasterMenu.svelte";
-    import {onMount} from "svelte";
 
-    onMount(async () => {
-        user = await Auth.currentUserInfo();
-    });
-    let user = {};
 </script>
 
 <header class="uk-padding-small" id="master-header">
@@ -19,7 +14,7 @@
     </div>
     <div class="right uk-flex">
         <p class="uk-button uk-button-default uk-disabled uk-margin-small-right">
-            Welcome, {user.username || ""}
+            Welcome, {$user.username || ""}
         </p>
         <ClinicMasterMenu on:updateappts on:create-appointment on:create-patient/>
     </div>
