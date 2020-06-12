@@ -8,8 +8,6 @@
         user = await Auth.currentUserInfo();
     });
     let user = {};
-
-    export let updateAppointments;
 </script>
 
 <header class="uk-padding-small" id="master-header">
@@ -23,13 +21,14 @@
         <p class="uk-button uk-button-default uk-disabled uk-margin-small-right">
             Welcome, {user.username || ""}
         </p>
-        <ClinicMasterMenu/>
+        <ClinicMasterMenu on:updateappts/>
     </div>
 </header>
 
 
 <style lang="scss">
     header {
+        background-color:white;
         grid-area: header;
         display: flex;
         align-items: center;

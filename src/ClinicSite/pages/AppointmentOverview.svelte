@@ -1,10 +1,10 @@
 <script>
     import ClinicHeader from '../../Components/Clinic/Header/ClinicHeader.svelte'
-    import AppointmentOverview from "../../Components/Clinic/Asymmetric/Appointment/AppointmentOverview.svelte";
+    import AppointmentOverview from "../../Components/Clinic/Asymmetric/AppointmentOverview/AppointmentOverview.svelte";
     import {onMount, setContext} from 'svelte';
     import {appt} from '../../helpers/stores';
 
-    import AppointmentAside from "../../Components/Clinic/Asymmetric/Appointment/AppointmentAside.svelte";
+    import AppointmentAside from "../../Components/Clinic/Asymmetric/AppointmentOverview/AppointmentAside.svelte";
     import {getFilterFunction} from "../../helpers/appointments";
 
     import {getClient, query} from 'svelte-apollo';
@@ -65,7 +65,7 @@
 </script>
 
 <AsymmetricLayout>
-    <ClinicHeader {updateAppointments}/>
+    <ClinicHeader on:updateappts={updateAppointments}/>
     <AppointmentAside {appointments} bind:selectedAppointment {updateAppointments} {filterValues} on:filter={updateFilters}/>
     <AppointmentOverview appointment="{selectedAppointment}" {updateAppointments}/>
 </AsymmetricLayout>

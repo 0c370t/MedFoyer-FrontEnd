@@ -12,9 +12,9 @@
     });
 
     $: {
-        if(open && modalElement){
+        if(open && modalElement && !Uikit.modal(modalElement).isToggled()){
             Uikit.modal(modalElement).show();
-        } else if (!open && modalElement){
+        } else if (!open && modalElement && Uikit.modal(modalElement).isToggled()){
             Uikit.modal(modalElement).hide();
         }
     }

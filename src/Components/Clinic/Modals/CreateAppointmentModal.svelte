@@ -45,7 +45,7 @@
 </script>
 
 
-<Modal bind:open={shown} id="apptCreateModal">
+<Modal bind:open={shown} id="apptCreateModal" on:beforeshow on:show on:shown on:beforehide on:hide on:hidden>
     <h3 slot="header">Add Appointment</h3>
     {#if shown}
     <Form form="{apptForm}" onSubmit="{submit}" loading="{formLoading}" bind:formElement

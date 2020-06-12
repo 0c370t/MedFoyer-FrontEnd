@@ -6,7 +6,7 @@
     import {navigate} from "svelte-routing";
     import Spinner from "../../Spinner/Spinner.svelte";
     import CreatePatientModel from "../Modals/CreatePatientModel.svelte";
-    import {onMount} from "svelte";
+    import {createEventDispatcher, onMount} from "svelte";
 
     let showAppointmentModal = false;
     let showPatientModal = false;
@@ -23,7 +23,6 @@
         } catch (e) {
             console.log(e);
         }
-
         loading = false;
     }
 
@@ -33,14 +32,18 @@
         if(groups.includes("medfoyer-admins")){
             user.admin = true;
         }
-    })
+    });
 
+    const dispatch = createEventDispatcher();
+    const updateAppts = () => {
+        dispatch("updateappts");
+    }
 </script>
 <Spinner show={loading}/>
 <CreatePatientModel bind:shown={showPatientModal}/>
-<CreateAppointmentModal bind:shown={showAppointmentModal}/>
+<CreateAppointmentModal bind:shown={showAppointmentModal} on:hide={updateAppts}/>
 
-<Drop mode="hover" pos="bottom-right" boundary="#master-header" animation="uk-animation-slide-top-small" bind:hide _class="uk-background-secondary uk-light">
+<Drop mode="hover" pos="bottom-right" boundary="#master-header" animation="uk-animation-slide-top-small" bind:hide _class="uk-background-secondary uk-light" padsize="small">
     <span slot="button" class="uk-flex uk-flex-middle uk-flex-around">
         <span class="uk-margin-small-right">Menu</span>
         <Icon icon="chevron-down"/>
@@ -54,9 +57,21 @@
             </button>
         </li>
         <li class="uk-margin-small">
+            <button class="uk-button uk-button-text" on:click={() => navigate("/clinic/patients")}>
+                <Icon icon="users"/>
+                <span>Manage Patients</span>
+            </button>
+        </li>
+        <li class="uk-margin-small">
             <button class="uk-button uk-button-text" on:click={() => {showAppointmentModal = true; hide()}}>
                 <Icon icon="calendar"/>
                 <span>Create an Appointment</span>
+            </button>
+        </li>
+        <li class="uk-margin-small">
+            <button class="uk-button uk-button-text" on:click={() => navigate("/clinic")}>
+                <Icon icon="users"/>
+                <span>Manage Appointments</span>
             </button>
         </li>
         <li class="uk-nav-divider uk-margin-small"></li>
