@@ -11,8 +11,6 @@
 
     let navElement;
 
-    let showAppointmentModal = false;
-    let showPatientModal = false;
     let loading = false;
     let hide = () => {};
     let user = {
@@ -27,7 +25,7 @@
             console.log(e);
         }
         loading = false;
-    }
+    };
 
     onMount(async()=>{
         let tempuser = await Auth.currentAuthenticatedUser();
@@ -39,13 +37,9 @@
     });
 
     const dispatch = createEventDispatcher();
-    const updateAppts = () => {
-        dispatch("updateappts");
-    }
+
 </script>
 <Spinner show={loading}/>
-<CreatePatientModel bind:shown={showPatientModal}/>
-<CreateAppointmentModal bind:shown={showAppointmentModal} on:hide={updateAppts}/>
 
 <Drop mode="hover" pos="bottom-right" boundary="#master-header" animation="uk-animation-slide-top-small" bind:hide _class="uk-background-secondary uk-light" padsize="small">
     <span slot="button" class="uk-flex uk-flex-middle uk-flex-around">
@@ -57,7 +51,7 @@
             <a class="uk-button uk-button-default uk-button-small uk-text-left uk-margin-small-bottom"><Icon icon="users" _class="uk-margin-small-left"/> Patients</a>
             <ul>
                 <li class="uk-margin-small">
-                    <button class="uk-button uk-button-default uk-button-small uk-text-left" on:click={() => {showPatientModal = true; hide()}}>
+                    <button class="uk-button uk-button-default uk-button-small uk-text-left" on:click={() => dispatch("create-patient")}>
                         <Icon icon="user"/>
                         <span>Create a Patient</span>
                     </button>
@@ -75,7 +69,7 @@
             <a class="uk-button uk-button-default uk-button-small uk-text-left uk-margin-small-bottom"><Icon icon="calendar" _class="uk-margin-small-left"/> Appointments</a>
             <ul>
                 <li class="uk-margin-small">
-                    <button class="uk-button uk-button-default uk-button-small" on:click={() => {showAppointmentModal = true; hide()}}>
+                    <button class="uk-button uk-button-default uk-button-small" on:click={() => dispatch("create-appointment")}>
                         <Icon icon="calendar"/>
                         <span>Create Appointment</span>
                     </button>

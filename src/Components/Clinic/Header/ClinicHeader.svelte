@@ -21,7 +21,7 @@
         <p class="uk-button uk-button-default uk-disabled uk-margin-small-right">
             Welcome, {user.username || ""}
         </p>
-        <ClinicMasterMenu on:updateappts/>
+        <ClinicMasterMenu on:updateappts on:create-appointment on:create-patient/>
     </div>
 </header>
 

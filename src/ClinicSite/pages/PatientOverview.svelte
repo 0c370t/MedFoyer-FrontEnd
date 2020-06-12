@@ -3,13 +3,10 @@
     import ClinicHeader from "../../Components/Clinic/Header/ClinicHeader.svelte";
     import PatientColumn from "../../Components/Clinic/SingleColumn/PatientOverview/PatientColumn.svelte";
 
-    function do_things(e){
-
-    }
 </script>
 
 
 <SingleColumnLayout>
-    <ClinicHeader/>
-    <PatientColumn on:create-appointment={do_things}/>
+    <ClinicHeader on:create-appointment on:create-patient/>
+    <PatientColumn on:create-appointment/>
 </SingleColumnLayout>

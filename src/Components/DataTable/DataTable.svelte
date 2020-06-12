@@ -15,6 +15,7 @@
     import SortableHeader from "./SortableHeader.svelte";
     import FilterCell from "./FilterCell.svelte";
     import Spinner from "../Spinner/Spinner.svelte";
+    import Button from "../Button/Button.svelte";
     import {fade, fly} from 'svelte/transition';
     import {flip} from 'svelte/animate';
     import better_flip from '../../helpers/animate/better_flip';
@@ -144,8 +145,10 @@
                         <div class="placeholder"></div>
                     </td>
                 {/each}
-                <td>
-                    Buttons go here
+                <td class="uk-flex uk-flex-around">
+                    <Button><Icon icon="refresh"/></Button>
+                    <Button><Icon icon="pencil"/></Button>
+                    <Button><Icon icon="trash"/></Button>
                 </td>
             </tr>
         {/each}

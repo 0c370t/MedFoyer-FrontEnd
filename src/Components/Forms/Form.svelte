@@ -5,6 +5,7 @@
     import PatientPicker from "./Controls/PatientPicker.svelte";
     import TimePicker from "../TimePicker/TimePicker.svelte";
     import {phoneClean} from "../../helpers/phone_numbers";
+
     export let form;
     export let onSubmit;
     export let formElement;
@@ -34,72 +35,59 @@
                             </span>
                     {/each}
                 </div>
-            {/if}
-
-            {#if question.type === "dropdown"}
+            {:else if question.type === "dropdown"}
                 <label>{question.label}</label>
                 <select class="uk-select input {question.type}">
                     {#each question.options as option}
                         <option value="{option.value}">{option.label}</option>
                     {/each}
                 </select>
-            {/if}
-            {#if question.type === "label"}
+            {:else if question.type === "label"}
                 <label class="labelfield">
                     <strong>{question.label}</strong>
                     <hr/>
                 </label>
-            {/if}
-            {#if question.type === "text"}
+            {:else if question.type === "text"}
                 <label for="{question.name}">{question.label} </label>
                 <input type="text" class="uk-input field {question.type}" bind:value={question.value}
                        name="{question.name}" required="{question.required}"/>
-            {/if}
-            {#if question.type === "number"}
+            {:else if question.type === "number"}
+
                 <label for="{question.name}">{question.label} </label>
                 <input type="number" class="uk-input field {question.type}" bind:value={question.value} step="any"
                        name="{question.name}" required="{question.required}"/>
-            {/if}
-            {#if question.type === "datetime"}
+            {:else if question.type === "datetime"}
                 <label for="{question.name}">{question.label} </label>
                 <div class="{question.type} uk-flex uk-flex-column uk-flex-1">
                     <TimePicker fullwidth={true} bind:value={question.value}/>
-                    <DatePicker fullwidth={true} flex="{true}" bind:value={question.value}/>
+                    <DatePicker fullwidth={true} flex="{true}" start="{question.start || new Date(1970,1,1)}" bind:value={question.value}/>
                 </div>
-            {/if}
-            {#if question.type === "date"}
+            {:else if question.type === "date"}
                 <label for="{question.name}">{question.label}</label>
                 <input type="date" class="uk-input field {question.type}" bind:value={question.value}
                        name="{question.name}" required="{question.required}"/>
-            {/if}
-            {#if question.type ==="datepicker"}
+            {:else if question.type === "datepicker"}
                 <label for="{question.name}">{question.label} </label>
                 <div class="{question.type} uk-flex uk-flex-column">
                     <DatePicker fullwidth={false} flex="{true}" bind:value={question.value}/>
                 </div>
-            {/if}
-            {#if question.type === "time"}
+            {:else if question.type === "time"}
                 <label for="{question.name}">{question.label} </label>
                 <input type="time" class="uk-input field {question.type}" bind:value={question.value}
                        name="{question.name}" required="{question.required}"/>
-            {/if}
-            {#if question.type === "phone"}
+            {:else if question.type === "phone"}
                 <label for="{question.name}">{question.label} </label>
                 <input type="tel" pattern={`\\(?[0-9]{3}\\)?-?[0-9]{3}-?[0-9]{4}`} placeholder="(000)-000-0000"
                        class="uk-input field {question.type}" bind:value={question.value}
                        on:change={() => question.value = phoneClean(question.value)} name="{question.name}"
                        required="{question.required}"/>
-            {/if}
-            {#if question.type === "email"}
+            {:else if question.type === "email"}
                 <label for="{question.name}">{question.label} </label>
                 <input type="email" class="uk-input field {question.type}" bind:value={question.value}
                        name="{question.name}" required="{question.required}"/>
-            {/if}
-            {#if question.type === "patient"}
+            {:else if question.type === "patient"}
                 <PatientPicker bind:question/>
             {/if}
-
-
             {#if question.message}
                 <Callout position="right" }>{question.message}</Callout>
             {/if}

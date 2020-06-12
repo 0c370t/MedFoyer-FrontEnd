@@ -11,7 +11,9 @@ export const new_appointment = [
         "label":"Appointment Time",
         "type":"datetime",
         "name":"appointment_time",
-        "required": true
+        "required": true,
+        "start": new Date(),
+        "value": new Date(),
     },
     {
         "label":"Street Address",

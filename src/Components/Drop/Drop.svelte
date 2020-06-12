@@ -55,6 +55,7 @@
 
     <div bind:this={wrapperElement} class={`uk-card uk-card-default uk-padding${padsize} ${_class}`} on:toggle on:beforeshow
          on:show on:shown on:beforehide on:hide on:hidden on:stack>
+
         <slot/>
     </div>
 </div>
