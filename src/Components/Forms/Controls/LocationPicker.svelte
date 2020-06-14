@@ -14,13 +14,16 @@
 </script>
 
 <label for="{question.name}">{question.label} </label>
-<select name="{question.name}" class="uk-select input {question.type} uk-flex-1" bind:value={question.value}>
+<select name="{question.name}" class="uk-select input {question.type} uk-flex-1" bind:value={question.value} required="{question.required}">
     {#await $locations}
-        <option>Loading...</option>
+        <option value="">Loading...</option>
     {:then result}
+        <option value=""></option>
         {#each result.data.getClinicLocations as location}
             <option value="{location.clinic_location_id}">{location.clinic_location_name}</option>
         {/each}
+    {:catch}
+        <option value="">An error has occured.</option>
     {/await}
 </select>
 

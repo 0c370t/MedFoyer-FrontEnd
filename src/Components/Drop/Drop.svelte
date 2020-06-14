@@ -59,3 +59,8 @@
         <slot/>
     </div>
 </div>
+<style>
+    .uk-card{
+        max-width:unset;
+    }
+</style>

@@ -21,14 +21,14 @@ export const severe_symptoms = [
     },
     {
         "label": "Check all symptoms that apply",
-        "type": "label"
+        "type": "label",
+        "name": "check_all_that_apply_1"
     },
     {
         "label": "Severe difficulty breathing",
         "name": "severe_breathing",
         "type": "boolean",
         "value": false,
-        "comment": "Severe symptoms (call 911!)",
         "required": false
     },
     {
@@ -36,7 +36,6 @@ export const severe_symptoms = [
         "name": "severe_chest",
         "type": "boolean",
         "value": false,
-        "comment": "Severe symptoms (call 911!)",
         "required": false
     },
     {
@@ -44,7 +43,6 @@ export const severe_symptoms = [
         "name": "patient_is_confused",
         "type": "boolean",
         "value": false,
-        "comment": "Severe symptoms (call 911!)",
         "required": false
     },
     {
@@ -52,7 +50,6 @@ export const severe_symptoms = [
         "name": "blue_lips",
         "type": "boolean",
         "value": false,
-        "comment": "Severe symptoms (call 911!)",
         "required": false
     }
 ];
@@ -60,14 +57,14 @@ export const severe_symptoms = [
 export const other_symptoms = [
     {
         "label": "Check all symptoms that apply",
-        "type": "label"
+        "type": "label",
+        "name": "check_all_that_apply_2"
     },
     {
         "label": "Fever",
         "name": "fever",
         "type": "boolean",
         "value": false,
-        "comment": "Less severe symptoms (sucks to be you!)",
         "required": false
     },
     {
@@ -75,7 +72,6 @@ export const other_symptoms = [
         "name": "new_cough",
         "type": "boolean",
         "value": false,
-        "comment": "Less severe symptoms (sucks to be you!)",
         "required": false
     },
     {
@@ -83,7 +79,6 @@ export const other_symptoms = [
         "name": "sore_throat",
         "type": "boolean",
         "value": false,
-        "comment": "Less severe symptoms (sucks to be you!)",
         "required": false
     },
     {
@@ -91,7 +86,6 @@ export const other_symptoms = [
         "name": "difficult_breathing",
         "type": "boolean",
         "value": false,
-        "comment": "Less severe symptoms (sucks to be you!)",
         "required": false
     },
     {
@@ -99,7 +93,6 @@ export const other_symptoms = [
         "name": "chills",
         "type": "boolean",
         "value": false,
-        "comment": "Less severe symptoms (sucks to be you!)",
         "required": false
     },
     {
@@ -107,7 +100,6 @@ export const other_symptoms = [
         "name": "body_aches",
         "type": "boolean",
         "value": false,
-        "comment": "Less severe symptoms (sucks to be you!)",
         "required": false
     },
     {
@@ -115,7 +107,6 @@ export const other_symptoms = [
         "name": "head_aches",
         "type": "boolean",
         "value": false,
-        "comment": "Less severe symptoms (sucks to be you!)",
         "required": false
     },
     {
@@ -123,12 +114,12 @@ export const other_symptoms = [
         "name": "cannot_smell",
         "type": "boolean",
         "value": false,
-        "comment": "Less severe symptoms (sucks to be you!)",
         "required": false
     },
     {
         "label": "Please answer a few additional questions",
-        "type": "label"
+        "type": "label",
+        "name":"additional"
     },
     {
         "label": "Have you or any of your close contacts been exposed to anyone diagnosed with COVID-19?",
@@ -159,7 +150,7 @@ export const other_symptoms = [
     },
     {
         "label": "Have you or any of your close contacts with traveled outside of the United States in the last 14 days?",
-        "name": "left_murica",
+        "name": "left_the_country",
         "value": "",
         "type": "radio",
         "options": [

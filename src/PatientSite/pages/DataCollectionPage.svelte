@@ -1,14 +1,19 @@
 <script>
-    import {getAppointment} from '../../API/appointments.API';
-
     export let id;
     import {navigate} from "svelte-routing";
     import {patient_meta} from '../../helpers/stores';
 
-    patient_meta.set({
-        appointment: {
-            id: id
-        }
-    });
-    navigate("/appt");
+    if (id) {
+        patient_meta.set({
+            token: {
+                id: id
+            },
+            state:"TOS"
+        });
+
+    } else {
+        patient_meta.set({});
+    }
+    window.location.href = "/patient/appt";
+
 </script>

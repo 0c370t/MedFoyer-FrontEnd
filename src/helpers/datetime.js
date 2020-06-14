@@ -89,6 +89,17 @@ export const formatForDisplay = (dateString, includeTime = false) => {
 
 export const toAWSDate = (date) => {
     if(!date instanceof Date) return "";
-    let output = `${date.getFullYear()}-${padMinutes(date.getMonth())}-${date.getDate()}`;
+    let output = `${date.getFullYear()}-${padMinutes(date.getMonth()+1)}-${padMinutes(date.getDate()+1)}`;
     return output;
+};
+
+export const isToday = (d1) => sameDay(d1, new Date());
+
+export const sameDay = (d1, d2) => {
+    if(!(d1 instanceof Date) || !(d2 instanceof Date)) return false;
+    return (
+        d1.getDate() === d2.getDate() &&
+        d1.getMonth() === d2.getMonth() &&
+        d1.getFullYear() === d2.getFullYear()
+    )
 }

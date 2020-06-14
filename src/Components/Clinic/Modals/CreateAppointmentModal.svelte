@@ -1,8 +1,6 @@
 <script>
-    import {lookupAddress} from "../../../API/mapbox.API";
-
     export let shown = false;
-    import {getContext} from "svelte";
+    import {createEventDispatcher, getContext} from "svelte";
     import Modal from "../../Modal/Modal.svelte";
     import Form from "../../Forms/Form.svelte";
     import {CREATE_NEW_APPOINTMENT} from "../../../API/queries/appointments.GQL";
@@ -11,8 +9,7 @@
     import {cloneForm, getFieldValue} from "../../../helpers/forms/form-utils";
     import {getClient, mutate} from "svelte-apollo";
     const client = getClient();
-    const updateAppointments = getContext("updateAppointments");
-
+    const dispatch = createEventDispatcher();
     const submit = async () => {
         formLoading = true;
         validationMessage = "";
@@ -35,6 +32,7 @@
                 }
             });
             apptForm = cloneForm(new_appointment);
+            dispatch("updateappts");
             shown = false;
         } catch(e){
             // TODO: Make this less likely to scare users

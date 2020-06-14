@@ -4,7 +4,7 @@
 }
 h1,h2,h3,h4,h5,h6{
     font-weight: 400;
-    color: #396481;
+    color: #002149;
 }
 a{
     text-decoration:none;
@@ -42,4 +42,8 @@ a:hover{
     100% {
         transform: translateX(10px);
     }
+}
+
+.uk-notification {
+    z-index: 1000000;
 }

@@ -1,11 +1,11 @@
 <script>
     import {slide, fade} from 'svelte/transition';
-    import {Link} from 'svelte-routing';
+    import {Link, navigate} from 'svelte-routing';
     import Button from "../../Components/Button/Button.svelte";
     import AnimatedLogo from "../../svg/AnimatedLogo.svelte";
     import Mount from "../../Components/Abstract/Mount.svelte";
     import Icon from "../../Components/Icon/Icon.svelte";
-    import {appt} from '../../helpers/stores';
+    import {patient_meta} from '../../helpers/stores';
 
     const headerFade = {
         duration: 500,
@@ -15,7 +15,11 @@
         duration: 500,
         delay: 2000,
     };
-    let appointmentExists = Object.keys($appt).length > 0;
+    let appointmentExists = Object.keys($patient_meta).length > 0;
+    const advance = () => {
+        $patient_meta.state = "VERIFICATION";
+        navigate("/patient/auth");
+    }
 </script>
 
 <Mount>
@@ -32,13 +36,11 @@
                 <hr class="uk-divider-icon uk-margin-small"/>
                 <div>
 
-                    <Link to="/auth">
-                        <Button>
+                        <Button on:click={advance}>
                     <span class="uk-text-large">
                         Tap to get started <Icon options="{{icon:'sign-in',ratio:2}}"/>
                             </span>
                         </Button>
-                    </Link>
 
                 </div>
             </main>

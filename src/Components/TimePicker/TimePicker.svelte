@@ -4,12 +4,13 @@
     import Button from "../Button/Button.svelte";
     import {padMinutes} from "../../helpers/datetime";
     import {cancelEvent} from "../../helpers/events";
+    import {onMount} from "svelte";
 
     export let value = new Date();
     export let step = 1;
     export let _class = "";
     export let fullwidth = false;
-
+    value.setMinutes(value.getMinutes() - (value.getMinutes() % step));
     let hours = [...Array(12).keys()].map(h => h + 1);
     let minutes = [...Array(60 / step).keys()].map(m => padMinutes(m * step));
     $: if (value) {

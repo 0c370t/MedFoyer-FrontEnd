@@ -1,13 +1,12 @@
 <script>
 
     import {severe_symptoms, other_symptoms} from '../../helpers/forms/default-covid-screen';
-    import {appt} from '../../helpers/stores';
-
-    import Logo from "../../svg/Logo.svelte";
+    import {patient_meta} from '../../helpers/stores';
     import Form from "../../Components/Forms/Form.svelte";
-    import {postScreeningResult} from "../../API/appointments.API";
+
     import {navigate} from "svelte-routing";
     import MobileHeader from "../../Components/Layout/MobileHeader.svelte";
+    import {postScreeningResult} from "../../API/patient.API";
 
     let formIndex = 0;
     let finalFormObject = [];
@@ -23,15 +22,14 @@
         }
     }, {
         questions: other_symptoms,
-        handler: function () {
+        handler: async function () {
             let obj = forms[formIndex];
             if (currentFormElement.reportValidity()) {
                 finalFormObject = [...finalFormObject, ...obj.questions];
 
-                postScreeningResult($appt.id, {form: JSON.stringify(finalFormObject)}).then((newAppt) => {
-                    appt.set(newAppt);
-                    navigate("/waitlist");
-                });
+                let result = await postScreeningResult(finalFormObject, $patient_meta.jwt);
+                $patient_meta.state = "CHECKED_IN";
+                navigate("/patient/waitlist");
                 formIndex = 2;
             }
         }

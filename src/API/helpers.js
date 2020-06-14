@@ -1,7 +1,7 @@
 export function getHost(){
-    if(window.location.host.includes("dev") || window.location.host.includes("localhost") || window.location.host.includes("192.168")) {
-        return "https://api.dev.medfoyer.com/"
+    if(window.location.host.includes("dev") || window.location.host.includes("local") || window.location.host.includes("192.168")) {
+        return "https://api.medfoyer.com/sandbox"
     } else {
-        return "https://api.medfoyer.com/"
+        return "https://api.medfoyer.com/prod"
     }
 }

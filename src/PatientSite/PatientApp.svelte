@@ -1,4 +1,6 @@
 <script>
+    import PatientWrapper from "./pages/PatientWrapper.svelte";
+
     export let url = "";
 
     import {Router, Route} from "svelte-routing";
@@ -9,16 +11,14 @@
     import AuthenticationPage from './pages/AuthenticationPage.svelte';
     import FormPage from './pages/FormPage.svelte';
     import Waitlist from './pages/Waitlist.svelte';
-
-
 </script>
 
 <Router {url}>
-    <Route path="/patient/*" component="{LandingPage}"/>
-    <Route path="/patient/appt/:id" component="{DataCollectionPage}"/>
-    <Route path="/patient/appt" component="{LandingPage}"/>
-    <Route path="/patient/auth" component="{AuthenticationPage}"/>
-    <Route path="/patient/map" component="{LocationPage}"/>
-    <Route path="/patient/screening" component="{FormPage}"/>
-    <Route path="/patient/waitlist" component="{Waitlist}"/>
+    <Route path="/patient/*"><PatientWrapper component={LandingPage}/></Route>
+    <Route path="/patient/appt/:id" component={DataCollectionPage}/>
+    <Route path="/patient/appt"><PatientWrapper component={LandingPage}/></Route>
+    <Route path="/patient/auth"><PatientWrapper component={AuthenticationPage}/></Route>
+    <Route path="/patient/map"><PatientWrapper component={LocationPage}/></Route>
+    <Route path="/patient/screening"><PatientWrapper component={FormPage}/></Route>
+    <Route path="/patient/waitlist"><PatientWrapper component={Waitlist}/></Route>
 </Router>

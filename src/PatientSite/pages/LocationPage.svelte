@@ -7,24 +7,17 @@
     import Button from '../../Components/Button/Button.svelte';
     import GpsPermissionModal from "../../Components/GpsPermissionModal.svelte";
     import Logo from "../../svg/Logo.svelte";
-    import {appt} from '../../helpers/stores';
+    import {patient_meta} from '../../helpers/stores';
     import {navigate} from "svelte-routing";
-    import {postCheckIn} from "../../API/appointments.API";
+    import {getClinicLocation, postCheckIn} from "../../API/patient.API";
+    import Spinner from "../../Components/Spinner/Spinner.svelte";
 
-    if (Object.keys($appt).length === 0) {
-        window.location.href = "/";
-    }
-
-    let clinicPosition = [parseFloat($appt.long), parseFloat($appt.lat)]; // TODO: Collect from API
+    let clinicPosition;
     let userPosition = [0, 0];
     const supportsGps = Boolean(navigator.geolocation);
     let needsConfirmation;
     let map = null;
     let withinBounds = false;
-
-    let clinicMarker = new mapboxgl.Marker({color: "#396481"})
-            .setLngLat(clinicPosition)
-            .setDraggable(false);
 
     const updateUserPosition = (pos) => {
         if (typeof (result) === "string") {
@@ -46,11 +39,21 @@
             }
         }
     };
-    if (supportsGps) {
-        subscribe(updateUserPosition)
-    }
-    onMount(()=>{
-        mapboxgl.accessToken = 'pk.eyJ1IjoiYmRvbmFsZG1mIiwiYSI6ImNrOWY0eGtqeTA5MTEzZnA5ZWdudHd0ZTUifQ.RhjKb2SBHSf5KTQnVbdTUA';
+    onMount(async () => {
+        loading = true;
+
+        let location = await getClinicLocation($patient_meta.jwt);
+        clinicPosition = [parseFloat(location.longitude), parseFloat(location.latitude)];
+
+        let clinicMarker = new mapboxgl.Marker({color: "#396481"})
+                .setLngLat(clinicPosition)
+                .setDraggable(false);
+
+        if (supportsGps) {
+            subscribe(updateUserPosition)
+        }
+
+        mapboxgl.accessToken = process.env.MAPBOX_API_KEY;
         map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/light-v10',
@@ -85,15 +88,17 @@
             });
             clinicMarker.addTo(map);
         });
+        loading = false;
     });
-
-    const verifyLocation = () => {
-        postCheckIn($appt.id, userPosition[1], userPosition[0]).then(response => {
-            appt.set(response);
-            navigate("/screening");
-        }).catch(error => {
+    let loading = false;
+    const verifyLocation = async () => {
+        try{
+            await postCheckIn(userPosition[1], userPosition[0], $patient_meta.jwt)
+            $patient_meta.state = "FORMS";
+            navigate("/patient/screening");
+        } catch(error){
             console.log(error);
-        })
+        }
     }
 
 </script>
@@ -119,6 +124,7 @@
         </p>
         <Button disabled="{!withinBounds}" on:click={verifyLocation}>Verify Location</Button>
     </footer>
+    <Spinner show="{loading}"/>
 </div>
 <style lang="scss">
     div.container {

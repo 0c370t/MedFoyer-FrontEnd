@@ -30,14 +30,15 @@
                     {#each question.options as option}
                         <span class="radioOption">
                                 <label>{option.label}</label>
-                                       bind:group={question.value} value="{option.value}" required={question.required}/>
-                                <input name="{question.name}" type="radio" class="uk-radio input {question.type}"/>
+                                <input name="{question.name}" type="radio" class="uk-radio input {question.type}"
+                                       bind:group={question.value} value="{option.value}" required="{question.required}"/>
                             </span>
                     {/each}
                 </div>
             {:else if question.type === "dropdown"}
                 <label>{question.label}</label>
-                <select class="uk-select input {question.type}">
+                <select class="uk-select input {question.type}" required="{question.required}">
+                    <option></option>
                     {#each question.options as option}
                         <option value="{option.value}">{option.label}</option>
                     {/each}
@@ -59,8 +60,8 @@
             {:else if question.type === "datetime"}
                 <label for="{question.name}">{question.label} </label>
                 <div class="{question.type} uk-flex uk-flex-column uk-flex-1">
-                    <TimePicker fullwidth={true} bind:value={question.value}/>
-                    <DatePicker fullwidth={true} flex="{true}" start="{question.start || new Date(1970,1,1)}" bind:value={question.value}/>
+                    <TimePicker fullwidth={true} bind:value={question.value} step="{question.minute_step || 1}"/>
+                    <DatePicker fullwidth={true} flex="{true}" start="{question.start || new Date(1970,1,1)}" bind:value={question.value} />
                 </div>
             {:else if question.type === "date"}
                 <label for="{question.name}">{question.label}</label>

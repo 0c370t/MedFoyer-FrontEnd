@@ -94,12 +94,13 @@ module.exports = (input, output, legacy_support = false) => {
             new MiniCssExtractPlugin({
                 filename: 'build/[name].css'
             }),
-            new EnvironmentPlugin(["AMP_DOMAIN", "AMP_USER_POOL", "AMP_USER_POOL_CLIENT"]),
+            new EnvironmentPlugin(["AMP_DOMAIN", "AMP_USER_POOL", "AMP_USER_POOL_CLIENT", "MAPBOX_API_KEY"]),
         ],
         devtool: prod ? false : 'source-map',
         devServer: {
             contentBase: path.join(output),
-            historyApiFallback: true
+            historyApiFallback: true,
+            disableHostCheck: true,
         },
         stats: {
             warningsFilter: [

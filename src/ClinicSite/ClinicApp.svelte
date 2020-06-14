@@ -15,7 +15,7 @@
     const client = createClient();
     setClient(client);
 
-    if (!window.location.pathname.includes("login")) {
+    if (!window.location.pathname.includes("login") && !window.location.pathname.includes("patient")) {
         CheckSession();
     }
 </script>

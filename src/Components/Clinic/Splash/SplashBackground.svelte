@@ -1,6 +1,6 @@
 <script>
     import {onMount} from "svelte";
-    import {getPicture} from "../../../API/pexels.API";
+    import {getPicture} from "../../../API/vendor/pexels.API";
 
 
     onMount(async () => {

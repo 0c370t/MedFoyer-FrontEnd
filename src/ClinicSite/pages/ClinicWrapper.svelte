@@ -11,13 +11,12 @@
 
     let showAppointmentModal = false;
     let showPatientModal = false;
+    let child = {};
 
     const openApptModal = (e) => {
         if(e.detail){
-            console.log(e.detail);
             setFieldValue($appointmentModalData, "patient_id", e.detail.patient_id);
         }
-        console.log("BEANS");
         showAppointmentModal = true;
     };
     const openPatientModal = (e) => {
@@ -27,11 +26,15 @@
     onMount(() => {
         // TODO: Wait for user information to become available
         if(admin_only && !$user.admin){ window.location.href = "/clinic" }
-    })
+    });
+
+    let updateAppointments = child.updateAppointments;
+    $: updateAppointments = child.updateAppointments || (() => {debugger})
+
 </script>
 
-<svelte:component this={component} on:create-appointment={openApptModal} on:create-patient={openPatientModal}/>
+<svelte:component this={component} on:create-appointment={openApptModal} on:create-patient={openPatientModal} bind:this={child}/>
 
 
 <CreatePatientModel bind:shown={showPatientModal}/>
-<CreateAppointmentModal bind:shown={showAppointmentModal}/>
+<CreateAppointmentModal bind:shown={showAppointmentModal} on:updateappts={updateAppointments}/>

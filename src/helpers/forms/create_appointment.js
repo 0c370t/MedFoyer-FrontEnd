@@ -18,5 +18,6 @@ export const new_appointment = [
         "required": true,
         "start": new Date(),
         "value": new Date(),
+        "minute_step": 15
     }
 ];

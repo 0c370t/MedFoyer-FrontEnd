@@ -4,48 +4,23 @@
 
 </script>
 <MobileHeader/>
-    <main class="container uk-container uk-container-small uk-text-center uk-margin-small-top">
-        <h3 class="uk-heading-medium">Thank you for checking in!</h3>
-        <p class="uk-text-large uk-text-center uk-margin-remove">
-            You are
-            <span class="uk-heading-small uk-display-block uk-margin-remove">
+<main class="uk-container uk-container-xsmall uk-text-center uk-margin-small-top uk-flex uk-flex-column uk-flex-middle">
+    <h3 class="uk-heading-small">You're all set!</h3>
+    <img src="/assets/img/undraw_confirmed_81ex.svg" class="uk-height-small uk-margin-small"/>
+    <div class="uk-text-large uk-margin-remove uk-flex uk-flex-around uk-width-1-1 uk-flex-middle">
+        <span class="uk-flex-1 uk-text-right">You are</span>
+        <span class="uk-heading-small uk-margin-remove uk-text-center uk-width-1-4">
                 5th
             </span>
-            in line
-        </p>
-        <hr class="uk-divider-icon uk-width-medium uk-align-center uk-margin-small"/>
-        <p class="uk-text-center uk-margin-small uk-text-large">
-            Approximate wait time: <span class="uk-text-emphasis">20 minutes</span>
-        </p>
-        <p class="uk-text-center uk-margin-small">
-            We'll text you when your doctor is ready. Please wait in your car or your favorite nearby cafe. See you soon.
-        </p>
+        <span class="uk-flex-1 uk-text-left">in line.</span>
+    </div>
+    <p class="uk-text-center uk-text-large uk-margin-remove">
+        Estimated wait <span class="uk-text-emphasis">20 </span> minutes. </p>
+    <hr class="uk-divider-icon uk-width-medium uk-align-center uk-margin-remove uk-margin-small"/>
+    <p class="uk-text-center uk-margin-small">
+        We'll let you know you when your doctor is ready. Please wait in your car or your favorite nearby cafe. </p>
+    <p class="uk-text-large">
+        See you soon.
+    </p>
 
-    </main>
-<style lang="scss">
-
-    .container {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
-    header {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-size: 1.3em;
-        top: 2em;
-        background-color: rgba(255, 255, 255, 0.5);
-        height: 6em;
-        z-index: 1;
-        margin-bottom:2em;
-    }
-    main{
-        display:flex;
-        flex-direction: column;
-        align-items:center;
-    }
-
-</style>
+</main>
