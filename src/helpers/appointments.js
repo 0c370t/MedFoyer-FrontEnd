@@ -26,7 +26,6 @@ export function getFilterFunction(filterValues) {
     let location = filterValues["location"];
     let includeSummoned = filterValues["includeSummoned"];
     return function (appt) {
-        console.log(appt);
         if(appt.status === "SUMMONED" && !includeSummoned) return false;
         if(location !== "ALL" && (!appt.clinic_location || appt.clinic_location.clinic_location_id !== location))
             return false;
