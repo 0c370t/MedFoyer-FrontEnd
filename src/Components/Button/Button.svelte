@@ -5,7 +5,7 @@
     export let _class = "";
     export let loading = false;
     export let color = "default";
-    export let title;
+    export let title = "";
     const allowed_colors = [ "default","primary","secondary","danger","text","link" ];
     if(!allowed_colors.includes(color)) color = "default";
     if (loading) {

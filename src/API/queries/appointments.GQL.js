@@ -23,7 +23,7 @@ query {
         check_in_latitude,
         check_in_longitude,
         check_in_time,
-        forms,
+        forms(dummy: "value"),
     }
 }
 `;
