@@ -4,7 +4,7 @@
 }
 h1,h2,h3,h4,h5,h6{
     font-weight: 400;
-    color: #396481;
+    color: #002149;
 }
 a{
     text-decoration:none;
@@ -22,4 +22,28 @@ a:hover{
     :root{
         font-size:14px;
     }
+}
+
+.shake {
+    animation-name: shaking;
+    animation-iteration-count: 3;
+    animation-timing-function: linear;
+    animation-duration: 200ms;
+    position: relative;
+}
+
+@keyframes shaking {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(-10px);
+    }
+    100% {
+        transform: translateX(10px);
+    }
+}
+
+.uk-notification {
+    z-index: 1000000;
 }

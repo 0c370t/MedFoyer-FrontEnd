@@ -1,30 +1,49 @@
 <script>
+    import Spinner from "../Spinner/Spinner.svelte";
     export let disabled = false;
-    export let fill = false;
+    export let fullwidth = false;
+    export let _class = "";
+    export let loading = false;
+    export let color = "default";
+    export let title = "";
+    const allowed_colors = [ "default","primary","secondary","danger","text","link" ];
+    if(!allowed_colors.includes(color)) color = "default";
+    if (loading) {
+        disabled = loading;
+    }
 </script>
 
-<button on:click type="button" class:fill {disabled} class="uk-button uk-button-default uk-box-shadow-hover-large">
+<button on:click type="button" class:fullwidth disabled={loading || disabled} {title}
+        class={`uk-button uk-button-${color} uk-box-shadow-hover-large ${_class} uk-position-relative`}>
+    <Spinner show="{loading}"/>
     <slot/>
 </button>
 
 <style lang="scss">
+    @import '../../scss/variables';
     button {
-        background-color:white;
+        background-color: white;
         border: 1px solid;
-        color: #396481;
-        padding:1em;
-        line-height:1em;
-        font-size:inherit;
-        &:disabled:hover{
-            box-shadow:none;
+        color: $primary-color;
+        padding: 1em;
+        line-height: 1em;
+        font-size: inherit;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:disabled:hover {
+            box-shadow: none;
         }
+
         &:focus {
             outline-offset: 20px;
-            outline-color: #5FA8D8;
+            outline-color: $secondary-color;
             outline-width: thick;
         }
-        &.fill{
-            width:100%;
+
+        &.fullwidth {
+            width: 100%;
         }
     }
 </style>

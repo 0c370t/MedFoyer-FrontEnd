@@ -23,10 +23,10 @@
 
 <Mount>
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 250 400" xml:space="preserve">
-        <path transition:draw={outerShapeDraw} class="outer-shape stroke" d="{paths.outerShape}"></path>
-        <path transition:draw={innerShapeDraw} class="inner-shape stroke" d="{paths.innerShape}"></path>
-        <path transition:fade={innerShapeFill} class="inner-shape fill" d="{paths.innerShape}"></path>
-        <path transition:draw={crossDraw} class="cross stroke" d="{paths.cross}"></path>
+        <path in:draw={outerShapeDraw} class="outer-shape stroke" d="{paths.outerShape}"></path>
+        <path in:draw={innerShapeDraw} class="inner-shape stroke" d="{paths.innerShape}"></path>
+        <path in:fade={innerShapeFill} class="inner-shape fill" d="{paths.innerShape}"></path>
+        <path in:draw={crossDraw} class="cross stroke" d="{paths.cross}"></path>
     </svg>
 </Mount>
 

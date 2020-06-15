@@ -1,118 +1,108 @@
 <script>
     import Button from '../Button/Button.svelte';
+    import DatePicker from "../DatePicker/DatePicker.svelte";
+    import Callout from "../Callout/Callout.svelte";
+    import PatientPicker from "./Controls/PatientPicker.svelte";
+    import TimePicker from "../TimePicker/TimePicker.svelte";
+    import {phoneClean} from "../../helpers/phone_numbers";
+    import LocationPicker from "./Controls/LocationPicker.svelte";
 
     export let form;
     export let onSubmit;
-
-    export let formElement;
-
+    export let formElement = null;
     export let buttonText = "Submit";
+    export let loading = false;
+    export let validationMessage = "";
+    export let _class = "";
+    export let fullwidth = true;
+
 </script>
-<form bind:this={formElement} class="uk-container uk-container-small uk-container-expand">
-    {#each form as question}
-        <div class="field {question.type}">
+<form bind:this={formElement} class={"uk-container uk-width-1-1 " + _class}>
+    {#each form as question (question.name)}
+        <div class="field {question.type} uk-position-relative">
             {#if question.type === "boolean"}
                 <label for="{question.name}">{question.label} </label>
-                <input name="{question.name}" type="checkbox" class="uk-checkbox" bind:checked={question.value}
-                       required={question.required}/>
-            {/if}
-
-            {#if question.type === "radio"}
+                <input name="{question.name}" type="checkbox" class="uk-checkbox input {question.type}"
+                       bind:checked={question.value} required={question.required}/>
+            {:else if question.type === "radio"}
                 <label>{question.label}</label>
                 <div class="radioContainer">
                     {#each question.options as option}
                         <span class="radioOption">
                                 <label>{option.label}</label>
-                                <input name="{question.name}" type="radio" class="uk-radio" bind:group={question.value}
-                                       value="{option.value}" required={question.required}/>
+                                <input name="{question.name}" type="radio" class="uk-radio input {question.type}"
+                                       bind:group={question.value} value="{option.value}" required="{question.required}"/>
                             </span>
                     {/each}
                 </div>
-            {/if}
-            {#if question.type === "label"}
-                <label class="labelfield"><strong>{question.label}</strong></label>
-            {/if}
-            {#if question.type === "text"}
+            {:else if question.type === "dropdown"}
+                <label>{question.label}</label>
+                <select class="uk-select input {question.type}" required="{question.required}">
+                    <option></option>
+                    {#each question.options as option}
+                        <option value="{option.value}">{option.label}</option>
+                    {/each}
+                </select>
+            {:else if question.type === "label"}
+                <label class="labelfield">
+                    <strong>{question.label}</strong>
+                    <hr/>
+                </label>
+            {:else if question.type === "text"}
                 <label for="{question.name}">{question.label} </label>
                 <input type="text" class="uk-input field {question.type}" bind:value={question.value}
                        name="{question.name}" required="{question.required}"/>
-            {/if}
-            {#if question.type === "number"}
+            {:else if question.type === "number"}
+
                 <label for="{question.name}">{question.label} </label>
-                <input type="number" class="uk-input field {question.type}" bind:value={question.value}
+                <input type="number" class="uk-input field {question.type}" bind:value={question.value} step="any"
                        name="{question.name}" required="{question.required}"/>
-            {/if}
-            {#if question.type === "datetime"}
+            {:else if question.type === "datetime"}
                 <label for="{question.name}">{question.label} </label>
-                <input type="datetime-local" class="uk-input field {question.type}" bind:value={question.value}
+                <div class="{question.type} uk-flex uk-flex-column uk-flex-1">
+                    <TimePicker fullwidth={true} bind:value={question.value} step="{question.minute_step || 1}"/>
+                    <DatePicker fullwidth={true} flex="{true}" start="{question.start || new Date(1970,1,1)}" bind:value={question.value} />
+                </div>
+            {:else if question.type === "date"}
+                <label for="{question.name}">{question.label}</label>
+                <input type="date" class="uk-input field {question.type}" bind:value={question.value}
                        name="{question.name}" required="{question.required}"/>
-            {/if}
-            {#if question.type === "time"}
+            {:else if question.type === "datepicker"}
+                <label for="{question.name}">{question.label} </label>
+                <div class="{question.type} uk-flex uk-flex-column">
+                    <DatePicker fullwidth={false} flex="{true}" bind:value={question.value}/>
+                </div>
+            {:else if question.type === "time"}
                 <label for="{question.name}">{question.label} </label>
                 <input type="time" class="uk-input field {question.type}" bind:value={question.value}
                        name="{question.name}" required="{question.required}"/>
+            {:else if question.type === "phone"}
+                <label for="{question.name}">{question.label} </label>
+                <input type="tel" pattern={`\\(?[0-9]{3}\\)?-?[0-9]{3}-?[0-9]{4}`} placeholder="(000)-000-0000"
+                       class="uk-input field {question.type}" bind:value={question.value}
+                       on:change={() => question.value = phoneClean(question.value)} name="{question.name}"
+                       required="{question.required}"/>
+            {:else if question.type === "email"}
+                <label for="{question.name}">{question.label} </label>
+                <input type="email" class="uk-input field {question.type}" bind:value={question.value}
+                       name="{question.name}" required="{question.required}"/>
+            {:else if question.type === "patient"}
+                <PatientPicker name={question.name} bind:value={question.value} label={question.label} required={question.required} type={question.type}/>
+            {:else if question.type === "location"}
+                <LocationPicker name={question.name} bind:value={question.value} label={question.label} required={question.required} type={question.type}/>
+            {/if}
+            {#if question.message}
+                <Callout position="right" }>{question.message}</Callout>
             {/if}
         </div>
     {/each}
     <div class="buttonContainer">
-        <Button fill={true} on:click={onSubmit}>{buttonText}</Button>
+        <label class="labelfield uk-label-danger">
+            <strong>{validationMessage}</strong>
+        </label>
+        <Button {fullwidth} {loading} on:click={onSubmit}>{buttonText}</Button>
     </div>
 </form>
 <style lang="scss">
-
-    form {
-        margin-top: 2em;
-        font-size: 1.2em;
-    }
-
-    div.field {
-        margin-bottom: 1em;
-        display: flex;
-        justify-content: space-between;
-
-        &.radio {
-            flex-direction: column;
-        }
-
-        > label {
-            flex: 1;
-            font-size: 1.1em;
-        }
-
-        .radioContainer {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-
-            .radioOption {
-                display: flex;
-                justify-content: center;
-
-                input {
-                    margin-left: 1em;
-                }
-            }
-        }
-
-        input.radio, input.boolean {
-            width: 2em;
-            height: 2em;
-            margin-bottom: 1em;
-            display: inline-block;
-        }
-
-        input.text, input.number, input.datetime, input.time {
-            flex: 1;
-        }
-    }
-
-    div.buttonContainer {
-        flex: 1;
-        width: 80%;
-        display: flex;
-        justify-content: center;
-        margin: 0 auto 2em;
-    }
-
+    @import 'forms';
 </style>

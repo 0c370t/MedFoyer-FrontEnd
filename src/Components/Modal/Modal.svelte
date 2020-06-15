@@ -7,35 +7,42 @@
     import Uikit from 'uikit';
 
     let modalElement;
-    onMount(()=>{
-        Uikit.modal(modalElement, { bgClose: showClose, escClose: showClose, modal: showClose, keyboard:showClose});
+    onMount(() => {
+        Uikit.modal(modalElement, {bgClose: showClose, escClose: showClose, modal: showClose, keyboard: showClose});
     });
 
     $: {
-        if(open && modalElement){
+        if (open && modalElement && !Uikit.modal(modalElement).isToggled()) {
             Uikit.modal(modalElement).show();
-        } else if (!open && modalElement){
+        } else if (!open && modalElement && Uikit.modal(modalElement).isToggled()) {
             Uikit.modal(modalElement).hide();
         }
     }
 </script>
 
-<div {id} class="uk-flex-top" class:uk-open={open} bind:this={modalElement} on:hidden={() => open = false}>
-    <div class="uk-modal-dialog uk-margin-auto-vertical">
-        {#if showClose}
-            <button class="uk-modal-close-default" type="button" uk-close></button>
-        {/if}
-        <div class="uk-modal-header">
-            <slot name="header"/>
+<div {id} class="uk-flex-top container" class:uk-open={open} bind:this={modalElement} on:hidden={() => open = false}
+     on:shown={() => open = true} on:beforeshow on:show on:shown on:beforehide on:hide on:hidden>
+    {#if open}
+        <div class="uk-modal-dialog uk-margin-auto-vertical">
+            {#if showClose}
+                <button class="uk-modal-close-default" type="button" uk-close></button>
+            {/if}
+            <div class="uk-modal-header">
+                <slot name="header"/>
+            </div>
+            <div class="uk-modal-body">
+                <slot/>
+            </div>
+            <div class="uk-modal-footer">
+                <slot name="footer"/>
+            </div>
         </div>
-        <div class="uk-modal-body">
-            <slot/>
-        </div>
-        <div class="uk-modal-footer">
-            <slot name="footer"/>
-        </div>
-    </div>
+    {/if}
 </div>
 
 <style lang="scss">
+    .container {
+        /* The modal will be on top. Always. Forever. */
+        z-index: 499999 !important;
+    }
 </style>
