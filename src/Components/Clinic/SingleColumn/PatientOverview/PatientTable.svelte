@@ -34,7 +34,7 @@
                 },
                 ()=>{}
         )
-    }
+    };
     const createAppointment = (patient_id) => {
         dispatch('create-appointment', {
             patient_id

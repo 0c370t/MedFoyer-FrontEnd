@@ -6,7 +6,7 @@ patient_meta.subscribe(val => localStorage.setItem("patient_meta", JSON.stringif
 
 export const user = writable(false);
 
-export const waitlist_data = readable({position: "", expected_wait_time: 0}, (set) => {
+export const waitlist_data = readable({position: "", expected_wait_time: 0, summoned: false}, (set) => {
     let meta;
     let meta_unsub = patient_meta.subscribe(v => meta = v);
     let update = async () => {
