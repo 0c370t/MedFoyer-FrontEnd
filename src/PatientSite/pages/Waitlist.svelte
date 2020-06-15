@@ -11,7 +11,7 @@
         summoned = waitlist.summoned;
         unsub();
     }
-
+    // TODO: Make this page make users feel emotions again
 </script>
 <MobileHeader/>
 <main class="uk-container uk-container-xsmall uk-text-center uk-margin-small-top uk-flex uk-flex-column uk-flex-middle">

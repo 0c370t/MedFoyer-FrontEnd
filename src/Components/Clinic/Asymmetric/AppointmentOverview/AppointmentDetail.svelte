@@ -13,6 +13,7 @@
     export let appointment;
     const updateAppointments = getContext("updateAppointments");
     const client = getClient();
+    let summonPatientButtonLoading = false;
     const deleteAppointmentHandler = () => {
         UIkit.modal.confirm('Are you sure you want to delete this appointment?', {status: "danger"}).then(async () => {
             await mutate(client, {
@@ -25,6 +26,7 @@
         }).catch(e => console.log(e))
     };
     const summonPatient = async () => {
+        summonPatientButtonLoading = true;
         await mutate(client, {
             mutation: SUMMON_PATIENT,
             variables:{
@@ -33,6 +35,7 @@
         });
         UIkit.modal.alert("Notification Sent");
         updateAppointments();
+        summonPatientButtonLoading = false;
     };
     const resendCheckInLink = async () => {
         let message = "";
@@ -78,11 +81,11 @@
             </div>
         </div>
         <div class="uk-width-1-1 uk-margin-remove uk-flex">
-            <Button _class="uk-margin-small-right" on:click={resendCheckInLink}>
+            <Button _class="uk-margin-small-right" on:click={resendCheckInLink} disabled={appointment.status === "SUMMONED"}>
                 Resend Patient Link
                 <Icon options={{icon:"link"}}/>
             </Button>
-            <Button on:click={summonPatient} disabled={Boolean(!appointment.check_in_time) || appointment.status === "SUMMONED"} title={Boolean(!appointment.check_in_time) ? "Patient must check in first!" : ""}>
+            <Button on:click={summonPatient} disabled={Boolean(!appointment.check_in_time) || appointment.status === "SUMMONED" || summonPatientButtonLoading} title={Boolean(!appointment.check_in_time) ? "Patient must check in first!" : ""}>
                 Summon Patient
                 <Icon options={{icon:"phone"}}/>
             </Button>

@@ -29,7 +29,6 @@
         let patient = patients.filter(p => p.patient_id === patient_id)[0];
         Uikit.modal.confirm(`Are you sure you want to delete ${patient.given_name} ${patient.last_name}?`).then(
                 ()=>{
-                    console.log("He's dead, Jim.");
                     // TODO: DELETE PATIENT!
                 },
                 ()=>{}
@@ -51,7 +50,7 @@
         <Button on:click={()=>createAppointment(id)}>
             <Icon icon="calendar"/>
         </Button>
-        <Button on:click={()=>confirmDelete(id)}>
+        <Button on:click={()=>confirmDelete(id)} disabled={true} title={"Coming Soon"}>
             <Icon icon="trash"/>
         </Button>
     </div>

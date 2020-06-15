@@ -25,6 +25,7 @@
             newPassword.valid = false;
             confirmPassword.message = "Passwords must match";
             confirmPassword.valid = false;
+            return;
         }
         try {
             let response = await Auth.completeNewPassword($user, newPassword.value, {email: email.value});
