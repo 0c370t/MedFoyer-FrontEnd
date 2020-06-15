@@ -10,8 +10,10 @@ export const waitlist_data = readable({position: "", expected_wait_time: 0, summ
     let meta;
     let meta_unsub = patient_meta.subscribe(v => meta = v);
     let update = async () => {
-        let value = await getWaitlistInfo(meta.jwt);
-        set(value);
+        try{
+            let value = await getWaitlistInfo(meta.jwt);
+            set(value);
+        } catch {}
     };
     update();
     const interval = setInterval(update, 10000);
