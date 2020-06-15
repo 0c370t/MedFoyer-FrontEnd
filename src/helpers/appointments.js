@@ -23,11 +23,12 @@ export function sortByCheckInTime(appt1, appt2) {
 export function getFilterFunction(filterValues) {
     let from = filterValues['from'];
     let to = filterValues['to'];
-
+    let location = filterValues["location"];
     return function (appt) {
-        if (!within(from, appt.appointment_time, to)) {
+        if(location !== "ALL" && (!appt.clinic_location || appt.clinic_location.clinic_location_id !== location))
             return false;
-        }
+        if (!within(from, appt.appointment_time, to))
+            return false;
         return true;
     }
 }

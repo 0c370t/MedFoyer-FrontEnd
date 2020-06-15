@@ -13,7 +13,7 @@
     export let notShownToday = 0;
     export let notShownTotal = 0;
 </script>
-<div class="container">
+<div class="container uk-flex uk-flex-column">
     <div class="uk-background-default uk-width-1-1 uk-margin-remove uk-padding-small uk-padding-remove-right uk-flex uk-flex-between"
          id="not-checked-in-header">
         <h3 class="uk-margin-remove uk-flex uk-flex-middle">
@@ -60,7 +60,7 @@
 
     .appointment-container {
         overflow-y: scroll;
-        height: calc(100% - 4em);
+        flex:1;
     }
     .inherit-color{
         color:inherit;

@@ -5,13 +5,15 @@ query {
     listAppointments{
         appointment_id,
         status,
+        reminder_status,
         covid_flag,
         appointment_time,
         clinic_location {
             latitude,
             longitude,
             address,
-            clinic_location_name
+            clinic_location_name,
+            clinic_location_id
         },
         patient {
             given_name,
@@ -21,7 +23,7 @@ query {
         check_in_latitude,
         check_in_longitude,
         check_in_time,
-        forms
+        forms,
     }
 }
 `;

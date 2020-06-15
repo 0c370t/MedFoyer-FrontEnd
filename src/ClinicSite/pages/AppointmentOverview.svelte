@@ -21,6 +21,7 @@
     let filterValues = {
         from: defaultFrom,
         to: defaultTo,
+        location: "ALL"
     };
     let result__ = query(client, {query: GET_APPOINTMENT_OVERVIEW});
     $: $result__.then(r => {
@@ -39,12 +40,13 @@
             }
         });
         all_appointments = all_appointments;
-        if (!selectedAppointment || !appointments.filter(a => a.id === selectedAppointment.id)) {
+        applyFilters();
+        if (!selectedAppointment || !appointments.filter(a => a.appointment_id === selectedAppointment.appointment_id)) {
             selectedAppointment = false;
         } else {
-            selectedAppointment = appointments.filter(a => a.id === selectedAppointment.id)[0];
+            selectedAppointment = appointments.filter(a => a.appointment_id === selectedAppointment.appointment_id)[0];
         }
-        applyFilters();
+
     };
     setContext("updateAppointments", updateAppointments);
 

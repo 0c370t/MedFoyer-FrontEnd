@@ -1,4 +1,5 @@
 <script>
+    import Button from "../Button/Button.svelte";
     import UIKit from 'uikit';
     // UIKit component options
     export let pos = "bottom-center";
@@ -13,6 +14,7 @@
     export let boundaryAlign = true;
     export let padsize = "normal";
     export let _class = "";
+    export let wait = false;
     const padsizings = ["normal", "small", "large", "remove"];
     if (!padsizings.includes(padsize)) {
         padsize = "";
@@ -48,9 +50,9 @@
 
 <div class="uk-inline">
     <slot name="full-button">
-        <button class={`uk-button uk-button-default mf-drop-${id}`} class:uk-display-block={block}>
+        <Button _class={`uk-button uk-button-default mf-drop-${id} ${block ? "uk-display-block" : ""}`} disabled={wait}>
             <slot name="button">Drop</slot>
-        </button>
+        </Button>
     </slot>
 
     <div bind:this={wrapperElement} class={`uk-card uk-card-default uk-padding${padsize} ${_class}`} on:toggle on:beforeshow
@@ -62,5 +64,8 @@
 <style>
     .uk-card{
         max-width:unset;
+    }
+    .uk-card{
+        z-index:1000000;
     }
 </style>

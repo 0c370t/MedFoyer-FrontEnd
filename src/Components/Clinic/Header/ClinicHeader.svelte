@@ -2,7 +2,7 @@
     import Logo from "../../../svg/Logo.svelte";
     import {user} from "../../../helpers/clinic_stores";
     import ClinicMasterMenu from "./ClinicMasterMenu.svelte";
-
+    import Button from "../../Button/Button.svelte";
 </script>
 
 <header class="uk-padding-small" id="master-header">
@@ -13,9 +13,9 @@
         <h1 class="uk-margin-remove"> MedFoyer </h1>
     </div>
     <div class="right uk-flex">
-        <p class="uk-button uk-button-default uk-disabled uk-margin-small-right">
+        <Button disabled={true} _class="uk-margin-small-right">
             Welcome, {$user.username || ""}
-        </p>
+        </Button>
         <ClinicMasterMenu on:updateappts on:create-appointment on:create-patient/>
     </div>
 </header>

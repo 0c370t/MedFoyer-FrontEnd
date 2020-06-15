@@ -7,8 +7,8 @@
     import {formatForDisplay, isToday} from "../../../../helpers/datetime";
     import {sortByAppointmentTime, sortByCheckInTime} from "../../../../helpers/appointments";
     import AsymmetricAside from "../AsymmetricAside.svelte";
-    import Spinner from "../../../Spinner/Spinner.svelte";
     import {getContext} from "svelte";
+    import Button from "../../../Button/Button.svelte";
 
     export let appointments = [];
     export let all_appointments = [];
@@ -42,11 +42,11 @@
         <span class="uk-text-meta" slot="header">{formatForDisplay(filterValues.from, true)} - {formatForDisplay(filterValues.to, true)}</span>
 
     <AppointmentList title="Checked In" appointments={checkedInAppointments} {selectedAppointment} {selectAppointment} {loading} notShownToday={countCheckedInAppointmentsToday} notShownTotal={countCheckedInAppointmentsTotal}>
-        <div slot="header">
-            <button class="uk-button uk-button-default" on:click={updateAppointments}>
+        <div slot="header" class="uk-flex">
+            <Button on:click={updateAppointments} disabled={loading} _class="uk-margin-small-right">
                 <Icon options={{icon: "refresh"}}/>
-            </button>
-            <FilterPanel on:filter {filterValues}/>
+            </Button>
+            <FilterPanel on:filter {filterValues} {loading}/>
         </div>
     </AppointmentList>
 

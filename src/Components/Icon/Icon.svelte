@@ -10,7 +10,6 @@
     let target;
 
     onMount(()=>{
-        if(!target) console.log("Too soon bro!");
         let newOptions = options;
         if(icon)
             options['icon'] = icon;

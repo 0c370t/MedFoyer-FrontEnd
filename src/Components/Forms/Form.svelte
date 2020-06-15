@@ -87,9 +87,9 @@
                 <input type="email" class="uk-input field {question.type}" bind:value={question.value}
                        name="{question.name}" required="{question.required}"/>
             {:else if question.type === "patient"}
-                <PatientPicker bind:question/>
+                <PatientPicker name={question.name} bind:value={question.value} label={question.label} required={question.required} type={question.type}/>
             {:else if question.type === "location"}
-                <LocationPicker bind:question/>
+                <LocationPicker name={question.name} bind:value={question.value} label={question.label} required={question.required} type={question.type}/>
             {/if}
             {#if question.message}
                 <Callout position="right" }>{question.message}</Callout>

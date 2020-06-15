@@ -29,7 +29,7 @@
     });
 
     let updateAppointments = child.updateAppointments;
-    $: updateAppointments = child.updateAppointments || (() => {debugger})
+    $: updateAppointments = child.updateAppointments || (() => {})
 
 </script>
 

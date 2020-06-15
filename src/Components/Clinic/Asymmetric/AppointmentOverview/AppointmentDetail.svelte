@@ -26,25 +26,33 @@
     const summonPatientPhoneNumber = () => {
         UIkit.modal.alert(`The patient's contact phone number is ${appointment.patient.phone_number}`);
     };
-    $: console.log(appointment);
+    const resendPatient = () => {
+        alert(appointment.);
+    }
 </script>
 <AsymmetricMain emptyMessage="Please select an appointment" hasContent={appointment}>
-    <header class="uk-flex uk-flex-between uk-child-width-1-3 uk-container uk-container-expand">
-        <div class="uk-flex uk-flex-left uk-flex-wrap">
-            <h2 class="uk-width-1-1">{appointment.patient ? appointment.patient.given_name : "Unnamed"} @ {formatTime(appointment.appointment_time)}</h2>
-            <a href="{window.location.protocol}//{window.location.host}/patient/appt/{appointment.appointment_id}" target="_blank"
-               class="uk-margin-small-right" title="This functionality is for internal testing only!">
-                <Button>Patient Link
-                    <Icon options={{icon:"link"}}/>
+    <header class="uk-container uk-container-expand">
+        <div class="uk-flex uk-flex-between uk-child-width-1-3 ">
+
+            <div class="uk-flex uk-flex-left uk-flex-wrap">
+                <h2 class="uk-width-1-1">{appointment.patient ? appointment.patient.given_name : "Unnamed"}
+                    @ {formatTime(appointment.appointment_time)}</h2>
+            </div>
+            <div class="uk-flex uk-flex-right uk-flex-top">
+                <Button on:click={deleteAppointmentHandler}>
+                    Cancel Appointment
+                    <Icon options={{icon:"trash"}}/>
                 </Button>
-            </a>
-            <Button on:click={summonPatientPhoneNumber}>Contact Patient
-                <Icon options={{icon:"phone"}}/>
-            </Button>
+            </div>
         </div>
-        <div class="uk-flex uk-flex-right uk-flex-top">
-            <Button on:click={deleteAppointmentHandler}>Cancel Appointment
-                <Icon options={{icon:"trash"}}/>
+        <div class="uk-width-1-1 uk-margin-remove uk-flex">
+            <Button _class="uk-margin-small-right" on:click={resendPatient}>
+                Resend Patient Link
+                <Icon options={{icon:"link"}}/>
+            </Button>
+            <Button on:click={summonPatientPhoneNumber}>
+                Contact Patient
+                <Icon options={{icon:"phone"}}/>
             </Button>
         </div>
     </header>
@@ -71,7 +79,8 @@
                 </dl>
             {:else}
                 <p>
-                    {appointment.patient ? appointment.patient.given_name + " " + appointment.patient.last_name : "Unnamed"} has not completed their COVID-19 screening yet. </p>
+                    {appointment.patient ? appointment.patient.given_name + " " + appointment.patient.last_name : "Unnamed"}
+                    has not completed their COVID-19 screening yet. </p>
             {/if}
         </div>
         <div class="uk-width-2-5 uk-section uk-section-primary uk-padding-small uk-flex uk-flex-column uk-preserve-color">
@@ -91,7 +100,13 @@
                         {#if appointment.check_in_time}
                             <dd>{formatTime(new Date(appointment.check_in_time))}</dd>
                         {:else}
-                            <dd>{appointment.patient ? appointment.patient.given_name + " " + appointment.patient.last_name : "Unnamed"} has not checked in yet.</dd>
+                            <dd>{appointment.patient ? appointment.patient.given_name + " " + appointment.patient.last_name : "Unnamed"}
+                                has not checked in yet.
+                            </dd>
+                        {/if}
+                        {#if appointment.wait_list_priority}
+                            <dt>Position on waitlist</dt>
+                            <dd>{appointment.wait_list_priority}</dd>
                         {/if}
                     </dl>
                 </div>
@@ -99,8 +114,9 @@
                     <div class="uk-card uk-card-body uk-box-shadow-small uk-background-default uk-margin-small-bottom">
                         <h3>Check-in Location:</h3>
                         <hr/>
-                        <ClinicStaticMap clinicPosition="{[appointment.clinic_location.longitude, appointment.clinic_location.latitude]}"
-                                         userPosition="{[appointment.check_in_longitude, appointment.check_in_latitude]}"/>
+                        <ClinicStaticMap
+                                clinicPosition="{[appointment.clinic_location.longitude, appointment.clinic_location.latitude]}"
+                                userPosition="{[appointment.check_in_longitude, appointment.check_in_latitude]}"/>
                     </div>
                 {/if}
 

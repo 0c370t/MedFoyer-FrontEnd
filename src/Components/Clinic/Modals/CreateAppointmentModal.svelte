@@ -24,7 +24,7 @@
             let response = await mutate(client, {
                 mutation: CREATE_NEW_APPOINTMENT,
                 variables: {
-                    status: "Created",
+                    status: "SCHEDULED",
                     appointment_time,
                     patient_id,
                     clinic_location_id,
