@@ -8,6 +8,7 @@
     import {DELETE_APPOINTMENT} from "../../../../API/queries/appointments.GQL";
     import {getClient, mutate} from "svelte-apollo";
     import {getContext} from "svelte";
+    import Modal from "../../../Modal/Modal.svelte";
 
     export let appointment;
     const updateAppointments = getContext("updateAppointments");
@@ -23,11 +24,38 @@
             updateAppointments();
         }).catch(e => console.log(e))
     };
-    const summonPatientPhoneNumber = () => {
+    const summonPatient = () => {
         UIkit.modal.alert(`The patient's contact phone number is ${appointment.patient.phone_number}`);
     };
-    const resendPatient = () => {
-        alert(appointment.);
+    const resendCheckInLink = async () => {
+        switch (appointment.reminder_status) {
+            case "NONE_SENT":
+                UIkit.modal.confirm(`${appointment.patient.given_name} has not yet been notified via MedFoyer. Would you like to send their check-in link now?`).then(
+                        () => {
+                            alert("Sent!")
+                        }
+                ).catch(e => undefined);
+                break;
+            case "FIRST_REMINDER_SENT":
+                UIkit.modal.confirm(`${appointment.patient.given_name} has been reminded of their appointment already. Would you like to send their check-in link now?`).then(
+                        () => {
+                            alert("Sent!")
+                        }
+                ).catch(e => undefined);
+                break;
+            case "CHECK_IN_REMINDER_SENT":
+                UIkit.modal.confirm(`${appointment.patient.given_name} has already received their check-in link. Would you like to send it again?`).then(
+                        () => {
+                            alert("Sent!")
+                        }
+                ).catch(e => undefined);
+                break;
+            case "OPT_OUT":
+                UIkit.modal.alert(`${appointment.patient.given_name} has opted out of receiving SMS Messages!`);
+                break;
+        }
+
+
     }
 </script>
 <AsymmetricMain emptyMessage="Please select an appointment" hasContent={appointment}>
@@ -46,12 +74,12 @@
             </div>
         </div>
         <div class="uk-width-1-1 uk-margin-remove uk-flex">
-            <Button _class="uk-margin-small-right" on:click={resendPatient}>
+            <Button _class="uk-margin-small-right" on:click={resendCheckInLink}>
                 Resend Patient Link
                 <Icon options={{icon:"link"}}/>
             </Button>
-            <Button on:click={summonPatientPhoneNumber}>
-                Contact Patient
+            <Button on:click={summonPatient}>
+                Summon Patient
                 <Icon options={{icon:"phone"}}/>
             </Button>
         </div>
