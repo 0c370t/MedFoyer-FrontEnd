@@ -144,10 +144,6 @@
             z-index: 1;
         }
 
-        main#map {
-            background: green;
-        }
-
         footer {
             background-color: white;
             bottom: 3em;

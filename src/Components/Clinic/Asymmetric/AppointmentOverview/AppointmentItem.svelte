@@ -5,7 +5,8 @@
     export let appt;
     export let active = false;
     export let index = 0;
-    const at_risk = appt.covid_flag && appt.covid_flag !== "NORMAL";
+    let at_risk = Boolean(appt.covid_flag) && appt.covid_flag !== "NORMAL";
+    $: at_risk = Boolean(appt.covid_flag) && appt.covid_flag !== "NORMAL";
 </script>
 
 <div class="uk-box-shadow-hover-medium uk-position-relative" on:click class:active class:at_risk
@@ -32,9 +33,16 @@
         {appt.status}
     </p>
     {#if at_risk}
-        <span class="uk-badge danger">AT RISK</span>
-    {:else if appt.check_in_time && appt.status != "FILLING_FORMS"}
-        <span class="uk-badge success">OK</span>
+        <span class="uk-badge danger">AT RISK | {appt.status === "SUMMONED" ? "SUMMONED" : "WAITING"}</span>
+    {:else if appt.check_in_time}
+        {#if appt.status === "SUMMONED"}
+            <span class="uk-badge success">SUMMONED</span>
+            {:else if appt.status === "FILLING_FORMS"}
+            <span class="uk-badge warning">FILLING PAPERWORK</span>
+        {:else}
+            <span class="uk-badge success">WAITING</span>
+        {/if}
+
     {/if}
 </div>
 
@@ -72,6 +80,9 @@
 
         &.success {
             background-color: #32d296;
+        }
+        &.warning{
+            background-color: #b7b520;
         }
     }
 

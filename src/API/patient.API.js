@@ -55,3 +55,14 @@ export const getClinicLocation = async (jwt) => {
     });
     return await response.json();
 };
+
+export const getWaitlistInfo = async (jwt) => {
+    let url = getHost() + "/Waitlist";
+    let response = await fetch(url, {
+        method: "GET",
+        headers: {
+            "X-Auth-Token": `Basic ${jwt}`
+        }
+    });
+    return response.json();
+};

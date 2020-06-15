@@ -30,7 +30,7 @@ const getLoaders = (legacy_support = false) => legacy_support
                 emitCss: true,
                 hotReload: true,
                 legacy: legacy_support,
-                hydratable: true,
+                hydratable: false,
                 dev: !prod,
                 preprocess: [preprocess()],
             }
@@ -41,8 +41,8 @@ const getLoaders = (legacy_support = false) => legacy_support
         loader: 'svelte-loader',
         options: {
             emitCss: true,
-            hotReload: true,
-            hydratable: true,
+            hotReload: !prod,
+            hydratable: false,
             dev: !prod,
             preprocess: [preprocess()],
         }

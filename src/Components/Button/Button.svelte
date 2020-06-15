@@ -5,6 +5,7 @@
     export let _class = "";
     export let loading = false;
     export let color = "default";
+    export let title;
     const allowed_colors = [ "default","primary","secondary","danger","text","link" ];
     if(!allowed_colors.includes(color)) color = "default";
     if (loading) {
@@ -12,7 +13,7 @@
     }
 </script>
 
-<button on:click type="button" class:fullwidth disabled={loading || disabled}
+<button on:click type="button" class:fullwidth disabled={loading || disabled} {title}
         class={`uk-button uk-button-${color} uk-box-shadow-hover-large ${_class} uk-position-relative`}>
     <Spinner show="{loading}"/>
     <slot/>

@@ -48,8 +48,14 @@
             <label for="location" class="uk-form-label uk-display-block">
                 Location:
             </label>
-            <div>
+            <div class="uk-margin-small-bottom">
                 <LocationPicker includeAll="true" bind:value={internalValues.location}/>
+            </div>
+            <label for="include_summoned" class="uk-form-label uk-display-block">
+                Include Summoned:
+            </label>
+            <div>
+                <input class="uk-checkbox" type="checkbox" bind:checked={internalValues.includeSummoned}/>
             </div>
         </div>
     </div>

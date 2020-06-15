@@ -9,7 +9,6 @@ Auth.configure(awsconfig.Auth);
 
 const app = new App({
 	target: document.body,
-	hydrate: true,
 	props: {
 		url: window.location.href
 	}

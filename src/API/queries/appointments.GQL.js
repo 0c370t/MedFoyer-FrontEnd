@@ -53,3 +53,13 @@ export const DELETE_APPOINTMENT = gql`
         deleteAppointment(appointment_id: $appointment_id){appointment_id}
     }
     `;
+export const SUMMON_PATIENT = gql`
+    mutation($appointment_id: ID!){
+        summonPatient(appointment_id: $appointment_id){appointment_id}
+    }
+    `;
+export const RESEND_CHECKIN_LINK = gql`
+    mutation($appointment_id: ID!){
+        sendCheckInText(appointment_id: $appointment_id)
+    }
+    `

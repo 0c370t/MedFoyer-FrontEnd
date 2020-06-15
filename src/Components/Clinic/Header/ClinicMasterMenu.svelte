@@ -30,6 +30,11 @@
 
     const dispatch = createEventDispatcher();
     let dropElem;
+
+    const support = () => {
+        Uikit.modal.alert("Please email support questions to support@medfoyer.com");
+    }
+
 </script>
 <Spinner show={loading}/>
 
@@ -112,7 +117,7 @@
         </li>
         <li class="uk-nav-divider uk-margin-small"></li>
         <li class="uk-margin-small">
-            <button class="uk-button uk-button-default uk-button-small">
+            <button class="uk-button uk-button-default uk-button-small" on:click={support}>
                 <Icon icon="lifesaver"/>
                 <span>Support</span>
             </button>

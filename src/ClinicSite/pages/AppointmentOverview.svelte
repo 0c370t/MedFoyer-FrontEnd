@@ -21,7 +21,8 @@
     let filterValues = {
         from: defaultFrom,
         to: defaultTo,
-        location: "ALL"
+        location: "ALL",
+        includeSummoned: false
     };
     let result__ = query(client, {query: GET_APPOINTMENT_OVERVIEW});
     $: $result__.then(r => {

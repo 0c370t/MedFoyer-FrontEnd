@@ -5,7 +5,7 @@
     import UIkit from "uikit";
     import ClinicStaticMap from "../../../Map/ClinicStaticMap.svelte";
     import AsymmetricMain from "../AsymmetricMain.svelte";
-    import {DELETE_APPOINTMENT} from "../../../../API/queries/appointments.GQL";
+    import {DELETE_APPOINTMENT, RESEND_CHECKIN_LINK, SUMMON_PATIENT} from "../../../../API/queries/appointments.GQL";
     import {getClient, mutate} from "svelte-apollo";
     import {getContext} from "svelte";
     import Modal from "../../../Modal/Modal.svelte";
@@ -24,36 +24,40 @@
             updateAppointments();
         }).catch(e => console.log(e))
     };
-    const summonPatient = () => {
-        UIkit.modal.alert(`The patient's contact phone number is ${appointment.patient.phone_number}`);
+    const summonPatient = async () => {
+        await mutate(client, {
+            mutation: SUMMON_PATIENT,
+            variables:{
+                appointment_id: appointment.appointment_id
+            }
+        });
+        UIkit.modal.alert("Notification Sent");
+        updateAppointments();
     };
     const resendCheckInLink = async () => {
+        let message = "";
         switch (appointment.reminder_status) {
-            case "NONE_SENT":
-                UIkit.modal.confirm(`${appointment.patient.given_name} has not yet been notified via MedFoyer. Would you like to send their check-in link now?`).then(
-                        () => {
-                            alert("Sent!")
-                        }
-                ).catch(e => undefined);
+            case "NONE_SENT": default:
+                message = `${appointment.patient.given_name} has not yet been notified via MedFoyer. Would you like to send their check-in link now?`;
                 break;
             case "FIRST_REMINDER_SENT":
-                UIkit.modal.confirm(`${appointment.patient.given_name} has been reminded of their appointment already. Would you like to send their check-in link now?`).then(
-                        () => {
-                            alert("Sent!")
-                        }
-                ).catch(e => undefined);
+                message = `${appointment.patient.given_name} has been reminded of their appointment already. Would you like to send their check-in link now?`
                 break;
             case "CHECK_IN_REMINDER_SENT":
-                UIkit.modal.confirm(`${appointment.patient.given_name} has already received their check-in link. Would you like to send it again?`).then(
-                        () => {
-                            alert("Sent!")
-                        }
-                ).catch(e => undefined);
+                message = `${appointment.patient.given_name} has already received their check-in link. Would you like to send it again?`;
                 break;
             case "OPT_OUT":
                 UIkit.modal.alert(`${appointment.patient.given_name} has opted out of receiving SMS Messages!`);
-                break;
+                return;
         }
+        UIkit.modal.confirm(message).then(e=>{
+            mutate(client, {
+                mutation: RESEND_CHECKIN_LINK,
+                variables:{
+                    appointment_id: appointment.appointment_id
+                }
+            })
+        }).catch(e => undefined);
 
 
     }
@@ -78,7 +82,7 @@
                 Resend Patient Link
                 <Icon options={{icon:"link"}}/>
             </Button>
-            <Button on:click={summonPatient}>
+            <Button on:click={summonPatient} disabled={Boolean(!appointment.check_in_time) || appointment.status === "SUMMONED"} title={Boolean(!appointment.check_in_time) ? "Patient must check in first!" : ""}>
                 Summon Patient
                 <Icon options={{icon:"phone"}}/>
             </Button>

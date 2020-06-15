@@ -29,6 +29,7 @@
 
                 let result = await postScreeningResult(finalFormObject, $patient_meta.jwt);
                 $patient_meta.state = "CHECKED_IN";
+                $patient_meta.covid_flag = result.covid_flag;
                 navigate("/patient/waitlist");
                 formIndex = 2;
             }

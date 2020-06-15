@@ -40,11 +40,12 @@
             patient_id
         })
     }
+    // TODO: Edit Patients
 </script>
 
 <DataTable data_promise={$patients__} {attributes} data_attribute="listPatients" data_key="patient_id">
     <div slot="buttons" let:prop={id} class="uk-flex uk-flex-around">
-        <Button disabled="{true}">
+        <Button disabled="{true}" title="Coming Soon">
             <Icon icon="pencil"/>
         </Button>
         <Button on:click={()=>createAppointment(id)}>
