@@ -17,7 +17,7 @@ export const severe_symptoms = [
             }
         ],
         "comment": "",
-        "required": true
+        "required": true,
     },
     {
         "label": "Check all symptoms that apply",
@@ -29,28 +29,44 @@ export const severe_symptoms = [
         "name": "severe_breathing",
         "type": "boolean",
         "value": false,
-        "required": false
+        "required": false,
+        "flag": "HIGH_RISK",
+        "flaggable_answers": [
+            true
+        ]
     },
     {
         "label": "Severe chest pain",
         "name": "severe_chest",
         "type": "boolean",
         "value": false,
-        "required": false
+        "required": false,
+        "flag": "HIGH_RISK",
+        "flaggable_answers": [
+            true
+        ]
     },
     {
         "label": "New onset of confusion",
         "name": "patient_is_confused",
         "type": "boolean",
         "value": false,
-        "required": false
+        "required": false,
+        "flag": "HIGH_RISK",
+        "flaggable_answers": [
+            true
+        ]
     },
     {
         "label": "Blue-colored face or lips",
         "name": "blue_lips",
         "type": "boolean",
         "value": false,
-        "required": false
+        "required": false,
+        "flag": "HIGH_RISK",
+        "flaggable_answers": [
+            true
+        ]
     }
 ];
 
@@ -65,56 +81,88 @@ export const other_symptoms = [
         "name": "fever",
         "type": "boolean",
         "value": false,
-        "required": false
+        "required": false,
+        "flag":"AT_RISK",
+        "flaggable_answers": [
+            true
+        ]
     },
     {
         "label": "New onset of cough",
         "name": "new_cough",
         "type": "boolean",
         "value": false,
-        "required": false
+        "required": false,
+        "flag":"AT_RISK",
+        "flaggable_answers": [
+            true
+        ]
     },
     {
         "label": "Sore throat",
         "name": "sore_throat",
         "type": "boolean",
         "value": false,
-        "required": false
+        "required": false,
+        "flag":"AT_RISK",
+        "flaggable_answers": [
+            true
+        ]
     },
     {
         "label": "Difficult breathing",
         "name": "difficult_breathing",
         "type": "boolean",
         "value": false,
-        "required": false
+        "required": false,
+        "flag":"AT_RISK",
+        "flaggable_answers": [
+            true
+        ]
     },
     {
         "label": "Chills or shaking",
         "name": "chills",
         "type": "boolean",
         "value": false,
-        "required": false
+        "required": false,
+        "flag":"AT_RISK",
+        "flaggable_answers": [
+            true
+        ]
     },
     {
         "label": "Body aches",
         "name": "body_aches",
         "type": "boolean",
         "value": false,
-        "required": false
+        "required": false,
+        "flag":"AT_RISK",
+        "flaggable_answers": [
+            true
+        ]
     },
     {
         "label": "Headache",
         "name": "head_aches",
         "type": "boolean",
         "value": false,
-        "required": false
+        "required": false,
+        "flag":"AT_RISK",
+        "flaggable_answers": [
+            true
+        ]
     },
     {
         "label": "Loss of smell or taste",
         "name": "cannot_smell",
         "type": "boolean",
         "value": false,
-        "required": false
+        "required": false,
+        "flag":"AT_RISK",
+        "flaggable_answers": [
+            true
+        ]
     },
     {
         "label": "Please answer a few additional questions",
@@ -146,7 +194,11 @@ export const other_symptoms = [
         ],
         "value": "",
         "comment": "Don't talk to strangers",
-        "required": true
+        "required": true,
+        "flag":"AT_RISK",
+        "flaggable_answers": [
+            "1","2","3"
+        ]
     },
     {
         "label": "Have you or any of your close contacts with traveled outside of the United States in the last 14 days?",
@@ -169,84 +221,11 @@ export const other_symptoms = [
 
         ],
         "comment": "Don't talk to strangers",
-        "required": true
-    }
-];
-
-export const new_appointment = [
-    {
-        "label": "Select a patient...",
-        "type": "dropdown",
-        "options":[
-            {
-                "label":'Brian Donald',
-                'value':0
-            },{
-                "label":'James Crowell',
-                'value':0
-            },{
-                "label":'Saurabh Sethi',
-                'value':0
-            }
-        ],
-        "required":"true",
-        "name":"patient"
-    },
-    {
-        "label": "Patient Name",
-        "type": "text",
-        "name": "name",
-        "required": true
-    },
-    {
-        "label": "Patient Date of Birth",
-        "type": "date",
-        "name": "dob",
-        "required": true
-    },
-    {
-        "label": "Patient Phone Number",
-        "type": "phone",
-        "name": "phone_num",
-        "required": true
-    },
-    {
-        "label": "Appointment Time",
-        "type": "time",
-        "name": "appointment_time",
-        "required": true
-    },
-    {
-        "label": "Appointment Date",
-        "type": "date",
-        "name": "appointment_time",
         "required": true,
-        "value": getCurrentDateForInput()
-    },
-    {
-        "label": "Street Address",
-        "type": "text",
-        "name": "address_1",
-        "required": true
-    },
-    {
-        "label": "City",
-        "type": "text",
-        "name": "city",
-        "required": true
-    },
-    {
-        "label": "State",
-        "type": "dropdown",
-        "name": "state",
-        "required": true,
-        "options": state_options
-    },
-    {
-        "label": "Zip Code",
-        "type": "number",
-        "name": "zip",
-        "required": true
+        "flag":"AT_RISK",
+        "flaggable_answers": [
+            "1","2"
+        ]
     }
 ];
 
