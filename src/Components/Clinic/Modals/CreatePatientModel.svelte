@@ -6,7 +6,9 @@
     import {CREATE_PATIENT} from "../../../API/queries/patients.GQL";
     import {toAWSDate} from "../../../helpers/datetime";
     import {cloneForm, getFieldValue, setFieldMessage} from "../../../helpers/forms/form-utils";
-
+    import Uikit from 'uikit';
+    import {createEventDispatcher} from "svelte";
+    const dispatch = createEventDispatcher();
     const client = getClient();
 
     export let shown = false;
@@ -33,8 +35,13 @@
                     }
                 }
             });
-            form = cloneForm(patientForm);
+
             shown = false;
+            try{
+                await Uikit.modal.confirm("Would you like to create an appointment for " + getFieldValue(form, "given_name") + "?");
+                dispatch("create-appointment", {patient_id: response.data.createPatient.patient_id})
+            } catch{}
+            form = cloneForm(patientForm);
         } catch (err) {
             if (err.message.includes("as a valid phone number")) {
                 setFieldMessage(form, "phone_num", "Invalid Phone Number");

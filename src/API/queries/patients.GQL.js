@@ -6,7 +6,8 @@ export const CREATE_PATIENT = gql`
             birth_date,
             given_name,
             last_name,
-            phone_number
+            phone_number,
+            patient_id
         }
     } 
 `;
