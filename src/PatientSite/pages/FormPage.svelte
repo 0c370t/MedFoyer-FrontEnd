@@ -1,5 +1,4 @@
 <script>
-
     import {severe_symptoms, other_symptoms} from '../../helpers/forms/default-covid-screen';
     import {patient_meta} from '../../helpers/stores';
     import Form from "../../Components/Forms/Form.svelte";
