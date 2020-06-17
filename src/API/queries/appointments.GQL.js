@@ -1,6 +1,6 @@
 import {gql} from 'apollo-boost';
 
-export const GET_APPOINTMENT_OVERVIEW = gql`
+export const GET_APPOINTMENT_DASHBOARD = gql`
 query {
     listAppointments{
         appointment_id,

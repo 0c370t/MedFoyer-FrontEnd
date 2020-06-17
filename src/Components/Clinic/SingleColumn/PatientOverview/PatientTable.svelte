@@ -5,9 +5,8 @@
     import Icon from "../../../Icon/Icon.svelte";
     import {phoneClean} from "../../../../helpers/phone_numbers";
     import DataTable, {buildAttribute} from "../../../DataTable/DataTable.svelte";
-    import ConfirmationModal from "../../../Modal/ConfirmationModal.svelte";
     import Uikit from 'uikit';
-    import {createEventDispatcher} from "svelte";
+    import {createEventDispatcher, onMount} from "svelte";
 
     const client = getClient();
     const attributes = [
@@ -32,18 +31,24 @@
                     // TODO: DELETE PATIENT!
                 },
                 ()=>{}
-        )
+        );
+        update();
     };
     const createAppointment = (patient_id) => {
         dispatch('create-appointment', {
             patient_id
         })
-    }
+    };
+
     // TODO: Edit Patients
+
+    export const update = () => table.shim(patients__.refetch());
+    onMount(update);
+    let table;
 </script>
 
-<DataTable data_promise={$patients__} {attributes} data_attribute="listPatients" data_key="patient_id">
-    <div slot="buttons" let:prop={id} class="uk-flex uk-flex-around">
+<DataTable data_promise={$patients__} {attributes} data_attribute="listPatients" data_key="patient_id" bind:this={table}>
+    <div slot="buttons" let:id class="uk-flex uk-flex-around">
         <Button disabled="{true}" title="Coming Soon">
             <Icon icon="pencil"/>
         </Button>

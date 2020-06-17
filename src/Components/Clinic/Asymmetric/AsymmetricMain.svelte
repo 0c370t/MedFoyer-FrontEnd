@@ -16,7 +16,7 @@
 <style lang="scss">
     main {
         grid-area: main;
-        overflow-y: scroll;
+        overflow-y: auto;
         padding-top:2em;
     }
 </style>

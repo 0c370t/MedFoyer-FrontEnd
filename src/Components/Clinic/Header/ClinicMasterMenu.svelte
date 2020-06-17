@@ -39,7 +39,7 @@
 <Spinner show={loading}/>
 
 <Drop mode="hover" pos="bottom-right" boundary="#master-header" animation="uk-animation-slide-top-small"
-      bind:this={dropElem} _class="uk-background-secondary uk-light" padsize="small">
+      bind:this={dropElem} _class="uk-background-secondary uk-light uk-width-large" padsize="small">
     <span slot="button" class="uk-flex uk-flex-middle uk-flex-around">
         <span class="uk-margin-small-right">Menu</span>
         <Icon icon="chevron-down"/>
@@ -77,13 +77,21 @@
                     <button class="uk-button uk-button-default uk-button-small"
                             on:click={() => {dispatch("create-appointment");dropElem.hide(0);}}>
                         <Icon icon="calendar"/>
-                        <span>Create Appointment</span>
+                        <span>Schedule Appointment</span>
                     </button>
                 </li>
                 <li class="uk-margin-small">
                     <Link to="/clinic">
                         <button class="uk-button uk-button-default uk-button-small">
                             <Icon icon="home"/>
+                            <span>Appointment Dashboard</span>
+                        </button>
+                    </Link>
+                </li>
+                <li class="uk-margin-small">
+                    <Link to="/clinic/appointments">
+                        <button class="uk-button uk-button-default uk-button-small">
+                            <Icon icon="info"/>
                             <span>Manage Appointments</span>
                         </button>
                     </Link>

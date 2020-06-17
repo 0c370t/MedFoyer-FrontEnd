@@ -28,13 +28,12 @@
         if(admin_only && !$user.admin){ window.location.href = "/clinic" }
     });
 
-    let updateAppointments = child.updateAppointments;
-    $: updateAppointments = child.updateAppointments || (() => {})
-
+    let update = child.update;
+    $: update = child.update || (() => {});
 </script>
 
 <svelte:component this={component} on:create-appointment={openApptModal} on:create-patient={openPatientModal} bind:this={child}/>
 
 
-<CreatePatientModel bind:shown={showPatientModal}/>
-<CreateAppointmentModal bind:shown={showAppointmentModal} on:updateappts={updateAppointments}/>
+<CreatePatientModel bind:shown={showPatientModal} on:updatepatients={update}/>
+<CreateAppointmentModal bind:shown={showAppointmentModal} on:updateappts={update}/>

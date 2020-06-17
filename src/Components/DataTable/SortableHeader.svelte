@@ -2,15 +2,15 @@
     import Icon from "../Icon/Icon.svelte";
     export let label = "";
     export let sort;
-    export let attribute;
+    export let path;
     export let sortedAttribute;
     export let desc;
     export let style;
 </script>
 
-<th on:click={()=>sort(attribute)} {style}>
+<th on:click={()=>sort(path)} {style}>
     {label}
-    {#if attribute === sortedAttribute}
+    {#if path === sortedAttribute}
         {#if desc}
             <Icon icon="chevron-down"/>
         {:else}

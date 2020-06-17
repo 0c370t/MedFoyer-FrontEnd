@@ -1,5 +1,5 @@
 import {readable, writable} from 'svelte/store';
-import {new_appointment} from './forms/create_appointment'
+import {new_appointment} from './forms/create_appointment';
 import {cloneForm} from "./forms/form-utils";
 import Auth from '@aws-amplify/auth';
 
