@@ -2,7 +2,7 @@ const defaultConfig = require('./conf/default_webpack_config');
 
 let output = [];
 
-if (process.env.NODE_ENV.toLowerCase() !== "production") {
+if (!process.env.NODE_ENV || process.env.NODE_ENV.toLowerCase() !== "production") {
     // Local Development
     output.push(defaultConfig("./src/main.js", __dirname + "/public/build"));
 } else {
