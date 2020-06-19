@@ -16,7 +16,6 @@ export const severe_symptoms = [
                 "value": "not_patient"
             }
         ],
-        "comment": "",
         "required": true,
     },
     {
@@ -30,9 +29,14 @@ export const severe_symptoms = [
         "type": "boolean",
         "value": false,
         "required": false,
-        "flag": "HIGH_RISK",
-        "flaggable_answers": [
-            true
+        "flags":[
+            {
+                "state": "HIGH_RISK",
+                "flaggable_answers": [
+                    true
+                ],
+                "priority": 10
+            }
         ]
     },
     {
@@ -41,9 +45,14 @@ export const severe_symptoms = [
         "type": "boolean",
         "value": false,
         "required": false,
-        "flag": "HIGH_RISK",
-        "flaggable_answers": [
-            true
+        "flags":[
+            {
+                "state": "HIGH_RISK",
+                "flaggable_answers": [
+                    true
+                ],
+                "priority": 10
+            }
         ]
     },
     {
@@ -52,9 +61,14 @@ export const severe_symptoms = [
         "type": "boolean",
         "value": false,
         "required": false,
-        "flag": "HIGH_RISK",
-        "flaggable_answers": [
-            true
+        "flags":[
+            {
+                "state": "HIGH_RISK",
+                "flaggable_answers": [
+                    true
+                ],
+                "priority": 10
+            }
         ]
     },
     {
@@ -63,9 +77,14 @@ export const severe_symptoms = [
         "type": "boolean",
         "value": false,
         "required": false,
-        "flag": "HIGH_RISK",
-        "flaggable_answers": [
-            true
+        "flags":[
+            {
+                "state": "HIGH_RISK",
+                "flaggable_answers": [
+                    true
+                ],
+                "priority": 10
+            },
         ]
     }
 ];
@@ -82,9 +101,14 @@ export const other_symptoms = [
         "type": "boolean",
         "value": false,
         "required": false,
-        "flag":"AT_RISK",
-        "flaggable_answers": [
-            true
+        "flags":[
+            {
+                "state": "HIGH_RISK",
+                "flaggable_answers": [
+                    true
+                ],
+                "priority": 10
+            }
         ]
     },
     {
@@ -93,9 +117,14 @@ export const other_symptoms = [
         "type": "boolean",
         "value": false,
         "required": false,
-        "flag":"AT_RISK",
-        "flaggable_answers": [
-            true
+        "flags":[
+            {
+                "state": "HIGH_RISK",
+                "flaggable_answers": [
+                    true
+                ],
+                "priority": 10
+            }
         ]
     },
     {
@@ -104,9 +133,14 @@ export const other_symptoms = [
         "type": "boolean",
         "value": false,
         "required": false,
-        "flag":"AT_RISK",
-        "flaggable_answers": [
-            true
+        "flags":[
+            {
+                "state": "HIGH_RISK",
+                "flaggable_answers": [
+                    true
+                ],
+                "priority": 10
+            }
         ]
     },
     {
@@ -115,9 +149,14 @@ export const other_symptoms = [
         "type": "boolean",
         "value": false,
         "required": false,
-        "flag":"AT_RISK",
-        "flaggable_answers": [
-            true
+        "flags":[
+            {
+                "state": "HIGH_RISK",
+                "flaggable_answers": [
+                    true
+                ],
+                "priority": 10
+            }
         ]
     },
     {
@@ -126,9 +165,14 @@ export const other_symptoms = [
         "type": "boolean",
         "value": false,
         "required": false,
-        "flag":"AT_RISK",
-        "flaggable_answers": [
-            true
+        "flags":[
+            {
+                "state": "HIGH_RISK",
+                "flaggable_answers": [
+                    true
+                ],
+                "priority": 10
+            }
         ]
     },
     {
@@ -137,9 +181,14 @@ export const other_symptoms = [
         "type": "boolean",
         "value": false,
         "required": false,
-        "flag":"AT_RISK",
-        "flaggable_answers": [
-            true
+        "flags":[
+            {
+                "state": "HIGH_RISK",
+                "flaggable_answers": [
+                    true
+                ],
+                "priority": 10
+            }
         ]
     },
     {
@@ -148,9 +197,14 @@ export const other_symptoms = [
         "type": "boolean",
         "value": false,
         "required": false,
-        "flag":"AT_RISK",
-        "flaggable_answers": [
-            true
+        "flags":[
+            {
+                "state": "HIGH_RISK",
+                "flaggable_answers": [
+                    true
+                ],
+                "priority": 10
+            }
         ]
     },
     {
@@ -159,9 +213,14 @@ export const other_symptoms = [
         "type": "boolean",
         "value": false,
         "required": false,
-        "flag":"AT_RISK",
-        "flaggable_answers": [
-            true
+        "flags":[
+            {
+                "state": "HIGH_RISK",
+                "flaggable_answers": [
+                    true
+                ],
+                "priority": 10
+            }
         ]
     },
     {
@@ -193,11 +252,15 @@ export const other_symptoms = [
 
         ],
         "value": "",
-        "comment": "Don't talk to strangers",
         "required": true,
-        "flag":"AT_RISK",
-        "flaggable_answers": [
-            "1","2","3"
+        "flags":[
+            {
+                "state": "AT_RISK",
+                "flaggable_answers": [
+                    "1","2","3"
+                ],
+                "priority": 5
+            },
         ]
     },
     {
@@ -220,11 +283,15 @@ export const other_symptoms = [
             }
 
         ],
-        "comment": "Don't talk to strangers",
         "required": true,
-        "flag":"AT_RISK",
-        "flaggable_answers": [
-            "1","2"
+        "flags":[
+            {
+                "state": "AT_RISK",
+                "flaggable_answers": [
+                    "3","2","1"
+                ],
+                "priority": 5
+            },
         ]
     }
 ];

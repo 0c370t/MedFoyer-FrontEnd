@@ -33,11 +33,17 @@
         {appt.status}
     </p>
     {#if at_risk}
-        <span class="uk-badge danger">AT RISK | {appt.status === "SUMMONED" ? "SUMMONED" : "WAITING"}</span>
+
+        {#if appt.covid_flag === "AT_RISK"}
+            <span class="uk-badge warning">AT RISK | {appt.status === "SUMMONED" ? "SUMMONED" : "WAITING"}</span>
+        {:else}
+            <span class="uk-badge danger">HIGH RISK | {appt.status === "SUMMONED" ? "SUMMONED" : "WAITING"}</span>
+        {/if}
+
     {:else if appt.check_in_time}
         {#if appt.status === "SUMMONED"}
             <span class="uk-badge success">SUMMONED</span>
-            {:else if appt.status === "FILLING_FORMS"}
+        {:else if appt.status === "FILLING_FORMS"}
             <span class="uk-badge warning">FILLING PAPERWORK</span>
         {:else}
             <span class="uk-badge success">WAITING</span>
@@ -81,7 +87,8 @@
         &.success {
             background-color: #32d296;
         }
-        &.warning{
+
+        &.warning {
             background-color: #b7b520;
         }
     }

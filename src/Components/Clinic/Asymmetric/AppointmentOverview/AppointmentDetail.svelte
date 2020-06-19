@@ -9,6 +9,7 @@
     import {getClient, mutate} from "svelte-apollo";
     import {getContext} from "svelte";
     import Modal from "../../../Modal/Modal.svelte";
+    import {questionIsFlagged} from "../../../../helpers/forms/form-utils";
 
     export let appointment;
     const updateAppointments = getContext("updateAppointments");
@@ -29,7 +30,7 @@
         summonPatientButtonLoading = true;
         await mutate(client, {
             mutation: SUMMON_PATIENT,
-            variables:{
+            variables: {
                 appointment_id: appointment.appointment_id
             }
         });
@@ -40,7 +41,8 @@
     const resendCheckInLink = async () => {
         let message = "";
         switch (appointment.reminder_status) {
-            case "NONE_SENT": default:
+            case "NONE_SENT":
+            default:
                 message = `${appointment.patient.given_name} has not yet been notified via MedFoyer. Would you like to send their check-in link now?`;
                 break;
             case "FIRST_REMINDER_SENT":
@@ -53,10 +55,10 @@
                 UIkit.modal.alert(`${appointment.patient.given_name} has opted out of receiving SMS Messages!`);
                 return;
         }
-        UIkit.modal.confirm(message).then(e=>{
+        UIkit.modal.confirm(message).then(e => {
             mutate(client, {
                 mutation: RESEND_CHECKIN_LINK,
-                variables:{
+                variables: {
                     appointment_id: appointment.appointment_id
                 }
             })
@@ -81,11 +83,14 @@
             </div>
         </div>
         <div class="uk-width-1-1 uk-margin-remove uk-flex">
-            <Button _class="uk-margin-small-right" on:click={resendCheckInLink} disabled={appointment.status === "SUMMONED"}>
+            <Button _class="uk-margin-small-right" on:click={resendCheckInLink}
+                    disabled={appointment.status === "SUMMONED"}>
                 Resend Patient Link
                 <Icon options={{icon:"link"}}/>
             </Button>
-            <Button on:click={summonPatient} disabled={Boolean(!appointment.check_in_time) || appointment.status === "SUMMONED" || summonPatientButtonLoading} title={Boolean(!appointment.check_in_time) ? "Patient must check in first!" : ""}>
+            <Button on:click={summonPatient}
+                    disabled={Boolean(!appointment.check_in_time) || appointment.status === "SUMMONED" || summonPatientButtonLoading}
+                    title={Boolean(!appointment.check_in_time) ? "Patient must check in first!" : ""}>
                 Summon Patient
                 <Icon options={{icon:"phone"}}/>
             </Button>
@@ -99,16 +104,17 @@
                     {#each JSON.parse(appointment.forms[0]) as q, i}
                         {#if q.type !== "label"}
                             <dt>{q.label}</dt>
-                            {#if q.value === true}
-                                <dd>Yes</dd>
-                            {:else if q.value === false}
-                                <dd>No</dd>
-                            {:else if q.options}
-                                <dd>{q.options.filter(q1 => q1.value === q.value)[0].label}</dd>
-                            {:else}
-                                <dd>{q.value}</dd>
-                            {/if}
-
+                            <dd class:uk-text-bold={questionIsFlagged(q)} class:uk-text-danger={questionIsFlagged(q)}>
+                                {#if q.value === true}
+                                    Yes
+                                {:else if q.value === false}
+                                    No
+                                {:else if q.options}
+                                    {q.options.filter(q1 => q1.value === q.value)[0].label}
+                                {:else}
+                                    {q.value}
+                                {/if}
+                            </dd>
                         {/if}
                     {/each}
                 </dl>
