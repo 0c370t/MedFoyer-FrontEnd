@@ -24,7 +24,7 @@
         <div class="uk-text-large uk-margin-remove uk-flex uk-flex-around uk-width-1-1 uk-flex-middle">
             <span class="uk-flex-1 uk-text-right">You are</span>
             <span class="uk-heading-small uk-margin-remove uk-text-center uk-width-1-4">
-            #{waitlist.position}
+            # {waitlist.position}
             </span>
             <span class="uk-flex-1 uk-text-left">in line.</span>
         </div>
@@ -32,7 +32,13 @@
             Estimated wait <span class="uk-text-emphasis">{waitlist.expected_wait_time / 60} </span> minutes. </p>
         <hr class="uk-divider-icon uk-width-medium uk-align-center uk-margin-remove uk-margin-small"/>
         <p class="uk-text-center uk-margin-small">
-            We'll let you know you when your doctor is ready. Please wait in your car or your favorite nearby cafe. </p>
+            We'll let you know you when your doctor is ready.
+            {#if $patient_meta.covid_flag === "NORMAL"}
+                Please wait in your car or your favorite nearby cafe.
+            {:else}
+                Please wait in your car.
+            {/if}
+        </p>
         <p class="uk-text-large">
             See you soon. </p>
     {:else}

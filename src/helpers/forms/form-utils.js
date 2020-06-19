@@ -17,3 +17,10 @@ export const setFieldMessage = (form, name, message) => {
 export const cloneForm = (form) => {
     return form.map(field => Object.assign({}, field));
 };
+export const questionIsFlagged = (question) => {
+    debugger;
+    if(question.flags) {
+        return question.flags.some(f => f.flaggable_answers.includes(question.value));
+    }
+    return false;
+};
