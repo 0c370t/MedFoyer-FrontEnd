@@ -35,5 +35,5 @@
 <svelte:component this={component} on:create-appointment={openApptModal} on:create-patient={openPatientModal} bind:this={child}/>
 
 
-<CreatePatientModel bind:shown={showPatientModal} on:updatepatients={update}/>
+<CreatePatientModel bind:shown={showPatientModal} on:updatepatients={update} on:create-appointment={openApptModal}/>
 <CreateAppointmentModal bind:shown={showAppointmentModal} on:updateappts={update}/>
