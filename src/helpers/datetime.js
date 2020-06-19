@@ -32,6 +32,7 @@ export const padMinutes = (minutes) => {
 
 export const formatTime = (date) => {
     try{
+        if(typeof date === "number") date = new Date(date);
         if(!(date instanceof Date) || !date){
             return "Invalid Date";
         }
@@ -70,6 +71,8 @@ export const formatForDisplay = (dateString, includeTime = false) => {
     let dateobj;
     if(dateString instanceof Date) {
         dateobj = new Date(dateString.getTime());
+    } else if (typeof dateString === "number" ){
+        dateobj = new Date(dateString);
     } else {
         dateobj = new Date();
         let [year, month, date] = dateString.split('-');

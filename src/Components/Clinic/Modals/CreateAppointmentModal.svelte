@@ -8,6 +8,7 @@
     import {appointmentModalData} from "../../../helpers/clinic_stores";
     import {cloneForm, getFieldValue} from "../../../helpers/forms/form-utils";
     import {getClient, mutate} from "svelte-apollo";
+
     const client = getClient();
     const dispatch = createEventDispatcher();
     const submit = async () => {
@@ -34,7 +35,7 @@
             apptForm = cloneForm(new_appointment);
             dispatch("updateappts");
             shown = false;
-        } catch(e){
+        } catch (e) {
             // TODO: Make this less likely to scare users
             validationMessage = e.message;
         }
@@ -48,8 +49,8 @@
     $: apptForm = $appointmentModalData;
 </script>
 
-<Modal bind:open={shown} id="apptCreateModal" on:beforeshow on:show on:shown on:beforehide on:hide on:hidden on:hidden={() => appointmentModalData.set(cloneForm(new_appointment))}>
-    <h3 slot="header">Add Appointment</h3>
+<Modal bind:open={shown} id="apptCreateModal" on:beforeshow on:show on:shown on:beforehide on:hide on:hidden
+       on:hidden={() => appointmentModalData.set(cloneForm(new_appointment))} title="Add Appointment">
     <Form form="{apptForm}" onSubmit="{submit}" loading="{formLoading}" bind:formElement buttonText="Create Appointment"
           {validationMessage}/>
 </Modal>

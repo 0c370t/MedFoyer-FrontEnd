@@ -6,6 +6,7 @@
     import {CREATE_PATIENT} from "../../../API/queries/patients.GQL";
     import {toAWSDate} from "../../../helpers/datetime";
     import {cloneForm, getFieldValue, setFieldMessage} from "../../../helpers/forms/form-utils";
+    import {createEventDispatcher} from "svelte";
 
     const client = getClient();
 
@@ -13,7 +14,7 @@
     let formLoading = false;
     let formElement = null;
     let form = cloneForm(patientForm);
-
+    const dispatch = createEventDispatcher();
     const submit = async () => {
         formLoading = true;
         if (!formElement.reportValidity()) {
@@ -35,6 +36,7 @@
             });
             form = cloneForm(patientForm);
             shown = false;
+            dispatch("updatepatients")
         } catch (err) {
             if (err.message.includes("as a valid phone number")) {
                 setFieldMessage(form, "phone_num", "Invalid Phone Number");
@@ -53,8 +55,7 @@
 </script>
 
 
-<Modal bind:open={shown} id="patientCreateModal" on:hide={resetForm}>
-    <h3 slot="header">Add Patient</h3>
+<Modal bind:open={shown} id="patientCreateModal" on:hide={resetForm} title="Add Patient">
     {#if shown}
         <Form {form} onSubmit="{submit}" loading="{formLoading}" bind:formElement buttonText="Create Patient"
               {validationMessage}/>

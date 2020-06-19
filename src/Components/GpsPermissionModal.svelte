@@ -51,8 +51,7 @@
     const refresh = () => window.location.reload();
 </script>
 {#if supportsGps}
-    <Modal open={promptForPermission} id="locationModal" showClose={false}>
-        <h3 slot="header">We need your permission</h3>
+    <Modal open={promptForPermission} id="locationModal" showClose={false} header="We need your permission">
         <p>
             MedFoyer uses GPS to ensure you are at your doctor's office before checking in, when tapping okay, you will
             be prompted to give MedFoyer permission. </p>
@@ -64,8 +63,7 @@
         </span>
     </Modal>
 {:else}
-    <Modal open={true} id="gpsUnavailable" showClose={false}>
-        <h3 slot="header">GPS Unavailable</h3>
+    <Modal open={true} id="gpsUnavailable" showClose={false} header="GPS Unavailable">
         <p>
             MedFoyer uses GPS to ensure you are at your destination before checking in, but it looks like your device
             does not currently support GPS. </p>
