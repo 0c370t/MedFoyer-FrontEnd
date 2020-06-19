@@ -7,6 +7,10 @@
     $: update = (column && column.update) || (()=>{})
 </script>
 <svelte:options accessors/>
+<svelte:head>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.8.1/mapbox-gl.css' rel='stylesheet'/>
+</svelte:head>
+
 
 <SingleColumnLayout>
     <ClinicHeader on:create-appointment on:create-patient/>
