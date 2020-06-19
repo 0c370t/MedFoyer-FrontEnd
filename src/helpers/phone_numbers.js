@@ -5,4 +5,4 @@ export const phoneClean = (value) => {
         phone = `(${match[1]})${match[2] ? '-' : ''}${match[2]}${match[3] ? '-' : ''}${match[3]}`;
     }
     return phone
-}
+};

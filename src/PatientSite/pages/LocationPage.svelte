@@ -92,7 +92,7 @@
     let loading = false;
     const verifyLocation = async () => {
         try{
-            await postCheckIn(userPosition[1], userPosition[0], $patient_meta.jwt)
+            await postCheckIn(userPosition[1], userPosition[0], $patient_meta.jwt);
             $patient_meta.state = "FORMS";
             navigate("/patient/screening");
         } catch(error){

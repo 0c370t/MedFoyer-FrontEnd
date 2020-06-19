@@ -23,6 +23,7 @@ export const months = [
 ];
 
 export const padMinutes = (minutes) => {
+    if(typeof minutes !== "number") return "Invalid";
     if(minutes < 10){
         return `0${minutes}`;
     } else {
@@ -41,9 +42,9 @@ export const formatTime = (date) => {
         }
         let minutes = padMinutes(date.getMinutes());
 
-        return `${date.getHours() % 12}:${minutes} ${ampm}`;
+        return `${date.getHours() % 12 ? date.getHours() % 12 : 12}:${minutes} ${ampm}`;
     } catch{
-
+        return "";
     }
 };
 
