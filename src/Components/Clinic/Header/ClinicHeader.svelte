@@ -3,15 +3,18 @@
     import {user} from "../../../helpers/clinic_stores";
     import ClinicMasterMenu from "./ClinicMasterMenu.svelte";
     import Button from "../../Button/Button.svelte";
+    import {Link} from "svelte-routing";
 </script>
 
 <header class="uk-padding-small" id="master-header">
-    <div class="left">
-        <div class="logo uk-margin-small-right">
-            <Logo/>
+    <Link to="/clinic">
+        <div class="left">
+            <div class="logo uk-margin-small-right">
+                <Logo/>
+            </div>
+            <h1 class="uk-margin-remove uk-logo uk-heading-medium"> MedFoyer </h1>
         </div>
-        <h1 class="uk-margin-remove"> MedFoyer </h1>
-    </div>
+    </Link>
     <div class="right uk-flex">
         <Button disabled={true} _class="uk-margin-small-right">
             Welcome, {$user.username || ""}
@@ -23,7 +26,7 @@
 
 <style lang="scss">
     header {
-        background-color:white;
+        background-color: white;
         grid-area: header;
         display: flex;
         align-items: center;

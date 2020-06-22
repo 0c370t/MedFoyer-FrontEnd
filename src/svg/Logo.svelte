@@ -1,42 +1,54 @@
 <script>
-    import {paths} from './newlogo.paths';
+    import {paths} from "./newlogo.2.paths";
 
+    import Mount from "../Components/Abstract/Mount.svelte";
+
+    export let speed = 1000;
 </script>
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 250 400" xml:space="preserve">
-    <path class="outer-shape stroke" d="{paths.outerShape}"></path>
-    <path class="inner-shape stroke" d="{paths.innerShape}"></path>
-    <path class="inner-shape fill" d="{paths.innerShape}"></path>
-    <path class="cross stroke" d="{paths.cross}"></path>
-</svg>
+<Mount>
+    <svg viewBox="0 0 252.71 246.67" version="1.1" xmlns="http://www.w3.org/2000/svg"
+         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px">
+        <g id="fills">
+            <path class="fill" id="phone_fill" d={paths.phone_bezel}></path>
+            <path class="fill" id="pin_fill" d={paths.pin_body}></path>
+            <path class="fill" id="pin_cross_fill" d={paths.pin_cross}></path>
+        </g>
+        <g id="strokes">
+            <path class="stroke" id="phone_stroke" d={paths.phone_bezel}></path>
+            <path class="stroke" id="pin_stroke" d={paths.pin_body}></path>
+            <path class="stroke" id="pin_cross_stroke" d={paths.pin_cross}></path>
+        </g>
 
-<style>
+        <!--  White Elements -->
+        <path class="fill white" id="phone_screen" d={paths.phone_screen}></path>
+        <path class="fill white" id="phone_button" d={paths.phone_button}></path>
+        <path class="fill white" id="pin_white" d={paths.pin_white}></path>
+    </svg>
+</Mount>
+<style lang="scss">
+    @import '../scss/variables';
+
     svg {
         height: 100%;
-        width:auto;
+        width: auto;
     }
 
     path {
-        fill: none;
-    }
-
-    path.outer-shape.stroke {
-        stroke: #396481;
         stroke-width: 5;
         stroke-miterlimit: 10;
-        transition: 5s;
     }
 
-    path.inner-shape.stroke {
-        stroke: #5FA8D8;
+    path.fill {
+        stroke: none;
+        fill: $primary-color;
     }
 
-    path.inner-shape.fill {
-        fill: #5FA8D8;
+    path.fill.white {
+        fill: white;
     }
 
-    path.cross.stroke {
-        stroke: #5FA8D8;
-        stroke-width: 4;
-        stroke-miterlimit: 10;
+    path.stroke {
+        stroke: $primary-color;
+        fill: none;
     }
 </style>
