@@ -7,7 +7,7 @@
     export let speed = 1000;
 </script>
 <Mount>
-    <svg viewBox="0 0 252.71 246.67" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px">
+    <svg viewBox="-3 -3 258 257" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px">
         <g id="fills">
             <path class="fill" id="phone_fill" d={paths.phone_bezel}
             in:fade={{duration:speed/2, delay: speed*3}}
@@ -32,9 +32,15 @@
         </g>
 
         <!--  White Elements -->
-        <path class="fill white" id="phone_screen" d={paths.phone_screen}></path>
-        <path class="fill white" id="phone_button" d={paths.phone_button}></path>
-        <path class="fill white" id="pin_white" d={paths.pin_white}></path>
+        <path class="fill white" id="phone_screen" d={paths.phone_screen}
+              in:fade={{duration:speed/2, delay: speed*3}}
+        ></path>
+        <path class="fill white" id="phone_button" d={paths.phone_button}
+              in:fade={{duration:speed/2, delay: speed*3}}
+        ></path>
+        <path class="fill white" id="pin_white" d={paths.pin_white}
+              in:fade={{duration:speed/2, delay: speed*3}}
+        ></path>
     </svg>
 </Mount>
 <style lang="scss">
