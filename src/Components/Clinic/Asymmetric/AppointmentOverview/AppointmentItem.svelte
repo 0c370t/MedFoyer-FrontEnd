@@ -29,26 +29,29 @@
             | Checked In: {formatTime(new Date(appt.check_in_time))}
         {/if}
     </p>
-    <p class="uk-margin-remove">
-        {appt.status}
-    </p>
     {#if at_risk}
 
         {#if appt.covid_flag === "AT_RISK"}
-            <span class="uk-badge warning">AT RISK | {appt.status === "SUMMONED" ? "SUMMONED" : "WAITING"}</span>
+            <p class="uk-margin-small uk-position-absolute uk-position-bottom-right">
+                <span class="uk-label uk-label-warning">AT RISK | {appt.status === "SUMMONED" ? "SUMMONED" : "WAITING"}</span>
+            </p>
         {:else}
-            <span class="uk-badge danger">HIGH RISK | {appt.status === "SUMMONED" ? "SUMMONED" : "WAITING"}</span>
+            <p class="uk-margin-small uk-position-absolute uk-position-bottom-right" style="right:-10px;">
+                <span class="uk-label uk-label-danger">HIGH RISK | {appt.status === "SUMMONED" ? "SUMMONED" : "WAITING"}</span>
+            </p>
         {/if}
 
     {:else if appt.check_in_time}
-        {#if appt.status === "SUMMONED"}
-            <span class="uk-badge success">SUMMONED</span>
-        {:else if appt.status === "FILLING_FORMS"}
-            <span class="uk-badge warning">FILLING PAPERWORK</span>
-        {:else}
-            <span class="uk-badge success">WAITING</span>
-        {/if}
+        <p class="uk-margin-small uk-position-absolute uk-position-bottom-right">
 
+            {#if appt.status === "SUMMONED"}
+                <span class="uk-label uk-label-success">SUMMONED</span>
+            {:else if appt.status === "FILLING_FORMS"}
+                <span class="uk-label uk-label-default">FILLING PAPERWORK</span>
+            {:else}
+                <span class="uk-label uk-label-default">WAITING</span>
+            {/if}
+        </p>
     {/if}
 </div>
 
@@ -60,7 +63,7 @@
         cursor: pointer;
 
         &.at_risk {
-            border-right: #fd3636 10px solid;
+            border-right: #f0506e 10px solid;
         }
 
         &:nth-child(odd) {
@@ -71,26 +74,6 @@
             background-color: hsl(204, 61%, 80%);
         }
 
-    }
-
-    span.uk-badge {
-        bottom: 1em;
-        right: 1em;
-        position: absolute;
-        padding: .5em;
-        color: white;
-
-        &.danger {
-            background-color: #fd3636;
-        }
-
-        &.success {
-            background-color: #32d296;
-        }
-
-        &.warning {
-            background-color: #b7b520;
-        }
     }
 
     p {

@@ -67,6 +67,7 @@
 
     }
 </script>
+
 <AsymmetricMain emptyMessage="Please select an appointment" hasContent={appointment}>
     <header class="uk-container uk-container-expand">
         <div class="uk-flex uk-flex-between uk-child-width-1-3 ">

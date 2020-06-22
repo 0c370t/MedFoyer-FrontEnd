@@ -15,8 +15,8 @@
         buildAttribute("covid_flag", "COVID Risk Level", true, true, true, (x) => x || "Unknown"),
         buildAttribute("patient.given_name", "Patient First Name", true, true, true),
         buildAttribute("patient.last_name", "Patient Last Name", true, true, true),
-        buildAttribute("appointment_time", "Appointment Time", true, true, true, (x) => formatForDisplay(x, true)),
-        buildAttribute("clinic_location.clinic_location_name", "Location", true, true, true)
+        buildAttribute("appointment_time", "Appointment Time", false, true, true, (x) => formatForDisplay(x, true)),
+        buildAttribute("clinic_location.clinic_location_name", "Location", false, true, true)
     ];
     let appointments__ = query(client, {query: GET_APPOINTMENT_DASHBOARD});
 

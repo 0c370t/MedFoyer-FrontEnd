@@ -28,7 +28,7 @@
     <Route path="/clinic/admin"><ClinicWrapper admin_only="{true}" component="{AdminOverview}"/></Route>
     <Route path="/clinic/login" component="{Login}"/>
     <Route path="/clinic/login/complete_profile" component="{CompleteProfile}"/>
-    <Route path="/*">
+    <Route path="/">
         <Redirect to="/clinic/login"/>
     </Route>
 </Router>
