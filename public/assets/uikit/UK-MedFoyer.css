@@ -7907,9 +7907,9 @@ iframe.uk-cover {
  * 1. Required for `a`
  */
 .uk-logo {
-  font-size: 1.5rem;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  color: #002149;
+  font-size: 2.625rem;
+  font-family: "Roboto", sans-serif;
+  color: #3279a5;
   /* 1 */
   text-decoration: none; }
 

@@ -1,63 +1,61 @@
 <script>
-    import {draw, fade} from 'svelte/transition';
-    import {paths} from './newlogo.paths';
+    import {paths} from "./newlogo.2.paths";
+
+    import {fade, draw} from "svelte/transition";
     import Mount from "../Components/Abstract/Mount.svelte";
 
-    const outerShapeDraw = {
-        delay: 0,
-        duration: 1500
-    };
-    const innerShapeDraw = {
-        delay: 200,
-        duration: 1500
-    };
-    const innerShapeFill = {
-        delay: 1300,
-        duration: 500
-    };
-    const crossDraw = {
-        delay: 500,
-        duration: 1200
-    };
+    export let speed = 1000;
 </script>
-
 <Mount>
-    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 250 400" xml:space="preserve">
-        <path in:draw={outerShapeDraw} class="outer-shape stroke" d="{paths.outerShape}"></path>
-        <path in:draw={innerShapeDraw} class="inner-shape stroke" d="{paths.innerShape}"></path>
-        <path in:fade={innerShapeFill} class="inner-shape fill" d="{paths.innerShape}"></path>
-        <path in:draw={crossDraw} class="cross stroke" d="{paths.cross}"></path>
+    <svg viewBox="0 0 252.71 246.67" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px">
+        <g id="fills">
+            <path class="fill" id="phone_fill" d={paths.phone_bezel}
+            in:fade={{duration:speed/2, delay: speed*3}}
+            ></path>
+            <path class="fill" id="pin_fill" d={paths.pin_body}
+              in:fade={{duration:speed/2, delay: speed*3}}
+            ></path>
+            <path class="fill" id="pin_cross_fill" d={paths.pin_cross}
+              in:fade={{duration:speed/2, delay: speed*3}}
+            ></path>
+        </g>
+        <g id="strokes">
+            <path class="stroke" id="phone_stroke" d={paths.phone_bezel}
+                  in:draw={{duration:speed*2, delay: speed}}
+            ></path>
+            <path class="stroke" id="pin_stroke" d={paths.pin_body}
+                  in:draw={{duration:speed*2, delay: speed}}
+            ></path>
+            <path class="stroke" id="pin_cross_stroke" d={paths.pin_cross}
+                  in:draw={{duration:speed*2, delay: speed}}
+            ></path>
+        </g>
+
+        <!--  White Elements -->
+        <path class="fill white" id="phone_screen" d={paths.phone_screen}></path>
+        <path class="fill white" id="phone_button" d={paths.phone_button}></path>
+        <path class="fill white" id="pin_white" d={paths.pin_white}></path>
     </svg>
 </Mount>
-
-<style>
+<style lang="scss">
+    @import '../scss/variables';
     svg {
         height: 100%;
         width:auto;
     }
-
     path {
+        stroke-width:5;
+        stroke-miterlimit: 10;
+    }
+    path.fill {
+        stroke: none;
+        fill: $primary-color;
+    }
+    path.fill.white {
+        fill: white;
+    }
+    path.stroke {
+        stroke: $primary-color;
         fill: none;
-    }
-
-    path.outer-shape.stroke {
-        stroke: #396481;
-        stroke-width: 5;
-        stroke-miterlimit: 10;
-        transition: 5s;
-    }
-
-    path.inner-shape.stroke {
-        stroke: #5FA8D8;
-    }
-
-    path.inner-shape.fill {
-        fill: #5FA8D8;
-    }
-
-    path.cross.stroke {
-        stroke: #5FA8D8;
-        stroke-width: 4;
-        stroke-miterlimit: 10;
     }
 </style>
