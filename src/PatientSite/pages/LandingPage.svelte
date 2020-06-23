@@ -35,13 +35,17 @@
                 <h2 class="uk-heading-medium uk-margin-remove">Welcome</h2>
                 <hr class="uk-divider-icon uk-margin-small"/>
                 <div>
+                    <Button on:click={advance}>
+                        <span class="uk-text-large uk-margin-remove">
+                            Tap to get started <Icon options="{{icon:'sign-in',ratio:2}}"/>
+                        </span>
+                    </Button>
 
-                        <Button on:click={advance}>
-                    <span class="uk-text-large">
-                        Tap to get started <Icon options="{{icon:'sign-in',ratio:2}}"/>
-                            </span>
-                        </Button>
-
+                </div>
+                <div>
+                    <span class="uk-text-meta">
+                        By tapping to proceed, you agree to the <a href="/_patient/terms_and_conditions.txt" target="_blank" class="uk-display-block">MedFoyer Terms and Conditions</a>
+                    </span>
                 </div>
             </main>
         {/if}
