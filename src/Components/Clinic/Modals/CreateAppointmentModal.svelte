@@ -22,6 +22,7 @@
             let patient_id = getFieldValue(apptForm, "patient_id");
             let clinic_location_id = getFieldValue(apptForm, "appointment_location");
             let appointment_time = getFieldValue(apptForm, "appointment_time").getTime();
+            let practitioner_id = getFieldValue(apptForm, "practitioner");
             let response = await mutate(client, {
                 mutation: CREATE_NEW_APPOINTMENT,
                 variables: {
@@ -29,7 +30,8 @@
                     appointment_time,
                     patient_id,
                     clinic_location_id,
-                    doctor_id: "00000000-0000-0000-0000-000000000000"
+                    practitioner_id
+
                 }
             });
             apptForm = cloneForm(new_appointment);

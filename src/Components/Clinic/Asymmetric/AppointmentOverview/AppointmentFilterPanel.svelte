@@ -6,6 +6,7 @@
     import TimePicker from "../../../TimePicker/TimePicker.svelte";
     import Callout from "../../../Callout/Callout.svelte";
     import LocationPicker from "../../../Forms/Controls/LocationPicker.svelte";
+    import PractitionerPicker from "../../../Forms/Controls/PractitionerPicker.svelte";
 
     export let filterValues;
     export let loading = false;
@@ -51,6 +52,13 @@
             <div class="uk-margin-small-bottom">
                 <LocationPicker includeAll="true" bind:value={internalValues.location}/>
             </div>
+            <label for="practitioner" class="uk-form-label uk-display-block">
+                Practitioner:
+            </label>
+            <div class="uk-margin-small-bottom">
+                <PractitionerPicker includeAll="true" bind:value={internalValues.practitioner}/>
+            </div>
+
             <label for="include_summoned" class="uk-form-label uk-display-block">
                 Include Summoned:
             </label>

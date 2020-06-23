@@ -11,14 +11,14 @@
 
 <div class="uk-box-shadow-hover-medium uk-position-relative" on:click class:active class:at_risk
      in:fly={{delay: index*50, duration:200, x: -50}} out:fly={{delay: index*50, duration:200, x: 50}}>
-    <span class="uk-flex uk-flex-between uk-flex-middle">
-        <h4 class="uk-margin-remove">
+    <span class="uk-flex uk-flex-between">
+        <p class="uk-margin-remove uk-text-bold">
             {#if appt.patient}
                 {appt.patient.given_name} {appt.patient.last_name}
             {:else}
                 Unnamed
             {/if}
-        </h4>
+        </p>
         <span class="uk-text-small">
             {appt.clinic_location ? appt.clinic_location.clinic_location_name : ""}
         </span>
@@ -28,6 +28,9 @@
         {#if appt.check_in_time}
             | Checked In: {formatTime(new Date(appt.check_in_time))}
         {/if}
+    </p>
+    <p class="uk-margin-remove">
+        {appt.practitioner.name} {appt.practitioner.title}
     </p>
     {#if at_risk}
 

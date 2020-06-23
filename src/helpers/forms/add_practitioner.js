@@ -1,0 +1,29 @@
+export const add_practitioner = [
+    {
+        "label":"Name",
+        "type":"text",
+        "required":true,
+        "name":"practitioner_name"
+    },
+    {
+        "label":"Title",
+        "type":"dropdown",
+        "required":true,
+        "name":"title",
+        "options":[
+            {
+                "label":"MD",
+                "value":"MD"
+            },
+            {
+                "label":"NP",
+                "value":"NP"
+            },
+            {
+                "label":"PA",
+                "value":"PA"
+            }
+        ]
+
+    }
+];

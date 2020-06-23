@@ -6,6 +6,7 @@
     import TimePicker from "../TimePicker/TimePicker.svelte";
     import {phoneClean} from "../../helpers/phone_numbers";
     import LocationPicker from "./Controls/LocationPicker.svelte";
+    import PractitionerPicker from "./Controls/PractitionerPicker.svelte";
 
     export let form;
     export let onSubmit;
@@ -19,6 +20,7 @@
 </script>
 <form bind:this={formElement} class={"uk-container uk-width-1-1 " + _class}>
     {#each form as question (question.name)}
+        {#if question.type !== "hidden"}
         <div class="field {question.type} uk-position-relative">
             {#if question.type === "boolean"}
                 <label for="{question.name}">{question.label} </label>
@@ -37,7 +39,7 @@
                 </div>
             {:else if question.type === "dropdown"}
                 <label>{question.label}</label>
-                <select class="uk-select input {question.type}" required="{question.required}">
+                <select class="uk-select input {question.type}" required="{question.required}" bind:value={question.value}>
                     <option></option>
                     {#each question.options as option}
                         <option value="{option.value}">{option.label}</option>
@@ -90,11 +92,14 @@
                 <PatientPicker name={question.name} bind:value={question.value} label={question.label} required={question.required} type={question.type}/>
             {:else if question.type === "location"}
                 <LocationPicker name={question.name} bind:value={question.value} label={question.label} required={question.required} type={question.type}/>
+            {:else if question.type === "practitioner"}
+                <PractitionerPicker name={question.name} bind:value={question.value} label={question.label} required={question.required} type={question.type}/>
             {/if}
             {#if question.message}
                 <Callout position="right" }>{question.message}</Callout>
             {/if}
         </div>
+        {/if}
     {/each}
     <div class="buttonContainer">
         <label class="labelfield uk-label-danger">

@@ -20,6 +20,11 @@ query {
             last_name,
             phone_number
         },
+        practitioner{
+            name,
+            practitioner_id,
+            title
+        },
         check_in_latitude,
         check_in_longitude,
         check_in_time,
@@ -34,14 +39,14 @@ export const CREATE_NEW_APPOINTMENT = gql`
         $appointment_time: AWSTimestamp!,
         $patient_id: ID!,
         $clinic_location_id: ID!,
-        $doctor_id: ID!)
+        $practitioner_id: ID!)
     {    
         createAppointment(
             status: $status
             appointment_time: $appointment_time
             patient_id: $patient_id
             clinic_location_id: $clinic_location_id
-            doctor_id: $doctor_id)
+            practitioner_id: $practitioner_id)
             {
                 status
             }
