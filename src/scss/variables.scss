@@ -8,6 +8,9 @@ $secondary-color: #002249;
 $secondary-color-dark: darken($secondary-color, 10%);
 $secondary-color-darker: darken($secondary-color, 20%);
 
+$global-warning-background: #faa05a;
+$global-danger-background: #f0506e;
+
 $text-dark: #002149;
 $text-light: #EEE;
 $base-heading-color: $text-dark;

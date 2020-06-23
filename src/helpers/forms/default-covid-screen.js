@@ -103,7 +103,7 @@ export const other_symptoms = [
         "required": false,
         "flags":[
             {
-                "state": "HIGH_RISK",
+                "state": "AT_RISK",
                 "flaggable_answers": [
                     true
                 ],
@@ -119,7 +119,7 @@ export const other_symptoms = [
         "required": false,
         "flags":[
             {
-                "state": "HIGH_RISK",
+                "state": "AT_RISK",
                 "flaggable_answers": [
                     true
                 ],
@@ -135,7 +135,7 @@ export const other_symptoms = [
         "required": false,
         "flags":[
             {
-                "state": "HIGH_RISK",
+                "state": "AT_RISK",
                 "flaggable_answers": [
                     true
                 ],
@@ -151,7 +151,7 @@ export const other_symptoms = [
         "required": false,
         "flags":[
             {
-                "state": "HIGH_RISK",
+                "state": "AT_RISK",
                 "flaggable_answers": [
                     true
                 ],
@@ -167,7 +167,7 @@ export const other_symptoms = [
         "required": false,
         "flags":[
             {
-                "state": "HIGH_RISK",
+                "state": "AT_RISK",
                 "flaggable_answers": [
                     true
                 ],
@@ -183,7 +183,7 @@ export const other_symptoms = [
         "required": false,
         "flags":[
             {
-                "state": "HIGH_RISK",
+                "state": "AT_RISK",
                 "flaggable_answers": [
                     true
                 ],
@@ -199,7 +199,7 @@ export const other_symptoms = [
         "required": false,
         "flags":[
             {
-                "state": "HIGH_RISK",
+                "state": "AT_RISK",
                 "flaggable_answers": [
                     true
                 ],
@@ -215,7 +215,7 @@ export const other_symptoms = [
         "required": false,
         "flags":[
             {
-                "state": "HIGH_RISK",
+                "state": "AT_RISK",
                 "flaggable_answers": [
                     true
                 ],

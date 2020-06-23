@@ -5,11 +5,13 @@
     export let appt;
     export let active = false;
     export let index = 0;
-    let at_risk = Boolean(appt.covid_flag) && appt.covid_flag !== "NORMAL";
-    $: at_risk = Boolean(appt.covid_flag) && appt.covid_flag !== "NORMAL";
+    let at_risk = Boolean(appt.covid_flag) && appt.covid_flag === "AT_RISK";
+    $: at_risk = Boolean(appt.covid_flag) && appt.covid_flag === "AT_RISK";
+    let high_risk = Boolean(appt.covid_flag) && appt.covid_flag === "HIGH_RISK";
+    $: high_risk = Boolean(appt.covid_flag) && appt.covid_flag === "HIGH_RISK";
 </script>
 
-<div class="uk-box-shadow-hover-medium uk-position-relative" on:click class:active class:at_risk
+<div class="uk-box-shadow-hover-medium uk-position-relative" on:click class:active class:at_risk class:high_risk
      in:fly={{delay: index*50, duration:200, x: -50}} out:fly={{delay: index*50, duration:200, x: 50}}>
     <span class="uk-flex uk-flex-between">
         <p class="uk-margin-remove uk-text-bold">
@@ -33,17 +35,13 @@
         {appt.practitioner.name} {appt.practitioner.title}
     </p>
     {#if at_risk}
-
-        {#if appt.covid_flag === "AT_RISK"}
-            <p class="uk-margin-small uk-position-absolute uk-position-bottom-right">
-                <span class="uk-label uk-label-warning">AT RISK | {appt.status === "SUMMONED" ? "SUMMONED" : "WAITING"}</span>
-            </p>
-        {:else}
-            <p class="uk-margin-small uk-position-absolute uk-position-bottom-right" style="right:-10px;">
-                <span class="uk-label uk-label-danger">HIGH RISK | {appt.status === "SUMMONED" ? "SUMMONED" : "WAITING"}</span>
-            </p>
-        {/if}
-
+        <p class="uk-margin-small uk-position-absolute uk-position-bottom-right">
+            <span class="uk-label uk-label-warning">AT RISK | {appt.status === "SUMMONED" ? "SUMMONED" : "WAITING"}</span>
+        </p>
+    {:else if high_risk}
+        <p class="uk-margin-small uk-position-absolute uk-position-bottom-right" style="right:-10px;">
+            <span class="uk-label uk-label-danger">HIGH RISK | {appt.status === "SUMMONED" ? "SUMMONED" : "WAITING"}</span>
+        </p>
     {:else if appt.check_in_time}
         <p class="uk-margin-small uk-position-absolute uk-position-bottom-right">
 
@@ -59,14 +57,20 @@
 </div>
 
 <style lang="scss">
+    @import '../../../../scss/variables.scss';
+
     div {
         height: 6em;
         padding: 1em;
         background-color: rgba(255, 255, 255, 0.7);
         cursor: pointer;
 
+        &.high_risk {
+            border-right: $global-danger-background 10px solid;
+        }
+
         &.at_risk {
-            border-right: #f0506e 10px solid;
+            border-right: $global-warning-background 10px solid;
         }
 
         &:nth-child(odd) {
