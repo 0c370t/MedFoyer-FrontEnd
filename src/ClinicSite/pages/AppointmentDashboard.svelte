@@ -22,6 +22,7 @@
         from: defaultFrom,
         to: defaultTo,
         location: "ALL",
+        practitioner: "ALL",
         includeSummoned: false
     };
     let result__ = query(client, {query: GET_APPOINTMENT_DASHBOARD});

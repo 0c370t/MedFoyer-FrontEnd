@@ -12,6 +12,12 @@ export const new_appointment = [
         "required":true
     },
     {
+        "label":"Practitioner",
+        "type":"practitioner",
+        "name":"practitioner",
+        "required":true
+    },
+    {
         "label":"Appointment Time",
         "type":"datetime",
         "name":"appointment_time",

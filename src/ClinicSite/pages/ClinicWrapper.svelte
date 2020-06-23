@@ -23,9 +23,11 @@
         showPatientModal = true;
     };
 
-    onMount(() => {
+    onMount(async () => {
         // TODO: Wait for user information to become available
+        await $user.loading;
         if(admin_only && !$user.admin){ window.location.href = "/clinic" }
+
     });
 
     let update = child.update;

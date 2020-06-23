@@ -23,17 +23,11 @@
     ;
 </script>
 
-<section class="uk-container uk-margin-medium ">
-    <hr/>
+<section class="uk-container">
     <h3>Clinic Details</h3>
-    <div class="uk-child-width-1-2">
-        <div class="uk-container uk-width-1-2 uk-container-expand-left">
+        <div class="uk-container">
             <Form form={inner_form} buttonText="Update Details" fullwidth={false}/>
         </div>
-        <div>
-
-        </div>
-    </div>
 </section>
 
 <style>
