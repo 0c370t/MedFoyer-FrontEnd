@@ -102,7 +102,7 @@
             {#if appointment.forms.length > 0}
                 <dl class="uk-description-list">
                     <h3>COVID-19 Screening Results:</h3>
-                    {#each JSON.parse(appointment.forms[0]) as q, i}
+                    {#each JSON.parse(appointment.forms[appointment.forms.length - 1]) as q, i}
                         {#if q.type !== "label"}
                             <dt>{q.label}</dt>
                             <dd class:uk-text-bold={questionIsFlagged(q)} class:uk-text-danger={questionIsFlagged(q)}>
