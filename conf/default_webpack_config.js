@@ -5,6 +5,7 @@ const path = require('path');
 const preprocess = require('svelte-preprocess');
 const mode = process.env.NODE_ENV || 'development';
 const prod = mode === 'production';
+const VersionManagerPlugin = require("./VersionManagerPlugin");
 
 const getLoaders = (legacy_support = false) => legacy_support
     ? [
@@ -90,11 +91,13 @@ module.exports = (input, output, legacy_support = false) => {
             ]
         },
         mode,
+
         plugins: [
             new MiniCssExtractPlugin({
                 filename: 'build/[name].css'
             }),
             new EnvironmentPlugin(["AMP_DOMAIN", "AMP_USER_POOL", "AMP_USER_POOL_CLIENT", "MAPBOX_API_KEY", "APPSYNC_URL"]),
+            new VersionManagerPlugin({files: ["bundle.js"], paths:[path.resolve(output, "..", "index.html")]}),
         ],
         devtool: prod ? false : 'source-map',
         devServer: {
@@ -107,6 +110,9 @@ module.exports = (input, output, legacy_support = false) => {
                 (warning) => /unused css selector/.exec(warning.toLowerCase()),
                 (warning) => /<a>/.exec(warning.toLowerCase()) // UIKit3 wants us to do thing to a tags that A1ly does not like.
             ]
+        },
+        node: {
+            fs: 'empty'
         }
     }
 };
