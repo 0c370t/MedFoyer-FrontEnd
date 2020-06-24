@@ -23,7 +23,6 @@
 
     export let appointment = false;
     export let appointment_id;
-    $: console.log(appointment_id)
     let message = "Please select an appointment";
 
     let loading = false;
