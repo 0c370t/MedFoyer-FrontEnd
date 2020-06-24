@@ -31,3 +31,6 @@ export const addHiddenField = (form, name, value) => {
         type: "hidden"
     });
 };
+export const containsField = (form, name) => {
+    return form.some(q => q.name === name);
+}

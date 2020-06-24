@@ -4,7 +4,12 @@
     import Icon from "../../../Icon/Icon.svelte";
     import UIkit from "uikit";
     import AsymmetricMain from "../AsymmetricMain.svelte";
-    import {DELETE_APPOINTMENT, RESEND_CHECKIN_LINK, SUMMON_PATIENT} from "../../../../API/queries/appointments.GQL";
+    import {
+        DELETE_APPOINTMENT,
+        RESEND_CHECKIN_LINK,
+        SEND_TELEHEALTH_LINK,
+        SUMMON_PATIENT
+    } from "../../../../API/queries/appointments.GQL";
     import {getClient, mutate} from "svelte-apollo";
     import {getContext} from "svelte";
     import Modal from "../../../Modal/Modal.svelte";
@@ -14,7 +19,7 @@
     export let appointment;
     const updateAppointments = getContext("updateAppointments");
     const client = getClient();
-    let summonPatientButtonLoading = false;
+    let buttonsLoading = false;
     const deleteAppointmentHandler = () => {
         UIkit.modal.confirm('Are you sure you want to delete this appointment?', {status: "danger"}).then(async () => {
             await mutate(client, {
@@ -27,7 +32,7 @@
         }).catch(e => console.log(e))
     };
     const summonPatient = async () => {
-        summonPatientButtonLoading = true;
+        buttonsLoading = true;
         await mutate(client, {
             mutation: SUMMON_PATIENT,
             variables: {
@@ -36,7 +41,7 @@
         });
         UIkit.modal.alert("Notification Sent");
         updateAppointments();
-        summonPatientButtonLoading = false;
+        buttonsLoading = false;
     };
     const resendCheckInLink = async () => {
         let message = "";
@@ -63,15 +68,36 @@
                 }
             })
         }).catch(e => undefined);
+    };
+    const sendTelehealthLink = async () => {
+        buttonsLoading = true;
+        await mutate(client, {
+            mutation: SEND_TELEHEALTH_LINK,
+            variables: {
+                appointment_id: appointment.appointment_id
+            }
+        });
+        UIkit.modal.alert("Telehealth link sent");
+        updateAppointments();
+        buttonsLoading = false;
+    };
 
-
-    }
+    let buttonsDisabled;
+    $: buttonsDisabled = Boolean(!appointment.check_in_time)          // Patient is not checked in
+                                      || appointment.status === "SUMMONED"   // patient is already interacting with doctor
+                                      || appointment.status === "TELEHEALTH"
+                                      || buttonsLoading;         // button is loading
+    let buttonDisabledReason;
+    $: buttonDisabledReason = Boolean(!appointment.check_in_time)
+            ? "Patient must check in first!"
+            : appointment.status === "SUMMONED" || appointment.status === "TELEHEALTH"
+                    ? "Patient has already been taken off the wait list"
+                    : "";
 </script>
 
 <AsymmetricMain emptyMessage="Please select an appointment" hasContent={appointment}>
     <header class="uk-container uk-container-expand">
         <div class="uk-flex uk-flex-between uk-child-width-1-3 ">
-
             <div class="uk-flex uk-flex-left uk-flex-wrap">
                 <h2 class="uk-width-1-1">{appointment.patient ? appointment.patient.given_name : "Unnamed"}
                     @ {formatTime(appointment.appointment_time)}</h2>
@@ -85,15 +111,23 @@
         </div>
         <div class="uk-width-1-1 uk-margin-remove uk-flex">
             <Button _class="uk-margin-small-right" on:click={resendCheckInLink}
-                    disabled={appointment.status === "SUMMONED"}>
-                Resend Patient Link
+                    disabled={appointment.status === "SUMMONED"}
+                    loading={buttonsLoading}>
+                Resend Link
                 <Icon options={{icon:"link"}}/>
             </Button>
-            <Button on:click={summonPatient}
-                    disabled={Boolean(!appointment.check_in_time) || appointment.status === "SUMMONED" || summonPatientButtonLoading}
-                    title={Boolean(!appointment.check_in_time) ? "Patient must check in first!" : ""}>
-                Summon Patient
-                <Icon options={{icon:"phone"}}/>
+            <Button _class="uk-margin-small-right" on:click={summonPatient} disabled={buttonsDisabled}
+                    title={buttonDisabledReason}
+                    loading={buttonsLoading}>
+                Summon
+                <Icon options={{icon:"sign-in"}}/>
+            </Button>
+            <Button on:click={sendTelehealthLink}
+                    disabled={buttonsDisabled}
+                    title={buttonDisabledReason}
+                    loading={buttonsLoading}>
+                Telehealth
+                <Icon options={{icon:"desktop"}}/>
             </Button>
         </div>
     </header>

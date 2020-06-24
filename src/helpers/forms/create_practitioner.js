@@ -1,4 +1,4 @@
-export const add_practitioner = [
+export const create_practitioner = [
     {
         "label":"Name",
         "type":"text",
@@ -24,6 +24,11 @@ export const add_practitioner = [
                 "value":"PA"
             }
         ]
-
+    },
+    {
+        "label":"Telehealth Link",
+        "type":"text",
+        "required":false,
+        "name":"telehealth_link"
     }
 ];

@@ -11,8 +11,14 @@
     import Icon from "../../../Icon/Icon.svelte";
     import Modal from "../../../Modal/Modal.svelte";
     import Form from "../../../Forms/Form.svelte";
-    import {add_practitioner} from "../../../../helpers/forms/add_practitioner";
-    import {addHiddenField, cloneForm, getFieldValue, setFieldValue} from "../../../../helpers/forms/form-utils";
+    import {create_practitioner} from "../../../../helpers/forms/create_practitioner";
+    import {
+        addHiddenField,
+        cloneForm,
+        containsField,
+        getFieldValue,
+        setFieldValue
+    } from "../../../../helpers/forms/form-utils";
     import {operation_not_supported} from "../../../../helpers/notify";
     import uikit from 'uikit';
 
@@ -22,11 +28,11 @@
     let data = [];
 
     let showCreateModal = false;
-    let create_form = cloneForm(add_practitioner);
+    let create_form = cloneForm(create_practitioner);
     let createFormElement;
 
     let showEditModal = false;
-    let edit_form = cloneForm(add_practitioner);
+    let edit_form = cloneForm(create_practitioner);
     let editFormElement;
 
     onMount(async () => {
@@ -48,22 +54,28 @@
             showCreateModal = false;
             let name = getFieldValue(create_form, "practitioner_name");
             let title = getFieldValue(create_form, "title");
-            console.log(title);
+            let telehealth_link = getFieldValue(create_form, "telehealth_link");
             await mutate(client, {
                 mutation: CREATE_PRACTITIONER,
                 variables: {
                     practitioner: {
                         name,
-                        title
+                        title,
+                        telehealth_link
                     }
                 }
             });
             await update();
         }
     };
-    const openEdit = async (name, id) => {
-        setFieldValue(edit_form, "practitioner_name", name);
-        addHiddenField(edit_form, "practitioner_id", id);
+    const openEdit = async (practitioner) => {
+        setFieldValue(edit_form, "practitioner_name", practitioner.name);
+        setFieldValue(edit_form, "title", practitioner.title);
+        setFieldValue(edit_form, "telehealth_link", practitioner.telehealth_link || "");
+        if(containsField(edit_form, "practitioner_id"))
+            setFieldValue(edit_form, "practitioner_id", practitioner.id);
+        else
+            addHiddenField(edit_form, "practitioner_id", practitioner.id);
         edit_form = edit_form;
         showEditModal = true;
     };
@@ -111,7 +123,7 @@
             <div class="uk-flex uk-flex-between uk-flex-middle uk-tile uk-tile-muted uk-tile-xsmall">
                 <h4 class="uk-margin-remove uk-flex-1">{prac.name} {prac.title}</h4>
                 <div class="uk-flex uk-flex-right uk-flex-1">
-                    <Button on:click={()=>openEdit(prac.name, prac.practitioner_id)} _class="uk-margin-small-right">
+                    <Button on:click={()=>openEdit(prac)} _class="uk-margin-small-right">
                         <Icon icon="pencil"/>
                     </Button>
                     <Button on:click={()=>remove(prac.name, prac.practitioner_id)}>
