@@ -2,7 +2,7 @@
     import Logo from "../../svg/Logo.svelte";
     import MobileHeader from "../../Components/Layout/MobileHeader.svelte";
     import {patient_meta, waitlist_data} from "../../helpers/stores";
-
+    import Button from "../../Components/Button/Button.svelte";
     let summoned = false;
     let waitlist;
     let unsub = waitlist_data.subscribe(v => waitlist = v);
