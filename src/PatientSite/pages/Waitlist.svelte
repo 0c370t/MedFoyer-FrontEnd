@@ -2,7 +2,7 @@
     import Logo from "../../svg/Logo.svelte";
     import MobileHeader from "../../Components/Layout/MobileHeader.svelte";
     import {patient_meta, waitlist_data} from "../../helpers/stores";
-
+    import Button from "../../Components/Button/Button.svelte";
     let summoned = false;
     let waitlist;
     let unsub = waitlist_data.subscribe(v => waitlist = v);
@@ -34,9 +34,9 @@
         <p class="uk-text-center uk-margin-small">
             We'll let you know you when your doctor is ready.
             {#if $patient_meta.covid_flag === "NORMAL"}
-                Please wait in your car or your favorite nearby cafe.
+            Please wait in your car or your favorite nearby cafe.
             {:else}
-                Please wait in your car.
+            Please wait in your car.
             {/if}
         </p>
         <p class="uk-text-large">
@@ -49,8 +49,22 @@
             <img src="/assets/img/undraw_confirmed_81ex.svg" class="uk-height-small uk-margin-small"/>
         {/if}
         <hr class="uk-width-3-4"/>
-        <p class="uk-text-center uk-text-large uk-margin-remove">
-            Please proceed inside and check in with the front desk. </p>
+        {#if waitlist.telehealth_link}
+            <p class="uk-text-center uk-text-large uk-margin-remove">
+                Your doctor is requesting a telehealth visit.
+            </p>
+            {#if waitlist.telehealth_link === "no_link"}
+                Please contact your doctor for the link.
+            {:else}
+                <Button>
+                    <a href="{waitlist.telehealth_link}" target="_blank">Click here to open telehealth</a>
+                </Button>
+            {/if}
+        {:else}
+            <p class="uk-text-center uk-text-large uk-margin-remove">
+                Please proceed inside and check in with the front
+                desk. </p>
+        {/if}
     {/if}
 
 </main>

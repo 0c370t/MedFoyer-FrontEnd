@@ -23,7 +23,8 @@ query {
         practitioner{
             name,
             practitioner_id,
-            title
+            title,
+            telehealth_link
         },
         check_in_latitude,
         check_in_longitude,
@@ -67,4 +68,9 @@ export const RESEND_CHECKIN_LINK = gql`
     mutation($appointment_id: ID!){
         sendCheckInText(appointment_id: $appointment_id)
     }
-    `
+    `;
+export const SEND_TELEHEALTH_LINK = gql`
+    mutation($appointment_id: ID!){
+        sendTelehealthText(appointment_id: $appointment_id)
+    }
+    `;
