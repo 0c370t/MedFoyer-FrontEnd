@@ -16,7 +16,6 @@
     export let validationMessage = "";
     export let _class = "";
     export let fullwidth = true;
-    $: console.log(form.map(q=>q.name));
 </script>
 <form bind:this={formElement} class={"uk-container uk-width-1-1 " + _class}>
     {#each form as question (question.name)}

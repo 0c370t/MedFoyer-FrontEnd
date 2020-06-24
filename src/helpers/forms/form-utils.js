@@ -3,7 +3,6 @@ export const getFieldValue = (form, name) => {
     if(field.type === "phone"){
         return field.value.replace(/[^\d\-]/g, '');
     } else {
-        console.log(field);
         return field.value || null;
     }
 };
