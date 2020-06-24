@@ -105,4 +105,12 @@ export const sameDay = (d1, d2) => {
         d1.getMonth() === d2.getMonth() &&
         d1.getFullYear() === d2.getFullYear()
     )
-}
+};
+
+export const getDefaultFromTo = () => {
+    let defaultFrom = new Date();
+    defaultFrom.setHours(8, 0);
+    let defaultTo = new Date();
+    defaultTo.setHours(17, 0);
+    return [defaultFrom, defaultTo];
+};

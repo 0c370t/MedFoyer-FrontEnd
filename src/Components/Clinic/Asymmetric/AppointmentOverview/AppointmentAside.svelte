@@ -11,29 +11,17 @@
     import Button from "../../../Button/Button.svelte";
 
     export let appointments = [];
-    export let all_appointments = [];
     export let loading = false;
-    export let selectedAppointment = false;
+    export let selectedAppointmentId = false;
     const updateAppointments = getContext("updateAppointments");
     export let filterValues;
 
-    const selectAppointment = (a) => selectedAppointment = a;
+    const selectAppointment = (a) => selectedAppointmentId = a;
 
     let checkedInAppointments = [];
-    let countCheckedInAppointmentsToday = 0;
-    let countCheckedInAppointmentsTotal = 0;
     let notCheckedInAppointments = [];
-    let countNotCheckedInAppointmentsToday = 0;
-    let countNotCheckedInAppointmentsTotal = 0;
     $: checkedInAppointments = appointments.filter(a => a.check_in_time).sort(sortByCheckInTime);
     $: notCheckedInAppointments = appointments.filter(a => !a.check_in_time).sort(sortByAppointmentTime);
-
-    $: countCheckedInAppointmentsToday = all_appointments.filter(a => a.check_in_time && isToday(a.appointment_time) && !checkedInAppointments.includes(a)).length;
-    $: countNotCheckedInAppointmentsToday = all_appointments.filter(a => !a.check_in_time && isToday(a.appointment_time)  && !notCheckedInAppointments.includes(a)).length;
-    $: countCheckedInAppointmentsTotal = all_appointments.filter(a => a.check_in_time  && !checkedInAppointments.includes(a)).length;
-    $: countNotCheckedInAppointmentsTotal = all_appointments.filter(a => !a.check_in_time  && !notCheckedInAppointments.includes(a)).length;
-
-
 </script>
 
 
@@ -41,7 +29,7 @@
         <h2 class="uk-margin-remove uk-width-1-1" slot="header">Appointment Overview</h2>
         <span class="uk-text-meta" slot="header">{formatForDisplay(filterValues.from, true)} - {formatForDisplay(filterValues.to, true)}</span>
 
-    <AppointmentList title="Checked In" appointments={checkedInAppointments} {selectedAppointment} {selectAppointment} {loading} notShownToday={countCheckedInAppointmentsToday} notShownTotal={countCheckedInAppointmentsTotal}>
+    <AppointmentList title="Checked In" appointments={checkedInAppointments} {selectedAppointmentId} {selectAppointment} {loading}>
         <div slot="header" class="uk-flex">
             <Button on:click={updateAppointments} disabled={loading} _class="uk-margin-small-right">
                 <Icon options={{icon: "refresh"}}/>
@@ -50,7 +38,7 @@
         </div>
     </AppointmentList>
 
-    <AppointmentList title="Not Checked In" appointments={notCheckedInAppointments} {selectedAppointment} {selectAppointment} {loading} notShownToday={countNotCheckedInAppointmentsToday} notShownTotal={countNotCheckedInAppointmentsTotal}>
+    <AppointmentList title="Not Checked In" appointments={notCheckedInAppointments} {selectedAppointmentId} {selectAppointment} {loading}>
         <div slot="header">
 
         </div>
