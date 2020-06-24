@@ -36,11 +36,11 @@
     </p>
     {#if at_risk}
         <p class="uk-margin-small uk-position-absolute uk-position-bottom-right">
-            <span class="uk-label uk-label-warning">AT RISK | {appt.status}</span>
+            <span class="uk-label uk-label-warning">AT RISK | {appt.status.split("_").join(" ")}</span>
         </p>
     {:else if high_risk}
         <p class="uk-margin-small uk-position-absolute uk-position-bottom-right" style="right:-10px;">
-            <span class="uk-label uk-label-danger">HIGH RISK | {appt.status}</span>
+            <span class="uk-label uk-label-danger">HIGH RISK | {appt.status.split("_").join(" ")}</span>
         </p>
     {:else if appt.check_in_time}
         <p class="uk-margin-small uk-position-absolute uk-position-bottom-right">

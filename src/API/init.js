@@ -14,6 +14,15 @@ export const createClient = () => {
                 jwtToken: async () =>
                     (await Auth.currentSession()).getIdToken().getJwtToken()
             }
+        }, {
+            defaultOptions: {
+                watchQuery:{
+                    fetchPolicy: 'no-cache'
+                },
+                query: {
+                    fetchPolicy: 'no-cache'
+                }
+            }
         });
     }
     return client;

@@ -36,7 +36,8 @@
                     query: GET_APPOINTMENT_DETAIL,
                     variables: {
                         appointment_id
-                    }
+                    },
+                    fetchPolicy: 'no-cache'
                 });
                 let result = await $response;
                 if (result.data && result.data.getAppointment) {
@@ -131,7 +132,7 @@
                     : "";
 </script>
 
-<AsymmetricMain emptyMessage={message} hasContent={appointment}>
+<AsymmetricMain emptyMessage={message} hasContent={appointment_id}>
     <Spinner show={loading}/>
     {#if appointment}
         <header class="uk-container uk-container-expand">

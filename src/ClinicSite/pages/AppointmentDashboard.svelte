@@ -52,10 +52,7 @@
         });
         all_appointments = all_appointments;
         applyFilters();
-        if (!selectedAppointmentId || !appointments.filter(a => a.appointment_id === selectedAppointmentId)) {
-            selectedAppointmentId = false;
-        }
-
+        selectedAppointmentId = false;
     };
     setContext("updateAppointments", update);
 
