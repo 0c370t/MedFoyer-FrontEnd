@@ -32,7 +32,7 @@ query(
 `;
 
 export const GET_APPOINTMENT_DETAIL = gql`
-query GetAppointments($appointment_id: ID!){
+query($appointment_id: ID!){
     getAppointment(appointment_id: $appointment_id){
         appointment_id,
         status,
