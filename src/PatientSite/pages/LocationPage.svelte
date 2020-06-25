@@ -91,13 +91,15 @@
     });
     let loading = false;
     const verifyLocation = async () => {
+        loading = true;
         try{
-            await postCheckIn(userPosition[1], userPosition[0], $patient_meta.jwt)
+            await postCheckIn(userPosition[1], userPosition[0], $patient_meta.jwt);
             $patient_meta.state = "FORMS";
             navigate("/patient/screening");
         } catch(error){
             console.log(error);
         }
+        loading = false;
     }
 
 </script>
