@@ -26,7 +26,7 @@
                 mutation: CREATE_PATIENT,
                 variables: {
                     patient: {
-                        birth_date: getFieldValue(form, "dob"),
+                        birth_date: toAWSDate(getFieldValue(form, "dob")),
                         given_name: getFieldValue(form, "given_name"),
                         last_name: getFieldValue(form, "last_name"),
                         phone_number: getFieldValue(form, "phone_num"),
