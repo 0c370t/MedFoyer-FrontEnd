@@ -134,7 +134,7 @@
 
 <AsymmetricMain emptyMessage={message} hasContent={appointment_id}>
     <Spinner show={loading}/>
-    {#if appointment}
+    {#if appointment && !loading}
         <header class="uk-container uk-container-expand">
             <div class="uk-flex uk-flex-between uk-child-width-1-3 ">
                 <div class="uk-flex uk-flex-left uk-flex-wrap">
