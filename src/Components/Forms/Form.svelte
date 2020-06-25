@@ -5,8 +5,10 @@
     import PatientPicker from "./Controls/PatientPicker.svelte";
     import TimePicker from "../TimePicker/TimePicker.svelte";
     import {phoneClean} from "../../helpers/phone_numbers";
+    import {dateClean} from "../../helpers/datetime";
     import LocationPicker from "./Controls/LocationPicker.svelte";
     import PractitionerPicker from "./Controls/PractitionerPicker.svelte";
+    import Icon from "../Icon/Icon.svelte";
 
     export let form;
     export let onSubmit;
@@ -16,6 +18,8 @@
     export let validationMessage = "";
     export let _class = "";
     export let fullwidth = true;
+
+
 </script>
 <form bind:this={formElement} class={"uk-container uk-width-1-1 " + _class}>
     {#each form as question (question.name)}
@@ -68,6 +72,13 @@
                 <label for="{question.name}">{question.label}</label>
                 <input type="date" class="uk-input field {question.type}" bind:value={question.value}
                        name="{question.name}" required="{question.required}"/>
+            {:else if question.type === "date-pasteable"}
+                <label for="{question.name}">{question.label}</label>
+                <input type="text" class="uk-input field {question.type}" bind:value={question.value}
+                       name="{question.name}" required="{question.required}"
+                       pattern={'[\\d]{2}/[\\d]{2}/[\\d]{4}'} placeholder="MM/DD/YYYY"
+                       on:change={()=>question.value = dateClean(question.value)}
+                />
             {:else if question.type === "datepicker"}
                 <label for="{question.name}">{question.label} </label>
                 <div class="{question.type} uk-flex uk-flex-column">

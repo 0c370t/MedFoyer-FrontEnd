@@ -84,14 +84,17 @@ export const formatForDisplay = (dateString, includeTime = false) => {
     output += months[dateobj.getMonth()] + " ";
     output += dateobj.getDate();
     if(includeTime) {
-        output += ` @ ${dateobj.getHours() % 12}:${padMinutes(dateobj.getMinutes())} ${dateobj.getHours() > 12 ? "pm" : "am"}`
+        output += ` @ ${dateobj.getHours() % 12}:${padMinutes(dateobj.getMinutes())} ${dateobj.getHours() > 12 ? "pm" : "am"}`;
     }
     return output;
 };
 
 
 export const toAWSDate = (date) => {
-    if(!date instanceof Date) return "";
+    if(!(date instanceof Date)) {
+        let dateParts = date.split(/\/|-| |\./);
+        date = new Date(dateParts[2], parseInt(dateParts[0]) - 1, parseInt(dateParts[1]) - 1)
+    }
     let output = `${date.getFullYear()}-${padMinutes(date.getMonth()+1)}-${padMinutes(date.getDate()+1)}`;
     return output;
 };
@@ -113,4 +116,13 @@ export const getDefaultFromTo = () => {
     let defaultTo = new Date();
     defaultTo.setHours(17, 0);
     return [defaultFrom, defaultTo];
+};
+
+export const dateClean = (value) => {
+    let date = value.replace(/\D/g, '');
+    const match = date.match(/(0[1-9]|1[012])[- /.]?(0[1-9]|[12][0-9]|3[01])[- /.]?((?:19|20)\d\d)$/);
+    if(match){
+        date = `${match[1]}/${match[2]}/${match[3]}`;
+    }
+    return date;
 };
