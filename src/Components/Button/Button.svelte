@@ -22,9 +22,11 @@
 <style lang="scss">
     @import '../../scss/variables';
     button {
-        background-color: white;
-        border: 1px solid;
-        color: $primary-color;
+        &.uk-button-default{
+            background-color: white;
+            color: $primary-color;
+        }
+        border: 1px solid currentColor;
         padding: 1em;
         line-height: 1em;
         font-size: inherit;

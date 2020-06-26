@@ -38,11 +38,11 @@
             shown = false;
             try{
                 await Uikit.modal.confirm("Would you like to create an appointment for " + getFieldValue(form, "given_name") + "?");
-                dispatch("create-appointment", {patient_id: response.data.createPatient.patient_id})
+                dispatch("create-appointment", {patient_id: response.data.createPatient.patient_id});
             } catch{}
             form = cloneForm(patientForm);
             shown = false;
-            dispatch("updatepatients")
+            dispatch("updatepatients");
         } catch (err) {
             if (err.message.includes("as a valid phone number")) {
                 setFieldMessage(form, "phone_num", "Invalid Phone Number");
@@ -61,7 +61,7 @@
 </script>
 
 
-<Modal bind:open={shown} id="patientCreateModal" on:hide={resetForm} title="Add Patient">
+<Modal bind:open={shown} id="patientCreateModal" on:hide={resetForm} header="Add New Patient">
     {#if shown}
         <Form {form} onSubmit="{submit}" loading="{formLoading}" bind:formElement buttonText="Create Patient"
               {validationMessage}/>

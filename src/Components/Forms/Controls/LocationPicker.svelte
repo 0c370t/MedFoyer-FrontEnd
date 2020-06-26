@@ -20,6 +20,7 @@
 
 {#if label}
 <label for="{name}">
+    {#if required}<span class="uk-text-danger">*</span>{/if}
     {label}
 </label>
 {/if}

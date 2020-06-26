@@ -91,6 +91,72 @@ export const severe_symptoms = [
 
 export const other_symptoms = [
     {
+        "label": "Have you or any of your close contacts been exposed to anyone diagnosed with COVID-19?",
+        "name": "contact_with_positives",
+        "type": "radio",
+        "options": [
+            {
+                "label": "No",
+                "value": "0"
+            },
+            {
+                "label": "Within 14 Days",
+                "value": "2"
+            },
+            {
+                "label": "Greater than 14 days ago",
+                "value": "3"
+            },
+            {
+                "label": "I'm not sure",
+                "value": "1"
+            }
+
+        ],
+        "value": "",
+        "required": true,
+        "flags":[
+            {
+                "state": "AT_RISK",
+                "flaggable_answers": [
+                    "1","2","3"
+                ],
+                "priority": 5
+            },
+        ]
+    },
+    {
+        "label": "Have you or any of your close contacts with traveled outside of the United States in the last 14 days?",
+        "name": "left_the_country",
+        "value": "",
+        "type": "radio",
+        "options": [
+            {
+                "label": "No",
+                "value": "0"
+            },
+            {
+                "label": "Yes",
+                "value": "2"
+            },
+            {
+                "label": "I'm not sure",
+                "value": "1"
+            }
+
+        ],
+        "required": true,
+        "flags":[
+            {
+                "state": "AT_RISK",
+                "flaggable_answers": [
+                    "3","2","1"
+                ],
+                "priority": 5
+            },
+        ]
+    },
+    {
         "label": "Check all symptoms that apply",
         "type": "label",
         "name": "check_all_that_apply_2"
@@ -221,77 +287,6 @@ export const other_symptoms = [
                 ],
                 "priority": 10
             }
-        ]
-    },
-    {
-        "label": "Please answer a few additional questions",
-        "type": "label",
-        "name":"additional"
-    },
-    {
-        "label": "Have you or any of your close contacts been exposed to anyone diagnosed with COVID-19?",
-        "name": "contact_with_positives",
-        "type": "radio",
-        "options": [
-            {
-                "label": "No",
-                "value": "0"
-            },
-            {
-                "label": "Within 14 Days",
-                "value": "2"
-            },
-            {
-                "label": "Greater than 14 days ago",
-                "value": "3"
-            },
-            {
-                "label": "I'm not sure",
-                "value": "1"
-            }
-
-        ],
-        "value": "",
-        "required": true,
-        "flags":[
-            {
-                "state": "AT_RISK",
-                "flaggable_answers": [
-                    "1","2","3"
-                ],
-                "priority": 5
-            },
-        ]
-    },
-    {
-        "label": "Have you or any of your close contacts with traveled outside of the United States in the last 14 days?",
-        "name": "left_the_country",
-        "value": "",
-        "type": "radio",
-        "options": [
-            {
-                "label": "No",
-                "value": "0"
-            },
-            {
-                "label": "Yes",
-                "value": "2"
-            },
-            {
-                "label": "I'm not sure",
-                "value": "1"
-            }
-
-        ],
-        "required": true,
-        "flags":[
-            {
-                "state": "AT_RISK",
-                "flaggable_answers": [
-                    "3","2","1"
-                ],
-                "priority": 5
-            },
         ]
     }
 ];

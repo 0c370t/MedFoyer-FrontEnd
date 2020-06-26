@@ -24,7 +24,7 @@
         handler: async function () {
             let obj = forms[formIndex];
             if (currentFormElement.reportValidity()) {
-                finalFormObject = [...finalFormObject, ...obj.questions];
+                finalFormObject = [...finalFormObject, {"type":"label","label":"","name":"page_break_01"}, ...obj.questions];
 
                 let result = await postScreeningResult(finalFormObject, $patient_meta.jwt);
                 $patient_meta.state = "CHECKED_IN";

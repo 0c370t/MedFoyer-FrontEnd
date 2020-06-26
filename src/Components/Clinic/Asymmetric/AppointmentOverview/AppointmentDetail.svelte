@@ -186,6 +186,8 @@
                                         {q.value}
                                     {/if}
                                 </dd>
+                                {:else}
+                                <hr/>
                             {/if}
                         {/each}
                     </dl>
