@@ -2,7 +2,7 @@
     export let options = {};
     export let icon = false;
     export let _class = '';
-
+    export let title = "";
     import Uikit from 'uikit';
     import UikitIcons from 'uikit/dist/js/uikit-icons.min';
     UikitIcons(Uikit);
@@ -21,4 +21,4 @@
 </script>
 
 
-<span class={_class} bind:this={target} on:click/>
+<span class={_class} bind:this={target} on:click {title}/>

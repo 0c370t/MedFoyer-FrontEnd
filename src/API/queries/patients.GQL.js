@@ -23,3 +23,11 @@ export const GET_ALL_PATIENTS = gql`
       }
     }
 `;
+
+export const DELETE_PATIENT = gql`
+mutation DeletePatient($patient_id: ID!){
+    deletePatient(patient_id: $patient_id){
+        patient_id
+    }
+}  
+`;

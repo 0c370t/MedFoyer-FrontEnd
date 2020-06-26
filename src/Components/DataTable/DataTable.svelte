@@ -82,12 +82,11 @@
         let segments = path.split(".");
         let output = "";
         let temp = object;
-        for(let s in segments){
+        for (let s in segments) {
             s = segments[s];
-            if(temp.hasOwnProperty(s)){
+            if (temp.hasOwnProperty(s)) {
                 temp = temp[s];
-            }
-            else {
+            } else {
                 return "";
             }
         }
@@ -101,14 +100,15 @@
     $: if (filters) {
         let internal = result;
         for (let path in filters) {
-            internal = internal.filter(o => lookup(o,path).toString().toLowerCase().includes(filters[path].toLowerCase()));
+            internal = internal.filter(o => lookup(o, path).toString().toLowerCase().includes(filters[path].toLowerCase()));
         }
         display = internal;
         update();
     }
 </script>
 
-<table class="uk-table uk-position-relative uk-table-striped uk-table-middle  uk-table-responsive" class:uk-table-small={small}>
+<table class="uk-table uk-position-relative uk-table-striped uk-table-middle  uk-table-responsive"
+       class:uk-table-small={small}>
     <thead>
     <tr>
         {#each visibleAttributes as attribute}
@@ -166,13 +166,19 @@
                     </td>
                 {/each}
                 <td class="uk-flex uk-flex-around">
-                    <Button><Icon icon="refresh"/></Button>
-                    <Button><Icon icon="pencil"/></Button>
-                    <Button><Icon icon="trash"/></Button>
+                    <Button>
+                        <Icon icon="refresh"/>
+                    </Button>
+                    <Button>
+                        <Icon icon="pencil"/>
+                    </Button>
+                    <Button>
+                        <Icon icon="trash"/>
+                    </Button>
                 </td>
             </tr>
         {/each}
-    {:then}
+    {:then r}
         {#each display.slice(page*pageLimit, page*pageLimit + pageLimit) as item, i (item[data_key])}
             <tr out:fly={{duration:500,delay:5 * i, x:50}} in:fly={{delay: 100*i, duration: 500, x:-50}}
                 animate:better_flip="{{duration:500}}" class="uk-background-default">

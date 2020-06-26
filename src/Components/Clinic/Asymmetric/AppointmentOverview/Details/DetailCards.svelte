@@ -18,6 +18,11 @@
             <dd>{appointment.patient.phone_number ? appointment.patient.phone_number : "Not available"}</dd>
             <dt>Appointment With:</dt>
             <dd>{appointment.practitioner.name} {appointment.practitioner.title}</dd>
+            {#if appointment.practitioner.telehealth_link}
+                <dd><a href="{appointment.practitioner.telehealth_link}" target="_blank">{appointment.practitioner.telehealth_link}</a></dd>
+                {:else}
+                <dd>Telehealth unavailable</dd>
+            {/if}
             <dt>Check-in Time:</dt>
             {#if appointment.check_in_time}
                 <dd>{formatTime(new Date(appointment.check_in_time))}</dd>

@@ -5,7 +5,8 @@ query{
     listPractitioners{
         practitioner_id, 
         name,
-        title
+        title,
+        telehealth_link
     }
 }
 `;

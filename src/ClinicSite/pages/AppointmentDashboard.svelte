@@ -9,15 +9,13 @@
     import {getClient, query} from 'svelte-apollo';
     import {GET_APPOINTMENT_DASHBOARD} from "../../API/queries/appointments.GQL";
     import AsymmetricLayout from "../../Components/Clinic/Asymmetric/AsymmetricLayout.svelte";
+    import {getDefaultFromTo} from "../../helpers/datetime";
 
     const client = getClient();
     let all_appointments = [];
     let appointments = [];
-    let selectedAppointment = false;
-    let defaultFrom = new Date();
-    defaultFrom.setHours(8, 0);
-    let defaultTo = new Date();
-    defaultTo.setHours(17, 0);
+    let selectedAppointmentId = false;
+    let [defaultFrom, defaultTo] = getDefaultFromTo();
     let filterValues = {
         from: defaultFrom,
         to: defaultTo,
@@ -25,7 +23,14 @@
         practitioner: "ALL",
         includeSummoned: false
     };
-    let result__ = query(client, {query: GET_APPOINTMENT_DASHBOARD});
+    let result__ = query(client, {
+        query: GET_APPOINTMENT_DASHBOARD,
+        variables: {
+            start_time: filterValues.from.getTime(),
+            end_time: filterValues.to.getTime(),
+            clinic_location_id: filterValues.location === "ALL" ? "" : filterValues.location
+        }
+    });
     $: $result__.then(r => {
         loading = false;
         all_appointments = r.data.listAppointments;
@@ -33,7 +38,11 @@
     });
     export const update = async () => {
         loading = true;
-        let r = await result__.refetch();
+        let r = await result__.refetch({
+            start_time: filterValues.from.getTime(),
+            end_time: filterValues.to.getTime(),
+            clinic_location_id: filterValues.location === "ALL" ? "" : filterValues.location
+        });
         all_appointments = r.data.listAppointments;
         all_appointments.forEach(a => {
             // Ensure dates are dates
@@ -43,12 +52,7 @@
         });
         all_appointments = all_appointments;
         applyFilters();
-        if (!selectedAppointment || !appointments.filter(a => a.appointment_id === selectedAppointment.appointment_id)) {
-            selectedAppointment = false;
-        } else {
-            selectedAppointment = appointments.filter(a => a.appointment_id === selectedAppointment.appointment_id)[0];
-        }
-
+        selectedAppointmentId = false;
     };
     setContext("updateAppointments", update);
 
@@ -68,7 +72,7 @@
 
 <AsymmetricLayout>
     <ClinicHeader on:updateappts={update} on:create-appointment on:create-patient/>
-    <AppointmentAside {appointments} {all_appointments} bind:selectedAppointment {filterValues}
+    <AppointmentAside {appointments} bind:selectedAppointmentId {filterValues}
                       on:filter={updateFilters} {loading}/>
-    <AppointmentDetail appointment="{selectedAppointment}"/>
+    <AppointmentDetail appointment_id="{selectedAppointmentId}"/>
 </AsymmetricLayout>

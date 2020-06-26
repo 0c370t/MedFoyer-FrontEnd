@@ -13,7 +13,7 @@ export const patientForm = [
     },
     {
         "label":"Patient Date of Birth",
-        "type":"date",
+        "type":"date-pasteable",
         "name":"dob",
         "required":true
     },

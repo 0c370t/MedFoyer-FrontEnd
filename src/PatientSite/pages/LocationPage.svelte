@@ -11,6 +11,7 @@
     import {navigate} from "svelte-routing";
     import {getClinicLocation, postCheckIn} from "../../API/patient.API";
     import Spinner from "../../Components/Spinner/Spinner.svelte";
+    import Icon from "../../Components/Icon/Icon.svelte";
 
     let clinicPosition;
     let userPosition = [0, 0];
@@ -91,13 +92,15 @@
     });
     let loading = false;
     const verifyLocation = async () => {
-        try{
-            await postCheckIn(userPosition[1], userPosition[0], $patient_meta.jwt)
+        loading = true;
+        try {
+            await postCheckIn(userPosition[1], userPosition[0], $patient_meta.jwt);
             $patient_meta.state = "FORMS";
             navigate("/patient/screening");
-        } catch(error){
+        } catch (error) {
             console.log(error);
         }
+        loading = false;
     }
 
 </script>
@@ -121,7 +124,7 @@
                 You are too far away, please check in when you have arrived.
             {/if}
         </p>
-        <Button disabled="{!withinBounds}" on:click={verifyLocation}>Verify Location</Button>
+        <Button color="primary" disabled="{!withinBounds}" on:click={verifyLocation}><Icon _class="uk-margin-small-right" icon="sign-in"/> Check-In</Button>
     </footer>
     <Spinner show="{loading}"/>
 </div>

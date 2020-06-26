@@ -9,6 +9,7 @@ export const createClient = () => {
         client = new AWSAppSyncClient({
             url: process.env.APPSYNC_URL,
             region: "us-west-2",
+            disableOffline: true,
             auth: {
                 type: AUTH_TYPE.AMAZON_COGNITO_USER_POOLS,
                 jwtToken: async () =>

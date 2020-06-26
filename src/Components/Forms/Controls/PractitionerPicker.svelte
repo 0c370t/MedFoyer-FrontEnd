@@ -21,7 +21,10 @@
 </script>
 
 {#if label}
-    <label for="{name}">{label} </label>
+    <label for="{name}">
+        {#if required}<span class="uk-text-danger">*</span>{/if}
+        {label}
+    </label>
 {/if}
 <select name="{name}" class="uk-select input {type} uk-flex-1" bind:value={value} required="{required}">
     {#await $practitioners}
