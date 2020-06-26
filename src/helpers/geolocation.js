@@ -14,10 +14,10 @@ export function getErrorCode(error) {
 }
 
 export function getLatLong(callback){
-    navigator.geolocation.getCurrentPosition(callback, function(e){callback(getErrorCode(e))});
+    navigator.geolocation.getCurrentPosition(callback, function(e){callback(getErrorCode(e), e)});
 }
 export function subscribe(callback){
-    navigator.geolocation.watchPosition(callback, function(e){callback(getErrorCode(e))});
+    navigator.geolocation.watchPosition(callback, function(e){callback(getErrorCode(e), e)});
 }
 export function withinDistance(patientLocation, drLocation, threshold){
     patientLocation = {
