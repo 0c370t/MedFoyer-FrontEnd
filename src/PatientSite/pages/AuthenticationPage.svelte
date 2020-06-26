@@ -5,18 +5,18 @@
     import {navigate} from "svelte-routing";
     import {patient_meta} from "../../helpers/stores";
     import {getAuthToken} from "../../API/patient.API";
-    import {toAWSDate} from "../../helpers/datetime";
+    import {padMinutes, toAWSDate} from "../../helpers/datetime";
 
-    let value;
+    let day, month, year;
     let validationText = "";
     let loading = false;
     const onSubmit = async () => {
         loading = true;
-        if (!value) {
+        if (!day || !month || !year) {
             validationText = "Please provide your birthday";
         } else {
             try {
-                let response = await getAuthToken(toAWSDate(new Date(value)), $patient_meta.token.id);
+                let response = await getAuthToken(`${year}-${padMinutes(month)}-${padMinutes(day)}`, $patient_meta.token.id);
                 if(!response.ok){
                     response.json().then(r => {
                         validationText = r;
@@ -35,7 +35,7 @@
                 loading = false;
             }
         }
-
+        loading = false;
     }
 </script>
 
@@ -46,7 +46,11 @@
     <p>
         MedFoyer uses your birthday to make sure nobody else checks in for you, please enter it below. </p>
     <label class="uk-text-danger">{validationText}</label>
-    <input type="date" class="uk-input" bind:value name="" required="true" title="Your birthday"/>
+    <div class="uk-flex uk-width-3-4 uk-align-center">
+        <input type="number" class="uk-input uk-width-1-4" bind:value={month} name="" required="true" placeholder="MM" min="1" max="2"/>
+        <input type="number" class="uk-input uk-width-1-4" bind:value={day} name="" required="true" placeholder="DD" min="1" max="2"/>
+        <input type="number" class="uk-input uk-flex-1" bind:value={year} name="" required="true" placeholder="YYYY" min="4" max="4"/>
+    </div>
     <Button fullwidth="true" _class="uk-margin-medium-top" on:click={onSubmit} {loading}>
         <span class="uk-margin-small-right">Submit</span>
         <Icon options={{icon:"check"}}/>
