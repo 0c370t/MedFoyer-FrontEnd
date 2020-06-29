@@ -8,6 +8,7 @@
     import {padMinutes, toAWSDate} from "../../helpers/datetime";
 
     let day, month, year;
+    let dayElem, monthElem, yearElem;
     let validationText = "";
     let loading = false;
     const onSubmit = async () => {
@@ -17,7 +18,7 @@
         } else {
             try {
                 let response = await getAuthToken(`${year}-${padMinutes(month)}-${padMinutes(day)}`, $patient_meta.token.id);
-                if(!response.ok){
+                if (!response.ok) {
                     response.json().then(r => {
                         validationText = r;
                         loading = false;
@@ -36,6 +37,37 @@
             }
         }
         loading = false;
+    };
+
+    const moveToDay = () => {
+        if (typeof month === "undefined") return;
+        if (month > 1 && month < 10) {
+            month = "0" + month;
+            dayElem.focus();
+        } else if (month > 12) {
+            month = 12;
+            dayElem.focus();
+        } else if (month.toString().length === 2) {
+            dayElem.focus();
+        }
+    };
+    const moveToYear = () => {
+        if (typeof day === "undefined") return;
+        if (day > 3 && day < 10) {
+            day = "0" + day;
+            yearElem.focus();
+        } else if (day > 31) {
+            day = 31;
+            yearElem.focus();
+        } else if (day.toString().length === 2) {
+            yearElem.focus();
+        }
+    };
+    const blurYear = () => {
+        if (typeof year === "undefined") return;
+        if (year.toString().length === 4){
+            yearElem.blur();
+        }
     }
 </script>
 
@@ -47,9 +79,12 @@
         MedFoyer uses your birthday to make sure nobody else checks in for you, please enter it below. </p>
     <label class="uk-text-danger">{validationText}</label>
     <div class="uk-flex uk-width-3-4 uk-align-center">
-        <input type="number" class="uk-input uk-width-1-4" bind:value={month} name="" required="true" placeholder="MM" min="1" max="2"/>
-        <input type="number" class="uk-input uk-width-1-4" bind:value={day} name="" required="true" placeholder="DD" min="1" max="2"/>
-        <input type="number" class="uk-input uk-flex-1" bind:value={year} name="" required="true" placeholder="YYYY" min="4" max="4"/>
+        <input type="number" class="uk-input uk-width-1-4" bind:this={monthElem} bind:value={month} name="month"
+               required="true" placeholder="MM" min="1" max="12" on:keyup={moveToDay} on:blur={padMinutes}/>
+        <input type="number" class="uk-input uk-width-1-4" bind:this={dayElem} bind:value={day} name="day"
+               required="true" placeholder="DD" min="1" max="31" on:keyup={moveToYear} on:blur={padMinutes}/>
+        <input type="number" class="uk-input uk-flex-1" bind:this={yearElem} bind:value={year} name="year"
+               required="true" placeholder="YYYY" min="1950" max={new Date().getFullYear()} on:keyup={blurYear}/>
     </div>
     <Button fullwidth="true" _class="uk-margin-medium-top" on:click={onSubmit} {loading}>
         <span class="uk-margin-small-right">Submit</span>
