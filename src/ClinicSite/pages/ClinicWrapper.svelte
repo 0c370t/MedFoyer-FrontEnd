@@ -3,6 +3,7 @@
     import CreateAppointmentModal from "../../Components/Clinic/Modals/CreateAppointmentModal.svelte";
     import {appointmentModalData, user} from "../../helpers/clinic_stores";
     import {navigate} from "svelte-routing";
+    import Auth from '@aws-amplify/auth';
     import {onMount} from "svelte";
     import {setFieldValue} from "../../helpers/forms/form-utils";
 
@@ -24,16 +25,13 @@
     };
 
     onMount(async () => {
-        // TODO: Wait for user information to become available
         await $user.loading;
         if(admin_only && !$user.admin){ window.location.href = "/clinic" }
-
     });
 
     let update = child.update;
     $: update = child.update || (() => {});
 </script>
-
 <svelte:component this={component} on:create-appointment={openApptModal} on:create-patient={openPatientModal} bind:this={child}/>
 
 
