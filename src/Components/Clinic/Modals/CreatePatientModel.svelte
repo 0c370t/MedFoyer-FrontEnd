@@ -39,7 +39,7 @@
             try{
                 await Uikit.modal.confirm("Would you like to create an appointment for " + getFieldValue(form, "given_name") + "?");
                 dispatch("create-appointment", {patient_id: response.data.createPatient.patient_id});
-            } catch{}
+            } catch(e){}
             form = cloneForm(patientForm);
             shown = false;
             dispatch("updatepatients");
