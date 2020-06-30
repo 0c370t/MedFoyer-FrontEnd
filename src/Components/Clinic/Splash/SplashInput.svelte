@@ -8,8 +8,6 @@
     );
     // This line is designed to prevent short-circuiting, to validate all fields rather than failing on just 1
     export const validateMany = (inputs) => ![...inputs.map(i => i.validate())].includes(false);
-
-
 </script>
 
 <script>
@@ -33,6 +31,7 @@
     export let icon = "check";
     export let placeholder = "Placeholder";
     export let type = "text";
+    export let disabled = false;
     if (type !== "text" && type !== "password" && type !== "email") type = "text";
 
     $: if (!input.valid) setTimeout(() => input.valid = true, 1000);
@@ -46,6 +45,6 @@
             {input.message}
         </Callout>
         <Icon _class="uk-form-icon uk-form-icon-flip" {icon}/>
-        <input class="uk-input uk-border-pill" required {placeholder} {type} on:change={handleInput}>
+        <input class="uk-input uk-border-pill" required {placeholder} {type} value={input.value} on:input={handleInput} {disabled} class:uk-disabled={disabled}>
     </div>
 </div>
