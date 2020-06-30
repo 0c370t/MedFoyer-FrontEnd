@@ -3,6 +3,7 @@
     import Spinner from "../../../Spinner/Spinner.svelte";
     import Drop from "../../../Drop/Drop.svelte";
     import Icon from "../../../Icon/Icon.svelte";
+    import {onMount} from "svelte";
 
     export let selectAppointment = () => {
     };
@@ -10,8 +11,11 @@
     export let appointments = [];
     export let title = "";
     export let loading = false;
+    export let asideHeaderHeight;
+
+
 </script>
-<div class="container uk-flex uk-flex-column">
+<div class="container uk-flex uk-flex-column" style={`height: calc(50% - (${asideHeaderHeight}px / 2));`}>
     <div class="uk-background-default uk-width-1-1 uk-margin-remove uk-padding-small uk-padding-remove-right uk-flex uk-flex-between"
          id="not-checked-in-header">
         <h3 class="uk-margin-remove uk-flex uk-flex-middle">

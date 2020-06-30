@@ -22,14 +22,18 @@
     let notCheckedInAppointments = [];
     $: checkedInAppointments = appointments.filter(a => a.check_in_time).sort(sortByCheckInTime);
     $: notCheckedInAppointments = appointments.filter(a => !a.check_in_time).sort(sortByAppointmentTime);
+
+
+    let headerHeight;
 </script>
 
 
-<AsymmetricAside>
-        <h2 class="uk-margin-remove uk-width-1-1" slot="header">Appointment Overview</h2>
-        <span class="uk-text-meta" slot="header">{formatForDisplay(filterValues.from, true)} - {formatForDisplay(filterValues.to, true)}</span>
+<AsymmetricAside bind:headerHeight>
 
-    <AppointmentList title="Checked In" appointments={checkedInAppointments} {selectedAppointmentId} {selectAppointment} {loading}>
+    <h2 class="uk-margin-remove uk-width-1-1" slot="header">Appointment Overview</h2>
+    <span class="uk-text-meta" slot="header">{formatForDisplay(filterValues.from, true)} - {formatForDisplay(filterValues.to, true)}</span>
+
+    <AppointmentList asideHeaderHeight={headerHeight} title="Checked In" appointments={checkedInAppointments} {selectedAppointmentId} {selectAppointment} {loading}>
         <div slot="header" class="uk-flex">
             <Button on:click={updateAppointments} disabled={loading} _class="uk-margin-small-right">
                 <Icon options={{icon: "refresh"}}/>
@@ -38,7 +42,7 @@
         </div>
     </AppointmentList>
 
-    <AppointmentList title="Not Checked In" appointments={notCheckedInAppointments} {selectedAppointmentId} {selectAppointment} {loading}>
+    <AppointmentList asideHeaderHeight={headerHeight} title="Not Checked In" appointments={notCheckedInAppointments} {selectedAppointmentId} {selectAppointment} {loading}>
         <div slot="header">
 
         </div>
