@@ -35,7 +35,7 @@
         {/if}
 
         {#each result.data.getClinicLocations as location}
-            <option value="{location.clinic_location_id}">{location.clinic_location_name}</option>
+            <option value="{location.clinic_location_id}" selected={value === location.clinic_location_id}>{location.clinic_location_name}</option>
         {/each}
     {:catch}
         <option value="">An error has occured.</option>
