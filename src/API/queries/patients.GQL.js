@@ -12,6 +12,18 @@ export const CREATE_PATIENT = gql`
     } 
 `;
 
+export const UPDATE_PATIENT = gql`
+    mutation UpdatePatient($patient: PatientInput!, $patient_id: ID!){
+        updatePatient(patient: $patient, patient_id: $patient_id){
+            birth_date,
+            given_name,
+            last_name,
+            phone_number,
+            patient_id
+        }
+    }
+`;
+
 export const GET_ALL_PATIENTS = gql`
     query {
       listPatients{
