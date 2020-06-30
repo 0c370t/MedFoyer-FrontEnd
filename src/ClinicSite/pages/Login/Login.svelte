@@ -47,7 +47,6 @@
             localStorage.setItem("mf-reset-data", JSON.stringify(Object.assign(data, {username})));
             navigate("/clinic/login/change_password");
         } catch(e){
-            debugger;
             switch(e.code){
                 case "UserNotFoundException":
                     masterValidation = "User not found.";

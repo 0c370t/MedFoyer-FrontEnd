@@ -26,7 +26,6 @@
 
     onMount(async () => {
         await $user.loading;
-        debugger;
         if(admin_only && !$user.admin){ window.location.href = "/clinic" }
     });
 
