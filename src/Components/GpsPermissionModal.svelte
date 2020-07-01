@@ -62,20 +62,35 @@
             MedFoyer uses GPS to ensure you are at your doctor's office before checking in, when tapping okay, you will
             be prompted to give MedFoyer permission. </p>
         {#if device_type === "iOS" && showIosHelp}
-            <hr/>
-            <p>
-                You may need to provide your web browser with permission.
-                Apple has provided instructions <a target="_blank" class="uk-link"
-                                                   href="https://support.apple.com/en-us/HT207092">here.</a>
+        <hr/>
+            <div>
+                <p>
+                    You may need to provide your web browser with permission. </p>
+                <p>
+                    To do so, open settings, and navigate to: </p>
+                <p class="uk-margin-left">
+                    Settings
+                    <Icon icon="chevron-double-right"/>
+                    Privacy
+                    <Icon icon="chevron-double-right"/>
+                    Location Services
+                    <Icon icon="chevron-double-right"/>
+                    Safari Websites
+                </p>
+                <p>
+                    Once there, select "While Using the App" </p>
+
                 <Button _class="uk-align-center uk-margin-small-top uk-margin-remove-bottom">
                     <a href="App-prefs://prefs:root=LOCATION_SERVICES">
-                        <Icon _class="uk-margin-small-right" icon="cog"/>Tap here to open your phone settings
+                        <Icon _class="uk-margin-small-right" icon="cog"/>
+                        Tap here to open your phone settings
                     </a>
                 </Button>
-            </p>
+
+            </div>
         {/if}
         <span class="modalButton" slot="footer">
-            <Button _class="uk-position-relative" on:click={getGpsPermission} {loading}>
+            <Button _class="uk-position-relative" color="primary" on:click={getGpsPermission} {loading}>
                 <span>Okay</span>
                 <span><Icon options={{icon:"check"}}/></span>
             </Button>
