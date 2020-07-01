@@ -61,8 +61,8 @@
         <p>
             MedFoyer uses GPS to ensure you are at your doctor's office before checking in, when tapping okay, you will
             be prompted to give MedFoyer permission. </p>
-        {#if 1 === 1}
-            <hr/>
+        {#if device_type === "iOS" && showIosHelp}
+        <hr/>
             <div>
                 <p>
                     You may need to provide your web browser with permission. </p>
