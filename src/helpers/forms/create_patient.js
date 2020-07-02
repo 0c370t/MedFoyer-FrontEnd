@@ -1,15 +1,9 @@
 export const patientForm = [
     {
-        "label":"Patient First Name",
+        "label":"Patient Name",
         "type":"text",
-        "name":"given_name",
+        "name":"name",
         "required": true
-    },
-    {
-        "label":"Patient Last Name",
-        "type":"text",
-        "name":"last_name",
-        "required":true
     },
     {
         "label":"Patient Date of Birth",

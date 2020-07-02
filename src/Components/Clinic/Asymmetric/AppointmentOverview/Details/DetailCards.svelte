@@ -27,7 +27,7 @@
             {#if appointment.check_in_time}
                 <dd>{formatTime(new Date(appointment.check_in_time))}</dd>
             {:else}
-                <dd>{appointment.patient ? appointment.patient.given_name + " " + appointment.patient.last_name : "Unnamed"}
+                <dd>{appointment.patient ? appointment.patient.name : "Unnamed"}
                     has not checked in yet.
                 </dd>
             {/if}
