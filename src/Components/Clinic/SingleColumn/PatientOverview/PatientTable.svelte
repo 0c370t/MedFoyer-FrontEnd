@@ -10,8 +10,7 @@
 
     const client = getClient();
     const attributes = [
-        buildAttribute("given_name", "First Name", true, true, true),
-        buildAttribute("last_name", "Last Name", true, true, true),
+        buildAttribute("name", "Name", true, true, true),
         buildAttribute("birth_date", "Date of Birth", true, true, true),
         buildAttribute("phone_number", "Phone Number", true, true, true, phoneClean),
     ];
@@ -24,7 +23,7 @@
         // Yes I'll take "words I'll probably eat in a month for 200" please
         let patient = patients.filter(p => p.patient_id === patient_id)[0];
 
-        Uikit.modal.confirm(`Are you sure you want to delete ${patient.given_name} ${patient.last_name}?`).then(
+        Uikit.modal.confirm(`Are you sure you want to delete ${patient.name}?`).then(
                 async () => {
                     await mutate(client, {
                         mutation: DELETE_PATIENT,

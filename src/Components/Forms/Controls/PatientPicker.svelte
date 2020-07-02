@@ -32,8 +32,7 @@
     {:then result}
         <option value=""></option>
         {#each result.data.listPatients as patient}
-            <option selected={value === patient.patient_id} value="{patient.patient_id}">{patient.last_name}
-                , {patient.given_name}</option>
+            <option selected={value === patient.patient_id} value="{patient.patient_id}">{patient.name}</option>
         {/each}
     {/await}
 </select>
