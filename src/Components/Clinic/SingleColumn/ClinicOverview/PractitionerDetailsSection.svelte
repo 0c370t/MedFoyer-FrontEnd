@@ -108,7 +108,7 @@
                 }
             });
             await update();
-        } catch {
+        } catch(e) {
             loading = false;
         } // Ignore exception, user closed modal
     }

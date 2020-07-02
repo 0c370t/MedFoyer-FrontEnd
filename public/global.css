@@ -15,10 +15,10 @@ a:hover{
     color:inherit;
 }
 :root{
-    font-size:16px;
+    font-size: calc(.5vw + .5vh + .15vmin);
 }
 
-@media screen and (max-width: 1900px){
+@media screen and (max-width: 1000px){
     :root{
         font-size:14px;
     }
