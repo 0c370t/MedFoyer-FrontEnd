@@ -14,9 +14,10 @@
     import {getClient, mutate, query} from "svelte-apollo";
     import {getContext, onMount} from "svelte";
     import Modal from "../../../Modal/Modal.svelte";
-    import {questionIsFlagged} from "../../../../helpers/forms/form-utils";
+    import {cloneForm, questionIsFlagged} from "../../../../helpers/forms/form-utils";
     import DetailCards from "./Details/DetailCards.svelte";
     import Spinner from "../../../Spinner/Spinner.svelte";
+    import {new_appointment} from "../../../../helpers/forms/create_appointment";
 
     const updateAppointments = getContext("updateAppointments");
     const client = getClient();
@@ -27,6 +28,19 @@
 
     let loading = false;
     let response;
+    let edit_form = cloneForm(new_appointment);
+
+
+    let mutateButtonsDisabled;
+    let mutateButtonsDisabledReason;
+    $: if(appointment){
+        if(appointment.check_in_time){
+            console.log(appointment);
+            mutateButtonsDisabled = true;
+            mutateButtonsDisabledReason = "Cannot change appointment after a patient has checked in";
+        }
+    }
+
     const updateSelf = async () => {
         message = "Please select an appointment";
         if (appointment_id) {
