@@ -20,7 +20,7 @@
         {#if $patient_meta.covid_flag === "NORMAL"}
             <img src="/assets/img/undraw_confirmed_81ex.svg" class="uk-height-small uk-margin-small"/>
             {:else}
-            <img src="/assets/img/Alert.svg" class="uk-height-small uk-margin-small"/>
+            <img src="/assets/img/caution.svg" class="uk-height-small uk-margin-small"/>
         {/if}
 
         <div class="uk-text-large uk-margin-remove uk-flex uk-flex-around uk-width-1-1 uk-flex-middle">
