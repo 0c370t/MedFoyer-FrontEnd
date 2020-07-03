@@ -23,7 +23,7 @@ export const months = [
 ];
 
 export const padMinutes = (minutes) => {
-    if(minutes < 10){
+    if(minutes.toString().length < 2){
         return `0${minutes}`;
     } else {
         return `${minutes}`;

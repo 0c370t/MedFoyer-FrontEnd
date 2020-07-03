@@ -6,7 +6,7 @@
     import Mount from "../../Components/Abstract/Mount.svelte";
     import Icon from "../../Components/Icon/Icon.svelte";
     import {patient_meta} from '../../helpers/stores';
-    import {_, locale, locales} from 'svelte-i18n';
+    import {_, locale} from 'svelte-i18n';
 
     const headerFade = {
         duration: 500,
@@ -21,8 +21,6 @@
         $patient_meta.state = "VERIFICATION";
         navigate("/patient/auth");
     };
-    $: console.log($locale);
-    $: console.log($locales);
 </script>
 
 <Mount>

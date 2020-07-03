@@ -1,7 +1,54 @@
 {
+  "error": "An error has occurred",
+  "submit": "Submit",
+  "okay": "Okay",
+  "reload": "Reload",
+  "continue": "Continue",
+
+
   "LandingPage": {
     "header": "Welcome",
     "text": "Tap to get started",
     "disclaimer": "By tapping to proceed, you agree to the "
+  },
+  "AuthenticationPage": {
+    "validationText": "Please provide your birthday",
+    "header": "Verification",
+    "text": "MedFoyer uses your birthday to make sure nobody else checks in for you, please enter it below."
+  },
+  "LocationPage": {
+    "tooFar": "You are too far away, please check in when you have arrived.",
+    "checkIn": "Check-In",
+    "modal": {
+      "title": "We need your permission",
+      "text": "MedFoyer uses GPS to ensure you are at your doctor's office before checking in, when tapping okay, you will be prompted to give MedFoyer permission.",
+      "instructions_1": "You may need to provide your web browser with permission.",
+      "instructions_2": "To do so, open settings, and navigate to:",
+      "steps": {
+        "settings": "Settings",
+        "privacy": "Privacy",
+        "locationServices": "Location Services",
+        "safariWebsites": "Safari Websites"
+      },
+      "instructions_3": "Once there, select \"While Using the App\"",
+      "openSettings": "Tap here to open your phone settings",
+      "notSupported": "MedFoyer uses GPS to ensure you are at your destination before checking in, but it looks like your device does not currently support GPS."
+    }
+  },
+  "WaitlistPage": {
+    "waiting": {
+      "header": "You're all set!",
+      "youAre": "You are",
+      "inLine": "in line",
+      "estimate": "Estimated wait",
+      "minutes": "minutes",
+      "text": "We'll let you know you when your doctor is ready.",
+      "successText": "Please wait in your car or your favorite nearby cafe.",
+      "atRiskText": "Please wait in your car.",
+      "seeYouSoon": "See you soon."
+    },
+    "telehealth": "Your doctor is requesting a telehealth visit.",
+    "telehealth_nolink": "Please contact your doctor for the link.",
+    "telehealth_open": "Click here to open telehealth"
   }
 }
