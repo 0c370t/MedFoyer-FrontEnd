@@ -1,7 +1,7 @@
 <script>
     import Logo from "../../svg/Logo.svelte";
     import MobileHeader from "../../Components/Layout/MobileHeader.svelte";
-    import {patient_meta, waitlist_data} from "../../helpers/stores";
+    import {patient_meta, waitlist_data} from "../../helpers/stores/patient";
     import Button from "../../Components/Button/Button.svelte";
     import {_} from "svelte-i18n";
 
@@ -49,7 +49,7 @@
             {$_("WaitlistPage.waiting.seeYouSoon")} </p>
     {:else}
         <div class="uk-text-large uk-margin-remove uk-flex uk-flex-around uk-width-1-1 uk-flex-middle">
-            <span class="uk-heading-small">You're up!</span>
+            <span class="uk-heading-small">{$_("WaitlistPage.summoned")}</span>
         </div>
         {#if $patient_meta.covid_flag === "NORMAL"}
             <img src="/assets/img/undraw_confirmed_81ex.svg" class="uk-height-small uk-margin-small"/>
@@ -63,13 +63,15 @@
                 {$_("WaitlistPage.waiting.telehealth_nolink")}
             {:else}
                 <Button>
-                    <a href="{waitlist.telehealth_link}" target="_blank">Click here to open telehealth</a>
+                    <a href="{waitlist.telehealth_link}" target="_blank">
+                        {$_("WaitlistPage.telehealth_open")}
+                    </a>
                 </Button>
             {/if}
         {:else}
             <p class="uk-text-center uk-text-large uk-margin-remove">
-                Please proceed inside and check in with the front
-                desk. </p>
+                {$_("WaitlistPage.comeIn")}
+            </p>
         {/if}
     {/if}
 

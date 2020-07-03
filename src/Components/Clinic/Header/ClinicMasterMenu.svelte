@@ -7,7 +7,7 @@
     import Spinner from "../../Spinner/Spinner.svelte";
     import CreatePatientModel from "../Modals/CreatePatientModel.svelte";
     import {createEventDispatcher, onMount} from "svelte";
-    import {user} from '../../../helpers/clinic_stores';
+    import {user} from '../../../helpers/stores/clinic';
     import Uikit from 'uikit';
 
     let navElement;

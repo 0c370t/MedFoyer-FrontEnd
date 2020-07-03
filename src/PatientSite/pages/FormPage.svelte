@@ -1,6 +1,6 @@
 <script>
     import {severe_symptoms, other_symptoms, i18nDictionary} from '../../helpers/forms/default-covid-screen';
-    import {patient_meta} from '../../helpers/stores';
+    import {patient_meta} from '../../helpers/stores/patient';
     import Form from "../../Components/Forms/Form.svelte";
 
     import {navigate} from "svelte-routing";

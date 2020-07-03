@@ -46,8 +46,10 @@
       "atRiskText": "Por favor espera en tu auto.",
       "seeYouSoon": "Te veo pronto."
     },
+    "summoned": "¡Tu turno!",
     "telehealth": "Su médico solicita una visita de telesalud.",
     "telehealth_nolink": "Póngase en contacto con su médico para obtener el enlace.",
-    "telehealth_open": "Haga clic aquí para abrir telesalud"
+    "telehealth_open": "Haga clic aquí para abrir telesalud",
+    "comeIn": "Proceda adentro y regístrese en la recepción."
   }
 }

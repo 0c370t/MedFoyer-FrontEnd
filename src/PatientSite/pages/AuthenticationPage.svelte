@@ -3,7 +3,7 @@
     import Icon from "../../Components/Icon/Icon.svelte";
     import Button from "../../Components/Button/Button.svelte";
     import {navigate} from "svelte-routing";
-    import {patient_meta} from "../../helpers/stores";
+    import {patient_meta} from "../../helpers/stores/patient";
     import {getAuthToken} from "../../API/patient.API";
     import {padMinutes, toAWSDate} from "../../helpers/datetime";
     import {_} from 'svelte-i18n';
