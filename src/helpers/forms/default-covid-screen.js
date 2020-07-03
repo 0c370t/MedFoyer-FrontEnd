@@ -291,3 +291,87 @@ export const other_symptoms = [
     }
 ];
 
+export const i18nDictionary = {
+    "en":{
+        "form": {
+            "is_actually_patient": "I am the:",
+            "check_all_that_apply_1": "Check all symptoms that apply",
+            "severe_breathing": "Severe difficulty breathing",
+            "severe_chest": "Severe chest pain",
+            "patient_is_confused": "New onset of confusion",
+            "blue_lips": "Blue-colored face or lips",
+            "contact_with_positives": "Have you or any of your close contacts been exposed to anyone diagnosed with COVID-19?",
+            "left_the_country": "Have you or any of your close contacts with traveled outside of the United States in the last 14 days?",
+
+
+            "check_all_that_apply_2": "Check all symptoms that apply",
+            "fever": "Fever",
+            "new_cough": "New onset of cough",
+            "sore_throat": "Sore throat",
+            "difficult_breathing": "Difficult breathing",
+            "chills": "Chills or shaking",
+            "body_aches": "Body aches",
+            "head_aches": "Headache",
+            "cannot_smell": "Loss of smell or taste",
+
+
+            "options": {
+                "is_actually_patient": {
+                    "patient": "Patient",
+                    "not_patient": "Patient's Representative"
+                },
+                "contact_with_positives": {
+                    "0": "No",
+                    "1": "I'm not sure",
+                    "2": "Within 14 Days",
+                    "3": "Greater than 14 days ago"
+                },
+                "left_the_country": {
+                    "0": "No",
+                    "1": "I'm not sure",
+                    "2": "Yes"
+                }
+            }
+        }
+    },
+    "es":{
+        "form": {
+            "is_actually_patient": "Soy el:",
+            "check_all_that_apply_1": "Marque todos los síntomas que apliquen",
+            "severe_breathing": "Dificultad severa para respirar",
+            "severe_chest": "Dolor de pecho severo",
+            "patient_is_confused": "Nuevo comienzo de confusión",
+            "blue_lips": "Cara o labios de color azul",
+            "contact_with_positives": "¿Usted o alguno de sus contactos cercanos ha estado expuesto a alguien diagnosticado con COVID-19?",
+            "left_the_country": "¿Ha viajado usted o alguno de sus contactos cercanos fuera de los Estados Unidos en los últimos 14 días?",
+
+            "check_all_that_apply_2": "Marque todos los síntomas que apliquen",
+            "fever": "Fiebre",
+            "new_cough": "Nuevo inicio de tos",
+            "sore_throat": "Dolor de garganta",
+            "difficult_breathing": "Respiración dificultosa",
+            "chills": "Escalofríos o temblores",
+            "body_aches": "Dolor de cuerpo",
+            "head_aches": "Dolor de cabeza",
+            "cannot_smell": "Pérdida del olfato o del gusto.",
+
+            "options": {
+                "is_actually_patient": {
+                    "patient": "Paciente",
+                    "not_patient": "Representante del paciente"
+                },
+                "contact_with_positives": {
+                    "0": "No",
+                    "1": "No estoy seguro",
+                    "2": "Dentro de 14 días",
+                    "3": "Hace más de 14 días"
+                },
+                "left_the_country": {
+                    "0": "No",
+                    "1": "No estoy seguro",
+                    "2": "Si"
+                }
+            }
+        }
+    }
+};

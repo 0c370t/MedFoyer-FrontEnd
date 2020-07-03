@@ -8,6 +8,7 @@
     import Button from '../Components/Button/Button.svelte';
     import {getLatLong} from "../helpers/geolocation";
     import {getMobileOperatingSystem} from "../helpers/useragent";
+    import {_} from 'svelte-i18n';
 
     export let supportsGps = false;
     export let promptForPermission = false;
@@ -24,6 +25,7 @@
     let showIosHelp = false;
     let loading = false;
     const checkForErrors = (result, error) => {
+        debugger;
         if (notification && notification.hasOwnProperty("close")) {
             notification.close();
         }
@@ -50,6 +52,7 @@
 
     const getGpsPermission = () => {
         loading = true;
+        debugger;
         getLatLong(checkForErrors);
     };
 
@@ -57,26 +60,42 @@
     const device_type = getMobileOperatingSystem();
 </script>
 {#if supportsGps}
-    <Modal open={promptForPermission} id="locationModal" showClose={false} header="We need your permission">
+    <Modal open={promptForPermission} id="locationModal" showClose={false} header={$_("LocationPage.modal.title")}>
         <p>
-            MedFoyer uses GPS to ensure you are at your doctor's office before checking in, when tapping okay, you will
-            be prompted to give MedFoyer permission. </p>
+            {$_("LocationPage.modal.text")}
+        </p>
         {#if device_type === "iOS" && showIosHelp}
             <hr/>
-            <p>
-                You may need to provide your web browser with permission.
-                Apple has provided instructions <a target="_blank" class="uk-link"
-                                                   href="https://support.apple.com/en-us/HT207092">here.</a>
+            <div>
+                <p>
+                    {$_("LocationPage.modal.instructions_1")}
+                </p>
+                <p>
+                    {$_("LocationPage.modal.instructions_2")} </p>
+                <p class="uk-margin-left">
+                    {$_("LocationPage.modal.steps.settings")}
+                    <Icon icon="chevron-double-right"/>
+                    {$_("LocationPage.modal.steps.privacy")}
+                    <Icon icon="chevron-double-right"/>
+                    {$_("LocationPage.modal.steps.locationServices")}
+                    <Icon icon="chevron-double-right"/>
+                    {$_("LocationPage.modal.steps.safariWebsites")}
+                </p>
+                <p>
+                    {$_("LocationPage.modal.steps.instructions_3")} </p>
+
                 <Button _class="uk-align-center uk-margin-small-top uk-margin-remove-bottom">
                     <a href="App-prefs://prefs:root=LOCATION_SERVICES">
-                        <Icon _class="uk-margin-small-right" icon="cog"/>Tap here to open your phone settings
+                        <Icon _class="uk-margin-small-right" icon="cog"/>
+                        {$_("LocationPage.modal.openSettings")}
                     </a>
                 </Button>
-            </p>
+
+            </div>
         {/if}
         <span class="modalButton" slot="footer">
-            <Button _class="uk-position-relative" on:click={getGpsPermission} {loading}>
-                <span>Okay</span>
+            <Button _class="uk-position-relative" color="primary" on:click={getGpsPermission} {loading}>
+                <span>{$_("okay")}</span>
                 <span><Icon options={{icon:"check"}}/></span>
             </Button>
         </span>
@@ -84,10 +103,10 @@
 {:else}
     <Modal open={true} id="gpsUnavailable" showClose={false} header="GPS Unavailable">
         <p>
-            MedFoyer uses GPS to ensure you are at your destination before checking in, but it looks like your device
-            does not currently support GPS. </p>
+            {$_("LocationPage.modal.notSupported")}
+        </p>
         <span class="modalButton" slot="footer">
-            <Button on:click={refresh}>Reload <span class="uk-icon" uk-icon="icon: reload; ratio:2"/></Button>
+            <Button on:click={refresh}>{$_("reload")} <span class="uk-icon" uk-icon="icon: reload; ratio:2"/></Button>
         </span>
     </Modal>
 {/if}

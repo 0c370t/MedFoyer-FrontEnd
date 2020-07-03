@@ -7,11 +7,12 @@
     import Button from '../../Components/Button/Button.svelte';
     import GpsPermissionModal from "../../Components/GpsPermissionModal.svelte";
     import Logo from "../../svg/Logo.svelte";
-    import {patient_meta} from '../../helpers/stores';
+    import {patient_meta} from '../../helpers/stores/patient';
     import {navigate} from "svelte-routing";
     import {getClinicLocation, postCheckIn} from "../../API/patient.API";
     import Spinner from "../../Components/Spinner/Spinner.svelte";
     import Icon from "../../Components/Icon/Icon.svelte";
+    import { _ } from 'svelte-i18n';
 
     let clinicPosition;
     let userPosition = [0, 0];
@@ -121,10 +122,10 @@
     <footer class="uk-position-bottom-center">
         <p class="uk-text-small uk-margin-remove uk-width-1-1 uk-text-center uk-text-danger">
             {#if !withinBounds}
-                You are too far away, please check in when you have arrived.
+                {$_("LocationPage.tooFar")}
             {/if}
         </p>
-        <Button color="primary" disabled="{!withinBounds}" on:click={verifyLocation}><Icon _class="uk-margin-small-right" icon="sign-in"/> Check-In</Button>
+        <Button color="primary" disabled="{!withinBounds}" on:click={verifyLocation}><Icon _class="uk-margin-small-right" icon="sign-in"/>{$_("LocationPage.checkIn")}</Button>
     </footer>
     <Spinner show="{loading}"/>
 </div>

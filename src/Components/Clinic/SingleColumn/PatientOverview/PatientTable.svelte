@@ -1,12 +1,24 @@
 <script>
     import {getClient, mutate, query} from "svelte-apollo";
-    import {DELETE_PATIENT, GET_ALL_PATIENTS} from "../../../../API/queries/patients.GQL";
+    import {DELETE_PATIENT, GET_ALL_PATIENTS, UPDATE_PATIENT} from "../../../../API/queries/patients.GQL";
     import Button from "../../../Button/Button.svelte";
     import Icon from "../../../Icon/Icon.svelte";
     import {phoneClean} from "../../../../helpers/phone_numbers";
     import DataTable, {buildAttribute} from "../../../DataTable/DataTable.svelte";
     import Uikit from 'uikit';
     import {createEventDispatcher, onMount} from "svelte";
+    import {
+        addHiddenField,
+        cloneForm,
+        containsField,
+        getFieldValue,
+        setFieldValue
+    } from "../../../../helpers/forms/form-utils";
+    import {patientForm} from "../../../../helpers/forms/create_patient";
+    import Modal from "../../../Modal/Modal.svelte";
+    import Form from "../../../Forms/Form.svelte";
+    import {operation_not_supported} from "../../../../helpers/notify";
+    import {fromAWSDate, toAWSDate} from "../../../../helpers/datetime";
 
     const client = getClient();
     const attributes = [
@@ -44,6 +56,46 @@
     };
 
     // TODO: Edit Patients
+    let edit_form = cloneForm(patientForm);
+    let showEditModal = false;
+    let editFormElement;
+    const openEdit = async (patient) => {
+        setFieldValue(edit_form, "given_name", patient.given_name);
+        setFieldValue(edit_form, "last_name", patient.last_name);
+        setFieldValue(edit_form, "dob", fromAWSDate(patient.birth_date));
+        setFieldValue(edit_form, "phone_num", patient.phone_number);
+        if (containsField(edit_form, "patient_id"))
+            setFieldValue(edit_form, "patient_id", patient.patient_id);
+        else
+            addHiddenField(edit_form, "patient_id", patient.patient_id);
+        edit_form = edit_form;
+        showEditModal = true;
+    };
+    const edit = async () => {
+        if (editFormElement.reportValidity()) {
+            showEditModal = false;
+            let given_name = getFieldValue(edit_form, "given_name");
+            let last_name = getFieldValue(edit_form, "last_name");
+            let birth_date = toAWSDate(getFieldValue(edit_form, "dob"));
+            let phone_number = getFieldValue(edit_form, "phone_num");
+            let patient_id = getFieldValue(edit_form, "patient_id");
+            await mutate(client, {
+                mutation: UPDATE_PATIENT,
+                variables: {
+                    patient: {
+                        given_name,
+                        last_name,
+                        birth_date,
+                        phone_number,
+                        phone_number_country_code: 1
+                    },
+                    patient_id
+                }
+            });
+            await update();
+        }
+    };
+
 
     export const update = () => {
         table.shim(patients__.refetch());
@@ -58,15 +110,20 @@
 
 <DataTable data_promise={$patients__} {attributes} data_attribute="listPatients" data_key="patient_id"
            bind:this={table}>
-    <div slot="buttons" let:id class="uk-flex uk-flex-around">
-        <Button disabled="{true}" title="Coming Soon">
+    <div slot="buttons" let:id let:object={patient} class="uk-flex uk-flex-around">
+        <Button on:click={()=>openEdit(patient)}>
             <Icon icon="pencil"/>
         </Button>
         <Button on:click={()=>createAppointment(id)}>
             <Icon icon="calendar"/>
         </Button>
-        <Button on:click={()=>confirmDelete(id)} title={"Coming Soon"}>
+        <Button on:click={()=>confirmDelete(id)}>
             <Icon icon="trash"/>
         </Button>
     </div>
 </DataTable>
+
+<Modal id="EditPatientModal" header="Edit Patient" showClose={true} bind:open={showEditModal}>
+    <Form form={edit_form} fullwidth={true} onSubmit={edit} buttonText="Update Patient"
+          bind:formElement={editFormElement}/>
+</Modal>

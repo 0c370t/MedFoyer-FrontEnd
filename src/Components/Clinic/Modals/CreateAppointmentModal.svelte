@@ -5,7 +5,7 @@
     import Form from "../../Forms/Form.svelte";
     import {CREATE_NEW_APPOINTMENT} from "../../../API/queries/appointments.GQL";
     import {new_appointment} from "../../../helpers/forms/create_appointment";
-    import {appointmentModalData} from "../../../helpers/clinic_stores";
+    import {appointmentModalData} from "../../../helpers/stores/clinic";
     import {cloneForm, getFieldValue} from "../../../helpers/forms/form-utils";
     import {getClient, mutate} from "svelte-apollo";
 

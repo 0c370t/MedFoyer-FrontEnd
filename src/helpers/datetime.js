@@ -23,7 +23,7 @@ export const months = [
 ];
 
 export const padMinutes = (minutes) => {
-    if(minutes < 10){
+    if(minutes.toString().length < 2){
         return `0${minutes}`;
     } else {
         return `${minutes}`;
@@ -126,3 +126,8 @@ export const dateClean = (value) => {
     }
     return date;
 };
+
+export const fromAWSDate = (value) => {
+    let date = value.split("-");
+    return `${date[1]}/${date[2]}/${date[0]}`;
+}

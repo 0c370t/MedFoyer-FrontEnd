@@ -1,7 +1,7 @@
 <script>
     import CreatePatientModel from "../../Components/Clinic/Modals/CreatePatientModel.svelte";
     import CreateAppointmentModal from "../../Components/Clinic/Modals/CreateAppointmentModal.svelte";
-    import {appointmentModalData, user} from "../../helpers/clinic_stores";
+    import {appointmentModalData, user} from "../../helpers/stores/clinic";
     import {navigate} from "svelte-routing";
     import Auth from '@aws-amplify/auth';
     import {onMount} from "svelte";

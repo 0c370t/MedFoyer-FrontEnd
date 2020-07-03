@@ -2,7 +2,7 @@
     import {onMount} from "svelte";
 
     export let component;
-    import {patient_meta} from '../../helpers/stores';
+    import {patient_meta} from '../../helpers/stores/patient';
     import {navigate} from "svelte-routing";
 
     onMount(async () => {

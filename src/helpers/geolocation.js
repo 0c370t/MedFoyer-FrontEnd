@@ -1,6 +1,7 @@
 import getDistance from 'geolib/es/getDistance';
 
 export function getErrorCode(error) {
+    debugger;
     switch(error.code) {
         case error.PERMISSION_DENIED:
             return "Please allow MedFoyer access to your GPS.";
@@ -17,6 +18,7 @@ export function getLatLong(callback){
     navigator.geolocation.getCurrentPosition(callback, function(e){callback(getErrorCode(e), e)});
 }
 export function subscribe(callback){
+    // Todo: refactor this into a readable store
     navigator.geolocation.watchPosition(callback, function(e){callback(getErrorCode(e), e)});
 }
 export function withinDistance(patientLocation, drLocation, threshold){

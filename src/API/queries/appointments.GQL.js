@@ -47,6 +47,7 @@ query($appointment_id: ID!){
         },
         patient {
             name
+            patient_id,
             phone_number
         },
         practitioner{
@@ -88,6 +89,45 @@ export const DELETE_APPOINTMENT = gql`
         deleteAppointment(appointment_id: $appointment_id){appointment_id}
     }
     `;
+
+export const UPDATE_APPOINTMENT = gql`
+    mutation(
+        $appointment: AppointmentInput!,
+        $appointment_id: ID!
+        ){
+        updateAppointment(appointment: $appointment, appointment_id: $appointment_id){
+            appointment_id,
+            status,
+            reminder_status,
+            covid_flag,
+            appointment_time,
+            clinic_location {
+                latitude,
+                longitude,
+                address,
+                clinic_location_name,
+                clinic_location_id
+            },
+            patient {
+                given_name,
+                last_name,
+                phone_number
+            },
+            practitioner{
+                name,
+                practitioner_id,
+                title,
+                telehealth_link
+            },
+            check_in_latitude,
+            check_in_longitude,
+            check_in_time,
+            forms(dummy: "value")    
+        }
+    }
+`;
+
+
 export const SUMMON_PATIENT = gql`
     mutation($appointment_id: ID!){
         summonPatient(appointment_id: $appointment_id){appointment_id}

@@ -1,6 +1,6 @@
 <script>
     import Logo from "../../../svg/Logo.svelte";
-    import {user} from "../../../helpers/clinic_stores";
+    import {user} from "../../../helpers/stores/clinic";
     import ClinicMasterMenu from "./ClinicMasterMenu.svelte";
     import Button from "../../Button/Button.svelte";
     import {Link} from "svelte-routing";

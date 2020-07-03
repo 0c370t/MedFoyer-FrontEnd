@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@aws-amplify/auth": "latest",
+    "@aws-amplify/core": "latest",
     "@aws-amplify/pubsub": "^2.1.9",
     "@babel/core": "^7.9.6",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
@@ -39,6 +40,7 @@
     "svelte": "^3.23.0",
     "svelte-apollo": "^0.3.0",
     "svelte-calendar": "github:0c370t/svelte-calendar#7e82a7cb9917ebc39b61620e214c8b66cc8b035f",
+    "svelte-i18n": "^3.0.4",
     "svelte-loader": "^2.13.6",
     "svelte-preprocess": "^3.7.4",
     "svelte-preprocess-sass": "^0.2.0",
@@ -47,7 +49,6 @@
     "webpack": "latest",
     "webpack-bundle-analyzer": "^3.8.0",
     "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.11.0",
-    "@aws-amplify/core": "latest"
+    "webpack-dev-server": "^3.11.0"
   }
 }

@@ -1,0 +1,55 @@
+{
+  "error": "Se ha producido un error",
+  "submit": "Enviar",
+  "okay": "Bueno",
+  "reload": "Actualizar",
+  "continue": "Seguir",
+
+  "LandingPage": {
+    "header": "¡Bienvenido!",
+    "text": "Toca para comenzar",
+    "disclaimer": "Al tocar para continuar, usted acepta el "
+  },
+  "AuthenticationPage": {
+    "validationText": "Por favor proporcione su cumpleaños",
+    "header": "Verificación",
+    "text": "MedFoyer usa su fecha de nacimiento para asegurarse de que nadie más se registre por usted, ingréselo a continuación."
+  },
+  "LocationPage": {
+    "tooFar": "Está demasiado lejos, regístrese cuando haya llegado.",
+    "checkIn": "Registrarse",
+    "modal": {
+      "title": "Necesitamos su permiso",
+      "text": "MedFoyer utiliza el GPS para asegurarse de que se encuentra en el consultorio de su médico antes de registrarse, cuando toque OK, se le pedirá que otorgue permiso a MedFoyer.",
+      "instructions_1": "Es posible que deba proporcionar su navegador web con permiso.",
+      "instructions_2": "Para hacerlo, abra la configuración y navegue hasta:",
+      "steps": {
+        "settings": "Configuraciones",
+        "privacy": "Intimidad",
+        "locationServices": "Servicios de localización",
+        "safariWebsites": "Sitios web de Safari\n"
+      },
+      "instructions_3": "Una vez allí, seleccione \"Mientras usa la aplicación\"",
+      "openSettings": "Toque aquí para abrir la configuración de su teléfono",
+      "notSupported": "MedFoyer utiliza GPS para asegurarse de que está en su destino antes de registrarse, pero parece que su dispositivo no es compatible con GPS actualmente."
+    }
+  },
+  "WaitlistPage": {
+    "waiting": {
+      "header": "Estás listo!",
+      "youAre": "Eres el",
+      "inLine": "en la fila",
+      "estimate": "Espera estimada",
+      "minutes": "minutos",
+      "text": "Le avisaremos cuando su médico esté listo.",
+      "successText": "Por favor espere en su automóvil o en su cafetería cercana favorita.",
+      "atRiskText": "Por favor espera en tu auto.",
+      "seeYouSoon": "Te veo pronto."
+    },
+    "summoned": "¡Tu turno!",
+    "telehealth": "Su médico solicita una visita de telesalud.",
+    "telehealth_nolink": "Póngase en contacto con su médico para obtener el enlace.",
+    "telehealth_open": "Haga clic aquí para abrir telesalud",
+    "comeIn": "Proceda adentro y regístrese en la recepción."
+  }
+}

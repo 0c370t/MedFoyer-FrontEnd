@@ -73,9 +73,9 @@
         setFieldValue(edit_form, "title", practitioner.title);
         setFieldValue(edit_form, "telehealth_link", practitioner.telehealth_link || "");
         if(containsField(edit_form, "practitioner_id"))
-            setFieldValue(edit_form, "practitioner_id", practitioner.id);
+            setFieldValue(edit_form, "practitioner_id", practitioner.practitioner_id);
         else
-            addHiddenField(edit_form, "practitioner_id", practitioner.id);
+            addHiddenField(edit_form, "practitioner_id", practitioner.practitioner_id);
         edit_form = edit_form;
         showEditModal = true;
     };
@@ -84,11 +84,15 @@
             loading = true;
             showEditModal = false;
             let name = getFieldValue(edit_form, "practitioner_name");
+            let title = getFieldValue(edit_form, "title");
+            let telehealth_link = getFieldValue(edit_form, "telehealth_link");
             await mutate(client, {
                 mutation: UPDATE_PRACTITIONER,
                 variables: {
                     practitioner: {
-                        name
+                        name,
+                        title,
+                        telehealth_link
                     },
                     practitioner_id: getFieldValue(edit_form, "practitioner_id")
                 }
@@ -150,7 +154,7 @@
     <Form form={create_form} fullwidth={true} onSubmit={create} buttonText="Create Practitioner"
           bind:formElement={createFormElement}/>
 </Modal>
-<Modal id="EditPractitionerModal" header="Add new Practitioner" showClose={true} bind:open={showEditModal}>
+<Modal id="EditPractitionerModal" header="Edit Practitioner" showClose={true} bind:open={showEditModal}>
     <Form form={edit_form} fullwidth={true} onSubmit={edit} buttonText="Update Practitioner"
           bind:formElement={editFormElement}/>
 </Modal>
