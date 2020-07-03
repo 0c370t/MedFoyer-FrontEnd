@@ -47,8 +47,10 @@
       "atRiskText": "Please wait in your car.",
       "seeYouSoon": "See you soon."
     },
+    "summoned": "You're up!",
     "telehealth": "Your doctor is requesting a telehealth visit.",
     "telehealth_nolink": "Please contact your doctor for the link.",
-    "telehealth_open": "Click here to open telehealth"
+    "telehealth_open": "Click here to open telehealth",
+    "comeIn": "Please proceed inside and check in with the front desk."
   }
 }
