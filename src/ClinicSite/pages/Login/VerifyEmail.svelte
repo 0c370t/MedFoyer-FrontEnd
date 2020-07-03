@@ -1,6 +1,6 @@
 <script>
     import SplashLayout from "../../../Components/Clinic/Splash/SplashLayout.svelte";
-    import {user} from "../../../helpers/clinic_stores";
+    import {user} from "../../../helpers/stores/clinic";
     import {onMount} from "svelte";
     import Auth from '@aws-amplify/auth';
     import SplashInput from "../../../Components/Clinic/Splash/SplashInput.svelte";

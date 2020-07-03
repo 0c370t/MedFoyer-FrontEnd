@@ -7,7 +7,7 @@
     import Button from '../../Components/Button/Button.svelte';
     import GpsPermissionModal from "../../Components/GpsPermissionModal.svelte";
     import Logo from "../../svg/Logo.svelte";
-    import {patient_meta} from '../../helpers/stores';
+    import {patient_meta} from '../../helpers/stores/patient';
     import {navigate} from "svelte-routing";
     import {getClinicLocation, postCheckIn} from "../../API/patient.API";
     import Spinner from "../../Components/Spinner/Spinner.svelte";

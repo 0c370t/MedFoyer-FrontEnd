@@ -5,7 +5,7 @@
     import AnimatedLogo from "../../svg/AnimatedLogo.svelte";
     import Mount from "../../Components/Abstract/Mount.svelte";
     import Icon from "../../Components/Icon/Icon.svelte";
-    import {patient_meta} from '../../helpers/stores';
+    import {patient_meta} from '../../helpers/stores/patient';
     import {_, locale} from 'svelte-i18n';
 
     const headerFade = {

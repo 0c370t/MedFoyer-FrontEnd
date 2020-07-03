@@ -1,7 +1,7 @@
 <script>
     import Logo from "../../svg/Logo.svelte";
     import MobileHeader from "../../Components/Layout/MobileHeader.svelte";
-    import {patient_meta, waitlist_data} from "../../helpers/stores";
+    import {patient_meta, waitlist_data} from "../../helpers/stores/patient";
     import Button from "../../Components/Button/Button.svelte";
     import {_} from "svelte-i18n";
 

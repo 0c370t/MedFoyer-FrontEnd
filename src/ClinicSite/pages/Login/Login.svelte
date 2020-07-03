@@ -5,7 +5,7 @@
     import SplashInput, {inputTemplate, validateMany} from "../../../Components/Clinic/Splash/SplashInput.svelte";
     import SplashButton from "../../../Components/Clinic/Splash/SplashButton.svelte";
     import {fly} from 'svelte/transition';
-    import {user} from '../../../helpers/stores';
+    import {user} from '../../../helpers/stores/patient';
 
     const doLogin = async () => {
         loading = true;

@@ -1,7 +1,7 @@
 <script>
     export let id;
     import {navigate} from "svelte-routing";
-    import {patient_meta} from '../../helpers/stores';
+    import {patient_meta} from '../../helpers/stores/patient';
 
     if (id) {
         patient_meta.set({
