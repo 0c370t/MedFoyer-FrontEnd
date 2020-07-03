@@ -1,11 +1,12 @@
 <script>
-    import {severe_symptoms, other_symptoms} from '../../helpers/forms/default-covid-screen';
+    import {severe_symptoms, other_symptoms, i18nDictionary} from '../../helpers/forms/default-covid-screen';
     import {patient_meta} from '../../helpers/stores';
     import Form from "../../Components/Forms/Form.svelte";
 
     import {navigate} from "svelte-routing";
     import MobileHeader from "../../Components/Layout/MobileHeader.svelte";
     import {postScreeningResult} from "../../API/patient.API";
+    import {_} from 'svelte-i18n';
 
     let formIndex = 0;
     let finalFormObject = [];
@@ -38,7 +39,7 @@
 <MobileHeader/>
 <div class="container uk-container uk-container-small">
     {#if formIndex < forms.length}
-        <Form form="{forms[formIndex].questions}" onSubmit="{forms[formIndex].handler}" bind:formElement={currentFormElement} buttonText="Continue"/>
+        <Form form="{forms[formIndex].questions}" onSubmit="{forms[formIndex].handler}" bind:formElement={currentFormElement} buttonText={$_("continue")} i18n={true} {i18nDictionary}/>
     {/if}
 </div>
 <style lang="scss">

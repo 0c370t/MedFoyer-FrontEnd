@@ -19,8 +19,7 @@ query(
             clinic_location_name,
         },
         patient {
-            given_name,
-            last_name,
+            name
         },
         practitioner{
             name,
@@ -47,9 +46,8 @@ query($appointment_id: ID!){
             clinic_location_id
         },
         patient {
+            name
             patient_id,
-            given_name,
-            last_name,
             phone_number
         },
         practitioner{

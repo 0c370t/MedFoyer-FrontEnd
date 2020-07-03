@@ -1,16 +1,23 @@
 <script>
-    import PatientWrapper from "./pages/PatientWrapper.svelte";
-
     export let url = "";
-
     import {Router, Route} from "svelte-routing";
 
+    import PatientWrapper from "./pages/PatientWrapper.svelte";
     import LandingPage from "./pages/LandingPage.svelte";
     import LocationPage from './pages/LocationPage.svelte';
     import DataCollectionPage from './pages/DataCollectionPage.svelte';
     import AuthenticationPage from './pages/AuthenticationPage.svelte';
     import FormPage from './pages/FormPage.svelte';
     import Waitlist from './pages/Waitlist.svelte';
+
+    import {addMessages,init,getLocaleFromNavigator} from 'svelte-i18n';
+    import en from '../I18N/en.json';
+    import es from '../I18N/es.json';
+    addMessages('en', en);
+    addMessages('es', es);
+
+    init({fallbackLocale:'en', initialLocale: getLocaleFromNavigator()})
+
 </script>
 
 <Router {url}>

@@ -23,7 +23,7 @@ export const months = [
 ];
 
 export const padMinutes = (minutes) => {
-    if(minutes < 10){
+    if(minutes.toString().length < 2){
         return `0${minutes}`;
     } else {
         return `${minutes}`;
@@ -42,7 +42,7 @@ export const formatTime = (date) => {
         }
         let minutes = padMinutes(date.getMinutes());
 
-        return `${date.getHours() % 12}:${minutes} ${ampm}`;
+        return `${date.getHours() % 12 === 0 ? 12 : date.getHours() % 12}:${minutes} ${ampm}`;
     } catch{
 
     }
@@ -84,7 +84,7 @@ export const formatForDisplay = (dateString, includeTime = false) => {
     output += months[dateobj.getMonth()] + " ";
     output += dateobj.getDate();
     if(includeTime) {
-        output += ` @ ${dateobj.getHours() % 12}:${padMinutes(dateobj.getMinutes())} ${dateobj.getHours() > 12 ? "pm" : "am"}`;
+        output += ` @ ${dateobj.getHours() % 12 === 0 ? 12 : dateobj.getHours() % 12}:${padMinutes(dateobj.getMinutes())} ${dateobj.getHours() > 12 ? "pm" : "am"}`;
     }
     return output;
 };

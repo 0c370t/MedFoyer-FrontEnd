@@ -27,8 +27,7 @@
                 variables: {
                     patient: {
                         birth_date: toAWSDate(getFieldValue(form, "dob")),
-                        given_name: getFieldValue(form, "given_name"),
-                        last_name: getFieldValue(form, "last_name"),
+                        name: getFieldValue(form, "name"),
                         phone_number: getFieldValue(form, "phone_num"),
                         phone_number_country_code: 1
                     }
@@ -37,7 +36,7 @@
 
             shown = false;
             try{
-                await Uikit.modal.confirm("Would you like to create an appointment for " + getFieldValue(form, "given_name") + "?");
+                await Uikit.modal.confirm("Would you like to create an appointment for " + getFieldValue(form, "name") + "?");
                 dispatch("create-appointment", {patient_id: response.data.createPatient.patient_id});
             } catch(e){}
             form = cloneForm(patientForm);

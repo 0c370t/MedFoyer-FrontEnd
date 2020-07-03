@@ -16,7 +16,7 @@
     <span class="uk-flex uk-flex-between">
         <p class="uk-margin-remove uk-text-bold">
             {#if appt.patient}
-                {appt.patient.given_name} {appt.patient.last_name}
+                {appt.patient.name}
             {:else}
                 Unnamed
             {/if}

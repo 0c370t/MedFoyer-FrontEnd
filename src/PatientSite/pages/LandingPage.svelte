@@ -6,6 +6,7 @@
     import Mount from "../../Components/Abstract/Mount.svelte";
     import Icon from "../../Components/Icon/Icon.svelte";
     import {patient_meta} from '../../helpers/stores';
+    import {_, locale} from 'svelte-i18n';
 
     const headerFade = {
         duration: 500,
@@ -19,7 +20,7 @@
     const advance = () => {
         $patient_meta.state = "VERIFICATION";
         navigate("/patient/auth");
-    }
+    };
 </script>
 
 <Mount>
@@ -32,19 +33,28 @@
         </header>
         {#if appointmentExists}
             <main in:slide={mainSlide} class="uk-margin-medium">
-                <h2 class="uk-heading-medium uk-margin-remove">Welcome</h2>
+                <h2 class="uk-heading-medium uk-margin-remove">{$_('LandingPage.header')}</h2>
                 <hr class="uk-divider-icon uk-margin-small"/>
-                <div>
-                    <Button on:click={advance}>
+                <div class="uk-margin-small">
+                    <label>
+                        <select class="uk-select" bind:value={$locale} on:blur={(e)=>locale.set(e.target.value)}>
+                            <option value="en">English</option>
+                            <option value="es">Español</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="uk-margin-small">
+                    <Button on:click={advance} fullwidth={true}>
                         <span class="uk-text-large uk-margin-remove">
-                            Tap to get started <Icon options="{{icon:'sign-in',ratio:2}}"/>
+                            {$_('LandingPage.text')}
+                            <Icon options="{{icon:'sign-in',ratio:2}}"/>
                         </span>
                     </Button>
-
                 </div>
                 <div>
                     <span class="uk-text-meta">
-                        By tapping to proceed, you agree to the <a href="/_patient/terms_and_conditions.txt" target="_blank" class="uk-display-block">MedFoyer Terms and Conditions</a>
+                        {$_('LandingPage.disclaimer')}<a href="/_patient/terms_and_conditions.txt" target="_blank"
+                                                         class="uk-display-block">MedFoyer Terms and Conditions</a>
                     </span>
                 </div>
             </main>

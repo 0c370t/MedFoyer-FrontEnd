@@ -104,16 +104,16 @@
         switch (appointment.reminder_status) {
             case "NONE_SENT":
             default:
-                message = `${appointment.patient.given_name} has not yet been notified via MedFoyer. Would you like to send their check-in link now?`;
+                message = `${appointment.patient.name} has not yet been notified via MedFoyer. Would you like to send their check-in link now?`;
                 break;
             case "FIRST_REMINDER_SENT":
-                message = `${appointment.patient.given_name} has been reminded of their appointment already. Would you like to send their check-in link now?`
+                message = `${appointment.patient.name} has been reminded of their appointment already. Would you like to send their check-in link now?`
                 break;
             case "CHECK_IN_REMINDER_SENT":
-                message = `${appointment.patient.given_name} has already received their check-in link. Would you like to send it again?`;
+                message = `${appointment.patient.name} has already received their check-in link. Would you like to send it again?`;
                 break;
             case "OPT_OUT":
-                UIkit.modal.alert(`${appointment.patient.given_name} has opted out of receiving SMS Messages!`);
+                UIkit.modal.alert(`${appointment.patient.name} has opted out of receiving SMS Messages!`);
                 return;
         }
         UIkit.modal.confirm(message).then(e => {
@@ -205,8 +205,8 @@
     {#if appointment && !loading}
         <header class="uk-container uk-container-expand">
             <div class="uk-flex uk-flex-between uk-child-width-1-3 ">
-                <div class="uk-flex uk-flex-left uk-flex-wrap">
-                    <h2 class="uk-width-1-1">{appointment.patient ? appointment.patient.given_name : "Unnamed"}
+                <div class="uk-flex uk-flex-left uk-flex-wrap uk-child-width-1-2">
+                    <h2 class="uk-width-1-1">{appointment.patient ? appointment.patient.name : "Unnamed"}
                         @ {formatTime(appointment.appointment_time)}</h2>
                 </div>
                 <div class="uk-flex uk-flex-right uk-flex-top">
@@ -267,7 +267,7 @@
                     </dl>
                 {:else}
                     <p>
-                        {appointment.patient ? appointment.patient.given_name + " " + appointment.patient.last_name : "Unnamed"}
+                        {appointment.patient ? appointment.patient.name : "Unnamed"}
                         has not completed their COVID-19 screening yet. </p>
                 {/if}
             </div>
